@@ -1,0 +1,19 @@
+{
+  "name": "scored",
+  "version": "1.0.0",
+  "description": "A simple score tracking application built with JavaScript. Keep track of scores across any game at your fingertips - intuitive, minimal, and fun.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "node-fetch": "^2.7.0"
+  }
+}
