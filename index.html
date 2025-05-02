@@ -1,90 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scored</title>
     <link rel="stylesheet" href="./styles/main.css">
-    <link rel="preload" href="/assets/fonts/fonnts.com-oakesgrotesk-regular-webfont.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/fonnts.com-oakesgrotesk-medium-webfont.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/fonnts.com-oakesgrotesk-light-webfont.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/fonnts.com-oakesgrotesk-bold-webfont.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/fonnts.com-oakesgrotesk-regular-webfont.woff2" as="font" type="font/woff2"
+        crossorigin>
+    <link rel="preload" href="/assets/fonts/fonnts.com-oakesgrotesk-medium-webfont.woff2" as="font" type="font/woff2"
+        crossorigin>
+    <link rel="preload" href="/assets/fonts/fonnts.com-oakesgrotesk-light-webfont.woff2" as="font" type="font/woff2"
+        crossorigin>
+    <link rel="preload" href="/assets/fonts/fonnts.com-oakesgrotesk-bold-webfont.woff2" as="font" type="font/woff2"
+        crossorigin>
 </head>
+
 <body>
-    <!--Sidebar Section-->
-    <aside>
-        <!-- <nav>
-            <ul>
-                <li><a>Dashboard</a></li>
-                <li><a>Live Games</a></li>
-                <li><a>All Games</a></li>
-                <li><a>Categories</a></li>
-                <li><a>Favourites</a></li>
-            </ul>
-        </nav> -->
-    </aside>
-    <!--Main Content-->
-    <main>
-        <nav>
+    <header>
+        <div class="header-top">
+            <p id="logo">Scored</p>
+        </div>
+        <div class="nav-sports-categories">
             <div class="nav-cards" id="football-card">Football</div>
             <div class="nav-cards" id="cricket-card">Cricket</div>
             <div class="nav-cards" id="tennis-card">Tennis</div>
             <div class="nav-cards" id="rugby-card">Rugby</div>
-            <div class="nav-cards" id="badminton-card">Badminton</div>
             <div class="nav-cards" id="motorsport-card">Motorsport</div>
             <div class="nav-cards" id="basketball-card">Basketball</div>
-            <div class="nav-cards" id="volleyball-card">Volleyball</div>
             <div class="nav-cards" id="mma-card">MMA</div>
-        </nav>
-        <section>
-            <h3>Football</h3>
-            <template id="fixture-card-template">
-                <div class="fixture-card">
-                    <div class="fixture-card-info">
-                        <div class="home-team">
-                            <img class="home-team-logo" src=""/>
-                            <div class="home-team-name"></div>
-                        </div>
-                        <div class="fixture-info">
-                            <div class="elapsed-time"></div>
-                            <div class="score">
-                                <div class="home-team-score"></div>
-                                <p>&ndash;</p>
-                                <div class="away-team-score"></div>
-                            </div>
-                        </div>
-                        <div class="away-team">
-                            <img class="away-team-logo" src=""/>
-                            <div class="away-team-name"></div>
+        </div>
+    </header>
+    <main>
+        <template id="fixture-card-template">
+            <div class="fixture-card">
+                <div class="fixture-card-info">
+                    <div class="home-team">
+                        <img class="home-team-logo" src="" />
+                        <div class="home-team-name"></div>
+                    </div>
+                    <div class="fixture-info">
+                        <div class="status"></div>
+                        <div class="score">
+                            <div class="home-team-score"></div>
+                            <p>&ndash;</p>
+                            <div class="away-team-score"></div>
                         </div>
                     </div>
-                    <div class="match-info">
-                        <div class="league-name"></div>
-                        <div class="venue"></div>
+                    <div class="away-team">
+                        <img class="away-team-logo" src="" />
+                        <div class="away-team-name"></div>
                     </div>
                 </div>
-            </template>
-            <div id="football-fixture-cards" class="fixture-cards-container"></div>
-        </section>
-        <section>
-            <h3>Cricket</h3>
-            <div class="cricket-score-cards">
-                <div>IPL</div>
-                <div>SA vs AUS</div>
-                <div>ICC Events</div>
-                <div>Big Bash</div>
+                <div class="match-info">
+                    <div class="league-name"></div>
+                    <div class="venue"></div>
+                </div>
             </div>
-        </section>
-        <section>
-            <h3>Tennis</h3>
-            <div class="tennis-score-cards">
-                <div>Davis Cup</div>
-                <div>Wimbeldon</div>
-                <div>England Opens</div>
-                <div>Aus Opens</div>
-            </div>
-        </section>
+        </template>
+        <div id="football-fixture-cards" class="fixture-cards-container"></div>
     </main>
-<script src="./script.js" defer></script>    
+    <script src="./script.js" defer></script>
 </body>
+
 </html>
