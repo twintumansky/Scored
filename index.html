@@ -43,7 +43,6 @@
                         <div class="status"></div>
                         <div class="score">
                             <div class="home-team-score"></div>
-                            <p>&ndash;</p>
                             <div class="away-team-score"></div>
                         </div>
                     </div>
@@ -58,7 +57,14 @@
                 </div>
             </div>
         </template>
-        <div id="football-fixture-cards" class="fixture-cards-container"></div>
+        <div class="main-container">
+            <div id="container-status-buttons">
+                <button class="container-buttons">Live</button>
+                <button class="container-buttons">Finished</button>
+                <button class="container-buttons">Upcoming</button>
+            </div>
+            <div id="fixtures-container"></div>
+        </div>
     </main>
     <script src="./script.js" defer></script>
 </body>

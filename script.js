@@ -13,7 +13,7 @@ const allowedLeagues = ['CL', 'PL', 'PD', 'BL1'];
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
   const template = document.querySelector('#fixture-card-template');
-  const liveScoresDiv = document.querySelector('#football-fixture-cards');
+  const liveScoresDiv = document.querySelector('#fixtures-container');
 
   // Function to get date range for today and next 3 days
   function getDateRange() {
@@ -142,12 +142,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // const groupedMatches = {};
     matches.forEach(match => {
       const card = template.content.cloneNode(true);
-      card.querySelector('.home-team-logo')?.setAttribute('src', match.homeTeam?.crest ?? '');
-      card.querySelector('.away-team-logo')?.setAttribute('src', match.awayTeam?.crest ?? '');
+      card.querySelector('.home-team-logo')?.setAttribute('src', match.homeTeam?.crest ?? ' ');
+      card.querySelector('.away-team-logo')?.setAttribute('src', match.awayTeam?.crest ?? ' ');
       card.querySelector('.home-team-name').textContent = match.homeTeam?.shortName ?? 'Unknown';
       card.querySelector('.away-team-name').textContent = match.awayTeam?.shortName ?? 'Unknown';
-      card.querySelector('.home-team-score').textContent = match.score?.fullTime?.home ?? '-';
-      card.querySelector('.away-team-score').textContent = match.score?.fullTime?.away ?? '-';
+      card.querySelector('.home-team-score').textContent = match.score?.fullTime?.home ?? '0';
+      card.querySelector('.away-team-score').textContent = match.score?.fullTime?.away ?? '0';
 
       card.querySelector('.status').textContent =
         match.status === 'IN_PLAY' || match.status === 'PAUSED'
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   : '';
 
       card.querySelector('.league-name').textContent = match.competition?.name ?? 'Unknown League';
-      card.querySelector('.venue').textContent = match.venue ?? 'Unknown Venue';
+      card.querySelector('.venue').textContent = match.venue ?? 'TBD';
       
     //     const date = new Date(match.utcDate).toDateString();
     //     if (!groupedMatches[date]) {
