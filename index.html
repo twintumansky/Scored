@@ -22,7 +22,7 @@
             <p id="logo">Scored</p>
         </div>
         <div class="nav-sports-categories">
-            <div class="nav-cards" id="football-card">Football</div>
+            <div class="nav-cards active" id="football-card">Football</div>
             <div class="nav-cards" id="cricket-card">Cricket</div>
             <div class="nav-cards" id="tennis-card">Tennis</div>
             <div class="nav-cards" id="rugby-card">Rugby</div>
@@ -32,18 +32,47 @@
         </div>
     </header>
     <main>
-        <template id="fixture-card-template">
-            <div class="fixture-card">
+        <template id="cricket-template">
+            <div class="cricket-match-card">
+                <div class="match-card-info">
+                    <img class="league-logo" src="" />
+                    <div class="league-info">
+                        <div class="home-team-name"></div>
+                        <span>vs</span>
+                        <div class="away-team-name"></div>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <div>
+                        <img class="home-team-logo" src="" />
+                        <div class="home-team-name"></div>
+                        <div class="home-team-score"></div>
+                    </div>
+                    <div>
+                        <img class="away-team-logo" src="" />
+                        <div class="away-team-name"></div>
+                        <div class="away-team-score"></div>
+                    </div>
+                </div>
+                <div class="match-status"></div>
+            </div>
+        </template>
+        <template id="football-template">
+            <div class="football-match-card">
                 <div class="fixture-card-info">
                     <div class="home-team">
                         <img class="home-team-logo" src="" />
                         <div class="home-team-name"></div>
                     </div>
                     <div class="fixture-info">
-                        <div class="status"></div>
-                        <div class="score">
+                        <div class="match-status"></div>
+                        <div class="score-container" style="display: none;">
                             <div class="home-team-score"></div>
                             <div class="away-team-score"></div>
+                        </div>
+                        <div class="scheduled-time-container" style="display: none;">
+                            <div class="match-time"></div> 
+                            <div class="match-date"></div>
                         </div>
                     </div>
                     <div class="away-team">
