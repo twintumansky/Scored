@@ -360,10 +360,10 @@ document.addEventListener('DOMContentLoaded', () => {
       populateCard: function (cardClone, match) {
         cardClone.querySelector('.home-team-logo')?.setAttribute('src', match.homeTeam.crest);
         cardClone.querySelector('.away-team-logo')?.setAttribute('src', match.awayTeam.crest);
-        cardClone.querySelector('.home-team-name').textContent = match.homeTeam.name;
-        cardClone.querySelector('.away-team-name').textContent = match.awayTeam.name;
-        cardClone.querySelector('.league-name').textContent = match.competition;
-        cardClone.querySelector('.venue').textContent = match.venue;
+        cardClone.querySelector('.home-team-name').textContent = match.homeTeam.shortName;
+        cardClone.querySelector('.away-team-name').textContent = match.awayTeam.shortName;
+        cardClone.querySelector('.league-name').textContent = match.competition.name;
+        cardClone.querySelector('.venue').textContent = match.area.name;
 
         const scoreContainer = cardClone.querySelector('.score-container');
         const scheduledContainer = cardClone.querySelector('.scheduled-time-container');
