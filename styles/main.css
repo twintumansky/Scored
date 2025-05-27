@@ -270,30 +270,49 @@ nav li {
     text-align: end;
 } */
 
+.league-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    grid-column: 1;
+    justify-self: center;
+    max-width: 100%;
+}
+
 .league-name {
     text-align: center;
     padding-right: 2rem;
     font-size: 0.75rem;
     color: #777;
-    grid-column: 1;
-    justify-self: center;
-    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.venue-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    grid-column: 2;
+    justify-self: center;
+    max-width: 100%;
 }
 
 .venue {
     text-align: center;
     padding-left: 3rem;
     font-size: 0.75rem;
-    color: #777;
-    grid-column: 2;
-    justify-self: center;
-    max-width: 100%;
+    color: #777;    
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.league-emblem, .venue-flag {
+    width: 1.25rem;
+    height: 1.25rem;
+    background-size: cover;
+    background-position: center;
 }
 
 @media screen and (max-width: 768px) {

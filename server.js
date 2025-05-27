@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.static('./'));
 
 // Proxy endpoint for football data
-app.get('/api/matches', async (req, res) => {
+app.get('/api/matches/football', async (req, res) => {
     try {
         const { dateFrom, dateTo } = req.query;
         const response = await fetch(
@@ -29,6 +29,41 @@ app.get('/api/matches', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+app.get('/api/matches/cricket', async (req, res) => {
+    try{
+        const {dateFrom, dateTo} = req.query;
+        const date = new Date(dateFrom);
+        date.setDate(date.getDate - 1);
+        const previousDay = date.toISOString().split('T')[0];
+        const header = {
+            'Authorization': process.env.CRICKET_API_KEY
+        }
+        const [liveMatches, upcomingMatches, recentMatches] = await Promise.all([
+            fetch(('https://cricket.sportdevs.com/matches-live'), {
+                headers: header
+            }).then(res => res.json()),
+            fetch((`https://cricket.sportdevs.com/matches?start_time=gte.${dateFrom}&start_time=lt.${dateTo}`), {
+                headers: header
+            }).then(res => res.json()),
+            fetch((`https://cricket.sportdevs.com/matches?status_type=eq.finished&start_time=gte.${previousDay}&start_time=lt.${dateFrom}`), {
+                headers: header
+            }).then(res => res.json())
+        ])
+
+        const combinedMatches = {
+            matches: [
+                ...(liveMatches.data || []),
+                ...(upcomingMatches.data || []),
+                ...(recentMatches.data || [])
+            ]
+        };
+        res.json(combinedMatches);
+    } catch (error) {
+        console.error('Proxy Error:', error);
+        res.status(500).json({ error: error.message });
+    }
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {

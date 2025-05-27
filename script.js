@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sportConfig = {
     football: {
       templateId: 'football-template',
-      apiEndpoint: 'http://localhost:3000/api/matches',
+      apiEndpoint: 'http://localhost:3000/api/matches/football',
       allowedLeagues: ['CL', 'PL', 'PD', 'BL1'],
       leaguePriorities: { CL: 100, PL: 90, PD: 80, BL1: 70, default: 50 },
       populateCard: function (cardClone, match) {
@@ -155,7 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cardClone.querySelector('.away-team-logo')?.setAttribute('src', match.awayTeam.crest);
         cardClone.querySelector('.home-team-name').textContent = match.homeTeam.shortName;
         cardClone.querySelector('.away-team-name').textContent = match.awayTeam.shortName;
+        cardClone.querySelector('.league-emblem')?.setAttribute('src', match.competition.emblem);
         cardClone.querySelector('.league-name').textContent = match.competition.name;
+        cardClone.querySelector('.venue-flag')?.setAttribute('src', match.area.flag);
         cardClone.querySelector('.venue').textContent = match.area.name;
 
         const scoreContainer = cardClone.querySelector('.score-container');
@@ -188,12 +190,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     },
+    cricket: {
+      templateId: 'cricket-template',
+      apiEndpoint: 'http://localhost:3000/api/matches/cricket',
+    },
   }
 
   //fetching of matches from API
   async function fetchMatches(sportId) {
     activeSport = sportId; // Updating the active sport state
-    console.log("Fetching for sport:", activeSport);
     liveScoresDiv.innerHTML = '<div class="spinner"></div>';
     const { from, to } = getDateRange();
     const config = sportConfig[activeSport];
