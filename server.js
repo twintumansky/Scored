@@ -31,39 +31,47 @@ app.get('/api/matches/football', async (req, res) => {
 });
 
 app.get('/api/matches/cricket', async (req, res) => {
-    try{
-        const {dateFrom, dateTo} = req.query;
-        const date = new Date(dateFrom);
-        date.setDate(date.getDate - 1);
-        const previousDay = date.toISOString().split('T')[0];
-        const header = {
-            'Authorization': process.env.CRICKET_API_KEY
-        }
-        const [liveMatches, upcomingMatches, recentMatches] = await Promise.all([
-            fetch(('https://cricket.sportdevs.com/matches-live'), {
-                headers: header
-            }).then(res => res.json()),
-            fetch((`https://cricket.sportdevs.com/matches?start_time=gte.${dateFrom}&start_time=lt.${dateTo}`), {
-                headers: header
-            }).then(res => res.json()),
-            fetch((`https://cricket.sportdevs.com/matches?status_type=eq.finished&start_time=gte.${previousDay}&start_time=lt.${dateFrom}`), {
-                headers: header
-            }).then(res => res.json())
-        ])
+    try {
+        // const {dateFrom, dateTo} = req.query;
 
+        // const date = new Date(dateFrom);
+        // date.setDate(date.getDate() - 1);
+        // const previousDay = date.toISOString().split('T')[0];
+        
+        // Make individual requests
+        const [matchesLive, matchesOther] = await Promise.all([
+            fetch(`https://api.cricapi.com/v1/currentMatches?apikey=${process.env.CRICKET_API_KEY}&offset=0`),
+            fetch(`https://api.cricapi.com/v1/matches?apikey=${process.env.CRICKET_API_KEY}&offset=0`)
+        ]);
+
+        // Parse JSON responses
+        const liveMatches = await matchesLive.json();
+        const otherMatches = await matchesOther.json();
+
+        // Combine the matches, ensuring we handle the data structure correctly
         const combinedMatches = {
             matches: [
                 ...(liveMatches.data || []),
-                ...(upcomingMatches.data || []),
-                ...(recentMatches.data || [])
+                ...(otherMatches.data || []),
             ]
         };
+
+        console.log('Number of matches in combined response:', combinedMatches.matches.length);
         res.json(combinedMatches);
+
     } catch (error) {
-        console.error('Proxy Error:', error);
-        res.status(500).json({ error: error.message });
+        console.error('Detailed Proxy Error:', {
+            message: error.message,
+            stack: error.stack,
+            dateFrom: req.query.dateFrom,
+            dateTo: req.query.dateTo
+        });
+        res.status(500).json({ 
+            error: error.message,
+            details: 'Check server logs for more information'
+        });
     }
-})
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
