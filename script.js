@@ -1,7 +1,6 @@
-//Config-driven-logic
-const cricketLeagueIds = {
+import { cricketTeamLogos } from './data/cricketTeamLogos.js'
 
-}
+//Config-driven-logic
 
 document.addEventListener('DOMContentLoaded', () => {
   const liveScoresDiv = document.querySelector('#fixtures-container');
@@ -217,11 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
       populateCard: function (cardClone, match) {
         cardClone.querySelector('.match-info').textContent = match.name;
         cardClone.querySelector('.home-team-name').textContent = match.teamInfo[0].shortName;
-        cardClone.querySelector('.home-team-logo')?.setAttribute('src', match.teamInfo[0].img);
+        cardClone.querySelector('.home-team-logo')?.setAttribute('src', cricketTeamLogos[match.teamInfo[0].shortName]);
         cardClone.querySelector('.away-team-name').textContent = match.teamInfo[1].shortName;
-        cardClone.querySelector('.away-team-logo')?.setAttribute('src', match.teamInfo[1].img);
+        cardClone.querySelector('.away-team-logo')?.setAttribute('src',cricketTeamLogos[match.teamInfo[1].shortName]);
         cardClone.querySelector('.match-status').textContent = match.status;
-        
       }
     },
   }

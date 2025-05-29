@@ -31,17 +31,11 @@ app.get('/api/matches/football', async (req, res) => {
 });
 
 app.get('/api/matches/cricket', async (req, res) => {
-    try {
-        // const {dateFrom, dateTo} = req.query;
-
-        // const date = new Date(dateFrom);
-        // date.setDate(date.getDate() - 1);
-        // const previousDay = date.toISOString().split('T')[0];
-        
+    try {        
         // Make individual requests
         const [matchesLive, matchesOther] = await Promise.all([
             fetch(`https://api.cricapi.com/v1/currentMatches?apikey=${process.env.CRICKET_API_KEY}&offset=0`),
-            fetch(`https://api.cricapi.com/v1/matches?apikey=${process.env.CRICKET_API_KEY}&offset=0`)
+            fetch(`https://api.cricapi.com/v1/matches?apikey=${process.env.CRICKET_API_KEY}&offset=0`),
         ]);
 
         // Parse JSON responses
