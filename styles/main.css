@@ -357,6 +357,11 @@ nav li {
     }
 }
 
+.cricket-match-card {
+    display: flex;
+    flex-direction: column;
+}
+
 .spinner {
     width: 1.5rem;
     height: 1.5rem;

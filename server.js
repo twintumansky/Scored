@@ -56,7 +56,6 @@ app.get('/api/matches/cricket', async (req, res) => {
             ]
         };
 
-        console.log('Number of matches in combined response:', combinedMatches.matches.length);
         res.json(combinedMatches);
 
     } catch (error) {
