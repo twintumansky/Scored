@@ -1,7 +1,6 @@
 import { cricketTeamLogos } from './data/cricketTeamLogos.js'
 
 //Config-driven-logic
-
 document.addEventListener('DOMContentLoaded', () => {
   const liveScoresDiv = document.querySelector('#fixtures-container');
   const statusButtons = document.querySelectorAll('.container-buttons');
@@ -214,12 +213,15 @@ document.addEventListener('DOMContentLoaded', () => {
       isRecent: (match, timestamp) => match.matchEnded  && isRecentMatch(timestamp),
       isUpcoming: (match, timestamp) => match.matchStarted === "false" && isUpcomingMatch(timestamp),
       populateCard: function (cardClone, match) {
-        cardClone.querySelector('.match-info').textContent = match.name;
-        cardClone.querySelector('.home-team-name').textContent = match.teamInfo[0].shortName;
-        cardClone.querySelector('.home-team-logo')?.setAttribute('src', cricketTeamLogos[match.teamInfo[0].shortName]);
-        cardClone.querySelector('.away-team-name').textContent = match.teamInfo[1].shortName;
-        cardClone.querySelector('.away-team-logo')?.setAttribute('src',cricketTeamLogos[match.teamInfo[1].shortName]);
-        cardClone.querySelector('.match-status').textContent = match.status;
+        const homeTeamShortName = match.teamInfo[0].shortname;
+        const awayTeamShortName = match.teamInfo[1].shortname;
+
+        cardClone.querySelector('.cricket-match-info').textContent = match.name;
+        cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName;
+        cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', cricketTeamLogos[homeTeamShortName]);
+        cardClone.querySelector('.cricket-away-team-name').textContent = awayTeamShortName;
+        cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src',cricketTeamLogos[awayTeamShortName]);
+        cardClone.querySelector('.cricket-match-status').textContent = match.status;
       }
     },
   }
