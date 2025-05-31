@@ -182,14 +182,14 @@ document.addEventListener('DOMContentLoaded', () => {
           statusTextElement.textContent = 'Live';
           scoreContainer.style.display = 'flex'; // Or 'block' depending on CSS
           scheduledContainer.style.display = 'none';
-          cardClone.querySelector('.home-team-score').textContent = match.score?.home ?? '0';
-          cardClone.querySelector('.away-team-score').textContent = match.score?.away ?? '0';
+          cardClone.querySelector('.home-team-score').textContent = match.score?.fullTime?.home ?? '0';
+          cardClone.querySelector('.away-team-score').textContent = match.score?.fullTime?.away ?? '0';
         } else if (match.status === 'FINISHED') {
           statusTextElement.textContent = 'Finished';
           scoreContainer.style.display = 'flex';
           scheduledContainer.style.display = 'none';
-          cardClone.querySelector('.home-team-score').textContent = match.score?.home ?? '0';
-          cardClone.querySelector('.away-team-score').textContent = match.score?.away ?? '0';
+          cardClone.querySelector('.home-team-score').textContent = match.score?.fullTime?.home ?? '0';
+          cardClone.querySelector('.away-team-score').textContent = match.score?.fullTime?.away ?? '0';
         } else if (match.status === 'SCHEDULED' || match.status === 'TIMED') {
           scoreContainer.style.display = 'none';
           scheduledContainer.style.display = 'block'; // Or 'flex'
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const homeTeamShortName = match.teamInfo[0].shortname;
         const awayTeamShortName = match.teamInfo[1].shortname;
 
-        cardClone.querySelector('.cricket-match-info').textContent = match.name;
+        cardClone.querySelector('.competition-info').textContent = match.name;
         cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName;
         cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', cricketTeamLogos[homeTeamShortName]);
         cardClone.querySelector('.cricket-away-team-name').textContent = awayTeamShortName;
