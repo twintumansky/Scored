@@ -34,18 +34,31 @@
     <main>
         <template id="cricket-template">
             <div class="cricket-match-card">
-                <div class="cricket-match-info"></div>
-                <div class="cricket-team-info">
-                    <div>
-                        <div class="cricket-home-team-name"></div>
-                        <img class="cricket-home-team-logo" src="" alt="Home Team"/>
+                <div class="cricket-fixture-info">
+                    <img class="cricket-icon" src="/assets/icons/cricket-icon.png"/>
+                    <div class="cricket-match-info"></div>
+                    <div class="cricket-team-info">
+                        <div class="cricket-home-team">
+                            <div class="cricket-home-team-name"></div>
+                            <img class="cricket-home-team-logo" src="" alt="Home Team"/>
+                        </div>
+                        <div class="cricket-away-team">
+                            <img class="cricket-away-team-logo" src="" alt="Away Team"/>
+                            <div class="cricket-away-team-name"></div>
+                        </div>
                     </div>
-                    <div>
-                        <img class="cricket-away-team-logo" src="" alt="Away Team"/>
-                        <div class="cricket-away-team-name"></div>
+                    <div class="cricket-match-status"></div>
+                </div>
+                <div class="cricket-match-info">
+                    <div class="cricket-format">
+                        <img class="format-icon" src="/assets/icons/cricket-icon-test.png" />
+                        <div class="format-name"></div>
+                    </div>
+                    <div class="venue-info">
+                        <img class="location-icon" src="/assets/icons/cricket-icon-venue.png" />
+                        <div class="venue-name"></div>
                     </div>
                 </div>
-                <div class="cricket-match-status"></div>
             </div>
         </template>
         <template id="football-template">
@@ -71,7 +84,7 @@
                         <div class="away-team-name"></div>
                     </div>
                 </div>
-                <div class="match-info">
+                <div class="football-match-info">
                     <div class="league-info">
                         <img class="league-emblem" src="" />
                         <div class="league-name"></div>
