@@ -54,10 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return score;
   }
 
-  function isRecentMatch(matchTimestamp) {
+  function isRecentMatch(matchTimestamp, hoursBefore) {
     const now = Math.floor(Date.now() / 1000);
-    const timeTwentyFourHoursAgo = now - (24 * 60 * 60);
-    return matchTimestamp > timeTwentyFourHoursAgo;
+    const timeHoursAgo = now - (hoursBefore * 60 * 60);
+    return matchTimestamp > timeHoursAgo;
   }
 
   function isUpcomingMatch(matchTimestamp) {
@@ -75,7 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       //const status = config.status(match);
       const timeFormat = config.time(match);
+      //const timeFormat = matchTime.toISOString().split('T')[0]
       const timestamp = Math.floor(new Date(timeFormat).getTime() / 1000);
+      //console.log(timestamp);
 
       const isLive = config.isLive(match);
       const isRecent = config.isRecent(match, timestamp);
@@ -158,9 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
       allowedLeagues: ['CL', 'PL', 'PD', 'BL1'],
       leagueCode: match => match.competition?.code,
       leaguePriorities: { CL: 100, PL: 90, PD: 80, BL1: 70, default: 50 },
-      time: match => match.utcDate,      
+      time: match => match.utcDate,
       isLive: match => match.status === "IN_PLAY" || match.status === "PAUSED",
-      isRecent: (match, timestamp) => match.status === "FINISHED"  && isRecentMatch(timestamp),
+      isRecent: (match, timestamp) => match.status === "FINISHED"  && isRecentMatch(timestamp, 24),
       isUpcoming: (match, timestamp) => (match.status === "TIMED" || match.status === "SCHEDULED") && isUpcomingMatch(timestamp),
       populateCard: function (cardClone, match) {
         cardClone.querySelector('.home-team-logo')?.setAttribute('src', match.homeTeam.crest);
@@ -209,9 +211,9 @@ document.addEventListener('DOMContentLoaded', () => {
       leagueCode: match => match.matchType,
       leaguePriorities: { test:100, odi:75, t20:50, default: 25},
       time: match => match.dateTimeGMT,
-      isLive: match => match.matchStarted && match.matchEnded === "false",
-      isRecent: (match, timestamp) => match.matchEnded  && isRecentMatch(timestamp),
-      isUpcoming: (match, timestamp) => match.matchStarted === "false" && isUpcomingMatch(timestamp),
+      isLive: match => match.matchStarted && (match.matchEnded === false),
+      isRecent: (match, timestamp) => match.matchEnded  && isRecentMatch(timestamp, 32),
+      isUpcoming: (match, timestamp) => (match.matchStarted === false) && isUpcomingMatch(timestamp),
       populateCard: function (cardClone, match) {
         const homeTeamShortName = match.teamInfo[0].shortname;
         const awayTeamShortName = match.teamInfo[1].shortname;
