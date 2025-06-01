@@ -218,16 +218,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const homeTeamShortName = (match.teamInfo[0]?.shortname) ?? 'NA';
         const awayTeamShortName = (match.teamInfo[1]?.shortname) ?? 'NA';
         const formatType = ((match.matchType == 'test')?'Test':((match.matchType == 'odi')?'ODI':'T20'));
-        const iconType = ((formatType == 'test')?'/assets/icons/cricket-icon-test.png':
-                            ((formatType == 'odi')?'/assets/icons/cricket-icon-odi.png':'/assets/icons/cricket-icon-t20.png'));
+        const iconType = ((match.matchType == 'test')?'/assets/icons/cricket-icon-test.png':
+                            ((match.matchType == 'odi')?'/assets/icons/cricket-icon-odi.png':'/assets/icons/cricket-icon-t20.png'));
 
         const venueInfo = match.venue?.split(',')[1] ?? 'TBD';     
-        //const homeTeamScore = (match.score[0]?.r)?`${match.score[0]?.r}/${match.score[0].w}`:'';
-        const homeTeamScore = (match.score?.[0]?.r) ?? '';
-        const homeTeamWickets = (match.score?.[0]?.w) ?? '';
-        // const homeTeamOvers = (match.score[0]?.o)?`${match.score[0].o}`:'';
-        // const awayTeamScore = (match.score[1]?.r)?`${match.score[1].r}/${match.score[1].w}`:'';
-        // const awayTeamOvers = (match.score[1]?.o)?`${match.score[1].o}`:'';
+        const homeTeamScore = (match?.score?.[0]?.r)?`${match.score[0].r}/${match.score[0].w}`:'';
+        //const homeTeamScore = (match.score?.[0]?.r) ?? '';
+        //const homeTeamWickets = (match.score?.[0]?.w) ?? '';
+        const homeTeamOvers = (match?.score?.[0]?.o)?`${match.score[0].o}`:'';
+        const awayTeamScore = (match?.score?.[1]?.r)?`${match.score[1].r}/${match.score[1].w}`:'';
+        const awayTeamOvers = (match?.score?.[1]?.o)?`${match.score[1].o}`:'';
+
+        const cricketTeamInfo = cardClone.querySelector('.cricket-team-info');
+        const cricketAwayTeamInfo = cardClone.querySelector('.cricket-away-team-info');
+        const cricketMatchStatus = cardClone.querySelector('.cricket-match-status');
+        const versusElement = cardClone.querySelector('.versus-element');
+        const scheduleContainer = cardClone.querySelector('.schedule-container');
+        const cricketHomeTeamOvers = cardClone.querySelector('.cricket-home-team-overs');
+        const cricketAwayTeamOvers = cardClone.querySelector('.cricket-away-team-overs');
+        const cricketHomeTeamscore = cardClone.querySelector('.cricket-home-team-score');
+        const cricketAwayTeamscore = cardClone.querySelector('.cricket-away-team-score');
+
 
         cardClone.querySelector('.competition-info').textContent = match.name ?? 'TBD';
         cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName;
@@ -238,6 +249,26 @@ document.addEventListener('DOMContentLoaded', () => {
         cardClone.querySelector('.format-icon')?.setAttribute('src', (iconType ?? '/assets/icons/cricket-icon-test.png'));
         cardClone.querySelector('.format-name').textContent = formatType ?? 'NA';
         cardClone.querySelector('.venue-name').textContent = venueInfo;
+
+        if(this.isLive(match) || this.isRecent(match, match.dateTimeGMT)){
+          cricketTeamInfo.classList.add('active');
+          cricketAwayTeamInfo.classList.add('active');
+          cricketMatchStatus.style.display = 'block';
+
+          cricketHomeTeamOvers.textContent = homeTeamOvers;
+          cricketAwayTeamOvers.textContent = awayTeamOvers;
+          cricketHomeTeamscore.textContent = homeTeamScore;
+          cricketAwayTeamscore.textContent = awayTeamScore;
+
+        } else {
+          versusElement.style.display = 'block';
+          scheduleContainer.style.display = 'block';
+          cricketMatchStatus.style.display = 'none';
+
+          const matchDate = new Date(match.dateTimeGMT);  
+          cardClone.querySelector('.scheduled-time').textContent = matchDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+          cardClone.querySelector('.scheduled-day').textContent = matchDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+        }
 
       }
     },
