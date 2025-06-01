@@ -215,15 +215,30 @@ document.addEventListener('DOMContentLoaded', () => {
       isRecent: (match, timestamp) => match.matchEnded  && isRecentMatch(timestamp, 32),
       isUpcoming: (match, timestamp) => (match.matchStarted === false) && isUpcomingMatch(timestamp),
       populateCard: function (cardClone, match) {
-        const homeTeamShortName = match.teamInfo[0].shortname;
-        const awayTeamShortName = match.teamInfo[1].shortname;
+        const homeTeamShortName = (match.teamInfo[0]?.shortname) ?? 'NA';
+        const awayTeamShortName = (match.teamInfo[1]?.shortname) ?? 'NA';
+        const formatType = ((match.matchType == 'test')?'Test':((match.matchType == 'odi')?'ODI':'T20'));
+        const iconType = ((formatType == 'test')?'/assets/icons/cricket-icon-test.png':
+                            ((formatType == 'odi')?'/assets/icons/cricket-icon-odi.png':'/assets/icons/cricket-icon-t20.png'));
 
-        cardClone.querySelector('.competition-info').textContent = match.name;
+        const venueInfo = match.venue?.split(',')[1] ?? 'TBD';     
+        //const homeTeamScore = (match.score[0]?.r)?`${match.score[0]?.r}/${match.score[0].w}`:'';
+        const homeTeamScore = (match.score?.[0]?.r) ?? '';
+        const homeTeamWickets = (match.score?.[0]?.w) ?? '';
+        // const homeTeamOvers = (match.score[0]?.o)?`${match.score[0].o}`:'';
+        // const awayTeamScore = (match.score[1]?.r)?`${match.score[1].r}/${match.score[1].w}`:'';
+        // const awayTeamOvers = (match.score[1]?.o)?`${match.score[1].o}`:'';
+
+        cardClone.querySelector('.competition-info').textContent = match.name ?? 'TBD';
         cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName;
         cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', (cricketTeamLogos[homeTeamShortName] ?? '/assets/logos/cricket/default-cricket-team.png'));
         cardClone.querySelector('.cricket-away-team-name').textContent = awayTeamShortName;
         cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src',(cricketTeamLogos[awayTeamShortName] ?? '/assets/logos/cricket/default-cricket-team.png'));
-        cardClone.querySelector('.cricket-match-status').textContent = match.status;
+        cardClone.querySelector('.cricket-match-status').textContent = match.status ?? 'match status not available';
+        cardClone.querySelector('.format-icon')?.setAttribute('src', (iconType ?? '/assets/icons/cricket-icon-test.png'));
+        cardClone.querySelector('.format-name').textContent = formatType ?? 'NA';
+        cardClone.querySelector('.venue-name').textContent = venueInfo;
+
       }
     },
   }
