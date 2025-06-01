@@ -26,7 +26,7 @@ export const cricketTeamLogos = {
   PAK: '/assets/logos/cricket/pakistan.webp',
   PORT: '/assets/logos/cricket/portugal.webp',
   SCO: '/assets/logos/cricket/scotland.webp',
-  SWZ: '/assets/logos/cricket/switzerland.webp',
+  SWZ: '/assets/logos/cricket/switzerland.png',
   ZIM: '/assets/logos/cricket/zimbabwe.webp',
   DERB: '/assets/logos/cricket/derbyshire.webp',
   DURH: '/assets/logos/cricket/durham.webp',

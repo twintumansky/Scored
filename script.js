@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusButtons = document.querySelectorAll('.container-buttons');
   const sportNavButtons = document.querySelectorAll('.nav-cards');
   let activeFilter = null; // Track current filter
-  let activeSport = "football"; // State for the currently active sport(Default - football)
+  let activeSport = "cricket"; // State for the currently active sport(Default - football)
 
   function getDateRange() {
     const today = new Date(Date.now());
@@ -220,9 +220,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cardClone.querySelector('.competition-info').textContent = match.name;
         cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName;
-        cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', cricketTeamLogos[homeTeamShortName]);
+        cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', (cricketTeamLogos[homeTeamShortName] ?? '/assets/logos/cricket/default-cricket-team.png'));
         cardClone.querySelector('.cricket-away-team-name').textContent = awayTeamShortName;
-        cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src',cricketTeamLogos[awayTeamShortName]);
+        cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src',(cricketTeamLogos[awayTeamShortName] ?? '/assets/logos/cricket/default-cricket-team.png'));
         cardClone.querySelector('.cricket-match-status').textContent = match.status;
       }
     },
