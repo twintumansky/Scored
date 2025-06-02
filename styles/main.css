@@ -279,7 +279,7 @@ nav li {
 
 .cricket-match-card {
     width: 100%;
-    aspect-ratio: 3 / 1.3;
+    aspect-ratio: 2 / 1;
     background: #ffffff;
     border-radius: 0.75rem;
     margin: 1rem 0;
@@ -320,7 +320,7 @@ nav li {
     font-size: 0.75rem;
     color: #777;
     border-top: 1.5px dashed #b2b0b0;
-    height: 25%;
+    height: 30%;
 }
 
 .cricket-team-info {
@@ -331,11 +331,11 @@ nav li {
     display: flex;
 }
 
-.cricket-team-info.active {
+/* .cricket-team-info.active {
     display:flex;
     flex-direction: column;
     align-items: flex-start;
-}
+} */
 
 .cricket-format, .cricket-venue-info {
     display: flex;
@@ -347,17 +347,28 @@ nav li {
 }
 
 .versus-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
     background-color: #c4c5be;
     width: 1.5rem;
     height: 1.5rem;
 }
 
-.cricket-home-team, .cricket-away-team-info {
+.cricket-home-team, .cricket-away-team {
     display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 0 0.30rem;
     margin: 0 1.5rem;
+}
+
+.cricket-home-team-score-container, .cricket-away-team-score-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    color: #777; 
 }
 
 .cricket-home-team.active, .cricket-away-team.active {
@@ -365,16 +376,10 @@ nav li {
     justify-content: space-around;
 }
 
-.cricket-away-team-info.active {
-    display: flex;
-    flex-direction: row-reverse;
-}
-
 .cricket-home-team-logo, .cricket-away-team-logo {
     width: 4.5rem;
     height: 2rem;
     object-fit: contain;
-    padding: 0 0.5rem;
 }
 
 .cricket-home-team-name, .cricket-away-team-name {
@@ -384,7 +389,7 @@ nav li {
 }
 
 .schedule-container {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
 }
