@@ -279,7 +279,7 @@ nav li {
 
 .cricket-match-card {
     width: 100%;
-    aspect-ratio: 2 / 1;
+    /* aspect-ratio: 1.9 / 1; */
     background: #ffffff;
     border-radius: 0.75rem;
     margin: 1rem 0;
@@ -326,6 +326,7 @@ nav li {
     border-top: 1.5px dashed #b2b0b0;
     /* height: 30%; */
     flex-grow: 1;
+    height: 2.5rem;
 }
 
 .cricket-team-info {
@@ -383,11 +384,14 @@ nav li {
 }
 
 .schedule-container {
-    padding: 0 0.5rem;
     justify-content: center;
     align-items: center;
     font-size: 0.85rem;
     color: #646464;
+}
+
+.scheduled-time {
+    padding: 0 0.25rem;
 }
 
 .format-icon, .location-icon {

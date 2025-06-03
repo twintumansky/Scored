@@ -53,11 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function isRecentMatch(matchTimestamp, hoursBefore) {
-    //const matchTimeInLocalTimezone = new Date(matchTimestamp).toLocaleString('en-US', { hour: '2-digit', minute: '2-digit'});
-    const matchTime = new Date(matchTimestamp).getTime();
-    const now = Math.floor(Date.now());
-    const timeHoursAgo = now - (hoursBefore * 60 * 60);
-    return matchTime > timeHoursAgo;
+    const matchTimeMs = matchTimestamp * 1000; // Convert timestamp to milliseconds
+    const now = Math.floor(Date.now()); // Current time in milliseconds
+    const timeHoursAgo = hoursBefore * 60 * 60 * 1000;
+    return matchTimeMs > (now - timeHoursAgo); // // Check if the match time is within the specified time range
   }
 
   function isUpcomingMatch(matchTimestamp) {
@@ -73,11 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const leagueCode = config.leagueCode(match);
       const allowedLeague = config.allowedLeagues.includes(leagueCode);
 
-      //const status = config.status(match);
       const timeFormat = config.time(match);
-      //const timeFormat = matchTime.toISOString().split('T')[0]
       const timestamp = Math.floor(new Date(timeFormat).getTime() / 1000);
-      //console.log(timestamp);
 
       const isLive = config.isLive(match);
       const isRecent = config.isRecent(match, timestamp);
@@ -222,11 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
           ((match.matchType == 'odi') ? '/assets/icons/cricket-icon-odi.png' : '/assets/icons/cricket-icon-t20.png'));
 
         const venueInfo = match.venue?.split(',')[1] ?? 'TBD';
-        // const homeTeamScore = (match?.score?.[0]?.r) ? `${match.score[0].r}/${match.score[0].w}` : '';
-        // const homeTeamOvers = (match?.score?.[0]?.o) ? `(${match.score[0].o})` : '-';
-        // const awayTeamScore = (match?.score?.[1]?.r) ? `${match.score[1].r}/${match.score[1].w}` : '';
-        // const awayTeamOvers = (match?.score?.[1]?.o) ? `(${match.score[1].o})` : '-';
-
         const cricketHomeTeamScoreContainer = cardClone.querySelector('.cricket-home-team-score-container');
         const cricketAwayTeamScoreContainer = cardClone.querySelector('.cricket-away-team-score-container');
         const cricketMatchStatus = cardClone.querySelector('.cricket-match-status');
@@ -235,6 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cricketAwayTeamOvers = cardClone.querySelector('.cricket-away-team-overs');
         const cricketHomeTeamScore = cardClone.querySelector('.cricket-home-team-score');
         const cricketAwayTeamScore = cardClone.querySelector('.cricket-away-team-score');
+        const matchTimestampSeconds = Math.floor(new Date(match.dateTimeGMT + 'Z').getTime() / 1000);
 
         cardClone.querySelector('.competition-info').textContent = match.name ?? 'TBD';
         cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName;
@@ -246,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cardClone.querySelector('.format-name').textContent = formatType ?? 'NA';
         cardClone.querySelector('.venue-name').textContent = venueInfo;
 
-        if (this.isLive(match) || this.isRecent(match, match.dateTimeGMT)) {
+        if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
           const homeTeamScore = (match?.score?.[0]?.r) ? `${match.score[0].r}/${match.score[0].w}` : "\xa0";
           const homeTeamOvers = (match?.score?.[0]?.o) ? `(${match.score[0].o})` : '\xa0';
           const awayTeamScore = (match?.score?.[1]?.r) ? `${match.score[1].r}/${match.score[1].w}` : "\xa0";
