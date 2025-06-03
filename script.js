@@ -25,8 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const leagueCode = config.leagueCode(match);
     score += config.leaguePriorities[leagueCode] || config.leaguePriorities.default;
 
-    //Status priority
-    //const status = match.status;
     const timeFormat = config.time(match);
     const timestamp = Math.floor(new Date(timeFormat).getTime() / 1000);
     const now = Math.floor(Date.now() / 1000);
@@ -55,9 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function isRecentMatch(matchTimestamp, hoursBefore) {
-    const now = Math.floor(Date.now() / 1000);
+    //const matchTimeInLocalTimezone = new Date(matchTimestamp).toLocaleString('en-US', { hour: '2-digit', minute: '2-digit'});
+    const matchTime = new Date(matchTimestamp).getTime();
+    const now = Math.floor(Date.now());
     const timeHoursAgo = now - (hoursBefore * 60 * 60);
-    return matchTimestamp > timeHoursAgo;
+    return matchTime > timeHoursAgo;
   }
 
   function isUpcomingMatch(matchTimestamp) {
@@ -210,27 +210,28 @@ document.addEventListener('DOMContentLoaded', () => {
       allowedLeagues: ['t20', 'odi', 'test'],
       leagueCode: match => match.matchType,
       leaguePriorities: { test: 100, odi: 75, t20: 50, default: 25 },
-      time: match => match.dateTimeGMT,
+      time: match => match.dateTimeGMT+'Z',
       isLive: match => match.matchStarted && (match.matchEnded === false),
       isRecent: (match, timestamp) => match.matchEnded && isRecentMatch(timestamp, 32),
       isUpcoming: (match, timestamp) => (match.matchStarted === false) && isUpcomingMatch(timestamp),
       populateCard: function (cardClone, match) {
-        const homeTeamShortName = (match.teamInfo[0]?.shortname) ?? 'NA';
-        const awayTeamShortName = (match.teamInfo[1]?.shortname) ?? 'NA';
+        const homeTeamShortName = (match.teamInfo[1]?.shortname) ?? 'NA';
+        const awayTeamShortName = (match.teamInfo[0]?.shortname) ?? 'NA';
         const formatType = ((match.matchType == 'test') ? 'Test' : ((match.matchType == 'odi') ? 'ODI' : 'T20'));
         const iconType = ((match.matchType == 'test') ? '/assets/icons/cricket-icon-test.png' :
           ((match.matchType == 'odi') ? '/assets/icons/cricket-icon-odi.png' : '/assets/icons/cricket-icon-t20.png'));
 
         const venueInfo = match.venue?.split(',')[1] ?? 'TBD';
         const homeTeamScore = (match?.score?.[0]?.r) ? `${match.score[0].r}/${match.score[0].w}` : '';
+        console.log(homeTeamScore);
         const homeTeamOvers = (match?.score?.[0]?.o) ? `${match.score[0].o}` : '';
         const awayTeamScore = (match?.score?.[1]?.r) ? `${match.score[1].r}/${match.score[1].w}` : '';
+        console.log(awayTeamScore);
         const awayTeamOvers = (match?.score?.[1]?.o) ? `${match.score[1].o}` : '';
 
         const cricketHomeTeamScoreContainer = cardClone.querySelector('.cricket-home-team-score-container');
         const cricketAwayTeamScoreContainer = cardClone.querySelector('.cricket-away-team-score-container');
         const cricketMatchStatus = cardClone.querySelector('.cricket-match-status');
-        const versusElement = cardClone.querySelector('.versus-element');
         const scheduleContainer = cardClone.querySelector('.schedule-container');
         const cricketHomeTeamOvers = cardClone.querySelector('.cricket-home-team-overs');
         const cricketAwayTeamOvers = cardClone.querySelector('.cricket-away-team-overs');
@@ -261,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
           scheduleContainer.style.display = 'flex';
           cricketMatchStatus.style.display = 'none';
 
-          const matchDate = new Date(match.dateTimeGMT);
+          const matchDate = new Date(match.dateTimeGMT+'Z');
           cardClone.querySelector('.scheduled-time').textContent = matchDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
           cardClone.querySelector('.scheduled-day').textContent = matchDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
         }

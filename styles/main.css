@@ -328,14 +328,7 @@ nav li {
     justify-content: space-around;
     align-items: center;
     margin: 1rem 0 1.25rem 0;
-    display: flex;
 }
-
-/* .cricket-team-info.active {
-    display:flex;
-    flex-direction: column;
-    align-items: flex-start;
-} */
 
 .cricket-format, .cricket-venue-info {
     display: flex;
@@ -371,11 +364,6 @@ nav li {
     color: #777; 
 }
 
-.cricket-home-team.active, .cricket-away-team.active {
-    display: flex;
-    justify-content: space-around;
-}
-
 .cricket-home-team-logo, .cricket-away-team-logo {
     width: 4.5rem;
     height: 2rem;
@@ -389,7 +377,6 @@ nav li {
 }
 
 .schedule-container {
-    /* display: flex; */
     justify-content: center;
     align-items: center;
 }
