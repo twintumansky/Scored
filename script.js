@@ -222,12 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
           ((match.matchType == 'odi') ? '/assets/icons/cricket-icon-odi.png' : '/assets/icons/cricket-icon-t20.png'));
 
         const venueInfo = match.venue?.split(',')[1] ?? 'TBD';
-        const homeTeamScore = (match?.score?.[0]?.r) ? `${match.score[0].r}/${match.score[0].w}` : '';
-        console.log(homeTeamScore);
-        const homeTeamOvers = (match?.score?.[0]?.o) ? `${match.score[0].o}` : '';
-        const awayTeamScore = (match?.score?.[1]?.r) ? `${match.score[1].r}/${match.score[1].w}` : '';
-        console.log(awayTeamScore);
-        const awayTeamOvers = (match?.score?.[1]?.o) ? `${match.score[1].o}` : '';
+        // const homeTeamScore = (match?.score?.[0]?.r) ? `${match.score[0].r}/${match.score[0].w}` : '';
+        // const homeTeamOvers = (match?.score?.[0]?.o) ? `(${match.score[0].o})` : '-';
+        // const awayTeamScore = (match?.score?.[1]?.r) ? `${match.score[1].r}/${match.score[1].w}` : '';
+        // const awayTeamOvers = (match?.score?.[1]?.o) ? `(${match.score[1].o})` : '-';
 
         const cricketHomeTeamScoreContainer = cardClone.querySelector('.cricket-home-team-score-container');
         const cricketAwayTeamScoreContainer = cardClone.querySelector('.cricket-away-team-score-container');
@@ -249,10 +247,20 @@ document.addEventListener('DOMContentLoaded', () => {
         cardClone.querySelector('.venue-name').textContent = venueInfo;
 
         if (this.isLive(match) || this.isRecent(match, match.dateTimeGMT)) {
-          cricketHomeTeamScoreContainer.style.display = 'block';
-          cricketAwayTeamScoreContainer.style.display = 'block';
-          cricketMatchStatus.style.display = 'block';
+          const homeTeamScore = (match?.score?.[0]?.r) ? `${match.score[0].r}/${match.score[0].w}` : "\xa0";
+          const homeTeamOvers = (match?.score?.[0]?.o) ? `(${match.score[0].o})` : '\xa0';
+          const awayTeamScore = (match?.score?.[1]?.r) ? `${match.score[1].r}/${match.score[1].w}` : "\xa0";
+          const awayTeamOvers = (match?.score?.[1]?.o) ? `(${match.score[1].o})` : '\xa0';
 
+          if(match.score?.length == 0 || match.score == null) {
+            cricketHomeTeamScoreContainer.style.display = 'none';
+            cricketAwayTeamScoreContainer.style.display = 'none';
+          } else {
+            cricketHomeTeamScoreContainer.style.display = 'block';
+            cricketAwayTeamScoreContainer.style.display = 'block';
+          }
+
+          cricketMatchStatus.style.display = 'block';
           cricketHomeTeamScore.textContent = homeTeamScore;
           cricketHomeTeamOvers.textContent = homeTeamOvers;
           cricketAwayTeamScore.textContent = awayTeamScore;
