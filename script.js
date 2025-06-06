@@ -25,6 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const leagueCode = config.leagueCode(match);
     score += config.leaguePriorities[leagueCode] || config.leaguePriorities.default;
 
+    if(currentSport === 'cricket') {
+      const matchFormat = match.matchType;
+      const homeTeam = match.teamInfo[1]?.shortname;
+      const awayTeam = match.teamInfo[0]?.shortname;
+      const homeTeamScore = config.teamPriorities.matchFormat?.homeTeam;
+      const awayTeamScore = config.teamPriorities.matchFormat?.awayTeam;
+      
+      score += homeTeamScore + awayTeamScore;
+    }
+
     const timeFormat = config.time(match);
     const timestamp = Math.floor(new Date(timeFormat).getTime() / 1000);
     const now = Math.floor(Date.now() / 1000);
@@ -49,14 +59,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // if (currentSport === 'cricket' && match.matchType === 't20' && config.teamPriorities && config.teamPriorities.t20) {
+    //   score -= config.leaguePriorities[leagueCode]
+    //   const homeTeamShortName = (match.teamInfo[1]?.shortname) ?? 'NA';
+    //   const awayTeamShortName = (match.teamInfo[0]?.shortname) ?? 'NA';
+    //   if (config.teamPriorities.t20[homeTeamShortName]) {
+    //     score += config.teamPriorities.t20[homeTeamShortName];
+    //   }
+    //   if (config.teamPriorities.t20[awayTeamShortName]) {
+    //     score += config.teamPriorities.t20[awayTeamShortName];
+    //   }
+    // }
+
     return score;
   }
 
   function isRecentMatch(matchTimestamp, hoursBefore) {
-    const matchTimeMs = matchTimestamp * 1000; // Convert timestamp to milliseconds
-    const now = Math.floor(Date.now()); // Current time in milliseconds
-    const timeHoursAgo = hoursBefore * 60 * 60 * 1000;
-    return matchTimeMs > (now - timeHoursAgo); // // Check if the match time is within the specified time range
+    const now = Math.floor(Date.now()/1000); // Current time in milliseconds
+    const timeHoursAgo = hoursBefore * 60 * 60;
+    return matchTimestamp > (now - timeHoursAgo); // // Check if the match time is within the specified time range
   }
 
   function isUpcomingMatch(matchTimestamp) {
@@ -205,7 +226,42 @@ document.addEventListener('DOMContentLoaded', () => {
       apiEndpoint: 'http://localhost:3000/api/matches/cricket',
       allowedLeagues: ['t20', 'odi', 'test'],
       leagueCode: match => match.matchType,
-      leaguePriorities: { test: 100, odi: 75, t20: 50, default: 25 },
+      leaguePriorities: { test: 100, odi: 85, t20: 50, default: 25 },
+      teamPriorities: {
+        t20: {
+          'IND': 25, 
+          'ENG': 25, 
+          'AUS': 25, 
+          'WI': 20,  
+          'PAK': 45, 
+          'RSA': 45,  
+          'NZ': 50,  
+          'SL': 45,  
+          'AFG': 40, 
+          'BAN': 40, 
+          'IRE': 30, 
+          'SCO': 30, 
+          'NEP': 30,
+          'DERB': 45,
+          'DURH': 45,
+          'ESX': 45,
+          'GLAM': 45,
+          'GLOU': 45,
+          'HAM': 45,
+          'KENT': 45,
+          'LECS': 45,
+          'LNCS': 45,
+          'MDX': 45,
+          'NOR': 45,
+          'NOT': 45,
+          'SUR': 45,
+          'SUSS': 45,
+          'WI': 45,
+          'WRCS': 45,
+          'WRKS': 45,
+          'YRK': 45,
+        },
+      },
       time: match => match.dateTimeGMT+'Z',
       isLive: match => match.matchStarted && (match.matchEnded === false),
       isRecent: (match, timestamp) => match.matchEnded && isRecentMatch(timestamp, 32),
