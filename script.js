@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const leagueCode = config.leagueCode(match);
     score += config.leaguePriorities[leagueCode] || config.leaguePriorities.default;
 
-    if(currentSport === 'cricket') {
+    if (currentSport === 'cricket') {
       const matchFormat = match.matchType;
       const homeTeam = match.teamInfo[1]?.shortname;
       const awayTeam = match.teamInfo[0]?.shortname;
@@ -59,23 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // if (currentSport === 'cricket' && match.matchType === 't20' && config.teamPriorities && config.teamPriorities.t20) {
-    //   score -= config.leaguePriorities[leagueCode]
-    //   const homeTeamShortName = (match.teamInfo[1]?.shortname) ?? 'NA';
-    //   const awayTeamShortName = (match.teamInfo[0]?.shortname) ?? 'NA';
-    //   if (config.teamPriorities.t20[homeTeamShortName]) {
-    //     score += config.teamPriorities.t20[homeTeamShortName];
-    //   }
-    //   if (config.teamPriorities.t20[awayTeamShortName]) {
-    //     score += config.teamPriorities.t20[awayTeamShortName];
-    //   }
-    // }
-
     return score;
   }
 
   function isRecentMatch(matchTimestamp, hoursBefore) {
-    const now = Math.floor(Date.now()/1000); // Current time in milliseconds
+    const now = Math.floor(Date.now() / 1000); // Current time in milliseconds
     const timeHoursAgo = hoursBefore * 60 * 60;
     return matchTimestamp > (now - timeHoursAgo); // // Check if the match time is within the specified time range
   }
@@ -228,54 +216,54 @@ document.addEventListener('DOMContentLoaded', () => {
       leagueCode: match => match.matchType,
       leaguePriorities: { test: 200, odi: 150, t20: 100, default: 25 },
       teamPriorities: {
-          'IND': 25, 
-          'ENG': 25, 
-          'AUS': 25, 
-          'WI': 20,  
-          'PAK': 25, 
-          'RSA': 25,  
-          'NZ': 25,  
-          'SL': 20,  
-          'AFG': 20, 
-          'BAN': 20, 
-          'IRE': 20,
-          'SCO': 15,
-          'NED': 15,
-          'AUT': 15,
-          'BEL': 15,
-          'CD': 15,
-          'HK': 15,
-          'IDN': 15,
-          'JP': 15,
-          'PH': 15,
-          'NEP': 15,
-          'MLT': 10,
-          'PORT': 10,
-          'SWZ': 10,
-          'DERB': 20,
-          'DURH': 20,
-          'ESX': 20,
-          'GLAM': 20,
-          'GLOU': 20,
-          'HAM': 20,
-          'KENT': 20,
-          'LECS': 20,
-          'LNCS': 20,
-          'MDX': 20,
-          'NOR': 20,
-          'NOT': 20,
-          'SOM': 20,
-          'SUR': 20,
-          'SUSS': 20,
-          'WRCS': 20,
-          'WRKS': 20,
-          'YRK': 20,
-          'ENGL': 10,
-          'INA': 10,
-          'WIA': 10,
-          'SA-A': 10,
+        'IND': 25,
+        'ENG': 25,
+        'AUS': 25,
+        'WI': 20,
+        'PAK': 25,
+        'RSA': 25,
+        'NZ': 25,
+        'SL': 20,
+        'AFG': 20,
+        'BAN': 20,
+        'IRE': 20,
+        'SCO': 15,
+        'NED': 15,
+        'AUT': 15,
+        'BEL': 15,
+        'CD': 15,
+        'HK': 15,
+        'IDN': 15,
+        'JP': 15,
+        'PH': 15,
+        'NEP': 15,
+        'MLT': 10,
+        'PORT': 10,
+        'SWZ': 10,
+        'DERB': 20,
+        'DURH': 20,
+        'ESX': 20,
+        'GLAM': 20,
+        'GLOU': 20,
+        'HAM': 20,
+        'KENT': 20,
+        'LECS': 20,
+        'LNCS': 20,
+        'MDX': 20,
+        'NOR': 20,
+        'NOT': 20,
+        'SOM': 20,
+        'SUR': 20,
+        'SUSS': 20,
+        'WRCS': 20,
+        'WRKS': 20,
+        'YRK': 20,
+        'ENGL': 10,
+        'INA': 10,
+        'WIA': 10,
+        'SA-A': 10,
       },
-      time: match => match.dateTimeGMT+'Z',
+      time: match => match.dateTimeGMT + 'Z',
       isLive: match => match.matchStarted && (match.matchEnded === false),
       isRecent: (match, timestamp) => match.matchEnded && isRecentMatch(timestamp, 32),
       isUpcoming: (match, timestamp) => (match.matchStarted === false) && isUpcomingMatch(timestamp),
@@ -313,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const awayTeamScore = (match?.score?.[1]?.r) ? `${match.score[1].r}/${match.score[1].w}` : "\xa0";
           const awayTeamOvers = (match?.score?.[1]?.o) ? `(${match.score[1].o})` : '\xa0';
 
-          if(match.score?.length == 0 || match.score == null) {
+          if (match.score?.length == 0 || match.score == null) {
             cricketHomeTeamScoreContainer.style.display = 'none';
             cricketAwayTeamScoreContainer.style.display = 'none';
           } else {
@@ -331,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
           scheduleContainer.style.display = 'flex';
           cricketMatchStatus.style.display = 'none';
 
-          const matchDate = new Date(match.dateTimeGMT+'Z');
+          const matchDate = new Date(match.dateTimeGMT + 'Z');
           cardClone.querySelector('.scheduled-time').textContent = matchDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
           cardClone.querySelector('.scheduled-day').textContent = matchDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
         }
@@ -415,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Initial Fetch ---
-  fetchMatches(activeSport); // Fetch for the default sport ("football")
+  fetchMatches(activeSport);
 
 })
 
