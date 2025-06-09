@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const matchFormat = match.matchType;
       const homeTeam = match.teamInfo[1]?.shortname;
       const awayTeam = match.teamInfo[0]?.shortname;
-      const homeTeamScore = config.teamPriorities.matchFormat?.homeTeam;
-      const awayTeamScore = config.teamPriorities.matchFormat?.awayTeam;
+      const homeTeamScore = config.teamPriorities?.homeTeam;
+      const awayTeamScore = config.teamPriorities?.awayTeam;
 
       score += homeTeamScore + awayTeamScore;
     }
