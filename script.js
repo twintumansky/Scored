@@ -26,11 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     score += config.leaguePriorities[leagueCode] || config.leaguePriorities.default;
 
     if (currentSport === 'cricket') {
-      const matchFormat = match.matchType;
       const homeTeam = match.teamInfo[1]?.shortname;
       const awayTeam = match.teamInfo[0]?.shortname;
-      const homeTeamScore = config.teamPriorities?.homeTeam;
-      const awayTeamScore = config.teamPriorities?.awayTeam;
+      const homeTeamScore = config.teamPriorities[homeTeam] || 0;
+      const awayTeamScore = config.teamPriorities[awayTeam] || 0;
 
       score += homeTeamScore + awayTeamScore;
     }
@@ -237,9 +236,18 @@ document.addEventListener('DOMContentLoaded', () => {
         'JP': 15,
         'PH': 15,
         'NEP': 15,
+        'BR': 10,
+        'CM': 10,
+        'CZE': 10,
+        'DEN': 10,
+        'FIN': 10,
         'MLT': 10,
+        'MW': 10,
         'PORT': 10,
+        'SLN': 10,
+        'SRB': 10,
         'SWZ': 10,
+        'UGA': 10,
         'DERB': 20,
         'DURH': 20,
         'ESX': 20,
@@ -268,8 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
       isRecent: (match, timestamp) => match.matchEnded && isRecentMatch(timestamp, 32),
       isUpcoming: (match, timestamp) => (match.matchStarted === false) && isUpcomingMatch(timestamp),
       populateCard: function (cardClone, match) {
-        const homeTeamShortName = (match.teamInfo[1]?.shortname) ?? 'NA';
-        const awayTeamShortName = (match.teamInfo[0]?.shortname) ?? 'NA';
+        const homeTeamShortName = match.teamInfo[1]?.shortname;
+        const awayTeamShortName = match.teamInfo[0]?.shortname;
         const formatType = ((match.matchType == 'test') ? 'Test' : ((match.matchType == 'odi') ? 'ODI' : 'T20'));
         const iconType = ((match.matchType == 'test') ? '/assets/icons/cricket-icon-test.png' :
           ((match.matchType == 'odi') ? '/assets/icons/cricket-icon-odi.png' : '/assets/icons/cricket-icon-t20.png'));
@@ -286,9 +294,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const matchTimestampSeconds = Math.floor(new Date(match.dateTimeGMT + 'Z').getTime() / 1000);
 
         cardClone.querySelector('.competition-info').textContent = match.name ?? 'TBD';
-        cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName;
+        cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName || match.teams[0];
         cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', (cricketTeamLogos[homeTeamShortName] ?? '/assets/logos/cricket/default-cricket-team.png'));
-        cardClone.querySelector('.cricket-away-team-name').textContent = awayTeamShortName;
+        cardClone.querySelector('.cricket-away-team-name').textContent = awayTeamShortName || match.teams[1];
         cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src', (cricketTeamLogos[awayTeamShortName] ?? '/assets/logos/cricket/default-cricket-team.png'));
         cardClone.querySelector('.cricket-match-status').textContent = match.status ?? 'match status not available';
         cardClone.querySelector('.format-icon')?.setAttribute('src', (iconType ?? '/assets/icons/cricket-icon-test.png'));
