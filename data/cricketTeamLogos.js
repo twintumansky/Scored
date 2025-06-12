@@ -14,7 +14,7 @@ export const cricketTeamLogos = {
   'AUT': '/assets/logos/cricket/austria.webp',
   'BAN': '/assets/logos/cricket/bangladesh.webp',
   'BEL': '/assets/logos/cricket/belgium.webp',
-  'CD': '/assets/logos/cricket/cambodia.png',
+  'CB': '/assets/logos/cricket/cambodia.png',
   'ENG': '/assets/logos/cricket/england.webp',
   'ENGW': '/assets/logos/cricket/england.webp',
   'ENGL': '/assets/logos/cricket/england.webp',
@@ -29,6 +29,7 @@ export const cricketTeamLogos = {
   'NEP': '/assets/logos/cricket/nepal.webp',
   'PAK': '/assets/logos/cricket/pakistan.webp',
   'BR': '/assets/logos/cricket/brazil.png',
+  'CAN': '/assets/logos/cricket/canada.webp',
   'CZE': '/assets/logos/cricket/czechrepublic.png',
   'DEN': '/assets/logos/cricket/denmark.png',
   'FIN': '/assets/logos/cricket/finland.png',
@@ -77,4 +78,6 @@ export const cricketTeamLogos = {
   'NGW': '/assets/logos/cricket/nigeria.png',
   'SLW': '/assets/logos/cricket/sierraleone.png',
   'RW': '/assets/logos/cricket/rwanda.png',
+  'USW': '/assets/logos/cricket/us.webp',
+  'NET-W': '/assets/logos/cricket/netherlands.png',
 };

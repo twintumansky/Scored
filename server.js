@@ -15,7 +15,7 @@ app.get('/api/matches/football', async (req, res) => {
     try {
         const { dateFrom, dateTo } = req.query;
         const response = await fetch(
-            `https://api.football-data.org/v4/matches?dateFrom=${dateFrom}&dateTo=${dateTo}&competitions=2001,2021,2014,2002`,
+            `https://api.football-data.org/v4/matches?dateFrom=${dateFrom}&dateTo=${dateTo}&competitions=2001,2021,2014,2002,2013,2152`,
             {
                 headers: {
                     'X-Auth-Token': process.env.FOOTBALL_API_KEY
