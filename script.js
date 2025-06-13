@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     football: {
       templateId: 'football-template',
       apiEndpoint: 'http://localhost:3000/api/matches/football',
-      allowedLeagues: ['CL', 'PL', 'PD', 'BL1', 'CLI', 'BSA'],
+      allowedLeagues: ['CL', 'PL', 'PD', 'BL1', 'BSA', 'CLI' ],
       leagueCode: match => match.competition?.code,
       leaguePriorities: { CL: 100, PL: 90, PD: 80, BL1: 70, BSA: 60, CLI: 50, default: 30 },
       time: match => match.utcDate,
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!response.ok) throw new Error(`HTTP error status - ${response.status}`);
 
       const data = await response.json();
-      console.log('API Response:', data);
+      console.log(`API Response for ${activeSport}:`, data);
 
       const leagueFilteredMatches = filterMatches(data.matches, activeSport);
       const sortedMatchData = sortMatches(leagueFilteredMatches, activeSport);
