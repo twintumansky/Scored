@@ -27,6 +27,42 @@
         </div>
     </header>
     <main>
+        <template id="football-template">
+            <div class="football-match-card">
+                <div class="fixture-card-info">
+                    <div class="home-team">
+                        <img class="home-team-logo" src="" />
+                        <div class="home-team-name"></div>
+                    </div>
+                    <div class="fixture-info">
+                        <div class="match-status"></div>
+                        <div class="score-container" style="display: none;">
+                            <div class="home-team-score"></div>
+                            <span>-</span>
+                            <div class="away-team-score"></div>
+                        </div>
+                        <div class="scheduled-time-container" style="display: none;">
+                            <div class="match-time"></div> 
+                            <div class="match-date"></div>
+                        </div>
+                    </div>
+                    <div class="away-team">
+                        <img class="away-team-logo" src="" />
+                        <div class="away-team-name"></div>
+                    </div>
+                </div>
+                <div class="football-match-info">
+                    <div class="league-info">
+                        <img class="league-emblem" src="" />
+                        <div class="league-name"></div>
+                    </div>
+                    <div class="venue-info">
+                        <img class="venue-flag" src="" />
+                        <div class="venue"></div>
+                    </div>
+                </div>
+            </div>
+        </template>
         <template id="cricket-template">
             <div class="cricket-match-card">
                 <div class="cricket-fixture-info">
@@ -74,42 +110,17 @@
                 </div>
             </div>
         </template>
-        <template id="football-template">
-            <div class="football-match-card">
-                <div class="fixture-card-info">
-                    <div class="home-team">
-                        <img class="home-team-logo" src="" />
-                        <div class="home-team-name"></div>
-                    </div>
-                    <div class="fixture-info">
-                        <div class="match-status"></div>
-                        <div class="score-container" style="display: none;">
-                            <div class="home-team-score"></div>
-                            <span>-</span>
-                            <div class="away-team-score"></div>
-                        </div>
-                        <div class="scheduled-time-container" style="display: none;">
-                            <div class="match-time"></div> 
-                            <div class="match-date"></div>
-                        </div>
-                    </div>
-                    <div class="away-team">
-                        <img class="away-team-logo" src="" />
-                        <div class="away-team-name"></div>
-                    </div>
+        <div id="motorsport-container">
+            <div id="motorsport-header-section">
+                <div class="motorsport-header-info">
+
                 </div>
-                <div class="football-match-info">
-                    <div class="league-info">
-                        <img class="league-emblem" src="" />
-                        <div class="league-name"></div>
-                    </div>
-                    <div class="venue-info">
-                        <img class="venue-flag" src="" />
-                        <div class="venue"></div>
-                    </div>
+                <div class="motorsport-header-main">
+                    <div class="motorsport-races-section">Races</div>
+                    <div class="motorsport-standings-section">Standings</div>
                 </div>
             </div>
-        </template>
+        </div>
         <div class="main-container">
             <div id="container-status-buttons">
                 <button class="container-buttons">Live</button>
