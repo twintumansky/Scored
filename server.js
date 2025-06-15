@@ -31,17 +31,15 @@ app.get('/api/matches/football', async (req, res) => {
 });
 
 app.get('/api/matches/cricket', async (req, res) => {
-    try {        
+    try {
         // Make individual requests
         const [matchesLive, matchesOther] = await Promise.all([
             fetch(`https://api.cricapi.com/v1/currentMatches?apikey=${process.env.CRICKET_API_KEY}&offset=0`),
             fetch(`https://api.cricapi.com/v1/matches?apikey=${process.env.CRICKET_API_KEY}&offset=0`),
         ]);
-
         // Parse JSON responses
         const liveMatches = await matchesLive.json();
         const otherMatches = await matchesOther.json();
-
         // Combine the matches, ensuring we handle the data structure correctly
         const combinedMatches = {
             matches: [
@@ -49,22 +47,25 @@ app.get('/api/matches/cricket', async (req, res) => {
                 ...(otherMatches.data || []),
             ]
         };
-
         res.json(combinedMatches);
-
     } catch (error) {
-        console.error('Detailed Proxy Error:', {
-            message: error.message,
-            stack: error.stack,
-            dateFrom: req.query.dateFrom,
-            dateTo: req.query.dateTo
-        });
-        res.status(500).json({ 
-            error: error.message,
-            details: 'Check server logs for more information'
-        });
+        console.error('Proxy Error:', error);
+        res.status(500).json({ error: error.message });
     }
 });
+
+app.get('/api/races/motorsport', async (req, res) => {
+    try {
+        const { dateFrom } = req.query;
+        const dateYear = dateFrom.split('-')[0];
+        const response = await fetch(`https://api.jolpi.ca/ergast/f1/${dateYear}/races`);
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Proxy Error:', error);
+        res.status(500).json({ error: error.message });
+    }
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {

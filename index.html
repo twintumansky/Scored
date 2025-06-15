@@ -113,12 +113,67 @@
         <div id="motorsport-container">
             <div id="motorsport-header-section">
                 <div class="motorsport-header-info">
-
+                    <img id="f1-logo" alt="formula1-logo" src=""/>
                 </div>
                 <div class="motorsport-header-main">
                     <div class="motorsport-races-section">Races</div>
                     <div class="motorsport-standings-section">Standings</div>
                 </div>
+            </div>
+            <div class="motorsport-main">
+                <template id="motorsport-template">
+                    <div class="motorsport-race-card">
+                        <div class="motorsport-race-info">
+                            <div class="motorsport-round-info">
+                                <p class="round-info"></p>
+                                <p class="round-status"></p>
+                            </div>
+                            <div class="motorsport-circuit-container">
+                                <div class="country-info">
+                                    <img class="country-flag" src="" alt="country-flag"/>
+                                    <p class="race-name"></p>
+                                </div>
+                                <div class="circuit-info-container">
+                                    <div class="circuit-info">
+                                        <div class="circuit-name"></div>
+                                        <div class="race-schedule"></div>
+                                    </div>
+                                    <img class="circuit-track-image"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="motorsport-circuit-image">
+                            <img class="circuit-bg-image" src="" alt="circuit-image"/>
+                        </div>
+                        <div class="motorsport-race-schedule">
+                            <div class="practice-1-schedule">
+                                <p>Free Practice 1</p>
+                                <p class="practice-1-date"></p>
+                                <p class="practice-1-time"></p>
+                            </div>
+                            <div class="practice-2-schedule">
+                                <p>Free Practice 2</p>
+                                <p class="practice-2-date"></p>
+                                <p class="practice-2-time"></p>
+                            </div>
+                            <div class="practice-3-schedule">
+                                <p>Free Practice 3</p>
+                                <p class="practice-3-date"></p>
+                                <p class="practice-3-time"></p>
+                            </div>
+                            <div class="Qualifying-schedule">
+                                <p>Qualifying</p>
+                                <p class="practice-1-date"></p>
+                                <p class="practice-1-time"></p>
+                            </div>
+                            <div class="main-race-schedule">
+                                <p>Race</p>
+                                <p class="race-date"></p>
+                                <p class="race-time"></p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
             </div>
         </div>
         <div class="main-container">

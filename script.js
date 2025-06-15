@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function displayLiveScores(matches, sportToDisplay) {
+  function displaySport(matches, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
     liveScoresDiv.innerHTML = '';
 
@@ -334,6 +334,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       }
     },
+    f1: {
+      templateId: 'motorsport-template',
+      apiEndpoint: 'http://localhost:3000/api/races/motorsport',
+    }
   }
 
   //fetching of matches from API
@@ -363,13 +367,35 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
       console.log(`API Response for ${activeSport}:`, data);
 
-      const leagueFilteredMatches = filterMatches(data.matches, activeSport);
-      const sortedMatchData = sortMatches(leagueFilteredMatches, activeSport);
+      // const leagueFilteredMatches = filterMatches(data.matches, activeSport);
+      // const sortedMatchData = sortMatches(leagueFilteredMatches, activeSport);
 
-      window.sortedMatches = sortedMatchData; // Store the full, sorted list for the current sport
+      // const sortedMatchData = ['football', 'cricket'].includes(activeSport)
+      //   ? sortMatches(filterMatches(data.matches, activeSport), activeSport)
+      //   : [];
 
-      const matchesToDisplay = filterMatchesByStatus(window.sortedMatches, activeFilter);
-      displayLiveScores(matchesToDisplay, activeSport);
+      // window.sortedMatches = sortedMatchData; // Store the full, sorted list for the current sport
+
+      // const matchesToDisplay = filterMatchesByStatus(window.sortedMatches, activeFilter);
+      const matchProcessors = {
+        football: () => {
+          const sortedMatchData = sortMatches(filterMatches(data.matches, 'football'), 'football');
+          window.sortedMatches = sortedMatchData;
+          return filterMatchesByStatus(sortedMatchData, activeFilter);
+        },
+        cricket: () => {
+          const sortedMatchData = sortMatches(filterMatches(data.matches, 'cricket'), 'cricket');
+          window.sortedMatches = sortedMatchData;
+          return filterMatchesByStatus(sortedMatchData, activeFilter);
+        },
+        f1: () => {
+          const races = data.MRData.RaceTable.Races || [];
+          return races;
+        },
+      };
+
+      const matchesToDisplay = matchProcessors[activeSport]?.() || [];
+      displaySport(matchesToDisplay, activeSport);
 
     } catch (error) {
       console.error('Error fetching matches:', error);
@@ -403,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Refilter and display matches using the currently stored sortedMatches and activeSport
       if (window.sortedMatches) { // Make sure data has been fetched at least once
         const filteredByStatus = filterMatchesByStatus(window.sortedMatches, activeFilter, activeSport);
-        displayLiveScores(filteredByStatus, activeSport); // Use the centrally stored activeSport
+        displaySport(filteredByStatus, activeSport); // Use the centrally stored activeSport
       } else {
         console.warn("No matches available at this moment.");
       }
