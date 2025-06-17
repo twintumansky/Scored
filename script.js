@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const liveScoresDiv = document.querySelector('#fixtures-container');
   const statusButtons = document.querySelectorAll('.container-buttons');
   const sportNavButtons = document.querySelectorAll('.nav-cards');
-  const motorsportContainer = document.querySelector('#motorsport-container');
+  const motorsportContainer = document.querySelector('.motorsport-container');
   const motorsportRaceCardContainer = document.querySelector('#motorsport-card-container');
   let activeFilter = null; // Track current filter
   let activeSport = "cricket"; // State for the currently active sport(Default - football)
@@ -141,21 +141,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function displaySport(fixtures, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
+    mainContainer.classList.add('hidden');
+    mainContainer.classList.remove('visible');
+    motorsportContainer.classList.add('hidden');
+    motorsportContainer.classList.remove('visible');
+
 
     if(isTeamSport(sportToDisplay)){
 
       mainContainer.classList.remove('hidden');
       mainContainer.classList.add('visible');
-      motorsportContainer.classList.remove('visible');
-      motorsportContainer.classList.add('hidden');
       liveScoresDiv.innerHTML = '';
 
     } else if(sportToDisplay === 'motorsport') {
 
       motorsportContainer.classList.remove('hidden');
       motorsportContainer.classList.add('visible');
-      mainContainer.classList.remove('visible');
-      mainContainer.classList.add('hidden'); 
 
     }
 
@@ -177,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fixtures.forEach(fixture => {
       const cardClone = template.content.cloneNode(true);
       currentConfig.populateCard(cardClone.firstElementChild, fixture);
-      isTeamSport
+      isTeamSport(sportToDisplay)
       ? liveScoresDiv.appendChild(cardClone)
       : motorsportRaceCardContainer.appendChild(cardClone);
     });
@@ -321,9 +322,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cardClone.querySelector('.competition-info').textContent = match.name ?? 'TBD';
         cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName || match.teams[0];
-        cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', (cricketTeamLogos[homeTeamShortName] ?? '/assets/logos/cricket/default-cricket-team.png'));
+        cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', (cricketTeamLogos[homeTeamShortName] ?? '/assets/logos/fixture_logos/default-cricket-team.png'));
         cardClone.querySelector('.cricket-away-team-name').textContent = awayTeamShortName || match.teams[1];
-        cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src', (cricketTeamLogos[awayTeamShortName] ?? '/assets/logos/cricket/default-cricket-team.png'));
+        cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src', (cricketTeamLogos[awayTeamShortName] ?? '/assets/logos/fixture_logos/default-cricket-team.png'));
         cardClone.querySelector('.cricket-match-status').textContent = match.status ?? 'match status not available';
         cardClone.querySelector('.format-icon')?.setAttribute('src', (iconType ?? '/assets/icons/cricket-icon-test.png'));
         cardClone.querySelector('.format-name').textContent = formatType ?? 'NA';
@@ -365,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
       apiEndpoint: 'http://localhost:3000/api/races/motorsport',
       isStatus: race => {
         const now = Date.now();
-        const raceTime = new Date(race[time]).getTime();
+        const raceTime = new Date(race.time).getTime();
         const raceDuration = 3 * 60 * 60 * 1000;
         let status;
         if((now >= raceTime && now <= (raceTime + raceDuration))) {
@@ -375,15 +376,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } else return status = 'Upcoming';          
       },
       populateCard: function(cardClone, race) {
-        const raceStatus = isStatus(race);
+        const raceStatus = this.isStatus(race);
         const raceCountry = race.Circuit?.Location?.country;
         const raceName = race.raceName;
         const circuitName = race.Circuit?.circuitName;
         const racePractice1Day = new Date(race.FirstPractice?.date).getDate();
         const raceDate = new Date(race.date).getDate(); 
-        const raceSchedule = new Date(race.dateTimeGMT);
+        
 
-        cardClone.querySelector('.round-info').textContent = `Round ${race[Round]}`;
+        cardClone.querySelector('.round-info').textContent = `Round ${race.Round}`;
         cardClone.querySelector('.round-status').textContent = raceStatus;
         cardClone.querySelector('.country-flag')?.setAttribute('src', (motorsportCountryLogos[raceCountry]));
         cardClone.querySelector('.race-name').textContent = raceName;
@@ -437,6 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       const fixturesToDisplay = fixtureProcessor[activeSport]?.() || [];
+      console.log(fixturesToDisplay);
       displaySport(fixturesToDisplay, activeSport);
 
     } catch (error) {

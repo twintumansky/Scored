@@ -80,6 +80,7 @@ export const cricketTeamLogos = {
   'MW': '/assets/logos/fixture_logos/malawi.png',
   'NGW': '/assets/logos/fixture_logos/nigeria.png',
   'SLW': '/assets/logos/fixture_logos/sierraleone.png',
+  'RSAW': '/assets/logos/fixture_logos/southafrica.webp',
   'RW': '/assets/logos/fixture_logos/rwanda.png',
   'USW': '/assets/logos/fixture_logos/us.webp',
   'NET-W': '/assets/logos/fixture_logos/netherlands.webp',
