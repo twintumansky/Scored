@@ -12,6 +12,14 @@ body {
     margin: 0;
 }
 
+.visible {
+    display:'block';
+}
+
+.hidden {
+    display: none;
+}
+
 header {
     width: 100%;
     margin: 0;
@@ -398,6 +406,99 @@ nav li {
     width: 1rem;
     height: 1rem;
     margin: 0 0.5rem;
+}
+
+#motorsport-container {
+    /* width:30%; */
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0efef;
+    border-radius: 0.75rem;
+    padding: 0.5rem 0;
+}
+
+#motorsport-header-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.motorsport-header-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.motorsport-header-main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#f1-logo {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.motorsport-race-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.motorsport-race-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.motorsport-round-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.motorsport-circuit-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.country-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.circuit-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.circuit-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.circuit-track-image {
+    width: 3rem;
+    height: 3rem;
+}
+
+.circuit-bg-image {
+    width: 40rem;
+    height: 10rem;
+}
+
+.motorsport-race-schedule {
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (max-width: 768px) {

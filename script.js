@@ -1,57 +1,65 @@
 import { cricketTeamLogos } from './data/cricketTeamLogos.js'
+import { motorsportCountryLogos } from './data/motorsportCountryLogos.js';
 
 //Config-driven-logic
 document.addEventListener('DOMContentLoaded', () => {
+  const mainContainer = document.querySelector('.main-container');
   const liveScoresDiv = document.querySelector('#fixtures-container');
   const statusButtons = document.querySelectorAll('.container-buttons');
   const sportNavButtons = document.querySelectorAll('.nav-cards');
+  const motorsportContainer = document.querySelector('#motorsport-container');
+  const motorsportRaceCardContainer = document.querySelector('#motorsport-card-container');
   let activeFilter = null; // Track current filter
   let activeSport = "cricket"; // State for the currently active sport(Default - football)
+
+  function isTeamSport(sport) {
+    return ['football', 'cricket'].includes(sport);
+  }
 
   function getDateRange() {
     const today = new Date(Date.now());
     const fiveDaysLater = new Date(today);
     fiveDaysLater.setDate(today.getDate() + 5);
-
     const formatDate = (date) => date.toISOString().split('T')[0];
+
     return { from: formatDate(today), to: formatDate(fiveDaysLater) };
   }
 
-  function calculateMatchPriority(match, sport) {
+  function calculateFixturePriority(fixture, sport) {
     let score = 0;
     const currentSport = sport;
     const config = sportConfig[currentSport];
     //League Priority
-    const leagueCode = config.leagueCode(match);
+    const leagueCode = config.leagueCode(fixture);
     score += config.leaguePriorities[leagueCode] || config.leaguePriorities.default;
 
     if (currentSport === 'cricket') {
-      const homeTeam = match.teamInfo[1]?.shortname;
-      const awayTeam = match.teamInfo[0]?.shortname;
+      const homeTeam = fixture.teamInfo[1]?.shortname;
+      const awayTeam = fixture.teamInfo[0]?.shortname;
       const homeTeamScore = config.teamPriorities[homeTeam] || 0;
       const awayTeamScore = config.teamPriorities[awayTeam] || 0;
 
       score += homeTeamScore + awayTeamScore;
     }
 
-    const timeFormat = config.time(match);
+    const timeFormat = config.time(fixture);
     const timestamp = Math.floor(new Date(timeFormat).getTime() / 1000);
     const now = Math.floor(Date.now() / 1000);
-    const hoursUntilMatch = (timestamp - now) / 3600; // Convert seconds to hours
+    const hoursUntilFixture = (timestamp - now) / 3600; // Convert seconds to hours
 
-    if (config.isLive(match)) {
+    if (config.isLive(fixture)) {
       score += 1000; // Live matches
-    } else if (config.isRecent(match)) {
+    } else if (config.isRecent(fixture)) {
       score += 500; // Recent matches
-    } else if (config.isUpcoming(match)) {
+    } else if (config.isUpcoming(fixture)) {
       // Prioritize matches happening sooner
-      if (hoursUntilMatch <= 24) {
+      if (hoursUntilFixture <= 24) {
         score += 300; // Next 24 hours
-      } else if (hoursUntilMatch <= 48) {
+      } else if (hoursUntilFixture <= 48) {
         score += 200; // 24-48 hours
-      } else if (hoursUntilMatch <= 72) {
+      } else if (hoursUntilFixture <= 72) {
         score += 150; // 48-72 hours
-      } else if (hoursUntilMatch <= 96) {
+      } else if (hoursUntilFixture <= 96) {
         score += 120; // 72-96 hours
       } else {
         score += 100; // 96-120 hours
@@ -61,41 +69,41 @@ document.addEventListener('DOMContentLoaded', () => {
     return score;
   }
 
-  function isRecentMatch(matchTimestamp, hoursBefore) {
-    const now = Math.floor(Date.now() / 1000); // Current time in milliseconds
+  function isRecentFixture(fixtureTimestamp, hoursBefore) {
+    const now = Math.floor(Date.now() / 1000); 
     const timeHoursAgo = hoursBefore * 60 * 60;
-    return matchTimestamp > (now - timeHoursAgo); // // Check if the match time is within the specified time range
+    return fixtureTimestamp > (now - timeHoursAgo); // // Check if the match time is within the specified time range
   }
 
-  function isUpcomingMatch(matchTimestamp) {
+  function isUpcomingFixture(fixtureTimestamp) {
     const now = Math.floor(Date.now() / 1000);
     const fiveDaysLater = now + (5 * 24 * 60 * 60);
-    return matchTimestamp >= now && matchTimestamp <= fiveDaysLater;
+
+    return fixtureTimestamp >= now && fixtureTimestamp <= fiveDaysLater;
   }
 
-  function filterMatches(matches, sport) {
+  function filterFixtures(fixtures, sport) {
     const currentSport = sport;
     const config = sportConfig[currentSport];
-    return matches.filter(match => {
-      const leagueCode = config.leagueCode(match);
+    return fixtures.filter(fixture => {
+      const leagueCode = config.leagueCode(fixture);
       const allowedLeague = config.allowedLeagues.includes(leagueCode);
-
-      const timeFormat = config.time(match);
+      const timeFormat = config.time(fixture);
       const timestamp = Math.floor(new Date(timeFormat).getTime() / 1000);
-
-      const isLive = config.isLive(match);
-      const isRecent = config.isRecent(match, timestamp);
-      const isUpcoming = config.isUpcoming(match, timestamp);
+      const isLive = config.isLive(fixture);
+      const isRecent = config.isRecent(fixture, timestamp);
+      const isUpcoming = config.isUpcoming(fixture, timestamp);
 
       return allowedLeague && (isLive || isRecent || isUpcoming);
     })
   }
 
-  function sortMatches(matches, sport) {
+  function sortFixtures(fixtures, sport) {
     const currentSport = sport;
-    const config = sportConfig[currentSport]
-    return matches
-      .map(match => ({ ...match, priority: calculateMatchPriority(match, sport), }))
+    const config = sportConfig[currentSport];
+
+    return fixtures
+      .map(fixture => ({ ...fixture, priority: calculateFixturePriority(fixture, sport), }))
       .sort((a, b) => {
         if (a.priority !== b.priority) {
           return b.priority - a.priority;
@@ -109,38 +117,54 @@ document.addEventListener('DOMContentLoaded', () => {
       })
   }
 
-  function filterMatchesByStatus(matches, filterStatus, sport) {
+  function filterFixturesByStatus(fixtures, filterStatus, sport) {
     const currentSport = sport;
     const config = sportConfig[currentSport];
-    if (!filterStatus) return matches; // Return all matches if no filter
+    if (!filterStatus) return fixtures; // Return all matches if no filter
 
-    return matches.filter(match => {
-      const timeFormat = config.time(match);
+    return fixtures.filter(fixture => {
+      const timeFormat = config.time(fixture);
       const timestamp = Math.floor(new Date(timeFormat).getTime() / 1000);
 
       switch (filterStatus) {
         case 'LIVE':
-          return config.isLive(match);
+          return config.isLive(fixture);
         case 'FINISHED':
-          return config.isRecent(match, timestamp);
+          return config.isRecent(fixture, timestamp);
         case 'UPCOMING':
-          return config.isUpcoming(match, timestamp);
+          return config.isUpcoming(fixture, timestamp);
         default:
           return true;
       }
     });
   }
 
-  function displaySport(matches, sportToDisplay) {
+  function displaySport(fixtures, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
-    liveScoresDiv.innerHTML = '';
+
+    if(isTeamSport(sportToDisplay)){
+
+      mainContainer.classList.remove('hidden');
+      mainContainer.classList.add('visible');
+      motorsportContainer.classList.remove('visible');
+      motorsportContainer.classList.add('hidden');
+      liveScoresDiv.innerHTML = '';
+
+    } else if(sportToDisplay === 'motorsport') {
+
+      motorsportContainer.classList.remove('hidden');
+      motorsportContainer.classList.add('visible');
+      mainContainer.classList.remove('visible');
+      mainContainer.classList.add('hidden'); 
+
+    }
 
     if (!currentConfig) {
       liveScoresDiv.innerHTML = '<p>No sport configuration found.</p>';
       return;
     }
-    if (matches.length === 0) {
-      liveScoresDiv.innerHTML = '<p>No matches available at the moment.</p>';
+    if (fixtures.length === 0) {
+      liveScoresDiv.innerHTML = '<p>No fixtures available at the moment.</p>';
       return;
     }
 
@@ -150,10 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    matches.forEach(match => {
+    fixtures.forEach(fixture => {
       const cardClone = template.content.cloneNode(true);
-      currentConfig.populateCard(cardClone.firstElementChild, match); // Pass the card element itself
-      liveScoresDiv.appendChild(cardClone);
+      currentConfig.populateCard(cardClone.firstElementChild, fixture);
+      isTeamSport
+      ? liveScoresDiv.appendChild(cardClone)
+      : motorsportRaceCardContainer.appendChild(cardClone);
     });
   }
 
@@ -166,8 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
       leaguePriorities: { CL: 100, PL: 90, PD: 80, BL1: 70, BSA: 60, CLI: 50, default: 30 },
       time: match => match.utcDate,
       isLive: match => match.status === "IN_PLAY" || match.status === "PAUSED",
-      isRecent: (match, timestamp) => match.status === "FINISHED" && isRecentMatch(timestamp, 24),
-      isUpcoming: (match, timestamp) => (match.status === "TIMED" || match.status === "SCHEDULED") && isUpcomingMatch(timestamp),
+      isRecent: (match, timestamp) => match.status === "FINISHED" && isRecentFixture(timestamp, 24),
+      isUpcoming: (match, timestamp) => (match.status === "TIMED" || match.status === "SCHEDULED") && isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
         cardClone.querySelector('.home-team-logo')?.setAttribute('src', match.homeTeam.crest);
         cardClone.querySelector('.away-team-logo')?.setAttribute('src', match.awayTeam.crest);
@@ -273,8 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       time: match => match.dateTimeGMT + 'Z',
       isLive: match => match.matchStarted && (match.matchEnded === false),
-      isRecent: (match, timestamp) => match.matchEnded && isRecentMatch(timestamp, 32),
-      isUpcoming: (match, timestamp) => (match.matchStarted === false) && isUpcomingMatch(timestamp),
+      isRecent: (match, timestamp) => match.matchEnded && isRecentFixture(timestamp, 32),
+      isUpcoming: (match, timestamp) => (match.matchStarted === false) && isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
         const homeTeamShortName = match.teamInfo[1]?.shortname;
         const awayTeamShortName = match.teamInfo[0]?.shortname;
@@ -334,15 +360,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
       }
     },
-    f1: {
+    motorsport: {
       templateId: 'motorsport-template',
       apiEndpoint: 'http://localhost:3000/api/races/motorsport',
+      isStatus: race => {
+        const now = Date.now();
+        const raceTime = new Date(race[time]).getTime();
+        const raceDuration = 3 * 60 * 60 * 1000;
+        let status;
+        if((now >= raceTime && now <= (raceTime + raceDuration))) {
+          return status = 'Live';
+        } else if((now > (raceTime + raceDuration))) {
+          return status = 'Finished';
+        } else return status = 'Upcoming';          
+      },
+      populateCard: function(cardClone, race) {
+        const raceStatus = isStatus(race);
+        const raceCountry = race.Circuit?.Location?.country;
+        const raceName = race.raceName;
+        const circuitName = race.Circuit?.circuitName;
+        const racePractice1Day = new Date(race.FirstPractice?.date).getDate();
+        const raceDate = new Date(race.date).getDate(); 
+        const raceSchedule = new Date(race.dateTimeGMT);
+
+        cardClone.querySelector('.round-info').textContent = `Round ${race[Round]}`;
+        cardClone.querySelector('.round-status').textContent = raceStatus;
+        cardClone.querySelector('.country-flag')?.setAttribute('src', (motorsportCountryLogos[raceCountry]));
+        cardClone.querySelector('.race-name').textContent = raceName;
+        cardClone.querySelector('.circuit-name').textContent = circuitName;
+        cardClone.querySelector('.race-schedule').textContent = `${racePractice1Day} - ${raceDate}`;
+      },
     }
   }
 
-  //fetching of matches from API
-  async function fetchMatches(sportId) {
-    activeSport = sportId; // Updating the active sport state
+  //fetching of fixtures from API
+  async function fetchFixtures(sport) {
+    activeSport = sport; // Updating the active sport state
     liveScoresDiv.innerHTML = '<div class="spinner"></div>';
     const { from, to } = getDateRange();
     const config = sportConfig[activeSport];
@@ -350,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Sport configuration error
     if (!config) {
       console.error("Configuration not found for this sport");
-      liveScoresDiv.innerHTML = 'This sport is not added to the app yet';
+      liveScoresDiv.innerHTML = 'Coming soon...';
       return;
     }
 
@@ -366,40 +419,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const data = await response.json();
       console.log(`API Response for ${activeSport}:`, data);
-
-      // const leagueFilteredMatches = filterMatches(data.matches, activeSport);
-      // const sortedMatchData = sortMatches(leagueFilteredMatches, activeSport);
-
-      // const sortedMatchData = ['football', 'cricket'].includes(activeSport)
-      //   ? sortMatches(filterMatches(data.matches, activeSport), activeSport)
-      //   : [];
-
-      // window.sortedMatches = sortedMatchData; // Store the full, sorted list for the current sport
-
-      // const matchesToDisplay = filterMatchesByStatus(window.sortedMatches, activeFilter);
-      const matchProcessors = {
+      const fixtureProcessor = {
         football: () => {
-          const sortedMatchData = sortMatches(filterMatches(data.matches, 'football'), 'football');
-          window.sortedMatches = sortedMatchData;
-          return filterMatchesByStatus(sortedMatchData, activeFilter);
+          const sortedFixtureData = sortFixtures(filterFixtures(data.matches, 'football'), 'football');
+          window.sortedFixtures = sortedFixtureData;
+          return filterFixturesByStatus(sortedFixtureData, activeFilter);
         },
         cricket: () => {
-          const sortedMatchData = sortMatches(filterMatches(data.matches, 'cricket'), 'cricket');
-          window.sortedMatches = sortedMatchData;
-          return filterMatchesByStatus(sortedMatchData, activeFilter);
+          const sortedFixtureData = sortFixtures(filterFixtures(data.matches, 'cricket'), 'cricket');
+          window.sortedFixtures = sortedFixtureData;
+          return filterFixturesByStatus(sortedFixtureData, activeFilter);
         },
-        f1: () => {
+        motorsport: () => {
           const races = data.MRData.RaceTable.Races || [];
           return races;
         },
       };
 
-      const matchesToDisplay = matchProcessors[activeSport]?.() || [];
-      displaySport(matchesToDisplay, activeSport);
+      const fixturesToDisplay = fixtureProcessor[activeSport]?.() || [];
+      displaySport(fixturesToDisplay, activeSport);
 
     } catch (error) {
-      console.error('Error fetching matches:', error);
-      liveScoresDiv.innerHTML = '<p class="error">Unable to load matches. Please try again later.</p>';
+      console.error('Error fetching fixtures:', error);
+      liveScoresDiv.innerHTML = '<p class="error">Unable to load fixtures. Please try again later.</p>';
     }
 
   }
@@ -407,8 +449,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sport Navigation Button Listeners
   sportNavButtons.forEach(sportCatButton => {
     sportCatButton.addEventListener('click', () => {
-      const sportId = sportCatButton.id.replace('-card', '');
-      fetchMatches(sportId);
+      const selectedSport = sportCatButton.id.replace('-card', '');
+      fetchFixtures(selectedSport);
     });
   });
 
@@ -426,18 +468,18 @@ document.addEventListener('DOMContentLoaded', () => {
         button.classList.add('active');
       }
 
-      // Refilter and display matches using the currently stored sortedMatches and activeSport
-      if (window.sortedMatches) { // Make sure data has been fetched at least once
-        const filteredByStatus = filterMatchesByStatus(window.sortedMatches, activeFilter, activeSport);
+      // Refilter and display matches using the currently stored sortedFixtures and activeSport
+      if (window.sortedFixtures) { // Make sure data has been fetched at least once
+        const filteredByStatus = filterFixturesByStatus(window.sortedFixtures, activeFilter, activeSport);
         displaySport(filteredByStatus, activeSport); // Use the centrally stored activeSport
       } else {
-        console.warn("No matches available at this moment.");
+        console.warn("No fixtures available at this moment.");
       }
     });
   });
 
   // --- Initial Fetch ---
-  fetchMatches(activeSport);
+  fetchFixtures(activeSport);
 
 })
 
