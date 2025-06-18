@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const raceDate = new Date(race.date).getDate(); 
         
 
-        cardClone.querySelector('.round-info').textContent = `Round ${race.Round}`;
+        cardClone.querySelector('.round-info').textContent = `Round ${race.round}`;
         cardClone.querySelector('.round-status').textContent = raceStatus;
         cardClone.querySelector('.country-flag')?.setAttribute('src', (motorsportCountryLogos[raceCountry]));
         cardClone.querySelector('.race-name').textContent = raceName;
