@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const motorsportContainer = document.querySelector('.motorsport-container');
   const motorsportRaceCardContainer = document.querySelector('#motorsport-card-container');
   let activeFilter = null; // Track current filter
-  let activeSport = "cricket"; // State for the currently active sport(Default - football)
+  let activeSport = "motorsport"; // State for the currently active sport(Default - football)
 
   function isTeamSport(sport) {
     return ['football', 'cricket'].includes(sport);
@@ -378,18 +378,19 @@ document.addEventListener('DOMContentLoaded', () => {
       populateCard: function(cardClone, race) {
         const raceStatus = this.isStatus(race);
         const raceCountry = race.Circuit?.Location?.country;
-        const raceName = race.raceName;
+        const raceName = race.raceName.split(' ')[0];
         const circuitName = race.Circuit?.circuitName;
         const racePractice1Day = new Date(race.FirstPractice?.date).getDate();
-        const raceDate = new Date(race.date).getDate(); 
+        const raceDate = new Date(race.date).getDate();
+        const raceMonth =  new Date(race.date).toLocaleDateString('en-US', {month: 'short' });
         
 
         cardClone.querySelector('.round-info').textContent = `Round ${race.round}`;
         cardClone.querySelector('.round-status').textContent = raceStatus;
         cardClone.querySelector('.country-flag')?.setAttribute('src', (motorsportCountryLogos[raceCountry]));
-        cardClone.querySelector('.race-name').textContent = raceName;
+        cardClone.querySelector('.race-name').textContent = `${raceName} GP`;
         cardClone.querySelector('.circuit-name').textContent = circuitName;
-        cardClone.querySelector('.race-schedule').textContent = `${racePractice1Day} - ${raceDate}`;
+        cardClone.querySelector('.race-schedule').textContent = `${racePractice1Day} - ${raceDate} ${raceMonth}`;
       },
     }
   }

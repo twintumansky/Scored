@@ -411,8 +411,7 @@ nav li {
     flex-direction: column;
     align-items: center;
     background-color: #f0efef;
-    border-radius: 0.75rem;
-    padding: 0.5rem 0;
+    border-radius: 1.5rem;
 }
 
 .motorsport-container.hidden {
@@ -423,13 +422,14 @@ nav li {
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
     border-bottom: 1.5px solid #c3c1c1;
     background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
                       linear-gradient(rgba(220, 53, 30, 0.75), rgba(220, 53, 30, 0.75)),
                       url('../assets/logos/f1/Ferrari\ SF-23.jpg');
     background-position: center center;
     background-size: cover;
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding: 1rem;
 }
 
 .motorsport-header-info {
@@ -443,7 +443,8 @@ nav li {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 1rem;
+    color: #b2b0b0;
+    font: bold;
 }
 
 #f1-logo {
@@ -451,22 +452,45 @@ nav li {
     height: 2.5rem;
 }
 
+.motorsport-main {
+    width: 100%;
+    background-color: #22222d;
+    padding: 0.5rem;
+}
+
 .motorsport-race-card {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #15151e;
+    background-color: #282830;
     color: #b2b0b0;
+    border-radius: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .motorsport-race-info {
     display: flex;
     flex-direction: column;
+    background-color: #3a3a45;
+    border-radius: 1.5rem;
+}
+
+.round-info {
+    font-size: 0.8rem;
+}
+
+.round-status {
+    font-size: 0.6rem;
+    background-color: #85858d;
+    color: #1f1f25;
+    border-radius: 1rem;
 }
 
 .country-flag {
     width: 2rem;
     height: 2rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
 }
 
 .motorsport-round-info {
@@ -497,21 +521,45 @@ nav li {
     flex-direction: column;
 }
 
+.race-name {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.circuit-name {
+    font-size: 0.9rem;
+    max-width: 20rem;
+}
+
+.race-schedule {
+    font-size: 0.75rem;
+}
+
 .circuit-track-image {
     width: 3rem;
     height: 3rem;
+    color: #b2b0b0;
 }
 
 .circuit-bg-image {
     width: 40rem;
-    height: 10rem;
+    height: 12rem;
+    background-position: center center;
     background-size: cover;
-    background-position: center;
+    border-radius: 1.5rem;
+    position: relative;
 }
 
 .motorsport-race-schedule {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     display: flex;
     flex-direction: column;
+    border-radius: 1.5rem;
+    font-size: 0.8rem;
+    color: #1f1f25;
+    background-color: #97979e;
 }
 
 .schedule {
