@@ -460,19 +460,27 @@ nav li {
 
 .motorsport-race-card {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     background-color: #282830;
     color: #b2b0b0;
     border-radius: 1.5rem;
     margin-bottom: 0.5rem;
+    overflow: hidden;
+    width: 100%;
 }
 
 .motorsport-race-info {
+    min-width: 10rem;
     display: flex;
     flex-direction: column;
+    flex: 1;
     background-color: #3a3a45;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 0.5rem;    
+    box-sizing: border-box;
 }
 
 .round-info {
@@ -480,26 +488,28 @@ nav li {
 }
 
 .round-status {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     background-color: #85858d;
     color: #1f1f25;
     border-radius: 1rem;
+    padding: 0.25rem 1rem;
 }
 
 .country-flag {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
+    object-fit: cover; 
     margin-right: 0.5rem;
 }
 
-.motorsport-round-info {
+.motorsport-round-info, .motorsport-circuit-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.motorsport-circuit-container {
+.circuit-container {
     display: flex;
     flex-direction: column;
 }
@@ -512,8 +522,7 @@ nav li {
 
 .circuit-info-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 }
 
 .circuit-info {
@@ -528,7 +537,7 @@ nav li {
 
 .circuit-name {
     font-size: 0.9rem;
-    max-width: 20rem;
+    max-width: 10rem;
 }
 
 .race-schedule {
@@ -536,30 +545,46 @@ nav li {
 }
 
 .circuit-track-image {
-    width: 3rem;
-    height: 3rem;
+    width: 5rem;
+    height: 5rem;
     color: #b2b0b0;
 }
 
-.circuit-bg-image {
-    width: 40rem;
-    height: 12rem;
-    background-position: center center;
-    background-size: cover;
-    border-radius: 1.5rem;
+.motorsport-circuit-image {
     position: relative;
+    min-width: 40rem;
+    height: 100%;
+    flex: 2;
+    margin: 0.5rem;
+    overflow: hidden;
+}
+
+.circuit-bg-image {
+    width: 100%;
+    height: 100%;
+    /* background-position: center center;
+    background-size: cover; */
+    object-fit: cover;
+    border-radius: 1rem;
+    
 }
 
 .motorsport-race-schedule {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 50%; 
+    /* bottom: 0.5rem;  */
+    right: 20rem;
+    transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    justify-content: space-around;
+    border-radius: 1rem;
     font-size: 0.8rem;
     color: #1f1f25;
-    background-color: #97979e;
+    background-color: rgb(151, 151, 158, 0.9);
+    z-index: 10; 
+    max-width: 10rem;
 }
 
 .schedule {
@@ -594,6 +619,33 @@ nav li {
         font-size: 0.7rem;
         padding: 4px 0.6rem;
     }
+
+    .motorsport-race-card {
+        flex-direction: column;
+    }
+
+    .motorsport-race-info,
+    .motorsport-circuit-image {
+        width: 95%;
+        min-width: unset;
+        margin: 0.5rem 0;
+        height: auto;
+    }
+
+    .motorsport-race-schedule {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        right: auto;
+        width: 100%;
+        margin-top: 0.5rem;
+        border-radius: 0 0 1.5rem 1.5rem;
+    }
+
+    .circuit-bg-image {
+        border-radius: 1.5rem 1.5rem 0 0;
+    }
+
 }
 
 @media screen and (max-width: 480px) {
