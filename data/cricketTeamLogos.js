@@ -34,6 +34,7 @@ export const cricketTeamLogos = {
   'DEN': '/assets/logos/fixture_logos/denmark.png',
   'FIN': '/assets/logos/fixture_logos/finland.png',
   'HKG': '/assets/logos/fixture_logos/hongkong.webp',
+  'HUN': '/assets/logos/fixture_logos/hungary.png',
   'NG': '/assets/logos/fixture_logos/nigeria.png',
   'JP': '/assets/logos/fixture_logos/japan.png',
   'PH': '/assets/logos/fixture_logos/philippines.webp',

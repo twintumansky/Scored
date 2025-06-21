@@ -584,10 +584,10 @@ nav li {
     font-size: 0.8rem;
     color: #1f1f25;
     background-color: rgba(151, 151, 158, 0.7); 
-    backdrop-filter: blur(5px); 
+    backdrop-filter: blur(3px); 
     z-index: 10; 
     max-width: 20rem;
-    height: 10rem;
+    height: 14rem;
 }
 
 .schedule {

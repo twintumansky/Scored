@@ -23,7 +23,7 @@ export const motorsportCountryLogos = {
     'Qatar': '/assets/logos/fixture_logos/qatar.png',
     'Russia': '/assets/logos/fixture_logos/russia.png',
     'Saudi Arabia': '/assets/logos/fixture_logos/saudiarabia.png',
-    'Singapore': '/assets/logos/fixture_logos/singapore.webp',
+    'Singapore': '/assets/logos/fixture_logos/singapore.png',
     'South Africa': '/assets/logos/fixture_logos/southafrica.webp',
     'South Korea': '/assets/logos/fixture_logos/southkorea.png',
     'Spain': '/assets/logos/fixture_logos/spain.webp',
