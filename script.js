@@ -268,6 +268,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'CZE': 10,
         'DEN': 10,
         'FIN': 10,
+        'FRA': 10,
+        'LUX': 10,
         'MLT': 10,
         'MW': 10,
         'PORT': 10,
