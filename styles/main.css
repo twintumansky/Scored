@@ -55,6 +55,7 @@ main nav {
     padding: 0.08rem 1.25rem 0rem 1.25rem;
     margin: 0 0.80rem;
     font-size: 0.80rem;
+    line-height: 1.2rem;
 }
 
 .nav-cards.active {
@@ -107,6 +108,7 @@ main nav {
     background-color: #c4c5be;
     margin: 0 1rem;
     font-size: 0.8rem;
+    list-style: 1.2rem;
     color: #5c5b5b;
     transition: all 0.2s ease;
 }
