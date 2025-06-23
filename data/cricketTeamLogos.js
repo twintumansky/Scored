@@ -22,6 +22,7 @@ export const cricketTeamLogos = {
   'ZIM': '/assets/logos/fixture_logos/zimbabwe.webp',
   'INA': '/assets/logos/fixture_logos/india.webp',
   'IND': '/assets/logos/fixture_logos/india.webp',
+  'IN19': '/assets/logos/fixture_logos/india.webp',
   'IDN': '/assets/logos/fixture_logos/indonesia.png',
   'IRE': '/assets/logos/fixture_logos/ireland.webp',
   'MLT': '/assets/logos/fixture_logos/malta.webp',
