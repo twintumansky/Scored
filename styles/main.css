@@ -5,7 +5,7 @@
 body { 
     width: 100vw;
     height:100vh;
-    background-color: #eaebe4;
+    background-color: #e3dfdf;
     font-family: "Hanken Grotesk", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -16,7 +16,7 @@ header {
     width: 100%;
     margin: 0;
     padding: 0.5rem 1rem;
-    background-color: #cecfc9;
+    background-color: #e3dfdf;
     box-shadow: 0 3px 2px -2px rgba(65, 65, 65, 0.2);
 }
 
@@ -50,7 +50,7 @@ main nav {
     height: 2rem;
     width:auto;
     border-radius: 1rem;
-    background-color: #5f5b5b;
+    background-color: #545356;
     color: #d5d3d3;
     padding: 0.08rem 1.25rem 0rem 1.25rem;
     margin: 0 0.80rem;
@@ -104,7 +104,7 @@ main nav {
     padding: 0.04rem 1rem 0.02rem 1rem;
     border: none;
     border-radius: 0.8rem;
-    background-color: #c4c5be;
+    background-color: #dcdada;
     margin: 0 1rem;
     font-size: 0.8rem;
     color: #5c5b5b;
@@ -289,6 +289,7 @@ nav li {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 1px 3px rgba(41, 41, 41, 0.12);
 }
 
 .cricket-fixture-info {
