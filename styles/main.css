@@ -50,26 +50,45 @@ main nav {
     height: 2rem;
     width:auto;
     border-radius: 1rem;
-    background-color: #545356;
     color: #d5d3d3;
+    background-color: #545356;
     padding: 0.08rem 1.25rem 0rem 1.25rem;
     margin: 0 0.80rem;
     font-size: 0.80rem;
+    letter-spacing: 0.02rem;
+    overflow: hidden;
+    transition: all .3s;
+    z-index: 1;
+    position: relative;
 }
 
-.nav-cards.active {
-    background-color: #363434;
-    color: #d5d3d3;
-}
+.nav-cards::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #545356;
+    transform: translateX(-100%); 
+    transition: transform 0.3s ease-out;
+    z-index: -1; 
+  }
+  
+  .nav-cards:hover::before {
+    transform: translateX(0); /* Slide in */
+  }
+  
+  .nav-cards:hover {
+    cursor: pointer;
+    background-color: #252425;
+    color: #d5d3d3; 
+  }
 
 .nav-cards:active {
-    transform: scale(0.95);
-}
-
-.nav-cards:hover {
-    cursor: pointer;
-    background: #4d4d4d;
+    background-color: #131212;
     color: #d5d3d3;
+    transform: scale(0.95);
 }
 
 .main-container.visible {
