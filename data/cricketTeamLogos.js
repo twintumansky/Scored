@@ -43,6 +43,7 @@ export const cricketTeamLogos = {
   'PH': '/assets/logos/fixture_logos/philippines.webp',
   'UGA': '/assets/logos/fixture_logos/uganda.png',
   'PORT': '/assets/logos/fixture_logos/portugal.webp',
+  'ROM': '/assets/logos/fixture_logos/romania.png',
   'SL': '/assets/logos/fixture_logos/srilanka.webp',
   'SCO': '/assets/logos/fixture_logos/scotland.png',
   'SLN': '/assets/logos/fixture_logos/slovenia.png',
