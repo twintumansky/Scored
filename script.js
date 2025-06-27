@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     football: {
       templateId: 'football-template',
       apiEndpoint: 'http://localhost:3000/api/matches/football',
-      allowedLeagues: ['CL', 'PL', 'PD', 'BL1', 'BSA', 'CLI' ],
+      allowedLeagues: ['CL', 'EC', 'ELC', 'PL', 'PD', 'BL1', 'BSA', 'CLI', 'FL1', 'SA', 'PPL' ],
       leagueCode: match => match.competition?.code,
       leaguePriorities: { CL: 100, PL: 90, PD: 80, BL1: 70, BSA: 60, CLI: 50, default: 30 },
       time: match => match.utcDate,
