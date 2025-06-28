@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function getDateRange() {
     const today = new Date(Date.now());
     const fiveDaysLater = new Date(today);
-    fiveDaysLater.setDate(today.getDate() + 5);
+    fiveDaysLater.setDate(today.getDate() + 10);
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     return { from: formatDate(today), to: formatDate(fiveDaysLater) };
@@ -425,7 +425,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(`API Response for ${activeSport}:`, data);
       const fixtureProcessor = {
         football: () => {
-          const sortedFixtureData = sortFixtures(filterFixtures(data.matches, 'football'), 'football');
+          const matches = Array.isArray(data.matches) ? data.matches : [];
+          const sortedFixtureData = sortFixtures(filterFixtures(matches, 'football'), 'football');
           window.sortedFixtures = sortedFixtureData;
           return filterFixturesByStatus(sortedFixtureData, activeFilter);
         },
