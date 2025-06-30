@@ -58,7 +58,7 @@ main nav {
     color: #d5d3d3;
     padding: 0.1rem 1.25rem 0.02rem 1.25rem;
     margin: 0 0.80rem;
-    font-size: 1rem;
+    font-size: 0.8rem;
     letter-spacing: 0.02rem;
     overflow: hidden;
     transition: all .3s;
@@ -91,7 +91,7 @@ main nav {
       }  
       &:hover {
         cursor: pointer;
-        color: #d5d3d3;
+        color: #f3f2f2;
         &:before {
           width: 100%;
         }
