@@ -305,8 +305,12 @@ document.addEventListener('DOMContentLoaded', () => {
       isRecent: (match, timestamp) => match.matchEnded && isRecentFixture(timestamp, 32),
       isUpcoming: (match, timestamp) => (match.matchStarted === false) && isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
-        const homeTeamShortName = match.teamInfo[1]?.shortname;
-        const awayTeamShortName = match.teamInfo[0]?.shortname;
+
+        const homeTeamShortName = match.teamInfo[0]?.shortname;
+        const homeTeamName = match.teamInfo[0]?.name;
+        const awayTeamShortName = match.teamInfo[1]?.shortname;
+        const awayTeamName = match.teamInfo[1]?.name;
+
         const formatType = ((match.matchType == 'test') ? 'Test' : ((match.matchType == 'odi') ? 'ODI' : 'T20'));
         const iconType = ((match.matchType == 'test') ? '/assets/icons/cricket-icon-test.png' :
           ((match.matchType == 'odi') ? '/assets/icons/cricket-icon-odi.png' : '/assets/icons/cricket-icon-t20.png'));
@@ -333,10 +337,19 @@ document.addEventListener('DOMContentLoaded', () => {
         cardClone.querySelector('.venue-name').textContent = venueInfo;
 
         if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
-          const homeTeamScore = (match?.score?.[0]?.r) ? `${match.score[0].r}/${match.score[0].w}` : "\xa0";
-          const homeTeamOvers = (match?.score?.[0]?.o) ? `(${match.score[0].o})` : '\xa0';
-          const awayTeamScore = (match?.score?.[1]?.r) ? `${match.score[1].r}/${match.score[1].w}` : "\xa0";
-          const awayTeamOvers = (match?.score?.[1]?.o) ? `(${match.score[1].o})` : '\xa0';
+
+          function findScoreForTeam(scores, teamName) {
+            if (!scores) return null;
+            return scores.find(
+              s => teamName && s.inning && s.inning.toLowerCase().includes(teamName.toLowerCase())
+            );
+          }
+          const homeScoreObj = findScoreForTeam(match.score, homeTeamName);
+          const awayScoreObj = findScoreForTeam(match.score, awayTeamName);
+          const homeTeamScore = homeScoreObj ? `${homeScoreObj.r}/${homeScoreObj.w}` : "\xa0";
+          const homeTeamOvers = homeScoreObj && homeScoreObj.o ? `(${homeScoreObj.o})` : '\xa0';
+          const awayTeamScore = awayScoreObj ? `${awayScoreObj.r}/${awayScoreObj.w}` : "\xa0";
+          const awayTeamOvers = awayScoreObj && awayScoreObj.o ? `(${awayScoreObj.o})` : '\xa0';
 
           if (match.score?.length == 0 || match.score == null) {
             cricketHomeTeamScoreContainer.style.display = 'none';
