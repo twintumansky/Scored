@@ -33,6 +33,7 @@ export const cricketTeamLogos = {
   'NEP': '/assets/logos/fixture_logos/nepal.webp',
   'PAK': '/assets/logos/fixture_logos/pakistan.webp',
   'BR': '/assets/logos/fixture_logos/brazil.png',
+  'BHR': '/assets/logos/fixture_logos/bahrain.png',
   'CAN': '/assets/logos/fixture_logos/canada.webp',
   'CZE': '/assets/logos/fixture_logos/czechrepublic.png',
   'DEN': '/assets/logos/fixture_logos/denmark.png',
