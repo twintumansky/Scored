@@ -88,7 +88,8 @@ export const cricketTeamLogos = {
   'UGAW': '/assets/logos/fixture_logos/uganda.png',
   'BRW': '/assets/logos/fixture_logos/brazil.png',
   'CW': '/assets/logos/fixture_logos/cameroon.png',
-  'MW': '/assets/logos/fixture_logos/malawi.png',
+  'GW': '/assets/logos/fixture_logos/greece.png',
+  'MWI': '/assets/logos/fixture_logos/malawi.png',
   'NGW': '/assets/logos/fixture_logos/nigeria.png',
   'SLW': '/assets/logos/fixture_logos/sierraleone.png',
   'RSAW': '/assets/logos/fixture_logos/southafrica.webp',
@@ -96,4 +97,5 @@ export const cricketTeamLogos = {
   'USW': '/assets/logos/fixture_logos/us.webp',
   'NET-W': '/assets/logos/fixture_logos/netherlands.webp',
   'SIN-W': '/assets/logos/fixture_logos/singapore.png',
+  'TKW': '/assets/logos/fixture_logos/turkey.png',
 };
