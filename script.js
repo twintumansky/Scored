@@ -340,16 +340,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
           function findScoreForTeam(scores, teamName) {
             if (!scores) return null;
-            return scores.find(
+            return scores.filter(
               s => teamName && s.inning && s.inning.toLowerCase().includes(teamName.toLowerCase())
             );
           }
+
+          function testMatchScoreContainer() {
+            const homeScoreObj = findScoreForTeam(match.score, homeTeamName);
+
+            const homeTeamScoreObj = {
+              '1st-inngs-runs': homeScoreObj ?`${homeScoreObj[0].r}/${homeScoreObj[0].w}`:"\xa0",
+              '2nd-inngs-runs': homeScoreObj ?`${homeScoreObj[1].r}/${homeScoreObj[1].w}`:"\xa0",
+              '1st-inngs-overs': homeScoreObj ?homeScoreObj[0].o:"\xa0",
+              '2nd-inngs-overs': homeScoreObj ?homeScoreObj[1].o:"\xa0",
+            }
+            const awayTeamScoreObj = {
+              '1st-inngs-runs': awayScoreObj ?`${awayScoreObj[0].r}/${awayScoreObj[0].w}`:"\xa0",
+              '2nd-inngs-runs': awayScoreObj ?`${awayScoreObj[1].r}/${awayScoreObj[1].w}`:"\xa0",
+              '1st-inngs-overs': awayScoreObj ?awayScoreObj[0].o:"\xa0",
+              '2nd-inngs-overs': awayScoreObj ?awayScoreObj[1].o:"\xa0",
+            }
+          const homeTeamScore = homeTeamScoreObj ? `${homeTeamScoreObj['1st-inngs-runs']}/${homeTeamScoreObj[0].w}` : "\xa0";
+          const homeTeamOvers = homeTeamScoreObj && homeScoreObj[0].o ? `(${homeScoreObj[0].o})` : '\xa0';
+          const awayTeamScore = awayTeamScoreObj ? `${awayScoreObj[0].r}/${awayScoreObj[0].w}` : "\xa0";
+          const awayTeamOvers = awayTeamScoreObj && awayScoreObj[0].o ? `(${awayScoreObj[0].o})` : '\xa0';
+
+          }
+
+          (match.matchType == 'Test') && testMatchScoreContainer();
+
           const homeScoreObj = findScoreForTeam(match.score, homeTeamName);
           const awayScoreObj = findScoreForTeam(match.score, awayTeamName);
-          const homeTeamScore = homeScoreObj ? `${homeScoreObj.r}/${homeScoreObj.w}` : "\xa0";
-          const homeTeamOvers = homeScoreObj && homeScoreObj.o ? `(${homeScoreObj.o})` : '\xa0';
-          const awayTeamScore = awayScoreObj ? `${awayScoreObj.r}/${awayScoreObj.w}` : "\xa0";
-          const awayTeamOvers = awayScoreObj && awayScoreObj.o ? `(${awayScoreObj.o})` : '\xa0';
+          const homeTeamScore = homeScoreObj ? `${homeScoreObj[0].r}/${homeScoreObj[0].w}` : "\xa0";
+          const homeTeamOvers = homeScoreObj && homeScoreObj[0].o ? `(${homeScoreObj[0].o})` : '\xa0';
+          const awayTeamScore = awayScoreObj ? `${awayScoreObj[0].r}/${awayScoreObj[0].w}` : "\xa0";
+          const awayTeamOvers = awayScoreObj && awayScoreObj[0].o ? `(${awayScoreObj[0].o})` : '\xa0';
 
           if (match.score?.length == 0 || match.score == null) {
             cricketHomeTeamScoreContainer.style.display = 'none';
