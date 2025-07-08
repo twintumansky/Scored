@@ -305,7 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
       isRecent: (match, timestamp) => match.matchEnded && isRecentFixture(timestamp, 32),
       isUpcoming: (match, timestamp) => (match.matchStarted === false) && isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
-        console.log('populateCard called for', match.name, match.matchType);
         const cricketHomeTeamScoreContainer = cardClone.querySelector('.cricket-home-team-score-container');
         const cricketAwayTeamScoreContainer = cardClone.querySelector('.cricket-away-team-score-container');
         const cricketMatchStatus = cardClone.querySelector('.cricket-match-status');
@@ -338,7 +337,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //for matches that are Live or Recently finished
         if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
-          console.log('Rendering live/recent for', match.name);
           function findScoreForTeam(scores, teamName) {
             if (!scores) return [];
             return scores.filter(
@@ -347,11 +345,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           function testMatchScoreContainer() {
-            console.log('Rendering live/recent for', match.name);
             const homeScoreObj = findScoreForTeam(match.score, homeTeamName);
             const awayScoreObj = findScoreForTeam(match.score, awayTeamName);
-            console.log('homeScoreObj:', homeScoreObj);
-            console.log('awayScoreObj:', awayScoreObj);
 
             const homeFirstInnings = homeScoreObj && homeScoreObj[0];
             const homeSecondInnings = homeScoreObj && homeScoreObj[1];
