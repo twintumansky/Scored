@@ -55,7 +55,7 @@ main nav {
     height: 2.25rem;
     width: auto;
     border-radius: 1.25rem;
-    color: #d5d3d3;
+    /* color: #d5d3d3; */
     padding: 0.1rem 1.25rem 0.02rem 1.25rem;
     margin: 0 0.80rem;
     font-size: 0.8rem;
@@ -92,7 +92,7 @@ main nav {
       }  
       &:hover {
         cursor: pointer;
-        color: #f3f2f2;
+        /* color: #f3f2f2; */
         &:before {
           width: 100%;
         }
@@ -105,8 +105,12 @@ main nav {
     z-index: 2;
   }
 
+.nav-cards.active .nav-cards-label {
+    color: #323232; /* darker color for active state */
+}  
+
 .nav-cards.active::after {
-    background-color: #a6a6a6; /* set active background */
+    background-color: #a6a6a6;
 }
 
 .nav-cards-icon {
@@ -115,7 +119,14 @@ main nav {
     justify-content: center;
     vertical-align: middle;
     padding-right: 0.25rem;
+    margin-bottom: 0.1rem;
     z-index: 2;
+}
+
+.nav-cards.active .nav-cards-icon svg {
+    /* stroke: #323232;  */
+    /* Optionally, also set fill if your SVG uses fill for the icon color */
+    fill: #323232;
 }
 
 #cricket-icon, #rugby-icon, #motorsport-icon, #mma-icon {
@@ -467,12 +478,11 @@ nav li {
 }
 
 .motorsport-container.visible{
-    width: 70%;
+    width: 40%;
     margin: 1rem auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: #f0efef; */
     border-radius: 1.5rem;
 }
 
@@ -535,7 +545,7 @@ nav li {
 }
 
 .motorsport-race-info {
-    min-width: 10rem;
+    min-width: 5rem;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -560,9 +570,6 @@ nav li {
 .country-flag {
     width: 2rem;
     height: 2rem;
-    border-radius: 50%;
-    object-fit: cover; 
-    margin-right: 0.5rem;
 }
 
 .motorsport-round-info, .motorsport-circuit-container {
@@ -614,30 +621,7 @@ nav li {
     filter: invert(100%);
 }
 
-.motorsport-circuit-image {
-    position: relative;
-    min-width: 20rem;
-    height: 100%;
-    flex: 2.5;
-    margin: 0.5rem;
-    overflow: hidden;
-}
-
-.circuit-bg-image {
-    width: 100%;
-    height: 100%;
-    /* background-position: center center;
-    background-size: cover; */
-    object-fit: cover;
-    border-radius: 1rem;
-}
-
 .motorsport-race-schedule {
-    position: absolute;
-    top: 50%; 
-    /* bottom: 0.5rem;  */
-    right: 1rem;
-    transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     padding: 0.5rem 1rem;
@@ -647,8 +631,7 @@ nav li {
     color: #1f1f25;
     background-color: rgba(151, 151, 158, 0.7); 
     backdrop-filter: blur(3px); 
-    z-index: 10; 
-    max-width: 20rem;
+    z-index: 10;
     height: 14rem;
 }
 

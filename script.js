@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const motorsportContainer = document.querySelector('.motorsport-container');
   const motorsportRaceCardContainer = document.querySelector('#motorsport-card-container');
   let activeFilter = null; // Track current filter
-  let activeSport = "cricket"; // State for the currently active sport(Default - football)
+  let activeSport = "motorsport"; // State for the currently active sport(Default - football)
 
   function isTeamSport(sport) {
     return ['football', 'cricket'].includes(sport);
