@@ -451,12 +451,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const raceMonth = new Date(race.date).toLocaleDateString('en-US', { month: 'short' });
 
 
-        cardClone.querySelector('.round-info').textContent = `Round ${race.round}`;
-        cardClone.querySelector('.round-status').textContent = raceStatus;
-        cardClone.querySelector('.country-flag')?.setAttribute('src', (motorsportCountryLogos[raceCountry]));
-        cardClone.querySelector('.race-name').textContent = `${raceName} GP`;
-        cardClone.querySelector('.circuit-name').textContent = circuitName;
-        cardClone.querySelector('.race-schedule').textContent = `${racePractice1Day} - ${raceDate} ${raceMonth}`;
+        // cardClone.querySelector('.round-info').textContent = `Round ${race.round}`;
+        // cardClone.querySelector('.round-status').textContent = raceStatus;
+        cardClone.querySelector('.country-flag-logo')?.setAttribute('src', (motorsportCountryLogos[raceCountry]));
+        cardClone.querySelector('.motorsport-race-name').textContent = `${raceName} GP`;
+        // cardClone.querySelector('.circuit-name').textContent = circuitName;
+        cardClone.querySelector('.motorsport-race-date').textContent = `${racePractice1Day} - ${raceDate} ${raceMonth}`;
       },
     }
   }
