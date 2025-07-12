@@ -320,18 +320,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const awayTeamName = match.teamInfo[1]?.name;
 
         const formatType = ((match.matchType == 'test') ? 'Test' : ((match.matchType == 'odi') ? 'ODI' : 'T20'));
-        const iconType = ((match.matchType == 'test') ? '/assets/icons/cricket-icon-test.png' :
-          ((match.matchType == 'odi') ? '/assets/icons/cricket-icon-odi.png' : '/assets/icons/cricket-icon-t20.png'));
+        const iconType = ((match.matchType == 'test') ? '/assets/icons/cricket-icon-test.svg' :
+          ((match.matchType == 'odi') ? '/assets/icons/cricket-icon-odi.svg' : '/assets/icons/cricket-icon-t20.svg'));
         const venueInfo = match.venue?.split(',')[1] ?? 'TBD';
         const matchTimestampSeconds = Math.floor(new Date(match.dateTimeGMT + 'Z').getTime() / 1000);
 
         cardClone.querySelector('.competition-info').textContent = match.name ?? 'NA';
         cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName || match.teams[0];
-        cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', (cricketTeamLogos[homeTeamShortName] ?? '/assets/logos/fixture_logos/default-cricket-team.png'));
+        cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', (cricketTeamLogos[homeTeamShortName] ?? '/assets/logos/fixture_logos/defaultcricketicon.svg'));
         cardClone.querySelector('.cricket-away-team-name').textContent = awayTeamShortName || match.teams[1];
-        cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src', (cricketTeamLogos[awayTeamShortName] ?? '/assets/logos/fixture_logos/default-cricket-team.png'));
+        cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src', (cricketTeamLogos[awayTeamShortName] ?? '/assets/logos/fixture_logos/defaultcricketicon.svg'));
         cardClone.querySelector('.cricket-match-status').textContent = match.status ?? 'Match status not available';
-        cardClone.querySelector('.format-icon')?.setAttribute('src', (iconType ?? '/assets/icons/cricket-icon-test.png'));
+        cardClone.querySelector('.format-icon')?.setAttribute('src', (iconType ?? '/assets/icons/cricket-icon-test.svg'));
         cardClone.querySelector('.format-name').textContent = formatType ?? 'NA';
         cardClone.querySelector('.venue-name').textContent = venueInfo;
 
