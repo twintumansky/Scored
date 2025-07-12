@@ -327,9 +327,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cardClone.querySelector('.competition-info').textContent = match.name ?? 'NA';
         cardClone.querySelector('.cricket-home-team-name').textContent = homeTeamShortName || match.teams[0];
-        cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', (cricketTeamLogos[homeTeamShortName] ?? '/assets/logos/fixture_logos/defaultcricketicon.svg'));
+        cardClone.querySelector('.cricket-home-team-logo')?.setAttribute('src', (cricketTeamLogos[homeTeamShortName] ?? '/assets/icons/defaultcricketicon.svg'));
         cardClone.querySelector('.cricket-away-team-name').textContent = awayTeamShortName || match.teams[1];
-        cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src', (cricketTeamLogos[awayTeamShortName] ?? '/assets/logos/fixture_logos/defaultcricketicon.svg'));
+        cardClone.querySelector('.cricket-away-team-logo')?.setAttribute('src', (cricketTeamLogos[awayTeamShortName] ?? '/assets/icons/defaultcricketicon.svg'));
         cardClone.querySelector('.cricket-match-status').textContent = match.status ?? 'Match status not available';
         cardClone.querySelector('.format-icon')?.setAttribute('src', (iconType ?? '/assets/icons/cricket-icon-test.svg'));
         cardClone.querySelector('.format-name').textContent = formatType ?? 'NA';
