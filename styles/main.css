@@ -82,14 +82,13 @@ main nav {
         left: 0;
         width: 0%;
         height: 100%;
-        background-color: #a6a6a6;
+        background-color: #a8a8a8;
         transition: all .3s;
         border-radius: 1.5rem;
         z-index: 1;
       }  
       &:hover {
         cursor: pointer;
-        /* color: #f3f2f2; */
         &:before {
           width: 100%;
         }
@@ -105,10 +104,13 @@ main nav {
   }
 
 .nav-cards.active .nav-cards-label {
-    
     color: #434343; /* darker color for active state */
     font-weight: 700;
 }  
+
+.nav-cards.active:after {
+    background-color: #a8a8a8;
+}
 
 .nav-cards-icon {
     display: inline-flex;
@@ -121,9 +123,7 @@ main nav {
 }
 
 .nav-cards.active .nav-cards-icon svg {
-    /* stroke: #323232;  */
-    /* Optionally, also set fill if your SVG uses fill for the icon color */
-    fill: #323232;
+    fill: #434343;
 }
 
 #cricket-icon, #rugby-icon, #motorsport-icon, #mma-icon {
