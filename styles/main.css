@@ -179,6 +179,7 @@ main nav {
     font-size: 0.8rem;
     color: #5c5b5b;
     transition: all 0.2s ease;
+    font-family: "Hanken Grotesk", sans-serif;
 }
 
 .container-buttons:hover {
@@ -293,7 +294,7 @@ main nav {
 }
 
 li a {
-    font-family: 'MyCustomFont', sans-serif;
+    font-family: "Hanken Grotesk", sans-serif;
     font-weight: 400;
 }
 
@@ -379,14 +380,14 @@ nav li {
 }
 
 .competition-info {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #6c6b6b;    
 }
 
 .cricket-match-status {
-    margin-bottom: 0.3rem;
-    font-size: 0.75rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.80rem;
     color: #777;    
 }
 
@@ -461,8 +462,9 @@ nav li {
 .schedule-container {
     justify-content: center;
     align-items: center;
-    font-size: 0.85rem;
-    color: #646464;
+    margin-bottom: 0.2rem;
+    font-size: 0.80rem;
+    color: #777;
 }
 
 .scheduled-time {
