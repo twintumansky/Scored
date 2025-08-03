@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const motorsportContainer = document.querySelector('.motorsport-container');
   const motorsportRaceCardContainer = document.querySelector('#motorsport-card-container');
   let activeFilter = null; // Track current filter
-  let activeSport = "motorsport"; // State for the currently active sport(Default - football)
+  let activeSport = "cricket"; // State for the currently active sport(Default - football)
 
   function isTeamSport(sport) {
     return ['football', 'cricket'].includes(sport);
@@ -371,9 +371,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const awayTeamOvers = awayTeamScoreObj && `${awayTeamScoreObj['1st-inngs-overs']}   ${awayTeamScoreObj['2nd-inngs-overs']}`;
 
             cricketHomeTeamScore.textContent = homeTeamScore;
-            cricketHomeTeamOvers.textContent = homeTeamOvers;
+            cricketHomeTeamOvers.textContent = `(${homeTeamOvers})`;
             cricketAwayTeamScore.textContent = awayTeamScore;
-            cricketAwayTeamOvers.textContent = awayTeamOvers;
+            cricketAwayTeamOvers.textContent = `(${awayTeamOvers})`;
           }
 
           function matchesScoreContainer() {
@@ -398,9 +398,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const awayTeamOvers = awayTeamScoreObj && awayTeamScoreObj['1st-inngs-overs'];
 
             cricketHomeTeamScore.textContent = homeTeamScore;
-            cricketHomeTeamOvers.textContent = homeTeamOvers;
+            cricketHomeTeamOvers.textContent = `(${homeTeamOvers})`;
             cricketAwayTeamScore.textContent = awayTeamScore;
-            cricketAwayTeamOvers.textContent = awayTeamOvers;
+            cricketAwayTeamOvers.textContent = `(${awayTeamOvers})`;
 
           }
 
