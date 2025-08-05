@@ -58,7 +58,7 @@ app.get('/api/races/motorsport', async (req, res) => {
     try {
         const { dateFrom } = req.query;
         const dateYear = dateFrom.split('-')[0];
-        const response = await fetch(`https://api.jolpi.ca/ergast/f1/${dateYear}/races`);
+        const response = await fetch(`https://api.jolpi.ca/ergast/f1/${dateYear}/results`);
         const data = await response.json();
         res.json(data);
     } catch (error) {

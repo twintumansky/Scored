@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const motorsportContainer = document.querySelector('.motorsport-container');
   const motorsportRaceCardContainer = document.querySelector('#motorsport-card-container');
   let activeFilter = null; // Track current filter
-  let activeSport = "cricket"; // State for the currently active sport(Default - football)
+  let activeSport = "motorsport"; // State for the currently active sport(Default - football)
 
   function isTeamSport(sport) {
     return ['football', 'cricket'].includes(sport);
@@ -449,6 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const racePractice1Day = new Date(race.FirstPractice?.date).getDate();
         const raceDate = new Date(race.date).getDate();
         const raceMonth = new Date(race.date).toLocaleDateString('en-US', { month: 'short' });
+        const raceResult = `${race.Results?.[0].Driver.givenName} ${race.Results?.[0].Driver.familyName}`;
 
 
         // cardClone.querySelector('.round-info').textContent = `Round ${race.round}`;
@@ -457,6 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cardClone.querySelector('.motorsport-race-name').textContent = `${raceName} GP`;
         // cardClone.querySelector('.circuit-name').textContent = circuitName;
         cardClone.querySelector('.motorsport-race-date').textContent = `${racePractice1Day} - ${raceDate} ${raceMonth}`;
+        cardClone.querySelector('.motorsport-round-winner').textContent = raceResult;
       },
     }
   }

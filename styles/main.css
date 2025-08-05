@@ -13,7 +13,8 @@ body {
     font-family: "Hanken Grotesk", sans-serif;
     font-optical-sizing: auto;
     margin: 0;
-    -webkit-font-smoothing: antialiased;
+    /* -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; */
 }
 
 header {
@@ -64,7 +65,6 @@ main nav {
     will-change: transform;
     backface-visibility: hidden;
     transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
 
     &:active {
         transform: scale(0.97);
@@ -475,10 +475,11 @@ nav li {
     display: flex;
     flex-direction: column;
     border-bottom: 1.5px solid #c3c1c1;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
-                      linear-gradient(rgba(220, 53, 30, 0.75), rgba(220, 53, 30, 0.75)),
-                      url('../assets/logos/f1/Ferrari\ SF-23.jpg');
-    background-position: center center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)),
+                      /* linear-gradient(rgba(218, 54, 32, 0.75), rgba(220, 53, 30, 0.75)), */
+                      linear-gradient(rgba(33, 32, 137, 0.75), rgba(57, 30, 212, 0.75)),
+                      url('../assets/logos/f1//Ferrari\ SF-23.jpg');
+    background-position: center 40%;
     background-size: cover;
     border-radius: 1.5rem 1.5rem 0 0;
     padding: 1rem;
@@ -488,7 +489,7 @@ nav li {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3.5rem;
 }
 
 .motorsport-header-main {
@@ -512,14 +513,15 @@ nav li {
 
 .motorsport-race-card {
     width: 100%;
-    background: #ffffff;
-    border-radius: 0.75rem;
-    margin: 1rem 0;
+    /* background: #ffffff; */
+    /* border-radius: 0.75rem; */
+    border-bottom: 0.9px solid #58575747;
+    margin-bottom: 1rem 0;
     padding: 0.5rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 1px 3px rgba(41, 41, 41, 0.12);   
+    /* box-shadow: 0 1px 3px rgba(41, 41, 41, 0.12);    */
 }
 
 .motorsport-race-info {
@@ -534,9 +536,28 @@ nav li {
     flex-direction: column;
 }
 
+.motorsport-race-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #5d5c5c;  
+}
+
+.motorsport-race-date {
+    font-size: 0.80rem;
+    font-weight: 500;
+    color: #717171;
+}
+
 .country-flag-logo{
     width: 2rem;
     height: 2rem;
+}
+
+.motorsport-round-winner {
+    margin: 0 1rem 0 auto;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #717171;
 }
 
 @media screen and (max-width: 768px) {
