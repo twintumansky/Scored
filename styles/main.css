@@ -603,8 +603,8 @@ nav li {
 }
 
 @media screen and (max-width: 768px) {
-    .main-container {
-        width: 90%;
+    .main-container.visible{
+        width: 50%;
     }
 
     .fixture-card {
@@ -660,6 +660,10 @@ nav li {
 }
 
 @media screen and (max-width: 480px) {
+     .main-container.visible{
+        width: 95%;
+    }
+
     .fixture-card {
         aspect-ratio: 3 / 1.7;
     }
