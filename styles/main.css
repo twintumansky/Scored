@@ -214,10 +214,10 @@ main nav {
 
 .fixture-card-info {
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1rem 0rem 1rem;
+    grid-template-columns: 1fr 0.8fr 1fr;
+    align-items: flex-start;
+    /* gap: 1rem; */
+    padding: 1rem 0rem 0.5rem 0rem;
     /* height: 75%; */
     flex-grow: 3;
     position: relative;
@@ -230,19 +230,24 @@ main nav {
     align-items: center;
     text-align: center;
     width: 6rem;
-    height: 100%;
-    justify-content: center;
+    /* height: 100%; */
+    justify-content: flex-start;
     padding: 0.5rem;
-    margin-top: 0.5rem;
+    /* margin-top: 0.5rem; */
+    min-height: 4rem;
 }
 
 .home-team-logo,
 .away-team-logo {
     width: 2.5rem;
     height: 2.5rem;
+    background-color: #e5e3d44f;
     background-size: cover;
     background-position: center;
     margin-bottom: 0.75rem;
+    /* border: 1px solid #d4d4d4; */
+    border-radius: 50%;
+    padding: 5px;
 }
 
 .fixture-info {
@@ -255,11 +260,10 @@ main nav {
 }
 
 .match-status {
-    margin-top: 1rem;
-    margin-bottom: 0.2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.4rem;
     font-size: 0.80rem;
-    color: #777;
-
+    color: #959595;
     text-align: center;
     white-space: normal; /* Allow text to wrap */
     word-wrap: break-word; /* Break long words if needed */
@@ -267,12 +271,18 @@ main nav {
 }
 
 .score-container {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     gap: 0.3rem;
-    font-size: 2rem;
-    color: #777;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #676767;
     margin-top: 0;
+    margin-bottom: 0.8rem;
+    border: 1px dashed #a09e9e;
+    border-radius: 1rem;
+    background: #e0e0e0;
+    padding: 0.13rem 1.1rem;
 }
 
 .football-versus-element {
@@ -280,7 +290,7 @@ main nav {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: #c4c5be;
+    background-color: #e5e5e5;
     width: 1.5rem;
     height: 1.5rem;
     font-size: 0.8rem;
@@ -297,8 +307,6 @@ main nav {
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 1rem;
-    font-size: 0.75rem;
-    color: #777;
     border-top: 1.5px dashed #b2b0b0;
     flex-grow: 1;
     height: 2.5rem;
@@ -316,18 +324,21 @@ nav li {
 
 .home-team-name,
 .away-team-name {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #777;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.2;
+    margin: 0;
 }
 
 .league-info, .venue-info {
     display: flex;
     align-items: center;
     max-width: 100%;
-    padding: 0 1rem;
     font-size: 0.75rem;
-    color: #777;
+    color: #959595;
 }
 
 /* .league-name {
@@ -361,8 +372,8 @@ nav li {
 
 .league-emblem,
 .venue-flag {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
     margin: 0 0.5rem;
 }
 

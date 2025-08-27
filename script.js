@@ -37,12 +37,15 @@ document.addEventListener("DOMContentLoaded", () => {
       config.leaguePriorities[leagueCode] || config.leaguePriorities.default;
 
     if (currentSport === "cricket") {
-      const homeTeam = fixture.teamInfo[1]?.shortname;
-      const awayTeam = fixture.teamInfo[0]?.shortname;
-      const homeTeamScore = config.teamPriorities[homeTeam] || 0;
-      const awayTeamScore = config.teamPriorities[awayTeam] || 0;
+      // Add proper error handling for teamInfo
+      if (fixture.teamInfo && Array.isArray(fixture.teamInfo) && fixture.teamInfo.length >= 2) {
+        const homeTeam = fixture.teamInfo[1]?.shortname;
+        const awayTeam = fixture.teamInfo[0]?.shortname;
+        const homeTeamScore = config.teamPriorities[homeTeam] || 0;
+        const awayTeamScore = config.teamPriorities[awayTeam] || 0;
 
-      score += homeTeamScore + awayTeamScore;
+        score += homeTeamScore + awayTeamScore;
+      }
     }
 
     const timeFormat = config.time(fixture);
@@ -394,10 +397,26 @@ document.addEventListener("DOMContentLoaded", () => {
           ".cricket-away-team-overs"
         );
 
-        const homeTeamShortName = match.teamInfo[0]?.shortname;
-        const homeTeamName = match.teamInfo[0]?.name;
-        const awayTeamShortName = match.teamInfo[1]?.shortname;
-        const awayTeamName = match.teamInfo[1]?.name;
+        let homeTeamShortName, homeTeamName, awayTeamShortName, awayTeamName;
+        
+        if (match.teamInfo && Array.isArray(match.teamInfo) && match.teamInfo.length >= 2) {
+          homeTeamShortName = match.teamInfo[0]?.shortname;
+          homeTeamName = match.teamInfo[0]?.name;
+          awayTeamShortName = match.teamInfo[1]?.shortname;
+          awayTeamName = match.teamInfo[1]?.name;
+        } else if (match.teams && Array.isArray(match.teams) && match.teams.length >= 2) {
+          // Fallback to teams array if teamInfo is not available
+          homeTeamShortName = match.teams[0];
+          homeTeamName = match.teams[0];
+          awayTeamShortName = match.teams[1];
+          awayTeamName = match.teams[1];
+        } else {
+          // Default values if neither teamInfo nor teams are available
+          homeTeamShortName = "TBD";
+          homeTeamName = "TBD";
+          awayTeamShortName = "TBD";
+          awayTeamName = "TBD";
+        }
 
         const formatType =
           match.matchType == "test"
