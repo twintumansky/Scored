@@ -51,28 +51,32 @@
     <main>
         <template id="football-template">
             <div class="football-match-card">
-                <div class="fixture-card-info">
-                    <div class="home-team">
-                        <img class="home-team-logo" src="" />
-                        <div class="home-team-name"></div>
-                    </div>
-                    <div class="fixture-info">
-                        <div class="score-container" style="display: none;">
-                            <div class="home-team-score"></div>
-                            <span>-</span>
-                            <div class="away-team-score"></div>
+                <div class="football-fixture-info">
+                    <img class="football-icon" src="/assets/icons/football-icon.svg" />
+                    <div class="football-competition-info competition-info"></div>
+                    <div class="fixture-card-info">
+                        <div class="home-team">
+                            <img class="home-team-logo" src="" />
+                            <div class="home-team-name"></div>
                         </div>
-                        <div class="football-versus-element" style="display: none;"><div>vs</div></div>
-                        <!-- <div class="scheduled-time-container" style="display: none;">
-                            <div class="match-time"></div>
-                            <div class="match-date"></div>
-                        </div> -->
+                        <div class="fixture-info">
+                            <div class="score-container" style="display: none;">
+                                <div class="home-team-score"></div>
+                                <span>-</span>
+                                <div class="away-team-score"></div>
+                            </div>
+                            <div class="football-versus-element" style="display: none;"><div>vs</div></div>
+                            <!-- <div class="scheduled-time-container" style="display: none;">
+                                <div class="match-time"></div>
+                                <div class="match-date"></div>
+                            </div> -->
+                        </div>
+                        <div class="away-team">
+                            <img class="away-team-logo" src="" />
+                            <div class="away-team-name"></div>
+                        </div>
                     </div>
-                    <div class="away-team">
-                        <img class="away-team-logo" src="" />
-                        <div class="away-team-name"></div>
-                    </div>
-                </div>
+                </div>     
                 <div class="match-status"></div>
                 <div class="football-match-info">
                     <div class="league-info">
@@ -90,7 +94,7 @@
             <div class="cricket-match-card">
                 <div class="cricket-fixture-info">
                     <img class="cricket-icon" src="/assets/icons/cricket-icon.svg" />
-                    <div class="competition-info"></div>
+                    <div class="cricket-competition-info competition-info"></div>
                     <div class="cricket-team-info">
                         <div class="cricket-home-team">
                             <div class="cricket-home-team-container">

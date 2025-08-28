@@ -38,7 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (currentSport === "cricket") {
       // Add proper error handling for teamInfo
-      if (fixture.teamInfo && Array.isArray(fixture.teamInfo) && fixture.teamInfo.length >= 2) {
+      if (
+        fixture.teamInfo &&
+        Array.isArray(fixture.teamInfo) &&
+        fixture.teamInfo.length >= 2
+      ) {
         const homeTeam = fixture.teamInfo[1]?.shortname;
         const awayTeam = fixture.teamInfo[0]?.shortname;
         const homeTeamScore = config.teamPriorities[homeTeam] || 0;
@@ -230,10 +234,12 @@ document.addEventListener("DOMContentLoaded", () => {
         cardClone
           .querySelector(".away-team-logo")
           ?.setAttribute("src", match.awayTeam.crest);
+        cardClone.querySelector(".football-competition-info").textContent =
+        `${match.homeTeam.shortName} vs ${match.awayTeam.shortName}` ?? "NA";  
         cardClone.querySelector(".home-team-name").textContent =
-          match.homeTeam.shortName;
+          match.homeTeam.tla;
         cardClone.querySelector(".away-team-name").textContent =
-          match.awayTeam.shortName;
+          match.awayTeam.tla;
         cardClone
           .querySelector(".league-emblem")
           ?.setAttribute("src", match.competition.emblem);
@@ -246,7 +252,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const homeTeamScore = match.score?.fullTime?.home;
         const awayTeamScore = match.score?.fullTime?.away;
         const scoreContainer = cardClone.querySelector(".score-container");
-        const versusElement = cardClone.querySelector(".football-versus-element");
+        const versusElement = cardClone.querySelector(
+          ".football-versus-element"
+        );
         const scheduledContainer = cardClone.querySelector(
           ".scheduled-time-container"
         );
@@ -261,14 +269,14 @@ document.addEventListener("DOMContentLoaded", () => {
           cardClone.querySelector(".away-team-score").textContent =
             awayTeamScore ?? "0";
         } else if (match.status === "FINISHED") {
-          if(homeTeamScore === awayTeamScore) {
+          if (homeTeamScore === awayTeamScore) {
             statusTextElement.textContent = "Match tied";
           } else if (homeTeamScore > awayTeamScore) {
             statusTextElement.textContent = `${match.homeTeam.shortName} won the match`;
           } else {
             statusTextElement.textContent = `${match.awayTeam.shortName} won the match`;
           }
-          
+
           scoreContainer.style.display = "flex";
           // scheduledContainer.style.display = "none";
           cardClone.querySelector(".home-team-score").textContent =
@@ -398,13 +406,21 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         let homeTeamShortName, homeTeamName, awayTeamShortName, awayTeamName;
-        
-        if (match.teamInfo && Array.isArray(match.teamInfo) && match.teamInfo.length >= 2) {
+
+        if (
+          match.teamInfo &&
+          Array.isArray(match.teamInfo) &&
+          match.teamInfo.length >= 2
+        ) {
           homeTeamShortName = match.teamInfo[0]?.shortname;
           homeTeamName = match.teamInfo[0]?.name;
           awayTeamShortName = match.teamInfo[1]?.shortname;
           awayTeamName = match.teamInfo[1]?.name;
-        } else if (match.teams && Array.isArray(match.teams) && match.teams.length >= 2) {
+        } else if (
+          match.teams &&
+          Array.isArray(match.teams) &&
+          match.teams.length >= 2
+        ) {
           // Fallback to teams array if teamInfo is not available
           homeTeamShortName = match.teams[0];
           homeTeamName = match.teams[0];
@@ -435,7 +451,7 @@ document.addEventListener("DOMContentLoaded", () => {
           new Date(match.dateTimeGMT + "Z").getTime() / 1000
         );
 
-        cardClone.querySelector(".competition-info").textContent =
+        cardClone.querySelector(".cricket-competition-info").textContent =
           match.name ?? "NA";
         cardClone.querySelector(".cricket-home-team-name").textContent =
           homeTeamShortName || match.teams[0];
@@ -681,8 +697,17 @@ document.addEventListener("DOMContentLoaded", () => {
           return filterFixturesByStatus(sortedFixtureData, activeFilter);
         },
         cricket: () => {
+          let matches = Array.isArray(data.matches) ? data.matches : [];
+          const uniqueMatchId = new Set();
+          matches = matches.filter((match) => {
+            if (uniqueMatchId.has(match.id)) {
+              return false;
+            }
+            uniqueMatchId.add(match.id);
+            return true;
+          });
           const sortedFixtureData = sortFixtures(
-            filterFixtures(data.matches, "cricket"),
+            filterFixtures(matches, "cricket"),
             "cricket"
           );
           window.sortedFixtures = sortedFixtureData;
