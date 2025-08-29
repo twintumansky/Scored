@@ -217,9 +217,6 @@ main nav {
     display: grid;
     grid-template-columns: 1fr 0.8fr 1fr;
     align-items: flex-start;
-    /* gap: 1rem; */
-    /* padding: 0.5rem 0rem 0.5rem 0rem; */
-    /* height: 75%; */
     flex-grow: 3;
     position: relative;
 }
@@ -231,10 +228,7 @@ main nav {
     align-items: center;
     text-align: center;
     width: 6rem;
-    /* height: 100%; */
     justify-content: flex-start;
-    /* padding: 0.5rem; */
-    /* margin-top: 0.5rem; */
     min-height: 4rem;
 }
 
@@ -246,7 +240,6 @@ main nav {
     background-size: cover;
     background-position: center;
     margin-bottom: 0.75rem;
-    /* border: 1px solid #d4d4d4; */
     border-radius: 50%;
     padding: 5px;
 }
@@ -267,9 +260,7 @@ main nav {
     color: #959595;
     text-align: center;
     white-space: normal;
-    /* Allow text to wrap */
     word-wrap: break-word;
-    /* Break long words if needed */
     max-width: 100%;
 }
 
@@ -345,35 +336,6 @@ nav li {
     font-size: 0.75rem;
     color: #959595;
 }
-
-/* .league-name {
-    text-align: center;
-    font-size: 0.75rem;
-    color: #777;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding: 0.25rem 0;
-} */
-
-/* .venue-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    grid-column: 3;
-    justify-self: end;
-    max-width: 100%;
-} */
-
-/* .venue {
-    text-align: center;
-    font-size: 0.75rem;
-    color: #777;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding: 0.25rem 0;
-} */
 
 .league-emblem,
 .venue-flag {
