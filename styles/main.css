@@ -13,8 +13,6 @@ body {
     font-family: "Hanken Grotesk", sans-serif;
     font-optical-sizing: auto;
     margin: 0;
-    /* -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; */
 }
 
 header {
@@ -190,17 +188,6 @@ main nav {
 }
 
 .football-match-card {
-    /* width: 100%;
-    aspect-ratio: 3 / 1.28;
-    background: #ffffff;
-    border-radius: 0.75rem;
-    margin: 1rem 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 1px 3px rgba(41, 41, 41, 0.12);
-    align-items: center; */
-
     width: 100%;
     background: #ffffff;
     border-radius: 0.75rem;
@@ -547,7 +534,6 @@ nav li {
     flex-direction: column;
     border-bottom: 1.5px solid #c3c1c1;
     background-image: linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)),
-        /* linear-gradient(rgba(218, 54, 32, 0.75), rgba(220, 53, 30, 0.75)), */
         linear-gradient(rgba(33, 32, 137, 0.75), rgba(57, 30, 212, 0.75)),
         url('../assets/logos/f1//Ferrari\ SF-23.jpg');
     background-position: center 40%;
@@ -584,15 +570,12 @@ nav li {
 
 .motorsport-race-card {
     width: 100%;
-    /* background: #ffffff; */
-    /* border-radius: 0.75rem; */
     border-bottom: 0.9px solid #58575747;
     margin-bottom: 1rem 0;
     padding: 0.5rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    /* box-shadow: 0 1px 3px rgba(41, 41, 41, 0.12);    */
 }
 
 .motorsport-race-info {
