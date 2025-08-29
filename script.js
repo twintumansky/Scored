@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
           .querySelector(".away-team-logo")
           ?.setAttribute("src", match.awayTeam.crest);
         cardClone.querySelector(".football-competition-info").textContent =
-        `${match.homeTeam.shortName} vs ${match.awayTeam.shortName}` ?? "NA";  
+          `${match.homeTeam.shortName} vs ${match.awayTeam.shortName}` ?? "NA";
         cardClone.querySelector(".home-team-name").textContent =
           match.homeTeam.tla;
         cardClone.querySelector(".away-team-name").textContent =
@@ -486,7 +486,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //for matches that are Live or Recently finished
         if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
           function findScoreForTeam(scores, teamName) {
-            if (!scores) return [];
+            if (!scores) return null;
             return scores.filter(
               (s) =>
                 teamName &&
@@ -507,26 +507,22 @@ document.addEventListener("DOMContentLoaded", () => {
             const homeTeamScoreObj = {
               "1st-inngs-runs": homeFirstInnings
                 ? `${homeFirstInnings.r}/${homeFirstInnings.w}`
-                : "\xa0",
+                : "Yet to bat",
               "2nd-inngs-runs": homeSecondInnings
                 ? `${homeSecondInnings.r}/${homeSecondInnings.w}`
-                : "\xa0",
-              "1st-inngs-overs": homeFirstInnings ? homeFirstInnings.o : "\xa0",
-              "2nd-inngs-overs": homeSecondInnings
-                ? homeSecondInnings.o
-                : "\xa0",
+                : "",
+              "1st-inngs-overs": homeFirstInnings ? homeFirstInnings.o : "-",
+              "2nd-inngs-overs": homeSecondInnings ? homeSecondInnings.o : "",
             };
             const awayTeamScoreObj = {
               "1st-inngs-runs": awayFirstInnings
                 ? `${awayFirstInnings.r}/${awayFirstInnings.w}`
-                : "\xa0",
+                : "Yet to bat",
               "2nd-inngs-runs": awaySecondInnings
                 ? `${awaySecondInnings.r}/${awaySecondInnings.w}`
-                : "\xa0",
-              "1st-inngs-overs": awayFirstInnings ? awayFirstInnings.o : "\xa0",
-              "2nd-inngs-overs": awaySecondInnings
-                ? awaySecondInnings.o
-                : "\xa0",
+                : "",
+              "1st-inngs-overs": awayFirstInnings ? awayFirstInnings.o : "-",
+              "2nd-inngs-overs": awaySecondInnings ? awaySecondInnings.o : "",
             };
             const homeTeamScore =
               homeTeamScoreObj &&
@@ -542,9 +538,9 @@ document.addEventListener("DOMContentLoaded", () => {
               `${awayTeamScoreObj["1st-inngs-overs"]}   ${awayTeamScoreObj["2nd-inngs-overs"]}`;
 
             cricketHomeTeamScore.textContent = homeTeamScore;
-            cricketHomeTeamOvers.textContent = `(${homeTeamOvers})`;
+            cricketHomeTeamOvers.textContent = `( ${homeTeamOvers})`;
             cricketAwayTeamScore.textContent = awayTeamScore;
-            cricketAwayTeamOvers.textContent = `(${awayTeamOvers})`;
+            cricketAwayTeamOvers.textContent = `( ${awayTeamOvers})`;
           }
 
           function matchesScoreContainer() {
@@ -557,14 +553,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const homeTeamScoreObj = {
               "1st-inngs-runs": homeFirstInnings
                 ? `${homeFirstInnings.r}/${homeFirstInnings.w}`
-                : "\xa0",
-              "1st-inngs-overs": homeFirstInnings ? homeFirstInnings.o : "\xa0",
+                : "Yet to bat",
+              "1st-inngs-overs": homeFirstInnings
+                ? `(${homeFirstInnings.o})`
+                : "-",
             };
             const awayTeamScoreObj = {
               "1st-inngs-runs": awayFirstInnings
                 ? `${awayFirstInnings.r}/${awayFirstInnings.w}`
-                : "\xa0",
-              "1st-inngs-overs": awayFirstInnings ? awayFirstInnings.o : "\xa0",
+                : "Yet to bat",
+              "1st-inngs-overs": awayFirstInnings
+                ? `(${awayFirstInnings.o})`
+                : "-",
             };
 
             const homeTeamScore =
@@ -577,9 +577,9 @@ document.addEventListener("DOMContentLoaded", () => {
               awayTeamScoreObj && awayTeamScoreObj["1st-inngs-overs"];
 
             cricketHomeTeamScore.textContent = homeTeamScore;
-            cricketHomeTeamOvers.textContent = `(${homeTeamOvers})`;
+            cricketHomeTeamOvers.textContent = homeTeamOvers;
             cricketAwayTeamScore.textContent = awayTeamScore;
-            cricketAwayTeamOvers.textContent = `(${awayTeamOvers})`;
+            cricketAwayTeamOvers.textContent = awayTeamOvers;
           }
 
           match.matchType == "test"
