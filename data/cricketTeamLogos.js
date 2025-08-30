@@ -22,6 +22,7 @@ export const cricketTeamLogos = {
   'MLT': '/assets/logos/fixture_logos/malta.svg',
   'NED': '/assets/logos/fixture_logos/netherlands.svg',
   'NZ': '/assets/logos/fixture_logos/newzealand.svg',
+  'NZA': '/assets/logos/fixture_logos/newzealand.svg',
   'NEP': '/assets/logos/fixture_logos/nepal.svg',
   'NAM': '/assets/logos/fixture_logos/namibia.svg',
   'PAK': '/assets/logos/fixture_logos/pakistan.svg',

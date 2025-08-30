@@ -8,9 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
   const motorsportContainer = document.querySelector(".motorsport-container");
+  const motorsportSelectedSection = document.querySelectorAll(".motorsport-header-button");
+  const motorsportActiveSection = "races";
   const motorsportRaceCardContainer = document.querySelector(
     "#motorsport-card-container"
   );
+
   let activeFilter = null; // Track current filter
   let activeSport = "football"; // State for the currently active sport(Default - football)
 
@@ -630,6 +633,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else return (status = "Upcoming");
       },
       populateCard: function (cardClone, race) {
+        const racesSection = cardClone.querySelector('.')
         const raceStatus = this.isStatus(race);
         const raceCountry = race.Circuit?.Location?.country;
         const raceName = race.raceName.split(" ")[0];
@@ -766,6 +770,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- Initial Fetch ---
+  //Selected-motorsport-section
+  motorsportSelectedSection.forEach((btn) => {
+    btn.classList.toggle("active", btn.id===`motorsport-${motorsportActiveSection}`);
+  });
+   
+  
+
+  // --- Initial fetch of selected sport ---
   fetchFixtures(activeSport);
 });
