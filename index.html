@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="motorsport-main">
-                <template id="motorsport-template">
+                <template id="motorsport-races-template">
                     <div class="motorsport-race-card">
                         <div class="motorsport-race-info">
                             <img src="" class="country-flag-logo" alt="country-flag" />
@@ -158,15 +158,49 @@
                                 <div class="motorsport-race-name"></div>
                                 <div class="motorsport-race-date"></div>
                             </div>
-                            <div class="motorsport-round-winner">
-
-                            </div>
-                        </div>
-                        <div class="motorsport-race-schedule">
-
+                            <div class="motorsport-round-winner"></div>
                         </div>
                     </div>
                 </template>
+                <template id="motorsport-standings-template">
+                    <div id="motorsport-standings-main-container">
+                        <div id="motorsport-standings-main-container-initial-sec">
+                            <p id="motorsport-standings-main-container-pos-info"></p>
+                            <div id="motorsport-standings-main-container-entity">
+                                <img id="motorsport-standings-main-container-entity-img" />
+                                <p id="motorsport-standings-main-container-entity-info"></p>
+                            </div>
+                        </div>
+                        <div id="motorsport-standings-main-container-final-sec">
+                            <p id="motorsport-standings-main-container-wins-info"></p>
+                            <p id="motorsport-standings-main-container-poles-info"></p>
+                            <p id="motorsport-standings-main-container-podiums-info"></p>
+                            <p id="motorsport-standings-main-container-points-info"></p>
+                        </div>
+                    </div>
+                </template>
+                <div id="motorsport-standings-container-info hidden">
+                    <div id="motorsport-standings-container-info-buttons">
+                        <button id="motorsport-standings-container-info-driver-btn">
+                            Drivers
+                        </button>
+                        <button id="motorsport-standings-container-info-team-btn">
+                            Teams
+                        </button>
+                    </div>
+                    <div id="motorsport-standings-container-info-container">
+                        <div id="motorsport-standings-container-initial-sec">
+                            <p id="motorsport-standings-container-pos-info">Position</p>
+                            <p id="motorsport-standings-container-entity-info"></p>
+                        </div>
+                        <div id="motorsport-standings-container-final-sec">
+                            <p id="motorsport-standings-container-wins-info">Wins</p>
+                            <p id="motorsport-standings-container-poles-info">Poles</p>
+                            <p id="motorsport-standings-container-podiums-info">Pod</p>
+                            <p id="motorsport-standings-container-points-info">Points</p>
+                        </div>
+                    </div>
+                </div>
                 <div id="motorsport-card-container"></div>
             </div>
         </div>
