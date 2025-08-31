@@ -7,11 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
+  //motorsport-specific
   const motorsportContainer = document.querySelector(".motorsport-container");
-  const motorsportSelectedSection = document.querySelectorAll(".motorsport-header-button");
   const motorsportActiveSection = "races";
-  const motorsportRaceCardContainer = document.querySelector(
+  const motorsportStandingsActiveSection = "drivers";
+  const motorsportCardContainer = document.querySelector(
     "#motorsport-card-container"
+  );
+  const motorsportSectionInfo = document.querySelector(
+    "#motorsport-standings-container-info"
   );
 
   let activeFilter = null; // Track current filter
@@ -169,6 +173,14 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (sportToDisplay === "motorsport") {
       motorsportContainer.classList.remove("hidden");
       motorsportContainer.classList.add("visible");
+      motorsportSectionInfo.classList.remove("visible");
+      motorsportSectionInfo.classList.add("hidden");
+
+      if (motorsportActiveSection === "standings") {
+        motorsportSectionInfo.classList.remove("hidden");
+        motorsportSectionInfo.classList.add("visible");
+        motorsportContainer.innerHTML = "";
+      }
     }
 
     if (!currentConfig) {
@@ -180,7 +192,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const template = document.querySelector(`#${currentConfig.templateId}`);
+    if(isTeamSport(sportToDisplay)){
+      const template = document.querySelector(`#${currentConfig.templateId}`);
+    } else if (sportToDisplay === "motorsport" && motorsportActiveSection === "races") {
+      const template = document.querySelector(`#${currentConfig.templateId[0]}`);
+    } else {
+      const template = document.querySelector(`#${currentConfig.templateId[1]}`);
+    }
+    
     if (!template) {
       liveScoresDiv.innerHTML = `<p>Template not found for ${currentConfig.templateId}</p>`;
       return;
@@ -191,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentConfig.populateCard(cardClone.firstElementChild, fixture);
       isTeamSport(sportToDisplay)
         ? liveScoresDiv.appendChild(cardClone)
-        : motorsportRaceCardContainer.appendChild(cardClone);
+        : motorsportCardContainer.appendChild(cardClone);
     });
   }
 
@@ -619,7 +638,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     },
     motorsport: {
-      templateId: "motorsport-template",
+      templateId: ["motorsport-races-template", "motorsport-standings-template"],
       apiEndpoint: "http://localhost:3000/api/races/motorsport",
       isStatus: (race) => {
         const now = Date.now();
@@ -633,7 +652,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } else return (status = "Upcoming");
       },
       populateCard: function (cardClone, race) {
-        const racesSection = cardClone.querySelector('.')
+        if(motorsportActiveSection === "races"){
+          const racesSection = cardClone.querySelector(".");
         const raceStatus = this.isStatus(race);
         const raceCountry = race.Circuit?.Location?.country;
         const raceName = race.raceName.split(" ")[0];
@@ -659,6 +679,14 @@ document.addEventListener("DOMContentLoaded", () => {
         ).textContent = `${racePractice1Day} - ${raceDate} ${raceMonth}`;
         cardClone.querySelector(".motorsport-round-winner").textContent =
           raceResult;
+        } else if(motorsportActiveSection === "standings" && motorsportStandingsActiveSection === "drivers") {
+            cardClone.querySelector('#motorsport-standings-main-container-pos-info').textContent = race.position; 
+            cardClone.querySelector('#motorsport-standings-main-container-entity-img')?.setAttribute("src", '') = race.position;
+        } else {
+          cardClone.querySelector('#motorsport-standings-main-container-pos-info').textContent = race.position;
+        }
+        
+          
       },
     },
   };
@@ -718,8 +746,15 @@ document.addEventListener("DOMContentLoaded", () => {
           return filterFixturesByStatus(sortedFixtureData, activeFilter);
         },
         motorsport: () => {
-          const races = data.MRData.RaceTable.Races || [];
-          return races;
+          const motorsportData =
+            motorsportActiveSection === "races"
+              ? data[results]?.MRData?.Racetable?.Races
+              : motorsportStandingsActiveSection === "drivers"
+              ? data[driverstandings]?.MRData?.StandingsTable?.StandingsLists[0]?.DriverStandings
+              : data[constructorstandings]?.MRData?.StandingsTable?.StandingsLists[0]?.ConstructorStandings
+                  ?.StandingsLists;
+          console.log(motorsportData);
+          return motorsportData;
         },
       };
 
@@ -771,11 +806,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   //Selected-motorsport-section
-  motorsportSelectedSection.forEach((btn) => {
-    btn.classList.toggle("active", btn.id===`motorsport-${motorsportActiveSection}`);
-  });
-   
-  
 
   // --- Initial fetch of selected sport ---
   fetchFixtures(activeSport);
