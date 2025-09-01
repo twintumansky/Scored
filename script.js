@@ -1,4 +1,4 @@
-import { cricketTeamLogos } from "./data/cricketTeamLogos.js";
+import { cricketTeamLogos } from "./data/cricketAssets.js";
 import {
   motorsportCountryLogos,
   constructorLogos,
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "#motorsport-standings-container-info"
   );
 
-  let activeFilter = null; // Track current filter
+  let activeFilter = null; // Track the current filter for sport(Live, Upcoming, Finished)
   let activeSport = "football"; // State for the currently active sport(Default - football)
 
   function isTeamSport(sport) {
