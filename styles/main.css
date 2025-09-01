@@ -536,13 +536,12 @@ nav li {
 }
 
 .motorsport-header-button:hover {
-    color: #f0efef; /* A lighter color on hover */
+    color: #f0efef;
 }
 
 .motorsport-header-button.active {
-    /* Style for the active/selected button */
     color: #f0efef;
-    border-bottom: 2px solid #f0efef; /* The underline effect */
+    border-bottom: 2px solid #f0efef;
 }
 
 .motorsport-main {
@@ -693,7 +692,6 @@ nav li {
     }
 }
 
-/* Error message styling */
 .error {
     text-align: center;
     color: #777;
