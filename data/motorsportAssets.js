@@ -33,4 +33,41 @@ export const motorsportCountryLogos = {
     'UAE': '/assets/logos/fixture_logos/uae.svg',
     'UK': '/assets/logos/fixture_logos/unitedkingdom.svg',
     'USA': '/assets/logos/fixture_logos/us.svg',
-}
+};
+
+export const constructorLogos = {
+    'mclaren': '/assets/logos/f1/mclaren.svg',
+    'ferrari': '/assets/logos/f1/ferrari.svg',
+    'mercedes': '/assets/logos/f1/mercedes.svg',
+    'red_bull': '/assets/logos/f1/redbull.svg',
+    'williams': '/assets/logos/f1/williams.svg',
+    'aston_martin': '/assets/logos/f1/astonmartin.svg',
+    'rb': '/assets/logos/f1/racingbulls.svg',
+    'sauber': '/assets/logos/f1/kicksauber.svg',
+    'haas': '/assets/logos/f1/haas.svg',
+    'alpine': '/assets/logos/f1/alpine.svg',
+};
+
+export const driverImages = {
+    'piastri': '/assets/logos/f1/oscar_piastri.png',
+    'norris': '/assets/logos/f1/lando_norris.png',
+    'max_verstappen': '/assets/logos/f1/max_verstappen.png',
+    'russell': '/assets/logos/f1/george_russell.png',
+    'leclerc': '/assets/logos/f1/charles_leclerc.png',
+    'hamilton': '/assets/logos/f1/lewis_hamilton.png',
+    'antonelli': '/assets/logos/f1/kimi_antonelli.png',
+    'albon': '/assets/logos/f1/alexander_albon.png',
+    'hulkenberg': '/assets/logos/f1/nico_hulkenberg.png',
+    'hadjar': '/assets/logos/f1/isack_hadjar.png',
+    'stroll': '/assets/logos/f1/lance_stroll.png',
+    'alonso': '/assets/logos/f1/fernando_alonso.png',
+    'ocon': '/assets/logos/f1/esteban_ocon.png',
+    'gasly': '/assets/logos/f1/pierre_gasly.png',
+    'lawson': '/assets/logos/f1/liam_lawson.png',
+    'bearman': '/assets/logos/f1/oliver_bearman.png',
+    'sainz': '/assets/logos/f1/carlos_sainz.png',
+    'bortoleto': '/assets/logos/f1/gabriel_bortoleto.png',
+    'tsunoda': '/assets/logos/f1/yuki_tsunoda.png',
+    'colapinto': '/assets/logos/f1/franco_colapinto.png',
+    'doohan': '/assets/logos/f1/jack_doohan.png',
+};
