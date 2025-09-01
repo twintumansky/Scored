@@ -536,7 +536,7 @@ nav li {
 }
 
 .motorsport-header-button:hover {
-    color: #f0efef;
+    color: #b1b1b1;
 }
 
 .motorsport-header-button.active {
@@ -594,6 +594,69 @@ nav li {
     font-size: 0.85rem;
     font-weight: 500;
     color: #717171;
+}
+
+#motorsport-standings-container-info .active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+#motorsport-standings-container-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0 0.5rem;
+}
+
+.motorsport-standings-container-info-buttons {
+    background-color: #929292;
+    color: #4e4e4e;
+    text-align: center;
+    padding: 0.2rem 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.motorsport-standings-container-info-buttons .hover {
+    color: #636363;
+}
+
+.motorsport-standings-container-info-buttons .active {
+    background-color: #aeaeae;
+    color: #636363;
+}
+
+#motorsport-standings-container-table-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+#motorsport-standings-container-table-info p {
+    margin: 0 0.25rem;
+}
+
+.motorsport-standings-container-table-info-data {
+    display: flex;
+}
+
+#motorsport-standings-main-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.motorsport-standings-main-container-data {
+    margin: 0 0.25rem;
+}
+
+#motorsport-standings-main-container-entity-img {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    object-fit: contain;
 }
 
 @media screen and (max-width: 768px) {

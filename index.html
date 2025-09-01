@@ -142,7 +142,7 @@
         <div class="motorsport-container hidden">
             <div class="motorsport-header-section">
                 <div class="motorsport-header-info">
-                    <img id="f1-logo" alt="formula1-logo" src="./assets/logos/f1/f1_logo.png" />
+                    <img id="f1-logo" alt="formula_1-logo" src="./assets/logos/f1/f1_logo.png" />
                 </div>
                 <div class="motorsport-header-main">
                     <button class="motorsport-header-button active" id="motorsport-races">Races</button>
@@ -165,35 +165,37 @@
                 <template id="motorsport-standings-template">
                     <div id="motorsport-standings-main-container">
                         <div id="motorsport-standings-main-container-initial-sec">
-                            <p id="motorsport-standings-main-container-pos-info"></p>
+                            <p class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-pos-info"></p>
                             <div id="motorsport-standings-main-container-entity">
-                                <img id="motorsport-standings-main-container-entity-img" />
-                                <p id="motorsport-standings-main-container-entity-info"></p>
+                                <img class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-entity-img" />
+                                <p class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-entity-info"></p>
                             </div>
                         </div>
                         <div id="motorsport-standings-main-container-final-sec">
-                            <p id="motorsport-standings-main-container-wins-info"></p>
+                            <p class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-wins-info"></p>
                             <!-- <p id="motorsport-standings-main-container-poles-info"></p>
                             <p id="motorsport-standings-main-container-podiums-info"></p> -->
-                            <p id="motorsport-standings-main-container-points-info"></p>
+                            <p class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-points-info"></p>
                         </div>
                     </div>
                 </template>
                 <div id="motorsport-standings-container-info hidden">
-                    <div id="motorsport-standings-container-info-buttons">
-                        <button id="motorsport-standings-container-info-driver-btn">
+                    <div id="motorsport-standings-container-info">
+                        <button class="motorsport-standings-container-info-buttons"
+                            id="motorsport-standings-container-info-btn-drivers">
                             Drivers
                         </button>
-                        <button id="motorsport-standings-container-info-team-btn">
+                        <button class="motorsport-standings-container-info-buttons"
+                            id="motorsport-standings-container-info-btn-teams">
                             Teams
                         </button>
                     </div>
-                    <div id="motorsport-standings-container-info-container">
-                        <div id="motorsport-standings-container-initial-sec">
+                    <div id="motorsport-standings-container-table-info">
+                        <div class="motorsport-standings-container-table-info-data" id="motorsport-standings-container-initial-sec">
                             <p id="motorsport-standings-container-pos-info">Position</p>
                             <p id="motorsport-standings-container-entity-info"></p>
                         </div>
-                        <div id="motorsport-standings-container-final-sec">
+                        <div class="motorsport-standings-container-table-info-data" id="motorsport-standings-container-final-sec">
                             <p id="motorsport-standings-container-wins-info">Wins</p>
                             <p id="motorsport-standings-container-poles-info">Poles</p>
                             <p id="motorsport-standings-container-podiums-info">Pod</p>
