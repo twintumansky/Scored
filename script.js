@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ".motorsport-header-button"
   );
   const motorsportContainerStandingsButtons = document.querySelectorAll(
-    "#motorsport-standings-container-info-buttons"
+    ".motorsport-standings-container-info-buttons"
   );
   let motorsportActiveSection = "races";
   let motorsportStandingsActiveSection = "drivers";

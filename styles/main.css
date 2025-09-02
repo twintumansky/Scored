@@ -496,13 +496,13 @@ nav li {
     display: flex;
     flex-direction: column;
     border-bottom: 1.5px solid #c3c1c1;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)),
-        linear-gradient(rgba(33, 32, 137, 0.75), rgba(57, 30, 212, 0.75)),
-        url('../assets/logos/f1//Ferrari\ SF-23.jpg');
+    justify-content: space-between;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)), linear-gradient(rgba(33, 32, 137, 0.75), rgba(57, 30, 212, 0.75)), url(../assets/logos/f1//Ferrari\ SF-23.jpg);
     background-position: center 40%;
     background-size: cover;
     border-radius: 1.5rem 1.5rem 0 0;
-    padding: 1rem;
+    padding: 1rem 0rem 0rem 0rem;
+    height: 10.5rem;
 }
 
 .motorsport-header-info {
@@ -516,12 +516,11 @@ nav li {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font: bold;
 }
 
 #f1-logo {
-    width: 6.25rem;
-    height: 2.5rem;
+    width: 7.75rem;
+    height: 3rem;
 }
 
 .motorsport-header-button {
@@ -529,7 +528,7 @@ nav li {
     border: none;
     cursor: pointer;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #b2b0b0;
     padding: 0.5rem 1rem;
     transition: all 0.2s ease-in-out;
@@ -540,8 +539,8 @@ nav li {
 }
 
 .motorsport-header-button.active {
-    color: #f0efef;
-    border-bottom: 2px solid #f0efef;
+    color: #eeeeee;
+    border-bottom: 3px solid #eeeeee;
 }
 
 .motorsport-main {
@@ -596,35 +595,37 @@ nav li {
     color: #717171;
 }
 
-.motorsport-standings-container-info .visible {
+.motorsport-standings-container-info.visible {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0.5rem;
+    padding: 0 0 0.5rem 0;
     border-bottom: 0.9px solid #58575747;
+    margin-bottom: 0.5rem;
 }
 
-.motorsport-standings-container-info .hidden{
+.motorsport-standings-container-info.hidden{
     display: none;
 }
 
 .motorsport-standings-container-info-buttons {
     background-color: #929292;
-    color: #4e4e4e;
+    color: #313131;
     text-align: center;
-    padding: 0.5rem 1rem;
+    padding: 0.45rem 1.25rem;
     border: none;
-    border-radius: 0.5rem;
-}
-
-.motorsport-standings-container-info-buttons .hover {
-    color: #636363;
+    border-radius: 1.25rem;
+    transition: all 0.2s ease-in-out;
     cursor: pointer;
 }
 
-.motorsport-standings-container-info-buttons .active {
-    background-color: #aeaeae;
-    color: #636363;
+.motorsport-standings-container-info-buttons.hover {
+    background-color: #acabab;
+}
+
+.motorsport-standings-container-info-buttons.active {
+    background-color: #393939;
+    color: #cccbcb;
 }
 
 #motorsport-standings-container-table-info {
