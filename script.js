@@ -713,6 +713,8 @@ document.addEventListener("DOMContentLoaded", () => {
           motorsportActiveSection === "standings" &&
           motorsportStandingsActiveSection === "drivers"
         ) {
+          document.querySelector("#motorsport-standings-container-entity-info").textContent = "Drivers";
+
           cardClone.querySelector(
             "#motorsport-standings-main-container-pos-info"
           ).textContent = race.position || "NA";
@@ -738,6 +740,8 @@ document.addEventListener("DOMContentLoaded", () => {
           motorsportActiveSection === "standings" &&
           motorsportStandingsActiveSection === "teams"
         ) {
+          document.querySelector("#motorsport-standings-container-entity-info").textContent = "Team";
+
           cardClone.querySelector(
             "#motorsport-standings-main-container-pos-info"
           ).textContent = race.position || "NA";
