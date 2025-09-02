@@ -14,22 +14,23 @@ document.addEventListener("DOMContentLoaded", () => {
   //motorsport-specific
   const motorsportContainer = document.querySelector(".motorsport-container");
   const motorsportContainerButtons = document.querySelectorAll(
-    "#motorsport-header-button"
+    ".motorsport-header-button"
   );
   const motorsportContainerStandingsButtons = document.querySelectorAll(
     "#motorsport-standings-container-info-buttons"
   );
-  let motorsportActiveSection = "races"; //done ✅
+  let motorsportActiveSection = "races";
   let motorsportStandingsActiveSection = "drivers";
   const motorsportCardContainer = document.querySelector(
     "#motorsport-card-container"
   );
   const motorsportSectionInfo = document.querySelector(
-    "#motorsport-standings-container-info"
+    ".motorsport-standings-container-info"
   );
 
   let activeFilter = null; // Track the current filter for sport(Live, Upcoming, Finished)
   let activeSport = "motorsport"; // State for the currently active sport(Default - football)
+
 
   function isTeamSport(sport) {
     return ["football", "cricket"].includes(sport);
@@ -184,13 +185,14 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (sportToDisplay === "motorsport") {
       motorsportContainer.classList.remove("hidden");
       motorsportContainer.classList.add("visible");
-      motorsportSectionInfo.classList.remove("visible");
-      motorsportSectionInfo.classList.add("hidden");
-
-      if (motorsportActiveSection === "standings") {
+      if(motorsportActiveSection === "races") {
+        motorsportSectionInfo.classList.remove("visible");
+        motorsportSectionInfo.classList.add("hidden");
+        motorsportCardContainer.innerHTML = '';
+      } else if (motorsportActiveSection === "standings") {
         motorsportSectionInfo.classList.remove("hidden");
         motorsportSectionInfo.classList.add("visible");
-        motorsportContainer.innerHTML = "";
+        motorsportCardContainer.innerHTML = '';
       }
     }
 
@@ -777,10 +779,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sportNavButtons.forEach((btn) => {
       btn.classList.toggle("active", btn.id === `${activeSport}-card`);
-      // if(btn.id === "motorsport-card") {
-      //   motorsportActiveSection = "races";
-      // }
     }); // Updating active class for sport navigation buttons
+
+    motorsportContainerButtons.forEach((btn) => {
+      btn.classList.toggle("active", btn.id === `${activeSport}-${motorsportActiveSection}`);
+    });
+
+    motorsportContainerStandingsButtons.forEach((btn) => {
+      btn.classList.toggle("active", btn.id === `motorsport-standings-container-info-btn-${motorsportActiveSection}`);
+    });
 
     let url = `${config.apiEndpoint}?dateFrom=${from}&dateTo=${to}`;
 
@@ -873,24 +880,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   motorsportContainerButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      motorsportContainerButtons.forEach((btn) =>
-        btn.classList.remove("active")
-      );
       motorsportActiveSection = btn.id.replace("motorsport-", "");
-      btn.classList.add("active");
+      console.log(`${btn.id} clicked`)
+      fetchFixtures(activeSport);
     });
   });
 
   motorsportContainerStandingsButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      motorsportContainerStandingsButtons.forEach((btn) =>
-        btn.classList.remove("active")
-      );
-      motorsportStandingsActiveSection = btn.id.replace(
+    motorsportStandingsActiveSection = btn.id.replace(
         "motorsport-standings-container-info-btn-",
         ""
       );
-      btn.classList.add("active");
+      console.log(`${btn.id} clicked`);
+      fetchFixtures(activeSport);
     });
   });
 

@@ -596,31 +596,30 @@ nav li {
     color: #717171;
 }
 
-#motorsport-standings-container-info .active {
+.motorsport-standings-container-info .visible {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 0.5rem;
+    border-bottom: 0.9px solid #58575747;
 }
 
-#motorsport-standings-container-info {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    padding: 0 0.5rem;
+.motorsport-standings-container-info .hidden{
+    display: none;
 }
 
 .motorsport-standings-container-info-buttons {
     background-color: #929292;
     color: #4e4e4e;
     text-align: center;
-    padding: 0.2rem 0.5rem;
+    padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.5rem;
 }
 
 .motorsport-standings-container-info-buttons .hover {
     color: #636363;
+    cursor: pointer;
 }
 
 .motorsport-standings-container-info-buttons .active {
@@ -630,7 +629,7 @@ nav li {
 
 #motorsport-standings-container-table-info {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
 }
 
