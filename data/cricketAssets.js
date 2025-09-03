@@ -50,7 +50,7 @@ export const cricketTeamLogos = {
   'FJI': '/assets/logos/fixture_logos/fiji.svg',
   'FJI-W': '/assets/logos/fixture_logos/fiji.svg',
   'JER':'/assets/logos/fixture_logos/jersey.svg',
-  'JER-W':'/assets/logos/fixture_logos/jersey.svg',
+  'JERW':'/assets/logos/fixture_logos/jersey.svg',
   'KEN': '/assets/logos/fixture_logos/kenya.svg',
   'KEN-W': '/assets/logos/fixture_logos/kenya.svg',
   'QAT':'/assets/logos/fixture_logos/qatar.svg',
