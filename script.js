@@ -674,9 +674,14 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       populateCard: function (cardClone, race) {
         console.log("Populating card for race:", race);
+
         const driverId = race.Driver?.driverId;
         // const activeSection = motorsportActiveBtn;
         if (motorsportActiveSection === "races") {
+          const motorsportRoundWinner = cardClone.querySelector(
+            ".motorsport-round-winner-container"
+          );
+          motorsportRoundWinner.style.display = "none";
           // const racesSection = cardClone.querySelector(".");
           // const raceStatus = this.isStatus(race);
           const raceCountry = race.Circuit?.Location?.country;
@@ -694,7 +699,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ? `${race.winner.driver.givenName} ${race.winner.driver.familyName}`
             : "TBD";
 
-          const winnerImage = race.winner?.driver ? driverImages[race.winner.driver.driverId] : null;  
+          const winnerImage = race.winner?.driver
+            ? driverImages[race.winner.driver.driverId]
+            : null;
 
           cardClone
             .querySelector(".country-flag-logo")
@@ -710,13 +717,15 @@ document.addEventListener("DOMContentLoaded", () => {
             ".motorsport-race-date"
           ).textContent = `${raceDate} ${raceMonth}`;
 
-          if (winnerImage) {
-            cardClone.querySelector("#motorsport-round-winner-image")?.setAttribute("src", winnerImage);
+          if (race.winner) {
+            motorsportRoundWinner.style.display = "flex";
+            cardClone
+              .querySelector("#motorsport-round-winner-image")
+              ?.setAttribute("src", winnerImage);
+
+            cardClone.querySelector("#motorsport-round-winner").textContent =
+              raceResult || TBD;
           }
-
-          cardClone.querySelector("#motorsport-round-winner").textContent =
-            raceResult || TBD;
-
         } else if (
           motorsportActiveSection === "standings" &&
           motorsportStandingsActiveSection === "drivers"
@@ -746,7 +755,6 @@ document.addEventListener("DOMContentLoaded", () => {
           cardClone.querySelector(
             "#motorsport-standings-main-container-points-info"
           ).textContent = race.points || "0";
-
         } else if (
           motorsportActiveSection === "standings" &&
           motorsportStandingsActiveSection === "teams"
@@ -854,7 +862,7 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log("Races data:", data?.races?.MRData?.RaceTable?.Races);
           console.log("Results data:", data?.results?.MRData?.RaceTable?.Races);
           console.log("Merged races:", data?.mergedRaces);
-          
+
           const motorsportData =
             motorsportActiveSection === "races"
               ? data?.mergedRaces
