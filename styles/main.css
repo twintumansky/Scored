@@ -548,16 +548,21 @@ nav li {
     width: 100%;
     background-color: #f0efef;
     padding: 0.5rem;
+    border-radius: 0 0 1.5rem 1.5rem;
 }
 
-.motorsport-race-card, #motorsport-standings-main-container {
+.motorsport-race-card {
     width: 100%;
     border-bottom: 0.9px solid #58575747;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0 0.5rem 0;
+    margin-bottom: 0;
+    min-height: 3rem; 
     overflow: hidden;
-    /* display: flex;
-    flex-direction: column; */
+}
+
+.motorsport-race-card:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 0.25rem;
 }
 
 .motorsport-race-info {
@@ -621,50 +626,63 @@ nav li {
 }
 
 #motorsport-standings-container-table-info {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 2rem 1fr 3rem 3rem 3rem 4rem; /* Match data columns exactly */
+    grid-template-areas: 
+        "pos entity wins poles pod pts";
+    align-items: center;
     width: 100%;
+    gap: 0.75rem;
     padding: 0 0.5rem 0 0;
+    margin-bottom: 0.5rem;
 }
 
 #motorsport-standings-container-table-info p {
-    margin: 0 0.25rem;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+#motorsport-standings-container-pos-info {
+    grid-area: pos;
+    text-align: left;
+}
+
+#motorsport-standings-container-entity-info {
+    grid-area: entity;
+    text-align: left;
+    display: flex;
+    padding-left: 0.6rem;
+}
+
+#motorsport-standings-container-wins-info {
+    grid-area: wins;
+}
+
+#motorsport-standings-container-poles-info {
+    grid-area: poles;
+}
+
+#motorsport-standings-container-podiums-info {
+    grid-area: pod;
+}
+
+#motorsport-standings-container-points-info {
+    grid-area: pts;
 }
 
 .motorsport-standings-container-table-info-data {
-    display: flex;
-    gap: 0.5rem;
+    display: contents; 
 }
 
-/* #motorsport-standings-main-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 0;
-}
-
-.motorsport-standings-main-container-card-left-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.motorsport-standings-main-container-card-right-container {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-} */
-
-/* Added-- */
 .motorsport-standings-main-container-card-left-container,
 .motorsport-standings-main-container-card-right-container {
-    display: contents; /* This makes the children direct grid items */
+    display: contents; 
 }
 
 #motorsport-standings-main-container {
     display: grid;
-    grid-template-columns: 2.5rem 1fr 3rem 3rem 3rem 4rem; /* Pos | Team | Wins | Poles | Pod | Pts */
+    grid-template-columns: 2rem 1fr 3rem 3rem 3rem 4rem; /* Pos | Team | Wins | Poles | Pod | Pts */
     grid-template-areas: 
         "pos entity wins poles pod pts";
     align-items: center;
@@ -672,55 +690,37 @@ nav li {
     gap: 0.75rem;
     padding: 0.5rem;
     margin-bottom: 0;
-    min-height: 3rem; /* Ensure consistent row height */
+    min-height: 3rem; 
+    overflow: hidden;
+    border-bottom: 0.9px solid #58575747;
 }
 
-/* Added-- Add subtle hover effect */
 #motorsport-standings-main-container:hover {
     background-color: rgba(0, 0, 0, 0.02);
     border-radius: 0.25rem;
 }
-/* Improve readability with better typography */
+
 #motorsport-standings-main-container-entity-info {
     text-align: left;
-    font-weight: 600;
+    font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     flex: 1;
     min-width: 0;
-    color: #2d2d2d;
+    color: #717171;
 }
 
-/* Add visual hierarchy */
-#motorsport-standings-main-container-pos-info,
-#motorsport-standings-main-container-points-info {
-    font-weight: 700;
-    color: #1a1a1a;
-}
-/* ende here */
-
-
-
-/* #motorsport-standings-main-container-card-entity {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-} */
-
-/* Entity (Team/Driver) column - left aligned with flex for image + text */
 #motorsport-standings-main-container-card-entity {
     grid-area: entity;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    min-width: 0; /* Allow flex shrinking */
+    min-width: 0;
 }
 
-/* Added-- */
 #motorsport-standings-main-container-entity-info {
     text-align: left;
-    font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -728,8 +728,6 @@ nav li {
     min-width: 0;
 }
 
-/* Added--all these below */
-/* Stats columns - center aligned */
 #motorsport-standings-main-container-wins-info {
     grid-area: wins;
 }
@@ -744,35 +742,24 @@ nav li {
 
 #motorsport-standings-main-container-points-info {
     grid-area: pts;
-    font-weight: 600;
-    color: #383636;
 } 
-/* Ends here */
-
-/* .motorsport-standings-main-container-data {
-    margin: 0 0.25rem;
-} */
 
 .motorsport-standings-main-container-data {
     margin: 0;
     text-align: center;
     font-size: 0.85rem;
     font-weight: 500;
-    color: #5d5c5c;
+    color: #717171;
 }
 
-/* Added--Position column - left aligned */
 #motorsport-standings-main-container-pos-info {
     grid-area: pos;
     text-align: left;
     font-weight: 600;
-    color: #383636;
     min-width: 2rem;
 }
 
-
-
-#motorsport-standings-main-container-entity-img {
+#motorsport-standings-main-container-entity-img,  #motorsport-round-winner-image{
     width: 2rem;
     height: 2rem;
     border-radius: 50%;

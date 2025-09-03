@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeFilter = null; // Track the current filter for sport(Live, Upcoming, Finished)
   let activeSport = "motorsport"; // State for the currently active sport(Default - football)
 
-
   function isTeamSport(sport) {
     return ["football", "cricket"].includes(sport);
   }
@@ -185,14 +184,14 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (sportToDisplay === "motorsport") {
       motorsportContainer.classList.remove("hidden");
       motorsportContainer.classList.add("visible");
-      if(motorsportActiveSection === "races") {
+      if (motorsportActiveSection === "races") {
         motorsportSectionInfo.classList.remove("visible");
         motorsportSectionInfo.classList.add("hidden");
-        motorsportCardContainer.innerHTML = '';
+        motorsportCardContainer.innerHTML = "";
       } else if (motorsportActiveSection === "standings") {
         motorsportSectionInfo.classList.remove("hidden");
         motorsportSectionInfo.classList.add("visible");
-        motorsportCardContainer.innerHTML = '';
+        motorsportCardContainer.innerHTML = "";
       }
     }
 
@@ -675,6 +674,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       populateCard: function (cardClone, race) {
         console.log("Populating card for race:", race);
+        const driverId = race.Driver?.driverId;
         // const activeSection = motorsportActiveBtn;
         if (motorsportActiveSection === "races") {
           // const racesSection = cardClone.querySelector(".");
@@ -683,11 +683,10 @@ document.addEventListener("DOMContentLoaded", () => {
           const raceName = race.raceName.split(" ")[0];
           // const circuitName = race.Circuit?.circuitName;
 
-          
           const raceDate = new Date(race.date).getDate();
-          const racePractice1Day = race.FirstPractice?.date
-            ? new Date(race.FirstPractice.date).getDate()
-            : raceDate;
+          // const racePractice1Day = race.FirstPractice?.date
+          //   ? new Date(race.FirstPractice.date).getDate()
+          //   : raceDate;
           const raceMonth = new Date(race.date).toLocaleDateString("en-US", {
             month: "short",
           });
@@ -697,28 +696,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // cardClone.querySelector('.round-info').textContent = `Round ${race.round}`;
           // cardClone.querySelector('.round-status').textContent = raceStatus;
+
           cardClone
             .querySelector(".country-flag-logo")
             ?.setAttribute("src", motorsportCountryLogos[raceCountry]);
+
           cardClone.querySelector(
             ".motorsport-race-name"
           ).textContent = `${raceName} GP`;
+
           // cardClone.querySelector('.circuit-name').textContent = circuitName;
+
           cardClone.querySelector(
             ".motorsport-race-date"
-          ).textContent = `${racePractice1Day} - ${raceDate} ${raceMonth}`;
-          cardClone.querySelector(".motorsport-round-winner").textContent =
+          ).textContent = `${raceDate} ${raceMonth}`;
+
+          cardClone
+            .querySelector("#motorsport-round-winner-image")
+            ?.setAttribute("src", driverImages[driverId]);
+
+          cardClone.querySelector("#motorsport-round-winner").textContent =
             raceResult;
+
         } else if (
           motorsportActiveSection === "standings" &&
           motorsportStandingsActiveSection === "drivers"
         ) {
-          document.querySelector("#motorsport-standings-container-entity-info").textContent = "Drivers";
+          document.querySelector(
+            "#motorsport-standings-container-entity-info"
+          ).textContent = "Drivers";
 
           cardClone.querySelector(
             "#motorsport-standings-main-container-pos-info"
           ).textContent = race.position || "NA";
-          const driverId = race.Driver?.driverId;
 
           cardClone
             .querySelector("#motorsport-standings-main-container-entity-img")
@@ -733,14 +743,18 @@ document.addEventListener("DOMContentLoaded", () => {
           cardClone.querySelector(
             "#motorsport-standings-main-container-wins-info"
           ).textContent = race.wins || "0";
+
           cardClone.querySelector(
             "#motorsport-standings-main-container-points-info"
           ).textContent = race.points || "0";
+
         } else if (
           motorsportActiveSection === "standings" &&
           motorsportStandingsActiveSection === "teams"
         ) {
-          document.querySelector("#motorsport-standings-container-entity-info").textContent = "Team";
+          document.querySelector(
+            "#motorsport-standings-container-entity-info"
+          ).textContent = "Team";
 
           cardClone.querySelector(
             "#motorsport-standings-main-container-pos-info"
@@ -786,11 +800,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }); // Updating active class for sport navigation buttons
 
     motorsportContainerButtons.forEach((btn) => {
-      btn.classList.toggle("active", btn.id === `${activeSport}-${motorsportActiveSection}`);
+      btn.classList.toggle(
+        "active",
+        btn.id === `${activeSport}-${motorsportActiveSection}`
+      );
     });
 
     motorsportContainerStandingsButtons.forEach((btn) => {
-      btn.classList.toggle("active", btn.id === `motorsport-standings-container-info-btn-${motorsportActiveSection}`);
+      btn.classList.toggle(
+        "active",
+        btn.id ===
+          `motorsport-standings-container-info-btn-${motorsportStandingsActiveSection}`
+      );
     });
 
     let url = `${config.apiEndpoint}?dateFrom=${from}&dateTo=${to}`;
@@ -885,14 +906,14 @@ document.addEventListener("DOMContentLoaded", () => {
   motorsportContainerButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       motorsportActiveSection = btn.id.replace("motorsport-", "");
-      console.log(`${btn.id} clicked`)
+      console.log(`${btn.id} clicked`);
       fetchFixtures(activeSport);
     });
   });
 
   motorsportContainerStandingsButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-    motorsportStandingsActiveSection = btn.id.replace(
+      motorsportStandingsActiveSection = btn.id.replace(
         "motorsport-standings-container-info-btn-",
         ""
       );
