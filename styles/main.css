@@ -554,7 +554,7 @@ nav li {
 .motorsport-race-card {
     width: 100%;
     border-bottom: 0.9px solid #58575747;
-    padding: 0.5rem 0 0.5rem 0;
+    padding: 0.5rem;
     margin-bottom: 0;
     min-height: 3rem; 
     overflow: hidden;
@@ -565,11 +565,18 @@ nav li {
     border-radius: 0.25rem;
 }
 
+.motorsport-race-info-container {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
+
 .motorsport-race-info {
     width: 100%;
     display: flex;
     gap: 0.5rem;
-    justify-content: flex-start;
+    justify-content:flex-start;
 }
 
 .motorsport-round-info {
@@ -594,11 +601,17 @@ nav li {
     height: 2rem;
 }
 
-.motorsport-round-winner {
-    margin: 0 1rem 0 auto;
+.motorsport-round-winner-container {
+    display: flex;
+    align-items: center;
+}
+
+#motorsport-round-winner {
+    margin: 0 0.5rem 0 0.5rem;
     font-size: 0.85rem;
     font-weight: 500;
     color: #717171;
+    min-width: max-content;
 }
 
 .motorsport-standings-container-info.visible {

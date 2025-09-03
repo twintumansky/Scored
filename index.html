@@ -152,15 +152,17 @@
             <div class="motorsport-main">
                 <template id="motorsport-races-template">
                     <div class="motorsport-race-card">
-                        <div class="motorsport-race-info">
-                            <img src="" class="country-flag-logo" alt="country-flag" />
-                            <div class="motorsport-round-info">
-                                <div class="motorsport-race-name"></div>
-                                <div class="motorsport-race-date"></div>
+                        <div class="motorsport-race-info-container">
+                            <div class="motorsport-race-info">
+                                <img src="" class="country-flag-logo" alt="country-flag" />
+                                <div class="motorsport-round-info">
+                                    <div class="motorsport-race-name"></div>
+                                    <div class="motorsport-race-date"></div>
+                                </div>
                             </div>
                             <div class="motorsport-round-winner-container">
                                 <img id="motorsport-round-winner-image" />
-                                <div id="motorsport-round-winner></div>
+                                <div id="motorsport-round-winner"></div>
                             </div>
                         </div>
                     </div>
@@ -168,17 +170,24 @@
                 <template id="motorsport-standings-template">
                     <div id="motorsport-standings-main-container">
                         <div class="motorsport-standings-main-container-card-left-container">
-                            <p class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-pos-info"></p>
+                            <p class="motorsport-standings-main-container-data"
+                                id="motorsport-standings-main-container-pos-info"></p>
                             <div id="motorsport-standings-main-container-card-entity">
-                                <img class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-entity-img" />
-                                <p class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-entity-info"></p>
+                                <img class="motorsport-standings-main-container-data"
+                                    id="motorsport-standings-main-container-entity-img" />
+                                <p class="motorsport-standings-main-container-data"
+                                    id="motorsport-standings-main-container-entity-info"></p>
                             </div>
                         </div>
-                        <div class="motorsport-standings-main-container-card-right-container" >
-                            <p class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-wins-info"></p>
-                            <p class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-poles-info">NA</p>
-                            <p class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-podiums-info">NA</p>
-                            <p class="motorsport-standings-main-container-data" id="motorsport-standings-main-container-points-info"></p>
+                        <div class="motorsport-standings-main-container-card-right-container">
+                            <p class="motorsport-standings-main-container-data"
+                                id="motorsport-standings-main-container-wins-info"></p>
+                            <p class="motorsport-standings-main-container-data"
+                                id="motorsport-standings-main-container-poles-info">NA</p>
+                            <p class="motorsport-standings-main-container-data"
+                                id="motorsport-standings-main-container-podiums-info">NA</p>
+                            <p class="motorsport-standings-main-container-data"
+                                id="motorsport-standings-main-container-points-info"></p>
                         </div>
                     </div>
                 </template>
@@ -194,11 +203,13 @@
                         </button>
                     </div>
                     <div id="motorsport-standings-container-table-info">
-                        <div class="motorsport-standings-container-table-info-data" id="motorsport-standings-container-initial-sec">
+                        <div class="motorsport-standings-container-table-info-data"
+                            id="motorsport-standings-container-initial-sec">
                             <p id="motorsport-standings-container-pos-info">Pos</p>
                             <p id="motorsport-standings-container-entity-info"></p>
                         </div>
-                        <div class="motorsport-standings-container-table-info-data" id="motorsport-standings-container-final-sec">
+                        <div class="motorsport-standings-container-table-info-data"
+                            id="motorsport-standings-container-final-sec">
                             <p id="motorsport-standings-container-wins-info">Wins</p>
                             <p id="motorsport-standings-container-poles-info">Poles</p>
                             <p id="motorsport-standings-container-podiums-info">Pod</p>

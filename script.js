@@ -690,12 +690,11 @@ document.addEventListener("DOMContentLoaded", () => {
           const raceMonth = new Date(race.date).toLocaleDateString("en-US", {
             month: "short",
           });
-          const raceResult = race.Results?.[0]?.Driver
-            ? `${race.Results[0].Driver.givenName} ${race.Results[0].Driver.familyName}`
+          const raceResult = race.winner
+            ? `${race.winner.driver.givenName} ${race.winner.driver.familyName}`
             : "TBD";
 
-          // cardClone.querySelector('.round-info').textContent = `Round ${race.round}`;
-          // cardClone.querySelector('.round-status').textContent = raceStatus;
+          const winnerImage = race.winner?.driver ? driverImages[race.winner.driver.driverId] : null;  
 
           cardClone
             .querySelector(".country-flag-logo")
@@ -711,12 +710,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ".motorsport-race-date"
           ).textContent = `${raceDate} ${raceMonth}`;
 
-          cardClone
-            .querySelector("#motorsport-round-winner-image")
-            ?.setAttribute("src", driverImages[driverId]);
+          if (winnerImage) {
+            cardClone.querySelector("#motorsport-round-winner-image")?.setAttribute("src", winnerImage);
+          }
 
           cardClone.querySelector("#motorsport-round-winner").textContent =
-            raceResult;
+            raceResult || TBD;
 
         } else if (
           motorsportActiveSection === "standings" &&
@@ -852,28 +851,13 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         motorsport: () => {
           console.log("Full API response:", data);
-          console.log("Races data:", data?.results?.MRData?.RaceTable?.Races);
-          console.log(
-            "Driver standings:",
-            data?.driverstandings?.MRData?.StandingsTable?.StandingsLists?.[0]
-              ?.DriverStandings
-          );
-          console.log(
-            "Constructor standings:",
-            data?.constructorstandings?.MRData?.StandingsTable
-              ?.StandingsLists?.[0]?.ConstructorStandings
-          );
-          // let motorsport_data = ((Object.entries(data).length)!==0)?(Object.entries(data).length):[];
-          console.log("Motorsport data:", data);
-          console.log("Active section:", motorsportActiveSection);
-          console.log(
-            "Standings active section:",
-            motorsportStandingsActiveSection
-          );
-
+          console.log("Races data:", data?.races?.MRData?.RaceTable?.Races);
+          console.log("Results data:", data?.results?.MRData?.RaceTable?.Races);
+          console.log("Merged races:", data?.mergedRaces);
+          
           const motorsportData =
             motorsportActiveSection === "races"
-              ? data?.results?.MRData?.RaceTable?.Races
+              ? data?.mergedRaces
               : motorsportStandingsActiveSection === "drivers"
               ? data?.driverstandings?.MRData?.StandingsTable
                   ?.StandingsLists?.[0]?.DriverStandings
