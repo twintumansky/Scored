@@ -699,9 +699,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ? `${race.winner.driver.givenName} ${race.winner.driver.familyName}`
             : "TBD";
 
-          const winnerImage = race.winner?.driver
-            ? driverImages[race.winner.driver.driverId]
-            : null;
+          // const winnerImage = race.winner?.driver
+          //   ? driverImages[race.winner.driver.driverId]
+          //   : null;
 
           cardClone
             .querySelector(".country-flag-logo")
@@ -719,12 +719,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (race.winner) {
             motorsportRoundWinner.style.display = "flex";
-            cardClone
-              .querySelector("#motorsport-round-winner-image")
-              ?.setAttribute("src", winnerImage);
+            // cardClone
+            //   .querySelector("#motorsport-round-winner-image")
+            //   ?.setAttribute("src", winnerImage);
 
             cardClone.querySelector("#motorsport-round-winner").textContent =
-              raceResult || TBD;
+              raceResult;
           }
         } else if (
           motorsportActiveSection === "standings" &&
