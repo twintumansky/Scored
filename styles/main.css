@@ -779,6 +779,12 @@ nav li {
     object-fit: contain;
 }
 
+#motorsport-round-winner-image{
+    width: 0.75rem;
+    height: 0.75rem;
+    object-fit: contain;
+}
+
 @media screen and (max-width: 768px) {
     .main-container.visible {
         width: 50%;
