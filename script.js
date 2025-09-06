@@ -175,7 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContainer.classList.remove("visible");
     motorsportContainer.classList.add("hidden");
     motorsportContainer.classList.remove("visible");
-    // const activeSection = motorsportActiveBtn;
 
     if (isTeamSport(sportToDisplay)) {
       mainContainer.classList.remove("hidden");
@@ -209,14 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
       : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
       ? document.querySelector(`#${currentConfig.templateId[0]}`)
       : document.querySelector(`#${currentConfig.templateId[1]}`);
-
-    // if(isTeamSport(sportToDisplay)){
-    //   const template = document.querySelector(`#${currentConfig.templateId}`);
-    // } else if (sportToDisplay === "motorsport" && motorsportActiveSection === "races") {
-    //   const template = document.querySelector(`#${currentConfig.templateId[0]}`);
-    // } else {
-    //   const template = document.querySelector(`#${currentConfig.templateId[1]}`);
-    // }
 
     if (!template) {
       liveScoresDiv.innerHTML = `<p>Template not found for ${currentConfig.templateId}</p>`;
@@ -665,7 +656,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const now = Date.now();
         const raceTime = new Date(race.time).getTime();
         const raceDuration = 3 * 60 * 60 * 1000;
-        let status;
+
         if (now >= raceTime && now <= raceTime + raceDuration) {
           return (status = "Live");
         } else if (now > raceTime + raceDuration) {
@@ -676,32 +667,21 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Populating card for race:", race);
 
         const driverId = race.Driver?.driverId;
-        // const activeSection = motorsportActiveBtn;
         if (motorsportActiveSection === "races") {
           const motorsportRoundWinner = cardClone.querySelector(
             ".motorsport-round-winner-container"
           );
           motorsportRoundWinner.style.display = "none";
-          // const racesSection = cardClone.querySelector(".");
-          // const raceStatus = this.isStatus(race);
           const raceCountry = race.Circuit?.Location?.country;
           const raceName = race.raceName.split(" ")[0];
-          // const circuitName = race.Circuit?.circuitName;
 
           const raceDate = new Date(race.date).getDate();
-          // const racePractice1Day = race.FirstPractice?.date
-          //   ? new Date(race.FirstPractice.date).getDate()
-          //   : raceDate;
           const raceMonth = new Date(race.date).toLocaleDateString("en-US", {
             month: "short",
           });
           const raceResult = race.winner
             ? `${race.winner.driver.givenName} ${race.winner.driver.familyName}`
             : "TBD";
-
-          // const winnerImage = race.winner?.driver
-          //   ? driverImages[race.winner.driver.driverId]
-          //   : null;
 
           cardClone
             .querySelector(".country-flag-logo")
@@ -711,18 +691,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ".motorsport-race-name"
           ).textContent = `${raceName} GP`;
 
-          // cardClone.querySelector('.circuit-name').textContent = circuitName;
-
           cardClone.querySelector(
             ".motorsport-race-date"
           ).textContent = `${raceDate} ${raceMonth}`;
 
           if (race.winner) {
             motorsportRoundWinner.style.display = "flex";
-            // cardClone
-            //   .querySelector("#motorsport-round-winner-image")
-            //   ?.setAttribute("src", winnerImage);
-
             cardClone.querySelector("#motorsport-round-winner").textContent =
               raceResult;
           }
