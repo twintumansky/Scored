@@ -664,7 +664,6 @@ document.addEventListener("DOMContentLoaded", () => {
         } else return (status = "Upcoming");
       },
       populateCard: function (cardClone, race) {
-        console.log("Populating card for race:", race);
 
         const driverId = race.Driver?.driverId;
         if (motorsportActiveSection === "races") {
@@ -832,10 +831,6 @@ document.addEventListener("DOMContentLoaded", () => {
           return filterFixturesByStatus(sortedFixtureData, activeFilter);
         },
         motorsport: () => {
-          console.log("Full API response:", data);
-          console.log("Races data:", data?.races?.MRData?.RaceTable?.Races);
-          console.log("Results data:", data?.results?.MRData?.RaceTable?.Races);
-          console.log("Merged races:", data?.mergedRaces);
 
           const motorsportData =
             motorsportActiveSection === "races"
@@ -846,13 +841,11 @@ document.addEventListener("DOMContentLoaded", () => {
               : data?.constructorstandings?.MRData?.StandingsTable
                   ?.StandingsLists?.[0]?.ConstructorStandings;
 
-          console.log("Extracted motorsportData:", motorsportData);
           return motorsportData || [];
         },
       };
 
       const fixturesToDisplay = fixtureProcessor[activeSport]?.() || [];
-      console.log(fixturesToDisplay);
       displaySport(fixturesToDisplay, activeSport);
     } catch (error) {
       console.error("Error fetching fixtures:", error);
@@ -872,7 +865,6 @@ document.addEventListener("DOMContentLoaded", () => {
   motorsportContainerButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       motorsportActiveSection = btn.id.replace("motorsport-", "");
-      console.log(`${btn.id} clicked`);
       fetchFixtures(activeSport);
     });
   });
@@ -883,7 +875,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "motorsport-standings-container-info-btn-",
         ""
       );
-      console.log(`${btn.id} clicked`);
+      
       fetchFixtures(activeSport);
     });
   });
