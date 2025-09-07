@@ -664,7 +664,6 @@ document.addEventListener("DOMContentLoaded", () => {
         } else return (status = "Upcoming");
       },
       populateCard: function (cardClone, race) {
-
         const driverId = race.Driver?.driverId;
         if (motorsportActiveSection === "races") {
           const motorsportRoundWinner = cardClone.querySelector(
@@ -831,7 +830,6 @@ document.addEventListener("DOMContentLoaded", () => {
           return filterFixturesByStatus(sortedFixtureData, activeFilter);
         },
         motorsport: () => {
-
           const motorsportData =
             motorsportActiveSection === "races"
               ? data?.mergedRaces
@@ -875,7 +873,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "motorsport-standings-container-info-btn-",
         ""
       );
-      
+
       fetchFixtures(activeSport);
     });
   });
