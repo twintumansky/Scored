@@ -844,7 +844,7 @@ nav li {
 
 @media screen and (max-width: 480px) {
     .main-container.visible {
-        width: 95%;
+        width: 90%;
     }
 
     .fixture-card {
