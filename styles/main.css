@@ -640,7 +640,7 @@ nav li {
 
 #motorsport-standings-container-table-info {
     display: grid;
-    grid-template-columns: 2rem 1fr 3rem 3rem 3rem 4rem; /* Match data columns exactly */
+    grid-template-columns: 2rem 1fr 3rem 3rem 3rem 4rem;
     grid-template-areas: 
         "pos entity wins poles pod pts";
     align-items: center;
@@ -695,7 +695,7 @@ nav li {
 
 #motorsport-standings-main-container {
     display: grid;
-    grid-template-columns: 2rem 1fr 3rem 3rem 3rem 4rem; /* Pos | Team | Wins | Poles | Pod | Pts */
+    grid-template-columns: 2rem 1fr 3rem 3rem 3rem 4rem; 
     grid-template-areas: 
         "pos entity wins poles pod pts";
     align-items: center;
