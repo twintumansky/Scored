@@ -843,7 +843,7 @@ nav li {
 }
 
 @media screen and (max-width: 480px) {
-    .main-container.visible {
+    /* .main-container.visible {
         width: 90%;
     }
 
@@ -858,7 +858,7 @@ nav li {
     .league-name,
     .venue {
         font-size: 0.7rem;
-    }
+    } */
 }
 
 .spinner {
