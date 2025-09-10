@@ -652,17 +652,17 @@ document.addEventListener("DOMContentLoaded", () => {
         "motorsport-standings-template",
       ],
       apiEndpoint: "http://localhost:3000/api/races/motorsport",
-      isStatus: (race) => {
-        const now = Date.now();
-        const raceTime = new Date(race.time).getTime();
-        const raceDuration = 3 * 60 * 60 * 1000;
+      // isStatus: (race) => {
+      //   const now = Date.now();
+      //   const raceTime = new Date(race.time).getTime();
+      //   const raceDuration = 3 * 60 * 60 * 1000;
 
-        if (now >= raceTime && now <= raceTime + raceDuration) {
-          return (status = "Live");
-        } else if (now > raceTime + raceDuration) {
-          return (status = "Finished");
-        } else return (status = "Upcoming");
-      },
+      //   if (now >= raceTime && now <= raceTime + raceDuration) {
+      //     return (status = "Live");
+      //   } else if (now > raceTime + raceDuration) {
+      //     return (status = "Finished");
+      //   } else return (status = "Upcoming");
+      // },
       populateCard: function (cardClone, race) {
         const driverId = race.Driver?.driverId;
         if (motorsportActiveSection === "races") {
@@ -830,57 +830,16 @@ document.addEventListener("DOMContentLoaded", () => {
           return filterFixturesByStatus(sortedFixtureData, activeFilter);
         },
         motorsport: () => {
-          // const motorsportData =
-          //   motorsportActiveSection === "races"
-          //     ? data?.mergedRaces
-          //     : motorsportStandingsActiveSection === "drivers"
-          //     ? data?.driverstandings?.MRData?.StandingsTable
-          //         ?.StandingsLists?.[0]?.DriverStandings
-          //     : data?.constructorstandings?.MRData?.StandingsTable
-          //         ?.StandingsLists?.[0]?.ConstructorStandings;
+          const motorsportData =
+            motorsportActiveSection === "races"
+              ? data?.mergedRaces
+              : motorsportStandingsActiveSection === "drivers"
+              ? data?.driverstandings?.MRData?.StandingsTable
+                  ?.StandingsLists?.[0]?.DriverStandings
+              : data?.constructorstandings?.MRData?.StandingsTable
+                  ?.StandingsLists?.[0]?.ConstructorStandings;
 
-          // return motorsportData || [];
-
-          //check for cached motorsport data
-          let motorsportData;
-          let isFromCache = false;
-
-          if (motorsportActiveSection === "races") {
-            motorsportData = getCachedMotorsportData("motorsport-races-data");
-            if (motorsportData) {
-              isFromCache = true;
-            } else {
-              motorsportData = data?.mergedRaces;
-              // Cache the data for future use
-              setCachedMotorsportData("motorsport-races-data", motorsportData);
-            }
-          } else if (motorsportStandingsActiveSection === "drivers") {
-            motorsportData = getCachedMotorsportData("motorsport-driver-standings-data");
-            if (motorsportData) {
-              isFromCache = true;
-            } else {
-              motorsportData = data?.driverstandings?.MRData?.StandingsTable
-                ?.StandingsLists?.[0]?.DriverStandings;
-              // Cache the data for future use
-              setCachedMotorsportData("motorsport-driver-standings-data", motorsportData);
-            }
-          } else if (motorsportStandingsActiveSection === "teams") {
-            motorsportData = getCachedMotorsportData("motorsport-constructor-standings-data");
-            if (motorsportData) {
-              isFromCache = true;
-            } else {
-              motorsportData = data?.constructorstandings?.MRData?.StandingsTable
-                ?.StandingsLists?.[0]?.ConstructorStandings;
-              // Cache the data for future use
-              setCachedMotorsportData("motorsport-constructor-standings-data", motorsportData);
-            }
-          }
-
-          if (isFromCache) {
-            console.log(`Using cached data for motorsport ${motorsportActiveSection} ${motorsportStandingsActiveSection || ''}`);
-          }
-
-          return motorsportData || [];
+          return motorsportData || [];          
         },
       };
 
@@ -890,40 +849,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error fetching fixtures:", error);
       liveScoresDiv.innerHTML =
         '<p class="error">Unable to load fixtures. Please try again later.</p>';
-    }
-  }
-
-  // localStorage caching helpers for motorsport
-  function getCachedMotorsportData(key) {
-    try {
-      const cached = localStorage.getItem(key);
-      if (!cached) return null;
-      
-      const parsed = JSON.parse(cached);
-      // Optional: Add cache expiration check (e.g., 24 hours)
-      // const isExpired = Date.now() - parsed.timestamp > 24 * 60 * 60 * 1000;
-      // if (isExpired) {
-      //   localStorage.removeItem(key);
-      //   return null;
-      // }
-      
-      return parsed.data;
-    } catch (error) {
-      console.warn(`Error reading cached data for ${key}:`, error);
-      localStorage.removeItem(key); // Clean up corrupted data
-      return null;
-    }
-  }
-
-  function setCachedMotorsportData(key, data) {
-    try {
-      const cacheObject = {
-        data: data,
-        timestamp: Date.now()
-      };
-      localStorage.setItem(key, JSON.stringify(cacheObject));
-    } catch (error) {
-      console.warn(`Error caching data for ${key}:`, error);
     }
   }
 
