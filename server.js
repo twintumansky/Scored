@@ -5,14 +5,12 @@ const fetch = require("node-fetch");
 
 const app = express();
 
-// Enable CORS for your frontend
 app.use(cors());
-// Serve static files from your current directory
 app.use(express.static("./"));
 
 // In-memory cache for motorsport data
 const motorsportCache = {}; // Stores data: { [year]: { timestamp: Date.now(), data: {...} } }
-const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours expiration limit
 
 // Proxy endpoint for football data
 app.get("/api/matches/football", async (req, res) => {
@@ -34,6 +32,7 @@ app.get("/api/matches/football", async (req, res) => {
   }
 });
 
+// Proxy endpoint for cricket data
 app.get("/api/matches/cricket", async (req, res) => {
   try {
     const endpoints = [
@@ -70,6 +69,7 @@ app.get("/api/matches/cricket", async (req, res) => {
   }
 });
 
+// Proxy endpoint for motorsport data
 app.get("/api/races/motorsport", async (req, res) => {
   try {
     const { dateFrom } = req.query;
@@ -88,12 +88,11 @@ app.get("/api/races/motorsport", async (req, res) => {
     const fetchAllResults = async (baseUrl) => {
       const allResults = [];
       let offset = 0;
-      const limit = 100; // Fetch more results per page
+      const limit = 100; // Fetching more results per page
       let hasMoreData = true;
 
       while (hasMoreData) {
         const url = `${baseUrl}?limit=${limit}&offset=${offset}`;
-        //console.log(`Fetching results page with offset: ${offset}`);
         
         const response = await fetch(url);
         if (!response.ok) {
@@ -186,7 +185,7 @@ app.get("/api/races/motorsport", async (req, res) => {
 
     console.log("Total races fetched:", responseData.mergedRaces?.length || 0);
 
-    // --- Cache the response before sending ---
+    //Caching the response before sending
     motorsportCache[dateYear] = {
       timestamp: Date.now(),
       data: responseData
