@@ -786,7 +786,7 @@ nav li {
 }
 
 @media screen and (max-width: 768px) {
-    /* .main-container.visible {
+    .main-container.visible {
         width: 50%;
     }
 
@@ -838,7 +838,7 @@ nav li {
 
     .circuit-bg-image {
         border-radius: 1.5rem 1.5rem 0 0;
-    } */
+    }
 
 }
 

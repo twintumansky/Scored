@@ -10,6 +10,10 @@ app.use(cors());
 // Serve static files from your current directory
 app.use(express.static("./"));
 
+// In-memory cache for motorsport data
+const motorsportCache = {}; // Stores data: { [year]: { timestamp: Date.now(), data: {...} } }
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
 // Proxy endpoint for football data
 app.get("/api/matches/football", async (req, res) => {
   try {
@@ -70,7 +74,15 @@ app.get("/api/races/motorsport", async (req, res) => {
   try {
     const { dateFrom } = req.query;
     const dateYear = dateFrom.split("-")[0];
-    console.log(dateYear);
+    console.log(`Motorsport request for year: ${dateYear}`);
+
+    //Checking the in-memory cache first
+    const cachedEntry = motorsportCache[dateYear];
+    if (cachedEntry && Date.now() - cachedEntry.timestamp < CACHE_DURATION) {
+      console.log(`Serving motorsport data for ${dateYear} from cache.`);
+      return res.json(cachedEntry.data);
+    }
+    console.log(`Cache miss or expired for ${dateYear}. Fetching from external API...`);
 
     // Helper function to fetch all paginated results
     const fetchAllResults = async (baseUrl) => {
@@ -81,7 +93,7 @@ app.get("/api/races/motorsport", async (req, res) => {
 
       while (hasMoreData) {
         const url = `${baseUrl}?limit=${limit}&offset=${offset}`;
-        console.log(`Fetching results page with offset: ${offset}`);
+        //console.log(`Fetching results page with offset: ${offset}`);
         
         const response = await fetch(url);
         if (!response.ok) {
@@ -173,6 +185,14 @@ app.get("/api/races/motorsport", async (req, res) => {
     }
 
     console.log("Total races fetched:", responseData.mergedRaces?.length || 0);
+
+    // --- Cache the response before sending ---
+    motorsportCache[dateYear] = {
+      timestamp: Date.now(),
+      data: responseData
+    };
+    console.log(`Cached motorsport data for ${dateYear}.`);
+
     res.json(responseData);
   } catch (error) {
     console.error("General Proxy Error in /api/races/motorsport:", error);
