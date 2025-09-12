@@ -148,6 +148,7 @@ main nav {
     width: 100%;
     border-bottom: 1.5px solid #c3c1c1;
     padding: 0.5rem 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)), linear-gradient(rgba(58, 163, 105, 0.75), rgba(97, 236, 148, 0.75)), url(../assets/logos/football/football_header.avif);
 }
 
 .container-buttons, .motorsport-standings-container-info-buttons {
