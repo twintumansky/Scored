@@ -141,20 +141,37 @@ main nav {
     display: none;
 }
 
-#container-status-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 1rem;
+#sport-header-container.visible {
+    display: block;
     width: 30%;
     height: 9rem;
-    border-bottom: 1.5px solid #c3c1c1;
     border-radius: 0.75rem 0.75rem 0 0;
-    padding: 0.5rem 0 0.5rem 0rem;
-    background-image: linear-gradient(rgb(0 0 0 / 12%), rgb(0 0 0 / 39%)), linear-gradient(rgba(58, 163, 105, 0.196), rgba(97, 236, 148, 0.75)), url(../assets/logos/football/football_header.avif);
+    /* background-image: linear-gradient(rgb(0 0 0 / 12%), rgb(0 0 0 / 39%)), linear-gradient(rgba(58, 163, 105, 0.196), rgba(97, 236, 148, 0.75)), url(../assets/logos/football/football_header.avif); */
     background-size: cover;
     background-position: center center;
     margin: 1rem auto 0 auto;
+}
+
+#sport-header-container.hidden {
+    display: none;
+}
+
+#sport-header-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+#container-status-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 30%;
+    border-bottom: 1.5px solid #c3c1c1;    
+    margin: 0 auto;
+    padding: 0.5rem 0 0.5rem 0rem;    
+    background-color: #f0efef;
 }
 
 .container-buttons, .motorsport-standings-container-info-buttons {

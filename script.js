@@ -172,15 +172,18 @@ document.addEventListener("DOMContentLoaded", () => {
   function displaySport(fixtures, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
     const statusButtonsContainer = document.querySelector('#container-status-buttons');
+    const sportHeaderContainer = document.querySelector('#sport-header-container');
 
     mainContainer.classList.add("hidden");
     mainContainer.classList.remove("visible");
+    // sportHeaderContainer.classList.add("hidden");
     motorsportContainer.classList.add("hidden");
     motorsportContainer.classList.remove("visible");
 
     if (isTeamSport(sportToDisplay)) {
       mainContainer.classList.remove("hidden");
       mainContainer.classList.add("visible");
+      sportHeaderContainer.classList.add("visible");
       statusButtonsContainer.style.display = "flex";
       liveScoresDiv.innerHTML = "";
     } else if (sportToDisplay === "motorsport") {
@@ -263,6 +266,11 @@ document.addEventListener("DOMContentLoaded", () => {
         (match.status === "TIMED" || match.status === "SCHEDULED") &&
         isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
+        const sportHeaderImage = document.querySelector('#sport-header-image');
+        if (sportHeaderImage) {
+          sportHeaderImage.src = './assets/logos/football/football_header.avif';
+      }
+
         cardClone
           .querySelector(".home-team-logo")
           ?.setAttribute("src", match.homeTeam.crest);
@@ -415,6 +423,11 @@ document.addEventListener("DOMContentLoaded", () => {
       isUpcoming: (match, timestamp) =>
         match.matchStarted === false && isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
+        const sportHeaderImage = document.querySelector('#sport-header-image');
+        if (sportHeaderImage) {
+          sportHeaderImage.src = './assets/logos/cricket/cricket_header.png';
+      }
+
         const cricketHomeTeamScoreContainer = cardClone.querySelector(
           ".cricket-home-team-score-container"
         );
