@@ -127,12 +127,12 @@ main nav {
 
 .main-container.visible {
     width: 30%;
-    margin: 1rem auto;
+    margin: 0 auto 1rem auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #f0efef;
-    border-radius: 0.75rem;
+    border-radius:  0 0 0.75rem 0.75rem;
     padding: 0.5rem 0;
     font-weight: 400;
 }
@@ -146,11 +146,15 @@ main nav {
     justify-content: center;
     align-items: flex-end;
     gap: 1rem;
-    width: 100%;
+    width: 30%;
     height: 9rem;
     border-bottom: 1.5px solid #c3c1c1;
+    border-radius: 0.75rem 0.75rem 0 0;
     padding: 0.5rem 0 0.5rem 0rem;
     background-image: linear-gradient(rgb(0 0 0 / 12%), rgb(0 0 0 / 39%)), linear-gradient(rgba(58, 163, 105, 0.196), rgba(97, 236, 148, 0.75)), url(../assets/logos/football/football_header.avif);
+    background-size: cover;
+    background-position: center center;
+    margin: 1rem auto 0 auto;
 }
 
 .container-buttons, .motorsport-standings-container-info-buttons {

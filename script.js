@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
+  let activeFilter = null; // Track the current filter for sport(Live, Upcoming, Finished)
+  let activeSport = "football"; // State for the currently active sport(Default - football)
+
   //motorsport-specific
   const motorsportContainer = document.querySelector(".motorsport-container");
   const motorsportContainerButtons = document.querySelectorAll(
@@ -27,9 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const motorsportSectionInfo = document.querySelector(
     ".motorsport-standings-container-info"
   );
-
-  let activeFilter = null; // Track the current filter for sport(Live, Upcoming, Finished)
-  let activeSport = "motorsport"; // State for the currently active sport(Default - football)
 
   function isTeamSport(sport) {
     return ["football", "cricket"].includes(sport);
@@ -171,6 +171,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function displaySport(fixtures, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
+    const statusButtonsContainer = document.querySelector('#container-status-buttons');
+
     mainContainer.classList.add("hidden");
     mainContainer.classList.remove("visible");
     motorsportContainer.classList.add("hidden");
@@ -179,10 +181,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isTeamSport(sportToDisplay)) {
       mainContainer.classList.remove("hidden");
       mainContainer.classList.add("visible");
+      statusButtonsContainer.style.display = "flex";
       liveScoresDiv.innerHTML = "";
     } else if (sportToDisplay === "motorsport") {
       motorsportContainer.classList.remove("hidden");
       motorsportContainer.classList.add("visible");
+      statusButtonsContainer.style.display = "none";
       if (motorsportActiveSection === "races") {
         motorsportSectionInfo.classList.remove("visible");
         motorsportSectionInfo.classList.add("hidden");
