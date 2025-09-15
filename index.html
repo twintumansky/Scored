@@ -50,92 +50,104 @@
         </div>
     </header>
     <main>
-        <template id="football-template">
-            <div class="football-match-card">
-                <div class="football-fixture-info">
-                    <img class="football-icon" src="/assets/icons/football_match-icon.svg" />
-                    <div class="football-competition-info competition-info"></div>
-                    <div class="fixture-card-info">
-                        <div class="home-team">
-                            <img class="home-team-logo" src="" />
-                            <div class="home-team-name"></div>
-                        </div>
-                        <div class="fixture-info">
-                            <div class="score-container" style="display: none;">
-                                <div class="home-team-score"></div>
-                                <span>-</span>
-                                <div class="away-team-score"></div>
-                            </div>
-                            <div class="football-versus-element" style="display: none;">
-                                <div>vs</div>
-                            </div>
-                        </div>
-                        <div class="away-team">
-                            <img class="away-team-logo" src="" />
-                            <div class="away-team-name"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="match-status"></div>
-                <div class="football-match-info">
-                    <div class="league-info">
-                        <img class="league-emblem" src="" />
-                        <div class="league-name"></div>
-                    </div>
-                    <div class="venue-info">
-                        <img class="venue-flag" src="" />
-                        <div class="venue"></div>
-                    </div>
-                </div>
+        <div class="football-section">
+            <div  class="sport-header-container" id="football-header-container">
+                <img class="football-header-image" src="/assets/logos/football/football_header.avif" alt="sport-header-image">
             </div>
-        </template>
-        <template id="cricket-template">
-            <div class="cricket-match-card">
-                <div class="cricket-fixture-info">
-                    <img class="cricket-icon" src="/assets/icons/cricket-icon.svg" />
-                    <div class="cricket-competition-info competition-info"></div>
-                    <div class="cricket-team-info">
-                        <div class="cricket-home-team">
-                            <div class="cricket-home-team-container">
-                                <img class="cricket-home-team-logo" src="" alt="Home Team" />
-                                <div class="cricket-home-team-name"></div>
+            <template id="football-template">
+                <div class="football-match-card">
+                    <div class="football-fixture-info">
+                        <img class="football-icon" src="/assets/icons/football_match-icon.svg" />
+                        <div class="football-competition-info competition-info"></div>
+                        <div class="fixture-card-info">
+                            <div class="home-team">
+                                <img class="home-team-logo" src="" />
+                                <div class="home-team-name"></div>
                             </div>
-                            <div class="cricket-home-team-score-container" style="display: none;">
-                                <div class="cricket-home-team-score"></div>
-                                <div class="cricket-home-team-overs"></div>
+                            <div class="fixture-info">
+                                <div class="score-container" style="display: none;">
+                                    <div class="home-team-score"></div>
+                                    <span>-</span>
+                                    <div class="away-team-score"></div>
+                                </div>
+                                <div class="football-versus-element" style="display: none;">
+                                    <div>vs</div>
+                                </div>
                             </div>
-                        </div>
-                        <span class="cricket-versus-element">vs</span>
-                        <div class="cricket-away-team">
-                            <div class="cricket-away-team-container">
-                                <img class="cricket-away-team-logo" src="" alt="Away Team" />
-                                <div class="cricket-away-team-name"></div>
-                            </div>
-                            <div class="cricket-away-team-score-container" style="display: none;">
-                                <div class="cricket-away-team-score"></div>
-                                <div class="cricket-away-team-overs"></div>
+                            <div class="away-team">
+                                <img class="away-team-logo" src="" />
+                                <div class="away-team-name"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="cricket-match-status" style="display: none;"></div>
-                    <div class="schedule-container" style="display: none;">
-                        <div class="scheduled-day"></div>
-                        <span>,</span>
-                        <div class="scheduled-time"></div>
+                    <div class="match-status"></div>
+                    <div class="football-match-info">
+                        <div class="league-info">
+                            <img class="league-emblem" src="" />
+                            <div class="league-name"></div>
+                        </div>
+                        <div class="venue-info">
+                            <img class="venue-flag" src="" />
+                            <div class="venue"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="cricket-match-info">
-                    <div class="cricket-format">
-                        <img class="format-icon" src="" />
-                        <div class="format-name"></div>
-                    </div>
-                    <div class="cricket-venue-info">
-                        <img class="location-icon" src="/assets/icons/cricket-venue-icon.svg" />
-                        <div class="venue-name"></div>
-                    </div>
-                </div>
+            </template>
+        </div>
+
+        <div class="cricket-section">
+            <div  class="sport-header-container" id="cricket-header-container">
+                <img id="cricket-header-image" src="/assets/logos/cricket/cricket_header.png" alt="sport-header-image">
             </div>
-        </template>
+            <template id="cricket-template">
+                <div class="cricket-match-card">
+                    <div class="cricket-fixture-info">
+                        <img class="cricket-icon" src="/assets/icons/cricket-icon.svg" />
+                        <div class="cricket-competition-info competition-info"></div>
+                        <div class="cricket-team-info">
+                            <div class="cricket-home-team">
+                                <div class="cricket-home-team-container">
+                                    <img class="cricket-home-team-logo" src="" alt="Home Team" />
+                                    <div class="cricket-home-team-name"></div>
+                                </div>
+                                <div class="cricket-home-team-score-container" style="display: none;">
+                                    <div class="cricket-home-team-score"></div>
+                                    <div class="cricket-home-team-overs"></div>
+                                </div>
+                            </div>
+                            <span class="cricket-versus-element">vs</span>
+                            <div class="cricket-away-team">
+                                <div class="cricket-away-team-container">
+                                    <img class="cricket-away-team-logo" src="" alt="Away Team" />
+                                    <div class="cricket-away-team-name"></div>
+                                </div>
+                                <div class="cricket-away-team-score-container" style="display: none;">
+                                    <div class="cricket-away-team-score"></div>
+                                    <div class="cricket-away-team-overs"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cricket-match-status" style="display: none;"></div>
+                        <div class="schedule-container" style="display: none;">
+                            <div class="scheduled-day"></div>
+                            <span>,</span>
+                            <div class="scheduled-time"></div>
+                        </div>
+                    </div>
+                    <div class="cricket-match-info">
+                        <div class="cricket-format">
+                            <img class="format-icon" src="" />
+                            <div class="format-name"></div>
+                        </div>
+                        <div class="cricket-venue-info">
+                            <img class="location-icon" src="/assets/icons/cricket-venue-icon.svg" />
+                            <div class="venue-name"></div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
         <div class="motorsport-container hidden">
             <div class="motorsport-header-section">
                 <div class="motorsport-header-info">
@@ -158,7 +170,7 @@
                                 </div>
                             </div>
                             <div class="motorsport-round-winner-container hidden">
-                                <img id="motorsport-round-winner-image" src="./assets/icons/champion_logo.svg"/>
+                                <img id="motorsport-round-winner-image" src="./assets/icons/champion_logo.svg" />
                                 <div id="motorsport-round-winner"></div>
                             </div>
                         </div>
@@ -216,9 +228,6 @@
                 </div>
                 <div id="motorsport-card-container"></div>
             </div>
-        </div>
-        <div id="sport-header-container">
-            <img id="sport-header-image" src="" alt="sport-header-image">
         </div>
         <div id="container-status-buttons">
             <button class="container-buttons">Live</button>

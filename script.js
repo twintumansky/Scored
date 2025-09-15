@@ -7,6 +7,7 @@ import {
 
 //Config-driven-logic
 document.addEventListener("DOMContentLoaded", () => {
+  const headerContainer = document.querySelectorAll(".sport-header-container")
   const mainContainer = document.querySelector(".main-container");
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
@@ -171,19 +172,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function displaySport(fixtures, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
-    const statusButtonsContainer = document.querySelector('#container-status-buttons');
-    const sportHeaderContainer = document.querySelector('#sport-header-container');
+    const statusButtonsContainer = document.querySelector(
+      "#container-status-buttons"
+    );  
+    const headerContainers = document.querySelectorAll('.sport-header-container');
 
     mainContainer.classList.add("hidden");
     mainContainer.classList.remove("visible");
-    // sportHeaderContainer.classList.add("hidden");
     motorsportContainer.classList.add("hidden");
     motorsportContainer.classList.remove("visible");
+
+    headerContainers.forEach((el) => {
+      const idSport = el.id.replace('-header-container', '');
+      const shouldShow = isTeamSport(sportToDisplay) && idSport === sportToDisplay;
+      el.classList.toggle('visible', shouldShow);
+      el.classList.toggle('hidden', !shouldShow);
+    });
 
     if (isTeamSport(sportToDisplay)) {
       mainContainer.classList.remove("hidden");
       mainContainer.classList.add("visible");
-      sportHeaderContainer.classList.add("visible");
       statusButtonsContainer.style.display = "flex";
       liveScoresDiv.innerHTML = "";
     } else if (sportToDisplay === "motorsport") {
@@ -266,11 +274,6 @@ document.addEventListener("DOMContentLoaded", () => {
         (match.status === "TIMED" || match.status === "SCHEDULED") &&
         isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
-        const sportHeaderImage = document.querySelector('#sport-header-image');
-        if (sportHeaderImage) {
-          sportHeaderImage.src = './assets/logos/football/football_header.avif';
-      }
-
         cardClone
           .querySelector(".home-team-logo")
           ?.setAttribute("src", match.homeTeam.crest);
@@ -305,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
           statusTextElement.textContent = "Match in progress...";
-          scoreContainer.style.display = "flex"; // Or 'block' depending on CSS
+          scoreContainer.style.display = "flex";
           // scheduledContainer.style.display = "none";
           cardClone.querySelector(".home-team-score").textContent =
             homeTeamScore ?? "0";
@@ -329,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (match.status === "SCHEDULED" || match.status === "TIMED") {
           scoreContainer.style.display = "none";
           versusElement.style.display = "block";
-          // scheduledContainer.style.display = "block"; // Or 'flex'
+          // scheduledContainer.style.display = "block";
           const matchDate = new Date(match.utcDate);
           const matchTime = matchDate.toLocaleTimeString("en-US", {
             hour: "2-digit",
@@ -423,11 +426,6 @@ document.addEventListener("DOMContentLoaded", () => {
       isUpcoming: (match, timestamp) =>
         match.matchStarted === false && isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
-        const sportHeaderImage = document.querySelector('#sport-header-image');
-        if (sportHeaderImage) {
-          sportHeaderImage.src = './assets/logos/cricket/cricket_header.png';
-      }
-
         const cricketHomeTeamScoreContainer = cardClone.querySelector(
           ".cricket-home-team-score-container"
         );
@@ -856,7 +854,7 @@ document.addEventListener("DOMContentLoaded", () => {
               : data?.constructorstandings?.MRData?.StandingsTable
                   ?.StandingsLists?.[0]?.ConstructorStandings;
 
-          return motorsportData || [];          
+          return motorsportData || [];
         },
       };
 
