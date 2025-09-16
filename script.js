@@ -173,9 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function displaySport(fixtures, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
-    // const statusButtonsContainer = document.querySelector(
-    //   "#container-status-buttons"
-    // );
 
     mainContainer.classList.add("hidden");
     mainContainer.classList.remove("visible");
@@ -185,12 +182,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isTeamSport(sportToDisplay)) {
       mainContainer.classList.remove("hidden");
       mainContainer.classList.add("visible");
-      // statusButtonsContainer.style.display = "flex";
       liveScoresDiv.innerHTML = "";
     } else if (sportToDisplay === "motorsport") {
       motorsportContainer.classList.remove("hidden");
       motorsportContainer.classList.add("visible");
-      // statusButtonsContainer.style.display = "none";
       if (motorsportActiveSection === "races") {
         motorsportSectionInfo.classList.remove("visible");
         motorsportSectionInfo.classList.add("hidden");
@@ -297,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const scheduledContainer = cardClone.querySelector(
           ".scheduled-time-container"
         );
-        const statusTextElement = cardClone.querySelector(".match-status");
+        const statusTextElement = cardClone.querySelector(".football-match-status");
 
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
           statusTextElement.textContent = "Match in progress...";
@@ -337,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
             month: "short",
             day: "numeric",
           });
-          statusTextElement.textContent = `Match scheduled on ${matchDay} at ${matchTime}`;
+          statusTextElement.textContent = `Scheduled on ${matchDay} at ${matchTime}`;
           // cardClone.querySelector('.match-time').textContent = matchDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
           // cardClone.querySelector('.match-date').textContent = matchDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
         } else {
