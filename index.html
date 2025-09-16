@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="preload" as="image" href="/assets/logos/football/football_header.avif">
+    <link rel="preload" as="image" href="/assets/logos/cricket/cricket_header.png">
 </head>
 
 <body>
@@ -51,8 +53,9 @@
     </header>
     <main>
         <div class="football-section">
-            <div  class="sport-header-container" id="football-header-container">
-                <img class="sport-header-image" src="/assets/logos/football/football_header.avif" alt="sport-header-image">
+            <div class="sport-header-container" id="football-header-container">
+                <img class="sport-header-image" src="/assets/logos/football/football_header.avif" decoding="async"
+                    fetchpriority="high" alt="sport-header-image">
             </div>
             <template id="football-template">
                 <div class="football-match-card">
@@ -96,8 +99,9 @@
         </div>
 
         <div class="cricket-section">
-            <div  class="sport-header-container" id="cricket-header-container">
-                <img class="sport-header-image" src="/assets/logos/cricket/cricket_header.png" alt="sport-header-image">
+            <div class="sport-header-container" id="cricket-header-container">
+                <img class="sport-header-image" src="/assets/logos/cricket/cricket_header.png" decoding="async"
+                    fetchpriority="high" alt="sport-header-image">
             </div>
             <template id="cricket-template">
                 <div class="cricket-match-card">
