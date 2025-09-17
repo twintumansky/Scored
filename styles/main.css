@@ -212,6 +212,10 @@ main nav {
     align-items: center;
 }
 
+#fixtures-container p {
+    color: #777;
+}
+
 .football-match-card {
     width: 100%;
     background: #ffffff;
@@ -282,7 +286,7 @@ main nav {
     margin-top: 0.75rem;
     margin-bottom: 0.3rem;
     font-size: 0.80rem;
-    color: #959595;
+    color: #777;
     text-align: center;
     white-space: normal;
     word-wrap: break-word;
