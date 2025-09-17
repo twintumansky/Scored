@@ -302,9 +302,9 @@ main nav {
     margin-top: 0;
     margin-bottom: 0.8rem;
     margin-right: 1rem;
-    border: 3px solid #a09e9e;
+    /* border: 3px solid #a09e9e; */
     border-radius: 1rem;
-    background: #e0e0e0;
+    background: #f6f4f4;
     padding: 0.13rem 1.1rem;
 }
 
