@@ -521,7 +521,7 @@ nav li {
     flex-direction: column;
     border-bottom: 1.5px solid #c3c1c1;
     justify-content: space-between;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)), linear-gradient(rgba(33, 32, 137, 0.75), rgba(57, 30, 212, 0.75)), url(../assets/logos/f1//Ferrari\ SF-23.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)), linear-gradient(rgba(33, 32, 137, 0.75), rgba(57, 30, 212, 0.75)), url(../assets/images/f1//Ferrari\ SF-23.jpg);
     background-position: center 40%;
     background-size: cover;
     border-radius: 1.5rem 1.5rem 0 0;

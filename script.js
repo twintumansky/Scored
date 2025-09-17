@@ -494,7 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ?.setAttribute(
             "src",
             cricketTeamLogos[homeTeamShortName] ??
-              "/assets/icons/defaultcricketicon.svg"
+              "/assets/icons/default_cricket_icon.svg"
           );
         cardClone.querySelector(".cricket-away-team-name").textContent =
           awayTeamShortName || match.teams[1];
@@ -503,7 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ?.setAttribute(
             "src",
             cricketTeamLogos[awayTeamShortName] ??
-              "/assets/icons/defaultcricketicon.svg"
+              "/assets/icons/default_cricket_icon.svg"
           );
         cardClone.querySelector(".cricket-match-status").textContent =
           match.status ?? "Match status not available";
