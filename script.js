@@ -290,7 +290,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const scheduledContainer = cardClone.querySelector(
           ".scheduled-time-container"
         );
-        const statusTextElement = cardClone.querySelector(".football-match-status");
+        const statusTextElement = cardClone.querySelector(
+          ".football-match-status"
+        );
 
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
           statusTextElement.textContent = "Match in progress...";
@@ -563,10 +565,43 @@ document.addEventListener("DOMContentLoaded", () => {
               awayTeamScoreObj &&
               `${awayTeamScoreObj["1st-inngs-overs"]}   ${awayTeamScoreObj["2nd-inngs-overs"]}`;
 
-            cricketHomeTeamScore.textContent = homeTeamScore;
-            cricketHomeTeamOvers.textContent = `( ${homeTeamOvers})`;
-            cricketAwayTeamScore.textContent = awayTeamScore;
-            cricketAwayTeamOvers.textContent = `( ${awayTeamOvers})`;
+            // cricketHomeTeamScore.textContent = homeTeamScore;
+            // cricketHomeTeamOvers.textContent = `( ${homeTeamOvers})`;
+            // cricketAwayTeamScore.textContent = awayTeamScore;
+            // cricketAwayTeamOvers.textContent = `( ${awayTeamOvers})`;
+
+            const homeRunsParts = [
+              homeTeamScoreObj["1st-inngs-runs"],
+              homeTeamScoreObj["2nd-inngs-runs"],
+            ].filter(Boolean);
+
+            const homeOversParts = [
+              homeTeamScoreObj["1st-inngs-overs"],
+              homeTeamScoreObj["2nd-inngs-overs"],
+            ].filter(Boolean);
+
+            const awayRunsParts = [
+              awayTeamScoreObj["1st-inngs-runs"],
+              awayTeamScoreObj["2nd-inngs-runs"],
+            ].filter(Boolean);
+
+            const awayOversParts = [
+              awayTeamScoreObj["1st-inngs-overs"],
+              awayTeamScoreObj["2nd-inngs-overs"],
+            ].filter(Boolean);
+
+            cricketHomeTeamScore.innerHTML = homeRunsParts
+              .map((p) => `<span>${p}</span>`)
+              .join("");
+            cricketHomeTeamOvers.innerHTML = homeOversParts.length
+              ? homeOversParts.map((p) => `<span>(${p})</span>`).join("")
+              : "";
+            cricketAwayTeamScore.innerHTML = awayRunsParts
+              .map((p) => `<span>${p}</span>`)
+              .join("");
+            cricketAwayTeamOvers.innerHTML = awayOversParts.length
+              ? awayOversParts.map((p) => `<span>(${p})</span>`).join("")
+              : "";
           }
 
           function matchesScoreContainer() {
@@ -849,21 +884,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setStaticUIForSport(sport) {
     // toggle sport header images
-    const sportHeaders = document.querySelectorAll('.sport-header-container');
-    sportHeaders.forEach(headerEl => {
-      const selectedSport = headerEl.id.replace('-header-container', '');
-      const show = selectedSport === sport && (sport === 'football' || sport === 'cricket');
-      headerEl.classList.toggle('visible', show);
-      headerEl.classList.toggle('hidden', !show);
+    const sportHeaders = document.querySelectorAll(".sport-header-container");
+    sportHeaders.forEach((headerEl) => {
+      const selectedSport = headerEl.id.replace("-header-container", "");
+      const show =
+        selectedSport === sport &&
+        (sport === "football" || sport === "cricket");
+      headerEl.classList.toggle("visible", show);
+      headerEl.classList.toggle("hidden", !show);
     });
-  
+
     // toggle status buttons for team sports
-    const statusButtonsContainer = document.querySelector('#container-status-buttons');
-    const showStatusButtons = sport === 'football' || sport === 'cricket';
-    statusButtonsContainer.style.display = showStatusButtons ? 'flex' : 'none';
+    const statusButtonsContainer = document.querySelector(
+      "#container-status-buttons"
+    );
+    const showStatusButtons = sport === "football" || sport === "cricket";
+    statusButtonsContainer.style.display = showStatusButtons ? "flex" : "none";
   }
 
-  // UI at initial fetch 
+  // UI at initial fetch
   setStaticUIForSport(activeSport);
 
   // Sport Navigation Button Listeners
