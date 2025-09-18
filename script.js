@@ -7,16 +7,14 @@ import {
 
 //Config-driven-logic
 document.addEventListener("DOMContentLoaded", () => {
-  // const headerContainer = document.querySelectorAll(".sport-header-container");
   const mainContainer = document.querySelector(".main-container");
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
-  // const headerContainers = document.querySelectorAll(".sport-header-container");
   let activeFilter = null; // Track the current filter for sport(Live, Upcoming, Finished)
   let activeSport = "football"; // State for the currently active sport(Default - football)
 
-  //motorsport-specific
+  //motorsport specific configurations
   const motorsportContainer = document.querySelector(".motorsport-container");
   const motorsportContainerButtons = document.querySelectorAll(
     ".motorsport-header-button"
@@ -297,7 +295,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
           statusTextElement.textContent = "Match in progress...";
           scoreContainer.style.display = "flex";
-          // scheduledContainer.style.display = "none";
           cardClone.querySelector(".home-team-score").textContent =
             homeTeamScore ?? "0";
           cardClone.querySelector(".away-team-score").textContent =
@@ -312,7 +309,6 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           scoreContainer.style.display = "flex";
-          // scheduledContainer.style.display = "none";
           cardClone.querySelector(".home-team-score").textContent =
             match.score?.fullTime?.home ?? "0";
           cardClone.querySelector(".away-team-score").textContent =
@@ -320,7 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (match.status === "SCHEDULED" || match.status === "TIMED") {
           scoreContainer.style.display = "none";
           versusElement.style.display = "block";
-          // scheduledContainer.style.display = "block";
           const matchDate = new Date(match.utcDate);
           const matchTime = matchDate.toLocaleTimeString("en-US", {
             hour: "2-digit",
@@ -333,12 +328,9 @@ document.addEventListener("DOMContentLoaded", () => {
             day: "numeric",
           });
           statusTextElement.textContent = `Scheduled on ${matchDay} at ${matchTime}`;
-          // cardClone.querySelector('.match-time').textContent = matchDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-          // cardClone.querySelector('.match-date').textContent = matchDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
         } else {
           statusTextElement.textContent = match.status; // Fallback
           scoreContainer.style.display = "none";
-          // scheduledContainer.style.display = "none";
         }
       },
     },
@@ -779,7 +771,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sportNavButtons.forEach((btn) => {
       btn.classList.toggle("active", btn.id === `${activeSport}-card`);
-    }); // Updating active class for sport navigation buttons
+    }); // Updating active class for sport nav buttons
 
     motorsportContainerButtons.forEach((btn) => {
       btn.classList.toggle(
