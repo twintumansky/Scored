@@ -244,20 +244,29 @@ main nav {
 
 .fixture-card-info {
     display: grid;
-    grid-template-columns: 1fr 0.8fr 1fr;
+    grid-template-columns: 1fr auto 1fr; 
     align-items: flex-start;
     flex-grow: 3;
     position: relative;
 }
 
-.home-team,
+.home-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 6rem;
+    justify-self: end;
+    min-height: 4rem;
+}
+
 .away-team {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     width: 6rem;
-    justify-content: flex-start;
+    justify-self: start;
     min-height: 4rem;
 }
 
@@ -447,9 +456,14 @@ nav li {
 }
 
 .cricket-team-info {
-    display: flex;
-    justify-content: space-around;
+    /* display: flex;
+    justify-content: space-around; */
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    justify-items: center;
+    gap: 1rem;
     margin: 1rem 0 1rem 0;
 }
 
@@ -487,8 +501,14 @@ nav li {
 
 .cricket-home-team-score-container,
 .cricket-away-team-score-container {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
+
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-auto-rows: auto;
+    column-gap: 0.5rem;
+    row-gap: 0.2rem;
     font-size: 0.75rem;
     color: #777;
     line-height: 0.9rem;
@@ -499,9 +519,18 @@ nav li {
 .cricket-away-team-score,
 .cricket-home-team-overs,
 .cricket-away-team-overs {
-    display: inline-flex;
+    /* display: inline-flex;
     gap: 0.5rem;                  
-    align-items: baseline;
+    align-items: baseline; */
+    display: contents;
+}
+
+.cricket-home-team-score span,
+.cricket-away-team-score span,
+.cricket-home-team-overs span,
+.cricket-away-team-overs span {
+    text-align: center;
+    min-width: max-content;
 }
 
 .cricket-home-team-logo,

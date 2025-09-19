@@ -552,18 +552,18 @@ document.addEventListener("DOMContentLoaded", () => {
               "1st-inngs-overs": awayFirstInnings ? awayFirstInnings.o : "-",
               "2nd-inngs-overs": awaySecondInnings ? awaySecondInnings.o : "",
             };
-            const homeTeamScore =
-              homeTeamScoreObj &&
-              `${homeTeamScoreObj["1st-inngs-runs"]}   ${homeTeamScoreObj["2nd-inngs-runs"]}`;
-            const homeTeamOvers =
-              homeTeamScoreObj &&
-              `${homeTeamScoreObj["1st-inngs-overs"]}   ${homeTeamScoreObj["2nd-inngs-overs"]}`;
-            const awayTeamScore =
-              awayTeamScoreObj &&
-              `${awayTeamScoreObj["1st-inngs-runs"]}   ${awayTeamScoreObj["2nd-inngs-runs"]}`;
-            const awayTeamOvers =
-              awayTeamScoreObj &&
-              `${awayTeamScoreObj["1st-inngs-overs"]}   ${awayTeamScoreObj["2nd-inngs-overs"]}`;
+            // const homeTeamScore =
+            //   homeTeamScoreObj &&
+            //   `${homeTeamScoreObj["1st-inngs-runs"]}   ${homeTeamScoreObj["2nd-inngs-runs"]}`;
+            // const homeTeamOvers =
+            //   homeTeamScoreObj &&
+            //   `${homeTeamScoreObj["1st-inngs-overs"]}   ${homeTeamScoreObj["2nd-inngs-overs"]}`;
+            // const awayTeamScore =
+            //   awayTeamScoreObj &&
+            //   `${awayTeamScoreObj["1st-inngs-runs"]}   ${awayTeamScoreObj["2nd-inngs-runs"]}`;
+            // const awayTeamOvers =
+            //   awayTeamScoreObj &&
+            //   `${awayTeamScoreObj["1st-inngs-overs"]}   ${awayTeamScoreObj["2nd-inngs-overs"]}`;
 
             // cricketHomeTeamScore.textContent = homeTeamScore;
             // cricketHomeTeamOvers.textContent = `( ${homeTeamOvers})`;
