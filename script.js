@@ -513,119 +513,184 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //for matches that are Live or Recently finished
         if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
+          //Helper function to extract scores for a specific team
           function findScoreForTeam(scores, teamName) {
-            if (!scores) return null;
+            if (!scores || !teamName) return [];
             return scores.filter(
               (s) =>
-                teamName &&
                 s.inning &&
                 s.inning.toLowerCase().includes(teamName.toLowerCase())
             );
           }
 
-          function testMatchScoreContainer() {
-            const homeScoreObj = findScoreForTeam(match.score, homeTeamName);
-            const awayScoreObj = findScoreForTeam(match.score, awayTeamName);
+          // Helper function to populate a team's score container
+          function updateScoreDisplay(
+            teamScoreContainer,
+            teamScores,
+            matchType
+          ) {
+            // Always ensure the container is visible
+            teamScoreContainer.style.display = "block";
 
-            const homeFirstInnings = homeScoreObj && homeScoreObj[0];
-            const homeSecondInnings = homeScoreObj && homeScoreObj[1];
-            const awayFirstInnings = awayScoreObj && awayScoreObj[0];
-            const awaySecondInnings = awayScoreObj && awayScoreObj[1];
+            const firstInnings = teamScores && teamScores[0];
+            const secondInnings = teamScores && teamScores[1];
 
-            const homeTeamScoreObj = {
-              "1st-inngs-runs": homeFirstInnings
-                ? `${homeFirstInnings.r}/${homeFirstInnings.w}`
-                : "Yet to bat",
-              "2nd-inngs-runs": homeSecondInnings
-                ? `${homeSecondInnings.r}/${homeSecondInnings.w}`
-                : "",
-              "1st-inngs-overs": homeFirstInnings ? homeFirstInnings.o : "-",
-              "2nd-inngs-overs": homeSecondInnings ? homeSecondInnings.o : "",
-            };
-            const awayTeamScoreObj = {
-              "1st-inngs-runs": awayFirstInnings
-                ? `${awayFirstInnings.r}/${awayFirstInnings.w}`
-                : "Yet to bat",
-              "2nd-inngs-runs": awaySecondInnings
-                ? `${awaySecondInnings.r}/${awaySecondInnings.w}`
-                : "",
-              "1st-inngs-overs": awayFirstInnings ? awayFirstInnings.o : "-",
-              "2nd-inngs-overs": awaySecondInnings ? awaySecondInnings.o : "",
-            };
-            const homeTeamScore =
-              homeTeamScoreObj &&
-              `${homeTeamScoreObj["1st-inngs-runs"]}   ${homeTeamScoreObj["2nd-inngs-runs"]}`;
-            const homeTeamOvers =
-              homeTeamScoreObj &&
-              `${homeTeamScoreObj["1st-inngs-overs"]}   ${homeTeamScoreObj["2nd-inngs-overs"]}`;
-            const awayTeamScore =
-              awayTeamScoreObj &&
-              `${awayTeamScoreObj["1st-inngs-runs"]}   ${awayTeamScoreObj["2nd-inngs-runs"]}`;
-            const awayTeamOvers =
-              awayTeamScoreObj &&
-              `${awayTeamScoreObj["1st-inngs-overs"]}   ${awayTeamScoreObj["2nd-inngs-overs"]}`;
+            const inngs1Col = teamScoreContainer.querySelector(".innings-1");
+            const inngs2Col = teamScoreContainer.querySelector(".innings-2");
 
-            cricketHomeTeamScore.textContent = homeTeamScore;
-            cricketHomeTeamOvers.textContent = `( ${homeTeamOvers})`;
-            cricketAwayTeamScore.textContent = awayTeamScore;
-            cricketAwayTeamOvers.textContent = `( ${awayTeamOvers})`;
+            // --- Populate 1st Innings or "Yet to bat" ---
+            if (firstInnings) {
+              inngs1Col.querySelector(
+                ".score-runs"
+              ).textContent = `${firstInnings.r}/${firstInnings.w}`;
+              inngs1Col.querySelector(
+                ".score-overs"
+              ).textContent = `(${firstInnings.o})`;
+            } else {
+              inngs1Col.querySelector(".score-runs").textContent = "Yet to bat";
+              inngs1Col.querySelector(".score-overs").textContent = "-";
+            }
 
+            // --- Populate 2nd Innings (for Test matches only) ---
+            if (matchType === "test" && secondInnings) {
+              inngs2Col.querySelector(
+                ".score-runs"
+              ).textContent = `${secondInnings.r}/${secondInnings.w}`;
+              inngs2Col.querySelector(
+                ".score-overs"
+              ).textContent = `(${secondInnings.o})`;
+              inngs2Col.style.display = "flex"; // Show the 2nd innings column
+            } else {
+              inngs2Col.style.display = "none"; // Hide it for non-test matches or if no 2nd innings data
+            }
           }
 
-          function matchesScoreContainer() {
-            const homeScoreObj = findScoreForTeam(match.score, homeTeamName);
-            const awayScoreObj = findScoreForTeam(match.score, awayTeamName);
+          // Find scores for each team
+          const homeScores = findScoreForTeam(match.score, homeTeamName);
+          const awayScores = findScoreForTeam(match.score, awayTeamName);
 
-            const homeFirstInnings = homeScoreObj && homeScoreObj[0];
-            const awayFirstInnings = awayScoreObj && awayScoreObj[0];
-
-            const homeTeamScoreObj = {
-              "1st-inngs-runs": homeFirstInnings
-                ? `${homeFirstInnings.r}/${homeFirstInnings.w}`
-                : "Yet to bat",
-              "1st-inngs-overs": homeFirstInnings
-                ? `(${homeFirstInnings.o})`
-                : "-",
-            };
-            const awayTeamScoreObj = {
-              "1st-inngs-runs": awayFirstInnings
-                ? `${awayFirstInnings.r}/${awayFirstInnings.w}`
-                : "Yet to bat",
-              "1st-inngs-overs": awayFirstInnings
-                ? `(${awayFirstInnings.o})`
-                : "-",
-            };
-
-            const homeTeamScore =
-              homeTeamScoreObj && homeTeamScoreObj["1st-inngs-runs"];
-            const homeTeamOvers =
-              homeTeamScoreObj && homeTeamScoreObj["1st-inngs-overs"];
-            const awayTeamScore =
-              awayTeamScoreObj && awayTeamScoreObj["1st-inngs-runs"];
-            const awayTeamOvers =
-              awayTeamScoreObj && awayTeamScoreObj["1st-inngs-overs"];
-
-            cricketHomeTeamScore.textContent = homeTeamScore;
-            cricketHomeTeamOvers.textContent = homeTeamOvers;
-            cricketAwayTeamScore.textContent = awayTeamScore;
-            cricketAwayTeamOvers.textContent = awayTeamOvers;
-          }
-
-          match.matchType == "test"
-            ? testMatchScoreContainer()
-            : matchesScoreContainer();
-
-          if (match.score?.length == 0 || match.score == null) {
-            cricketHomeTeamScoreContainer.style.display = "none";
-            cricketAwayTeamScoreContainer.style.display = "none";
-          } else {
-            cricketHomeTeamScoreContainer.style.display = "block";
-            cricketAwayTeamScoreContainer.style.display = "block";
-          }
+          // Update the UI for both teams
+          updateScoreDisplay(
+            cricketHomeTeamScoreContainer,
+            homeScores,
+            match.matchType
+          );
+          updateScoreDisplay(
+            cricketAwayTeamScoreContainer,
+            awayScores,
+            match.matchType
+          );
 
           cricketMatchStatus.style.display = "block";
+          scheduleContainer.style.display = "none";
+
+          // function testMatchScoreContainer() {
+          //   const homeScoreObj = findScoreForTeam(match.score, homeTeamName);
+          //   const awayScoreObj = findScoreForTeam(match.score, awayTeamName);
+
+          //   const homeFirstInnings = homeScoreObj && homeScoreObj[0];
+          //   const homeSecondInnings = homeScoreObj && homeScoreObj[1];
+          //   const awayFirstInnings = awayScoreObj && awayScoreObj[0];
+          //   const awaySecondInnings = awayScoreObj && awayScoreObj[1];
+
+          //   const homeTeamScoreObj = {
+          //     "1st-inngs-runs": homeFirstInnings
+          //       ? `${homeFirstInnings.r}/${homeFirstInnings.w}`
+          //       : "Yet to bat",
+          //     "2nd-inngs-runs": homeSecondInnings
+          //       ? `& ${homeSecondInnings.r}/${homeSecondInnings.w}`
+          //       : "",
+          //     "1st-inngs-overs": homeFirstInnings ? homeFirstInnings.o : "-",
+          //     "2nd-inngs-overs": homeSecondInnings ? homeSecondInnings.o : "",
+          //   };
+          //   const awayTeamScoreObj = {
+          //     "1st-inngs-runs": awayFirstInnings
+          //       ? `${awayFirstInnings.r}/${awayFirstInnings.w}`
+          //       : "Yet to bat",
+          //     "2nd-inngs-runs": awaySecondInnings
+          //       ? `& ${awaySecondInnings.r}/${awaySecondInnings.w}`
+          //       : "",
+          //     "1st-inngs-overs": awayFirstInnings ? awayFirstInnings.o : "-",
+          //     "2nd-inngs-overs": awaySecondInnings ? awaySecondInnings.o : "",
+          //   };
+          //   const homeTeamScore =
+          //     homeTeamScoreObj &&
+          //     `${homeTeamScoreObj["1st-inngs-runs"]}   ${homeTeamScoreObj["2nd-inngs-runs"]}`;
+          //   const homeTeamOvers =
+          //     homeTeamScoreObj &&
+          //     `${homeTeamScoreObj["1st-inngs-overs"]}   ${homeTeamScoreObj["2nd-inngs-overs"]}`;
+          //   const awayTeamScore =
+          //     awayTeamScoreObj &&
+          //     `${awayTeamScoreObj["1st-inngs-runs"]}   ${awayTeamScoreObj["2nd-inngs-runs"]}`;
+          //   const awayTeamOvers =
+          //     awayTeamScoreObj &&
+          //     `${awayTeamScoreObj["1st-inngs-overs"]}   ${awayTeamScoreObj["2nd-inngs-overs"]}`;
+
+          //   cricketHomeTeamScore.textContent = homeTeamScore;
+          //   cricketHomeTeamOvers.textContent = `(${homeTeamOvers})`;
+          //   cricketAwayTeamScore.textContent = awayTeamScore;
+          //   cricketAwayTeamOvers.textContent = `(${awayTeamOvers})`;
+
+          // }
+
+          // function matchesScoreContainer() {
+          //   const homeScoreObj = findScoreForTeam(match.score, homeTeamName);
+          //   const awayScoreObj = findScoreForTeam(match.score, awayTeamName);
+
+          //   const homeFirstInnings = homeScoreObj && homeScoreObj[0];
+          //   const awayFirstInnings = awayScoreObj && awayScoreObj[0];
+
+          //   const homeTeamScoreObj = {
+          //     "1st-inngs-runs": homeFirstInnings
+          //       ? `${homeFirstInnings.r}/${homeFirstInnings.w}`
+          //       : "Yet to bat",
+          //     "1st-inngs-overs": homeFirstInnings
+          //       ? `(${homeFirstInnings.o})`
+          //       : "-",
+          //   };
+          //   const awayTeamScoreObj = {
+          //     "1st-inngs-runs": awayFirstInnings
+          //       ? `${awayFirstInnings.r}/${awayFirstInnings.w}`
+          //       : "Yet to bat",
+          //     "1st-inngs-overs": awayFirstInnings
+          //       ? `(${awayFirstInnings.o})`
+          //       : "-",
+          //   };
+
+          //   const homeTeamScore =
+          //     homeTeamScoreObj && homeTeamScoreObj["1st-inngs-runs"];
+          //   const homeTeamOvers =
+          //     homeTeamScoreObj && homeTeamScoreObj["1st-inngs-overs"];
+          //   const awayTeamScore =
+          //     awayTeamScoreObj && awayTeamScoreObj["1st-inngs-runs"];
+          //   const awayTeamOvers =
+          //     awayTeamScoreObj && awayTeamScoreObj["1st-inngs-overs"];
+
+          //   cricketHomeTeamScore.textContent = homeTeamScore;
+          //   cricketHomeTeamOvers.textContent = homeTeamOvers;
+          //   cricketAwayTeamScore.textContent = awayTeamScore;
+          //   cricketAwayTeamOvers.textContent = awayTeamOvers;
+          // }
+
+          // match.matchType == "test"
+          //   ? testMatchScoreContainer()
+          //   : matchesScoreContainer();
+
+          // if (match.score?.length == 0 || match.score == null) {
+          //   cricketHomeTeamScoreContainer.style.display = "none";
+          //   cricketAwayTeamScoreContainer.style.display = "none";
+          // } else {
+          //   cricketHomeTeamScoreContainer.style.display = "block";
+          //   cricketAwayTeamScoreContainer.style.display = "block";
+          // }
+
+          // cricketMatchStatus.style.display = "block";
         } else {
           scheduleContainer.style.display = "flex";
+
+          cricketHomeTeamScoreContainer.style.display = "none";
+          cricketAwayTeamScoreContainer.style.display = "none";
+
           cricketMatchStatus.style.display = "none";
 
           const matchDate = new Date(match.dateTimeGMT + "Z");
