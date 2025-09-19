@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
   let activeFilter = null; // Track the current filter for sport(Live, Upcoming, Finished)
-  let activeSport = "football"; // State for the currently active sport(Default - football)
+  let activeSport = "cricket"; // State for the currently active sport(Default - football)
 
   //motorsport specific configurations
   const motorsportContainer = document.querySelector(".motorsport-container");
@@ -552,56 +552,24 @@ document.addEventListener("DOMContentLoaded", () => {
               "1st-inngs-overs": awayFirstInnings ? awayFirstInnings.o : "-",
               "2nd-inngs-overs": awaySecondInnings ? awaySecondInnings.o : "",
             };
-            // const homeTeamScore =
-            //   homeTeamScoreObj &&
-            //   `${homeTeamScoreObj["1st-inngs-runs"]}   ${homeTeamScoreObj["2nd-inngs-runs"]}`;
-            // const homeTeamOvers =
-            //   homeTeamScoreObj &&
-            //   `${homeTeamScoreObj["1st-inngs-overs"]}   ${homeTeamScoreObj["2nd-inngs-overs"]}`;
-            // const awayTeamScore =
-            //   awayTeamScoreObj &&
-            //   `${awayTeamScoreObj["1st-inngs-runs"]}   ${awayTeamScoreObj["2nd-inngs-runs"]}`;
-            // const awayTeamOvers =
-            //   awayTeamScoreObj &&
-            //   `${awayTeamScoreObj["1st-inngs-overs"]}   ${awayTeamScoreObj["2nd-inngs-overs"]}`;
+            const homeTeamScore =
+              homeTeamScoreObj &&
+              `${homeTeamScoreObj["1st-inngs-runs"]}   ${homeTeamScoreObj["2nd-inngs-runs"]}`;
+            const homeTeamOvers =
+              homeTeamScoreObj &&
+              `${homeTeamScoreObj["1st-inngs-overs"]}   ${homeTeamScoreObj["2nd-inngs-overs"]}`;
+            const awayTeamScore =
+              awayTeamScoreObj &&
+              `${awayTeamScoreObj["1st-inngs-runs"]}   ${awayTeamScoreObj["2nd-inngs-runs"]}`;
+            const awayTeamOvers =
+              awayTeamScoreObj &&
+              `${awayTeamScoreObj["1st-inngs-overs"]}   ${awayTeamScoreObj["2nd-inngs-overs"]}`;
 
-            // cricketHomeTeamScore.textContent = homeTeamScore;
-            // cricketHomeTeamOvers.textContent = `( ${homeTeamOvers})`;
-            // cricketAwayTeamScore.textContent = awayTeamScore;
-            // cricketAwayTeamOvers.textContent = `( ${awayTeamOvers})`;
+            cricketHomeTeamScore.textContent = homeTeamScore;
+            cricketHomeTeamOvers.textContent = `( ${homeTeamOvers})`;
+            cricketAwayTeamScore.textContent = awayTeamScore;
+            cricketAwayTeamOvers.textContent = `( ${awayTeamOvers})`;
 
-            const homeRunsParts = [
-              homeTeamScoreObj["1st-inngs-runs"],
-              homeTeamScoreObj["2nd-inngs-runs"],
-            ].filter(Boolean);
-
-            const homeOversParts = [
-              homeTeamScoreObj["1st-inngs-overs"],
-              homeTeamScoreObj["2nd-inngs-overs"],
-            ].filter(Boolean);
-
-            const awayRunsParts = [
-              awayTeamScoreObj["1st-inngs-runs"],
-              awayTeamScoreObj["2nd-inngs-runs"],
-            ].filter(Boolean);
-
-            const awayOversParts = [
-              awayTeamScoreObj["1st-inngs-overs"],
-              awayTeamScoreObj["2nd-inngs-overs"],
-            ].filter(Boolean);
-
-            cricketHomeTeamScore.innerHTML = homeRunsParts
-              .map((p) => `<span>${p}</span>`)
-              .join("");
-            cricketHomeTeamOvers.innerHTML = homeOversParts.length
-              ? homeOversParts.map((p) => `<span>(${p})</span>`).join("")
-              : "";
-            cricketAwayTeamScore.innerHTML = awayRunsParts
-              .map((p) => `<span>${p}</span>`)
-              .join("");
-            cricketAwayTeamOvers.innerHTML = awayOversParts.length
-              ? awayOversParts.map((p) => `<span>(${p})</span>`).join("")
-              : "";
           }
 
           function matchesScoreContainer() {
