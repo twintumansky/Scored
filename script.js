@@ -922,7 +922,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const selectedSport = headerEl.id.replace("-header-container", "");
       const show =
         selectedSport === sport &&
-        (sport === "football" || sport === "cricket");
+        (sport === "football" || sport === "cricket" || sport === "tennis");
       headerEl.classList.toggle("visible", show);
       headerEl.classList.toggle("hidden", !show);
     });
@@ -931,7 +931,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const statusButtonsContainer = document.querySelector(
       "#container-status-buttons"
     );
-    const showStatusButtons = sport === "football" || sport === "cricket";
+    const showStatusButtons = sport === "football" || sport === "cricket" || sport === "tennis";
     statusButtonsContainer.style.display = showStatusButtons ? "flex" : "none";
   }
 
