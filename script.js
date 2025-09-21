@@ -916,6 +916,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function setStaticUIForSport(sport) {
+    // Hiding all sport sections first
+    const allSections = document.querySelectorAll('.main-section');
+    allSections.forEach(section => {
+        section.classList.remove('active');
+    });
+
+    // Showing only the active sport section
+    const activeSection = document.querySelector(`.${sport}-section.main-section`);
+    if (activeSection) {
+        activeSection.classList.add('active');
+    }
+
     // toggle sport header images
     const sportHeaders = document.querySelectorAll(".sport-header-container");
     sportHeaders.forEach((headerEl) => {
@@ -931,7 +943,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const statusButtonsContainer = document.querySelector(
       "#container-status-buttons"
     );
-    const showStatusButtons = sport === "football" || sport === "cricket" || sport === "tennis";
+    const showStatusButtons = sport === "football" || sport === "cricket";
     statusButtonsContainer.style.display = showStatusButtons ? "flex" : "none";
   }
 
