@@ -833,7 +833,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Sport configuration error
     if (!config) {
       console.error("Configuration not found for this sport");
-      liveScoresDiv.innerHTML = "Coming soon...";
+      liveScoresDiv.innerHTML = "Warming up on the sidelines… stay tuned!";
       return;
     }
 
