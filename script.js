@@ -169,6 +169,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function getEmptyStateHTML(sport) {
+    const imgs = {
+      football: '/assets/images/empty/football_empty_state.png',
+      cricket: '/assets/images/empty/cricket_empty.png',
+      tennis: '/assets/images/empty/tennis_empty.png',
+      motorsport: '/assets/images/empty/motorsport_empty.png',
+    };
+    const msg = {
+      football: 'No football fixtures available right now.',
+      cricket: 'No cricket fixtures available right now.',
+      tennis: 'No tennis fixtures available right now.',
+      motorsport: 'No races available right now.',
+    };
+    const src = imgs[sport] || '/assets/images/empty/generic_empty.png';
+    const text = msg[sport] || 'Nothing to show here yet.';
+    return `
+      <div class="empty-state">
+        <img src="${src}" alt="${sport}-empty" />
+        <p>${text}</p>
+      </div>
+    `;
+  }
+
   function displaySport(fixtures, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
 
