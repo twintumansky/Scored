@@ -171,10 +171,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getEmptyStateHTML(sport) {
     const imgs = {
-      football: '/assets/images/empty/football_empty_state.png',
-      cricket: '/assets/images/empty/cricket_empty.png',
-      tennis: '/assets/images/empty/tennis_empty.png',
-      motorsport: '/assets/images/empty/motorsport_empty.png',
+      football: '/assets/images/football_empty_state.svg',
+      // cricket: '/assets/images/cricket_empty.png',
+      tennis: '/assets/images/tennis_empty_state.svg',
+      // motorsport: '/assets/images/empty/motorsport_empty.png',
+      basketball: '/assets/images/basketball_empty_state.jpg',
     };
     const msg = {
       football: 'No football fixtures available right now.',
@@ -218,25 +219,62 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    // if (!currentConfig) {
+    //   liveScoresDiv.innerHTML = "<p>No sport configuration found.</p>";
+    //   return;
+    // }
+    // if (fixtures.length === 0) {
+    //   liveScoresDiv.innerHTML = "<p>No fixtures available at the moment.</p>";
+    //   return;
+    // }
+
     if (!currentConfig) {
-      liveScoresDiv.innerHTML = "<p>No sport configuration found.</p>";
+      const html = getEmptyStateHTML(sportToDisplay);
+      if (isTeamSport(sportToDisplay)) {
+        liveScoresDiv.innerHTML = html;
+      } else {
+        document.querySelector('#motorsport-card-container').innerHTML = html;
+      }
       return;
     }
+  
     if (fixtures.length === 0) {
-      liveScoresDiv.innerHTML = "<p>No fixtures available at the moment.</p>";
+      const html = getEmptyStateHTML(sportToDisplay);
+      if (isTeamSport(sportToDisplay)) {
+        liveScoresDiv.innerHTML = html;
+      } else {
+        document.querySelector('#motorsport-card-container').innerHTML = html;
+      }
       return;
     }
+  
+
+    // const template = isTeamSport(sportToDisplay)
+    //   ? document.querySelector(`#${currentConfig.templateId}`)
+    //   : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
+    //   ? document.querySelector(`#${currentConfig.templateId[0]}`)
+    //   : document.querySelector(`#${currentConfig.templateId[1]}`);
+
+    // if (!template) {
+    //   liveScoresDiv.innerHTML = `<p>Template not found for ${currentConfig.templateId}</p>`;
+    //   return;
+    // }
 
     const template = isTeamSport(sportToDisplay)
-      ? document.querySelector(`#${currentConfig.templateId}`)
-      : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
+    ? document.querySelector(`#${currentConfig.templateId}`)
+    : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
       ? document.querySelector(`#${currentConfig.templateId[0]}`)
       : document.querySelector(`#${currentConfig.templateId[1]}`);
 
-    if (!template) {
-      liveScoresDiv.innerHTML = `<p>Template not found for ${currentConfig.templateId}</p>`;
-      return;
+  if (!template) {
+    const html = getEmptyStateHTML(sportToDisplay);
+    if (isTeamSport(sportToDisplay)) {
+      liveScoresDiv.innerHTML = html;
+    } else {
+      document.querySelector('#motorsport-card-container').innerHTML = html;
     }
+    return;
+  }
 
     fixtures.forEach((fixture) => {
       const cardClone = template.content.cloneNode(true);
