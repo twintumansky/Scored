@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
-  let activeFilter = null; // Track the current filter for sport(Live, Upcoming, Finished)
-  let activeSport = "cricket"; // State for the currently active sport(Default - football)
+  let activeFilter = null; // Current filter for sport(Live, Upcoming, Finished)
+  let activeSport = "cricket"; // Currently active sport(Default - football)
 
   //motorsport specific configurations
   const motorsportContainer = document.querySelector(".motorsport-container");
@@ -32,7 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   function isTeamSport(sport) {
-    return ["football", "cricket", "tennis", "basketball", "rugby"].includes(sport);
+    return ["football", "cricket", "tennis", "basketball", "rugby"].includes(
+      sport
+    );
   }
 
   function getDateRange() {
@@ -169,182 +171,103 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function getEmptyStateAssets(sport) {
-    const empty_state_images = {
+  // Place this function with your other helper functions
+  function getEmptyStateHTML(sport, reason = "no_fixtures") {
+    const illustrations = {
       football: "./assets/images/football_empty_state.svg",
-      // cricket: '/assets/images/cricket_empty.png',
+      cricket: "./assets/images/cricket_empty_state.svg",
       tennis: "./assets/images/tennis_empty_state.svg",
-      // motorsport: '/assets/images/empty/motorsport_empty.png',
       basketball: "./assets/images/basketball_empty_state.jpg",
+      rugby: "./assets/images/rugby_empty_state.svg",
+      motorsport: "./assets/images/motorsport_empty_state.svg", // Replace with your actual motorsport svg
+      default: "./assets/images/empty_state_generic.svg", // A generic one
     };
-    const empty_state_msg = {
-      football: "No football fixtures available right now.",
-      cricket: "No cricket fixtures available right now.",
-      tennis: "No tennis fixtures available right now.",
-      motorsport: "No races available right now.",
+
+    const messages = {
+      football: "No football matches available right now.",
+      cricket: "No cricket matches available right now.",
+      tennis: "Warming up on the sidelines… stay tuned!",
+      basketball: "Warming up on the sidelines… stay tuned!",
+      rugby: "Warming up on the sidelines… stay tuned!",
+      motorsport: "No races are available right now.",
+      default: "Nothing to show here yet.",
     };
-    const src =
-      empty_state_images[sport] || "./assets/images/generic_empty.svg";
-    const text = empty_state_msg[sport] || "Nothing to show here yet.";
+
+    // Customize message if the sport is configured but has no data
+    if (
+      reason === "no_fixtures" &&
+      (sport === "football" || sport === "cricket" || sport === "motorsport")
+    ) {
+      messages[
+        sport
+      ] = `No ${sport} matches are available at the moment. Please check back later.`;
+    }
+
+    const illustrationSrc = illustrations[sport] || illustrations.default;
+    const messageText = messages[sport] || messages.default;
+
     return `
       <div class="empty-state">
-        <img src="${src}" alt="${sport}-empty" />
-        <p>${text}</p>
+          <img src="${illustrationSrc}" alt="${sport} illustration" class="empty-state-img" />
+          <p class="empty-state-message">${messageText}</p>
       </div>
-    `;
+  `;
   }
 
   function displaySport(fixtures, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
-    const motorsportCardContainer = document.querySelector(
-      "#motorsport-card-container"
-    );
 
-    // mainContainer.classList.add("hidden");
-    // mainContainer.classList.remove("visible");
-    // motorsportContainer.classList.add("hidden");
-    // motorsportContainer.classList.remove("visible");
-
-    // Hide both sections first
     mainContainer.classList.add("hidden");
+    mainContainer.classList.remove("visible");
     motorsportContainer.classList.add("hidden");
+    motorsportContainer.classList.remove("visible");
 
-    // Pick target container (motorsport → its container, else → main container)
-    const isMotorsport = sportToDisplay === "motorsport";
-    const targetContainer = isMotorsport
-      ? motorsportCardContainer
-      : liveScoresDiv;
-
-    // if (isTeamSport(sportToDisplay)) {
-    //   mainContainer.classList.remove("hidden");
-    //   mainContainer.classList.add("visible");
-    //   liveScoresDiv.innerHTML = "";
-    // } else if (sportToDisplay === "motorsport") {
-    //   motorsportContainer.classList.remove("hidden");
-    //   motorsportContainer.classList.add("visible");
-    //   if (motorsportActiveSection === "races") {
-    //     motorsportSectionInfo.classList.remove("visible");
-    //     motorsportSectionInfo.classList.add("hidden");
-    //     motorsportCardContainer.innerHTML = "";
-    //   } else if (motorsportActiveSection === "standings") {
-    //     motorsportSectionInfo.classList.remove("hidden");
-    //     motorsportSectionInfo.classList.add("visible");
-    //     motorsportCardContainer.innerHTML = "";
-    //   }
-    // }
-
-    // Show the right container section
-    if (isMotorsport) {
+    if (isTeamSport(sportToDisplay)) {
+      mainContainer.classList.remove("hidden");
+      mainContainer.classList.add("visible");
+      liveScoresDiv.innerHTML = "";
+    } else if (sportToDisplay === "motorsport") {
       motorsportContainer.classList.remove("hidden");
       motorsportContainer.classList.add("visible");
-
-        // Ensure standings header (buttons row) visibility is correct
       if (motorsportActiveSection === "races") {
         motorsportSectionInfo.classList.remove("visible");
         motorsportSectionInfo.classList.add("hidden");
-      } else {
+        motorsportCardContainer.innerHTML = "";
+      } else if (motorsportActiveSection === "standings") {
         motorsportSectionInfo.classList.remove("hidden");
         motorsportSectionInfo.classList.add("visible");
+        motorsportCardContainer.innerHTML = "";
       }
-    } else {
-      mainContainer.classList.remove("hidden");
-      mainContainer.classList.add("visible");
     }
 
-    // if (!currentConfig) {
-    //   liveScoresDiv.innerHTML = "<p>No sport configuration found.</p>";
-    //   return;
-    // }
-    // if (fixtures.length === 0) {
-    //   liveScoresDiv.innerHTML = "<p>No fixtures available at the moment.</p>";
-    //   return;
-    // }
-
-    // if (!currentConfig) {
-    //   const html = getEmptyStateAssets(sportToDisplay);
-    //   if (isTeamSport(sportToDisplay)) {
-    //     liveScoresDiv.innerHTML = html;
-    //   } else {
-    //     document.querySelector('#motorsport-card-container').innerHTML = html;
-    //   }
-    //   return;
-    // }
-
-    // if (fixtures.length === 0) {
-    //   const html = getEmptyStateAssets(sportToDisplay);
-    //   if (isTeamSport(sportToDisplay)) {
-    //     liveScoresDiv.innerHTML = html;
-    //   } else {
-    //     document.querySelector('#motorsport-card-container').innerHTML = html;
-    //   }
-    //   return;
-    // }
-
-    // Handle no config / no fixtures with sport-specific empty state
-    if (!currentConfig) {
-      targetContainer.innerHTML = getEmptyStateAssets(sportToDisplay);
+    if (!fixtures || fixtures.length === 0) {
+      if (isTeamSport(sportToDisplay)) {
+          liveScoresDiv.innerHTML = getEmptyStateHTML(sportToDsiplay, 'no_fixtures');
+      } else if (sportToDisplay === 'motorsport') {
+          motorsportCardContainer.innerHTML = getEmptyStateHTML(sportToDisplay, 'no_fixtures');
+      }
       return;
-    }
-    if (fixtures.length === 0) {
-      targetContainer.innerHTML = getEmptyStateAssets(sportToDisplay);
-      return;
-    }
+  }
 
-    // const template = isTeamSport(sportToDisplay)
-    //   ? document.querySelector(`#${currentConfig.templateId}`)
-    //   : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
-    //   ? document.querySelector(`#${currentConfig.templateId[0]}`)
-    //   : document.querySelector(`#${currentConfig.templateId[1]}`);
-
-    // if (!template) {
-    //   liveScoresDiv.innerHTML = `<p>Template not found for ${currentConfig.templateId}</p>`;
-    //   return;
-    // }
-
-    //   const template = isTeamSport(sportToDisplay)
-    //   ? document.querySelector(`#${currentConfig.templateId}`)
-    //   : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
-    //     ? document.querySelector(`#${currentConfig.templateId[0]}`)
-    //     : document.querySelector(`#${currentConfig.templateId[1]}`);
-
-    // if (!template) {
-    //   const html = getEmptyStateAssets(sportToDisplay);
-    //   if (isTeamSport(sportToDisplay)) {
-    //     liveScoresDiv.innerHTML = html;
-    //   } else {
-    //     document.querySelector('#motorsport-card-container').innerHTML = html;
-    //   }
-    //   return;
-    // }
-
-    // ... existing template selection, then append to targetContainer instead of hard-coded containers
     const template = isTeamSport(sportToDisplay)
       ? document.querySelector(`#${currentConfig.templateId}`)
-      : isMotorsport && motorsportActiveSection === "races"
+      : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
       ? document.querySelector(`#${currentConfig.templateId[0]}`)
       : document.querySelector(`#${currentConfig.templateId[1]}`);
 
     if (!template) {
-      targetContainer.innerHTML = getEmptyStateAssets(sportToDisplay);
+      liveScoresDiv.innerHTML = `<p>Template not found for ${currentConfig.templateId}</p>`;
       return;
     }
 
-    targetContainer.innerHTML = "";
     fixtures.forEach((fixture) => {
       const cardClone = template.content.cloneNode(true);
       currentConfig.populateCard(cardClone.firstElementChild, fixture);
-      targetContainer.appendChild(cardClone);
+      isTeamSport(sportToDisplay)
+        ? liveScoresDiv.appendChild(cardClone)
+        : motorsportCardContainer.appendChild(cardClone);
     });
   }
-
-  // fixtures.forEach((fixture) => {
-  //   const cardClone = template.content.cloneNode(true);
-  //   currentConfig.populateCard(cardClone.firstElementChild, fixture);
-  //   isTeamSport(sportToDisplay)
-  //     ? liveScoresDiv.appendChild(cardClone)
-  //     : motorsportCardContainer.appendChild(cardClone);
-  // });
-  // }
 
   const sportConfig = {
     football: {
@@ -409,9 +332,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const versusElement = cardClone.querySelector(
           ".football-versus-element"
         );
-        const scheduledContainer = cardClone.querySelector(
-          ".scheduled-time-container"
-        );
+        // const scheduledContainer = cardClone.querySelector(
+        //   ".scheduled-time-container"
+        // );
         const statusTextElement = cardClone.querySelector(
           ".football-match-status"
         );
@@ -542,18 +465,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const scheduleContainer = cardClone.querySelector(
           ".schedule-container"
         );
-        // const cricketHomeTeamScore = cardClone.querySelector(
-        //   ".cricket-home-team-score"
-        // );
-        // const cricketHomeTeamOvers = cardClone.querySelector(
-        //   ".cricket-home-team-overs"
-        // );
-        // const cricketAwayTeamScore = cardClone.querySelector(
-        //   ".cricket-away-team-score"
-        // );
-        // const cricketAwayTeamOvers = cardClone.querySelector(
-        //   ".cricket-away-team-overs"
-        // );
 
         let homeTeamShortName, homeTeamName, awayTeamShortName, awayTeamName;
 
@@ -841,16 +752,36 @@ document.addEventListener("DOMContentLoaded", () => {
   //fetching of fixtures from API
   async function fetchFixtures(sport) {
     activeSport = sport; // Updating the active sport state
-    liveScoresDiv.innerHTML = '<div class="spinner"></div>';
-    const { from, to } = getDateRange();
     const config = sportConfig[activeSport];
 
-    //Sport configuration error
+    // If the sport is not configured, show the "coming soon" empty state and stop
     if (!config) {
-      console.error("Configuration not found for this sport");
-      liveScoresDiv.innerHTML = "Warming up on the sidelines… stay tuned!";
+      console.warn(`Configuration not found for sport: ${activeSport}`);
+      if (isTeamSport(activeSport)) {
+        liveScoresDiv.innerHTML = getEmptyStateHTML(
+          activeSport,
+          "not_configured"
+        );
+      } else {
+        motorsportCardContainer.innerHTML = getEmptyStateHTML(
+          activeSport,
+          "not_configured"
+        );
+      }
       return;
     }
+
+    liveScoresDiv.innerHTML = '<div class="spinner"></div>';
+    motorsportCardContainer.innerHTML = '<div class="spinner"></div>';
+
+    const { from, to } = getDateRange();
+
+    //Sport configuration error - original
+    // if (!config) {
+    //   console.error("Configuration not found for this sport");
+    //   liveScoresDiv.innerHTML = "Warming up on the sidelines… stay tuned!";
+    //   return;
+    // }
 
     sportNavButtons.forEach((btn) => {
       btn.classList.toggle("active", btn.id === `${activeSport}-card`);
