@@ -239,9 +239,9 @@ main nav {
     color: #777;
 }
 .empty-state img {
-    /* width: 8rem;
-    height: auto; */
-    /* opacity: 0.9; */
+    width: 15rem;
+    height: auto;
+    opacity: 0.95;
     margin: 0.5rem 0;
 }
 .empty-state p {

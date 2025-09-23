@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   function isTeamSport(sport) {
-    return ["football", "cricket"].includes(sport);
+    return ["football", "cricket", "tennis", "basketball", "rugby"].includes(sport);
   }
 
   function getDateRange() {
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
       motorsport: "No races available right now.",
     };
     const src =
-      empty_state_images[sport] || "./assets/images//generic_empty.svg";
+      empty_state_images[sport] || "./assets/images/generic_empty.svg";
     const text = empty_state_msg[sport] || "Nothing to show here yet.";
     return `
       <div class="empty-state">
@@ -237,6 +237,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isMotorsport) {
       motorsportContainer.classList.remove("hidden");
       motorsportContainer.classList.add("visible");
+
+        // Ensure standings header (buttons row) visibility is correct
+      if (motorsportActiveSection === "races") {
+        motorsportSectionInfo.classList.remove("visible");
+        motorsportSectionInfo.classList.add("hidden");
+      } else {
+        motorsportSectionInfo.classList.remove("hidden");
+        motorsportSectionInfo.classList.add("visible");
+      }
     } else {
       mainContainer.classList.remove("hidden");
       mainContainer.classList.add("visible");
@@ -273,11 +282,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handle no config / no fixtures with sport-specific empty state
     if (!currentConfig) {
-      targetContainer.innerHTML = getEmptyStateHTML(sportToDisplay);
+      targetContainer.innerHTML = getEmptyStateAssets(sportToDisplay);
       return;
     }
     if (fixtures.length === 0) {
-      targetContainer.innerHTML = getEmptyStateHTML(sportToDisplay);
+      targetContainer.innerHTML = getEmptyStateAssets(sportToDisplay);
       return;
     }
 
@@ -316,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : document.querySelector(`#${currentConfig.templateId[1]}`);
 
     if (!template) {
-      targetContainer.innerHTML = getEmptyStateHTML(sportToDisplay);
+      targetContainer.innerHTML = getEmptyStateAssets(sportToDisplay);
       return;
     }
 
