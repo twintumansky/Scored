@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
       motorsport: "No races available right now.",
     };
     const src =
-      empty_state_images[sport] || "./assets/images/empty/generic_empty.svg";
+      empty_state_images[sport] || "./assets/images//generic_empty.svg";
     const text = empty_state_msg[sport] || "Nothing to show here yet.";
     return `
       <div class="empty-state">
