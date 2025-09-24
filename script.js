@@ -177,10 +177,10 @@ document.addEventListener("DOMContentLoaded", () => {
       football: "./assets/images/football_empty_state.svg",
       cricket: "./assets/images/cricket_empty_state.svg",
       tennis: "./assets/images/tennis_empty_state.svg",
-      basketball: "./assets/images/basketball_empty_state.jpg",
+      basketball: "./assets/images/basketball_empty_state.svg",
       rugby: "./assets/images/rugby_empty_state.svg",
-      motorsport: "./assets/images/motorsport_empty_state.svg", // Replace with your actual motorsport svg
-      default: "./assets/images/empty_state_generic.svg", // A generic one
+      motorsport: "./assets/images/motorsport_empty_state.svg", 
+      default: "./assets/images/empty_state_generic.svg", 
     };
 
     const messages = {
