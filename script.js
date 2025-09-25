@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   function isTeamSport(sport) {
-    return ["football", "cricket", "tennis", "basketball", "rugby"].includes(
+    return ["football", "cricket", "tennis", "basketball", "badminton"].includes(
       sport
     );
   }
@@ -881,7 +881,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const selectedSport = headerEl.id.replace("-header-container", "");
       const show =
         selectedSport === sport &&
-        (sport === "football" || sport === "cricket" || sport === "tennis" ||sport === "basketball" || sport === "rugby" || sport === "mma");
+        (sport === "football" || sport === "cricket" || sport === "tennis" ||sport === "basketball" || sport === "badminton" || sport === "mma");
       headerEl.classList.toggle("visible", show);
       headerEl.classList.toggle("hidden", !show);
     });

@@ -2,26 +2,11 @@
     box-sizing: border-box;
 }
 
-/* html {
-    scroll-behavior: smooth;
-}
-
-body {
-    width: 100vw;
-    height: 100vh;
-    background-color: #e3dfdf;
-    font-family: "Hanken Grotesk", sans-serif;
-    font-optical-sizing: auto;
-    margin: 0;
-    overflow-x: hidden;
-} */
-
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    /* scroll-behavior: smooth; */
 }
 
 body {
@@ -54,6 +39,12 @@ main {
     height: 100%;
     overflow-y: auto;
     scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 main nav {
