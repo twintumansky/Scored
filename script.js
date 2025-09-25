@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Place this function with your other helper functions
+  // For handling empty state for sports 
   function getEmptyStateHTML(sport, reason = "no_fixtures") {
     const illustrations = {
       football: "./assets/images/football_empty_state.svg",
@@ -193,7 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
       default: "Nothing to show here yet.",
     };
 
-    // Customize message if the sport is configured but has no data
     if (
       reason === "no_fixtures" &&
       (sport === "football" || sport === "cricket" || sport === "motorsport")
@@ -242,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!fixtures || fixtures.length === 0) {
       if (isTeamSport(sportToDisplay)) {
-          liveScoresDiv.innerHTML = getEmptyStateHTML(sportToDsiplay, 'no_fixtures');
+          liveScoresDiv.innerHTML = getEmptyStateHTML(sportToDisplay, 'no_fixtures');
       } else if (sportToDisplay === 'motorsport') {
           motorsportCardContainer.innerHTML = getEmptyStateHTML(sportToDisplay, 'no_fixtures');
       }
@@ -882,7 +881,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const selectedSport = headerEl.id.replace("-header-container", "");
       const show =
         selectedSport === sport &&
-        (sport === "football" || sport === "cricket" || sport === "tennis");
+        (sport === "football" || sport === "cricket" || sport === "tennis" ||sport === "basketball" || sport === "rugby" || sport === "mma");
       headerEl.classList.toggle("visible", show);
       headerEl.classList.toggle("hidden", !show);
     });
