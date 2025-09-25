@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cricket: "./assets/images/cricket_empty_state.svg",
       tennis: "./assets/images/tennis_empty_state.svg",
       basketball: "./assets/images/basketball_empty_state.svg",
-      rugby: "./assets/images/rugby_empty_state.svg",
+      badminton: "./assets/images/badminton_empty_state.svg",
       motorsport: "./assets/images/motorsport_empty_state.svg", 
       default: "./assets/images/empty_state_generic.svg", 
     };
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cricket: "No cricket matches available right now.",
       tennis: "Warming up on the sidelines… stay tuned!",
       basketball: "Warming up on the sidelines… stay tuned!",
-      rugby: "Warming up on the sidelines… stay tuned!",
+      badminton: "Warming up on the sidelines… stay tuned!",
       motorsport: "No races are available right now.",
       default: "Nothing to show here yet.",
     };
