@@ -109,6 +109,8 @@ main nav {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    height: 1rem;
+    width: 1.2rem;
     vertical-align: middle;
     padding-right: 0.25rem;
     margin-bottom: 0.1rem;
@@ -116,25 +118,6 @@ main nav {
 
 .nav-cards.active .nav-cards-icon svg {
     fill: #434343;
-}
-
-#cricket-icon,
-#rugby-icon,
-#motorsport-icon,
-#mma-icon {
-    height: 1rem;
-    width: 1.2rem;
-}
-
-#football-icon,
-#basketball-icon {
-    height: 1rem;
-    width: 1.2rem;
-}
-
-#tennis-icon {
-    height: 1rem;
-    width: 1.2rem;
 }
 
 .main-container.visible {
