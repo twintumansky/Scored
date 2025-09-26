@@ -130,3 +130,11 @@ export const cricketTeamLogos = {
   'SIN-W': '/assets/logos/fixture_logos/singapore.svg',
   'TKW': '/assets/logos/fixture_logos/turkey.svg',
 };
+
+export const footballVenueLogos = {
+  'Europe': '/assets/logos/fixture_logos/europe.svg',
+  'Germany': '/assets/logos/fixture_logos/germany.svg',
+  'Spain': '/assets/logos/fixture_logos/spain.svg',
+  'England': '/assets/logos/fixture_logos/england.svg',
+  'Brazil': '/assets/logos/fixture_logos/brazil.svg',
+};

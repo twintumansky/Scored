@@ -1,4 +1,4 @@
-import { cricketTeamLogos } from "./data/cricketAssets.js";
+import { cricketTeamLogos, footballVenueLogos } from "./data/teamSportAssets.js";
 import {
   motorsportCountryLogos,
   constructorLogos,
@@ -304,6 +304,9 @@ document.addEventListener("DOMContentLoaded", () => {
         (match.status === "TIMED" || match.status === "SCHEDULED") &&
         isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
+
+        const footballVenue = match?.area?.name;
+
         cardClone
           .querySelector(".home-team-logo")
           ?.setAttribute("src", match.homeTeam.crest);
@@ -323,8 +326,8 @@ document.addEventListener("DOMContentLoaded", () => {
           match.competition.name;
         cardClone
           .querySelector(".venue-flag")
-          ?.setAttribute("src", match.area.flag);
-        cardClone.querySelector(".venue").textContent = match.area.name;
+          ?.setAttribute("src", footballVenueLogos[footballVenue]);
+        cardClone.querySelector(".venue").textContent = footballVenue ?? 'NA';
         const homeTeamScore = match.score?.fullTime?.home;
         const awayTeamScore = match.score?.fullTime?.away;
         const scoreContainer = cardClone.querySelector(".score-container");
@@ -541,7 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
           );
         cardClone.querySelector(".cricket-format-name").textContent =
           formatType ?? "NA";
-        cardClone.querySelector(".venue-name").textContent = venueInfo;
+        cardClone.querySelector(".cricket-venue-name").textContent = venueInfo;
 
         //for matches that are Live or Recently finished
         if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
