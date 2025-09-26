@@ -534,12 +534,12 @@ document.addEventListener("DOMContentLoaded", () => {
         cardClone.querySelector(".cricket-match-status").textContent =
           match.status ?? "Match status not available";
         cardClone
-          .querySelector(".format-icon")
+          .querySelector(".cricket-format-icon")
           ?.setAttribute(
             "src",
             iconType ?? "/assets/icons/cricket-icon-test.svg"
           );
-        cardClone.querySelector(".format-name").textContent =
+        cardClone.querySelector(".cricket-format-name").textContent =
           formatType ?? "NA";
         cardClone.querySelector(".venue-name").textContent = venueInfo;
 
