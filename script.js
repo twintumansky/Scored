@@ -180,6 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
       basketball: "./assets/images/basketball_empty_state.svg",
       badminton: "./assets/images/badminton_empty_state.svg",
       motorsport: "./assets/images/motorsport_empty_state.svg", 
+      mma: "./assets/images/mma_empty_state.svg",
       default: "./assets/images/empty_state_generic.svg", 
     };
 
@@ -190,6 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
       basketball: "Warming up on the sidelines… stay tuned!",
       badminton: "Warming up on the sidelines… stay tuned!",
       motorsport: "No races are available right now.",
+      mma: "Warming up on the sidelines… stay tuned!",
       default: "Nothing to show here yet.",
     };
 
