@@ -1,4 +1,7 @@
-import { cricketTeamLogos, footballVenueLogos } from "./data/teamSportAssets.js";
+import {
+  cricketTeamLogos,
+  footballVenueLogos,
+} from "./data/teamSportAssets.js";
 import {
   motorsportCountryLogos,
   constructorLogos,
@@ -32,9 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   function isTeamSport(sport) {
-    return ["football", "cricket", "tennis", "basketball", "badminton", "mma"].includes(
-      sport
-    );
+    return [
+      "football",
+      "cricket",
+      "tennis",
+      "basketball",
+      "badminton",
+      "mma",
+    ].includes(sport);
   }
 
   function getDateRange() {
@@ -171,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // For handling empty state for sports 
+  // For handling empty state for sports
   function getEmptyStateHTML(sport, reason = "no_fixtures") {
     const illustrations = {
       football: "./assets/images/football_empty_state.svg",
@@ -179,9 +187,9 @@ document.addEventListener("DOMContentLoaded", () => {
       tennis: "./assets/images/tennis_empty_state.svg",
       basketball: "./assets/images/basketball_empty_state.svg",
       badminton: "./assets/images/badminton_empty_state.svg",
-      motorsport: "./assets/images/motorsport_empty_state.svg", 
+      motorsport: "./assets/images/motorsport_empty_state.svg",
       mma: "./assets/images/mma_empty_state.svg",
-      default: "./assets/images/empty_state_generic.svg", 
+      default: "./assets/images/empty_state_generic.svg",
     };
 
     const messages = {
@@ -243,12 +251,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!fixtures || fixtures.length === 0) {
       if (isTeamSport(sportToDisplay)) {
-          liveScoresDiv.innerHTML = getEmptyStateHTML(sportToDisplay, 'no_fixtures');
-      } else if (sportToDisplay === 'motorsport') {
-          motorsportCardContainer.innerHTML = getEmptyStateHTML(sportToDisplay, 'no_fixtures');
+        liveScoresDiv.innerHTML = getEmptyStateHTML(
+          sportToDisplay,
+          "no_fixtures"
+        );
+      } else if (sportToDisplay === "motorsport") {
+        motorsportCardContainer.innerHTML = getEmptyStateHTML(
+          sportToDisplay,
+          "no_fixtures"
+        );
       }
       return;
-  }
+    }
 
     const template = isTeamSport(sportToDisplay)
       ? document.querySelector(`#${currentConfig.templateId}`)
@@ -306,7 +320,6 @@ document.addEventListener("DOMContentLoaded", () => {
         (match.status === "TIMED" || match.status === "SCHEDULED") &&
         isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
-
         const footballVenue = match?.area?.name;
 
         cardClone
@@ -329,7 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cardClone
           .querySelector(".venue-flag")
           ?.setAttribute("src", footballVenueLogos[footballVenue]);
-        cardClone.querySelector(".venue").textContent = footballVenue ?? 'NA';
+        cardClone.querySelector(".venue").textContent = footballVenue ?? "NA";
         const homeTeamScore = match.score?.fullTime?.home;
         const awayTeamScore = match.score?.fullTime?.away;
         const scoreContainer = cardClone.querySelector(".score-container");
@@ -886,7 +899,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const selectedSport = headerEl.id.replace("-header-container", "");
       const show =
         selectedSport === sport &&
-        (sport === "football" || sport === "cricket" || sport === "tennis" ||sport === "basketball" || sport === "badminton" || sport === "mma");
+        (sport === "football" ||
+          sport === "cricket" ||
+          sport === "tennis" ||
+          sport === "basketball" ||
+          sport === "badminton" ||
+          sport === "mma");
       headerEl.classList.toggle("visible", show);
       headerEl.classList.toggle("hidden", !show);
     });
