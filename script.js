@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   function isTeamSport(sport) {
-    return ["football", "cricket", "tennis", "basketball", "badminton"].includes(
+    return ["football", "cricket", "tennis", "basketball", "badminton", "mma"].includes(
       sport
     );
   }
