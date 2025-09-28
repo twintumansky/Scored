@@ -141,4 +141,5 @@ export const footballVenueLogos = {
   'England': '/assets/logos/fixture_logos/england.svg',
   'Brazil': '/assets/logos/fixture_logos/brazil.svg',
   'France': '/assets/logos/fixture_logos/france.svg',
+  'Italy': '/assets/logos/fixture_logos/italy.svg',
 };
