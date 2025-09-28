@@ -119,6 +119,7 @@ export const cricketTeamLogos = {
   'CRT': '/assets/logos/fixture_logos/croatia.svg',
   'CYP': '/assets/logos/fixture_logos/cyprus.svg',
   'EST': '/assets/logos/fixture_logos/estonia.svg',
+  'BOT': '/assets/logos/fixture_logos/botswana.svg',
   'GW': '/assets/logos/fixture_logos/greece.svg',
   'IRW': '/assets/logos/fixture_logos/ireland.svg',
   'MWI': '/assets/logos/fixture_logos/malawi.svg',
