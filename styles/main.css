@@ -143,7 +143,7 @@ main nav {
 }
 
 .main-section.active {
-    display: block; /* Show only the active section */
+    display: block;
 }
 
 .sport-header-container.visible {
@@ -151,7 +151,6 @@ main nav {
     width: 100%;
     height: 9rem;
     border-radius: 0.75rem 0.75rem 0 0;
-    /* background-image: linear-gradient(rgb(0 0 0 / 12%), rgb(0 0 0 / 39%)), linear-gradient(rgba(58, 163, 105, 0.196), rgba(97, 236, 148, 0.75)), url(../assets/logos/football/football_header.avif); */
     background-size: cover;
     background-position: center center;
     margin: 0 auto 0 auto;
@@ -242,6 +241,7 @@ main nav {
 .empty-state p {
     margin: 0.25rem 0 0;
     font-size: 0.9rem;
+    text-align: center;
 }
 
 .football-match-card {
@@ -430,6 +430,11 @@ nav li {
     display: flex;
     flex-direction: column;
     box-shadow: 0 1px 3px rgba(41, 41, 41, 0.12);
+}
+
+.cricket-match-card:hover {
+    background-color: #ffffff69;
+    color: #5d5d5d;
 }
 
 .cricket-fixture-info {
