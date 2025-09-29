@@ -28,15 +28,10 @@ header {
     flex-shrink: 0;
 }
 
-#app-logo {
-    margin: 0;
-    width: 6rem;
-    height: 2.5rem;
-}
-
 main {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    flex: 1 1 auto;
     overflow-y: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
@@ -50,6 +45,36 @@ main::-webkit-scrollbar {
 main nav {
     display: flex;
     flex-direction: column;
+}
+
+footer {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-shrink: 0;                
+    padding: 1rem 0;               
+    border-top: 1px solid #d4d4d4; 
+    background: #e9e9e9;
+}
+
+.footer-container {
+    width: 100%;                    
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-illustration img {
+    display: block;
+    height: auto;
+}
+
+#app-logo {
+    margin: 0;
+    width: 6rem;
+    height: 2.5rem;
 }
 
 .nav-sports-categories {
@@ -218,6 +243,7 @@ main nav {
     flex-direction: column;
     color: #777;
     align-items: center;
+    padding-bottom: 1rem;
 }
 
 #fixtures-container p {
