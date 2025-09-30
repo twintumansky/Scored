@@ -143,12 +143,12 @@ footer {
     fill: #434343;
 }
 
-.main-container.visible {
+/* .main-container.visible {
     width: 30%;
     margin: 0 auto 1rem auto;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* added */
+    flex-grow: 1; 
     align-items: center;
     background-color: #f0efef;
     border-radius: 0 0 0.75rem 0.75rem;
@@ -158,12 +158,27 @@ footer {
 
 .main-container.hidden {
     display: none;
-}
+} */
 
-.main-section {
+/* .main-section {
     width: 30%;
     margin: 1rem auto 0 auto;
     display: none;
+} */
+
+.main-section {
+    width: 30%; 
+    margin: 1rem auto 0 auto; 
+    display: none;
+    background-color: #f0efef;
+    border-radius: 0 0 0.75rem 0.75rem;
+}
+
+.team-sport-container.visible,
+.motorsport-container.visible {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
 }
 
 .main-section.active {
@@ -191,7 +206,7 @@ footer {
     border-radius: 0.75rem 0.75rem 0 0;
 }
 
-#container-status-buttons {
+/* #container-status-buttons {
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -200,6 +215,15 @@ footer {
     margin: 0 auto;
     padding: 0.5rem 0 0.5rem 0rem;
     background-color: #f0efef;
+} */
+
+#container-status-buttons {
+    width: 100%;
+    border-bottom: 1.5px solid #c3c1c1;
+    margin: 0;
+    padding: 0.5rem 0;
+    background-color: transparent; 
+    border-radius: 0.75rem 0.75rem 0 0; 
 }
 
 .container-buttons,
@@ -236,13 +260,22 @@ footer {
     transform: scale(0.95);
 }
 
-#fixtures-container {
+/* #fixtures-container {
     width: 90%;
     display: flex;
     flex-direction: column;
     color: #777;
     align-items: center;
     padding-bottom: 1rem;
+} */
+
+#fixtures-container {
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    color: #777;
+    align-items: center;
+    padding: 0 1rem 1rem 1rem; 
 }
 
 #fixtures-container p {
