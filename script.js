@@ -982,31 +982,34 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // In your script.js
 
-function setStaticUIForSport(sport) {
-  // Hide all main sport sections
-  document.querySelectorAll('.main-section').forEach(section => {
-      section.classList.remove('visible');
-  });
+  function setStaticUIForSport(sport) {
+    // 1. Hide all main sport sections first
+    document.querySelectorAll('.main-section').forEach(section => {
+        section.classList.remove('active');
+        section.classList.add('hidden'); // Explicitly add 'hidden' to all sections
+    });
 
-  // Determine which main section to show
-  const sectionToShow = isTeamSport(sport) 
-      ? document.querySelector('.team-sport-container')
-      : document.querySelector('.motorsport-container');
+    // 2. Find the one section we want to show
+    const sectionToShow = isTeamSport(sport) 
+        ? document.querySelector('.team-sport-container')
+        : document.querySelector('.motorsport-container');
 
-  if (sectionToShow) {
-      sectionToShow.classList.add('visible');
-  }
+    if (sectionToShow) {
+        // 3. Show the target section by adding 'active' AND removing 'hidden'
+        sectionToShow.classList.add('active');
+        sectionToShow.classList.remove('hidden');
+    }
 
-  // Toggle sport-specific header images (for team sports)
-  document.querySelectorAll('.sport-header-container').forEach(headerEl => {
-      const headerSport = headerEl.id.replace('-header-container', '');
-      headerEl.style.display = (headerSport === sport && isTeamSport(sport)) ? 'block' : 'none';
-  });
+    // 4. Toggle sport-specific header images (for team sports)
+    document.querySelectorAll('.sport-header-container').forEach(headerEl => {
+        const headerSport = headerEl.id.replace('-header-container', '');
+        headerEl.style.display = (headerSport === sport && isTeamSport(sport)) ? 'block' : 'none';
+    });
 
-  // Toggle status buttons for sports that use them
-  const statusButtonsContainer = document.querySelector("#container-status-buttons");
-  const showStatusButtons = sport === "football" || sport === "cricket";
-  statusButtonsContainer.style.display = showStatusButtons ? "flex" : "none";
+    // 5. Toggle status buttons for sports that use them
+    const statusButtonsContainer = document.querySelector("#container-status-buttons");
+    const showStatusButtons = sport === "football" || sport === "cricket";
+    statusButtonsContainer.style.display = showStatusButtons ? "flex" : "none";
 }
   
 setStaticUIForSport(activeSport);
@@ -1031,10 +1034,9 @@ setStaticUIForSport(activeSport);
     btn.addEventListener("click", () => {
         motorsportActiveSection = btn.id.replace("motorsport-", "");
 
-        
         const standingsNav = document.querySelector('.motorsport-standings-container-info');
-        
-        // If the user clicks "Standings", show the sub-nav. If they click "Races", hide it.
+
+        // This is the correct logic for showing/hiding the sub-nav
         if (motorsportActiveSection === 'standings') {
             standingsNav.classList.remove('hidden');
             standingsNav.classList.add('visible');
@@ -1042,9 +1044,8 @@ setStaticUIForSport(activeSport);
             standingsNav.classList.remove('visible');
             standingsNav.classList.add('hidden');
         }
-        // --- END OF NEW LOGIC ---
 
-        fetchFixtures(activeSport); // This call remains the same
+        fetchFixtures(activeSport);
     });
 });
 

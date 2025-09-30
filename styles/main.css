@@ -171,7 +171,15 @@ footer {
     margin: 1rem auto 0 auto; 
     display: none;
     background-color: #f0efef;
-    border-radius: 0 0 0.75rem 0.75rem;
+    border-radius: 0.75rem;
+}
+
+.team-sport-container {
+    background-color: #f0efef;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .team-sport-container.visible,
@@ -217,13 +225,37 @@ footer {
     background-color: #f0efef;
 } */
 
-#container-status-buttons {
+/* #container-status-buttons {
     width: 100%;
     border-bottom: 1.5px solid #c3c1c1;
     margin: 0;
     padding: 0.5rem 0;
     background-color: transparent; 
     border-radius: 0.75rem 0.75rem 0 0; 
+} */
+
+#container-status-buttons {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1.5px solid #c3c1c1;
+    padding: 0.5rem 0;
+    background-color: transparent;
+}
+
+#container-status-buttons .container-buttons:nth-child(1) {
+    justify-self: end;
+    margin-right: 2rem;
+}
+
+#container-status-buttons .container-buttons:nth-child(2) {
+    justify-self: center; 
+}
+
+#container-status-buttons .container-buttons:nth-child(3) {
+    justify-self: start;
+    margin-left: 2rem; 
 }
 
 .container-buttons,
