@@ -29,6 +29,8 @@ header {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     flex: 1 1 auto;
     overflow-y: auto;
@@ -146,6 +148,7 @@ footer {
     margin: 0 auto 1rem auto;
     display: flex;
     flex-direction: column;
+    flex-grow: 1; /* added */
     align-items: center;
     background-color: #f0efef;
     border-radius: 0 0 0.75rem 0.75rem;

@@ -226,28 +226,28 @@ document.addEventListener("DOMContentLoaded", () => {
   function displaySport(fixtures, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
 
-    mainContainer.classList.add("hidden");
-    mainContainer.classList.remove("visible");
-    motorsportContainer.classList.add("hidden");
-    motorsportContainer.classList.remove("visible");
+    // mainContainer.classList.add("hidden");
+    // mainContainer.classList.remove("visible");
+    // motorsportContainer.classList.add("hidden");
+    // motorsportContainer.classList.remove("visible");
 
-    if (isTeamSport(sportToDisplay)) {
-      mainContainer.classList.remove("hidden");
-      mainContainer.classList.add("visible");
-      liveScoresDiv.innerHTML = "";
-    } else if (sportToDisplay === "motorsport") {
-      motorsportContainer.classList.remove("hidden");
-      motorsportContainer.classList.add("visible");
-      if (motorsportActiveSection === "races") {
-        motorsportSectionInfo.classList.remove("visible");
-        motorsportSectionInfo.classList.add("hidden");
-        motorsportCardContainer.innerHTML = "";
-      } else if (motorsportActiveSection === "standings") {
-        motorsportSectionInfo.classList.remove("hidden");
-        motorsportSectionInfo.classList.add("visible");
-        motorsportCardContainer.innerHTML = "";
-      }
-    }
+    // if (isTeamSport(sportToDisplay)) {
+    //   mainContainer.classList.remove("hidden");
+    //   mainContainer.classList.add("visible");
+    //   liveScoresDiv.innerHTML = "";
+    // } else if (sportToDisplay === "motorsport") {
+    //   motorsportContainer.classList.remove("hidden");
+    //   motorsportContainer.classList.add("visible");
+    //   if (motorsportActiveSection === "races") {
+    //     motorsportSectionInfo.classList.remove("visible");
+    //     motorsportSectionInfo.classList.add("hidden");
+    //     motorsportCardContainer.innerHTML = "";
+    //   } else if (motorsportActiveSection === "standings") {
+    //     motorsportSectionInfo.classList.remove("hidden");
+    //     motorsportSectionInfo.classList.add("visible");
+    //     motorsportCardContainer.innerHTML = "";
+    //   }
+    // }
 
     if (!fixtures || fixtures.length === 0) {
       if (isTeamSport(sportToDisplay)) {
@@ -878,44 +878,75 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // function setStaticUIForSport(sport) {
+  //   // Hiding all sport sections first
+  //   const allSections = document.querySelectorAll(".main-section");
+  //   allSections.forEach((section) => {
+  //     section.classList.remove("active");
+  //   });
+
+  //   // Showing only the active sport section
+  //   const activeSection = document.querySelector(
+  //     `.${sport}-section.main-section`
+  //   );
+  //   if (activeSection) {
+  //     activeSection.classList.add("active");
+  //   }
+
+  //   // toggle sport header images
+  //   const sportHeaders = document.querySelectorAll(".sport-header-container");
+  //   sportHeaders.forEach((headerEl) => {
+  //     const selectedSport = headerEl.id.replace("-header-container", "");
+  //     const show =
+  //       selectedSport === sport &&
+  //       (sport === "football" ||
+  //         sport === "cricket" ||
+  //         sport === "tennis" ||
+  //         sport === "basketball" ||
+  //         sport === "badminton" ||
+  //         sport === "mma");
+  //     headerEl.classList.toggle("visible", show);
+  //     headerEl.classList.toggle("hidden", !show);
+  //   });
+
+  //   // toggle status buttons for team sports
+  //   const statusButtonsContainer = document.querySelector(
+  //     "#container-status-buttons"
+  //   );
+  //   const showStatusButtons = sport === "football" || sport === "cricket";
+  //   statusButtonsContainer.style.display = showStatusButtons ? "flex" : "none";
+  // }
+
   function setStaticUIForSport(sport) {
-    // Hiding all sport sections first
-    const allSections = document.querySelectorAll(".main-section");
-    allSections.forEach((section) => {
-      section.classList.remove("active");
+    // Hiding all main sport sections first
+    document.querySelectorAll('.main-section').forEach(section => {
+        section.classList.remove('visible');
+        section.classList.add('hidden');
     });
 
-    // Showing only the active sport section
-    const activeSection = document.querySelector(
-      `.${sport}-section.main-section`
-    );
+    // 2. Find and show only the active sport's section
+    const activeSection = isTeamSport(sport)
+        ? document.querySelector(`.${sport}-section`)
+        : document.querySelector('.motorsport-container');
+    
     if (activeSection) {
-      activeSection.classList.add("active");
+        activeSection.classList.remove('hidden');
+        activeSection.classList.add('visible');
     }
 
-    // toggle sport header images
-    const sportHeaders = document.querySelectorAll(".sport-header-container");
-    sportHeaders.forEach((headerEl) => {
-      const selectedSport = headerEl.id.replace("-header-container", "");
-      const show =
-        selectedSport === sport &&
-        (sport === "football" ||
-          sport === "cricket" ||
-          sport === "tennis" ||
-          sport === "basketball" ||
-          sport === "badminton" ||
-          sport === "mma");
-      headerEl.classList.toggle("visible", show);
-      headerEl.classList.toggle("hidden", !show);
+    // 3. Toggling sport-specific header images
+    document.querySelectorAll('.sport-header-container').forEach(headerEl => {
+        const selectedSport = headerEl.id.replace('-header-container', '');
+        const show = (selectedSport === sport) && isTeamSport(sport);
+        headerEl.classList.toggle('visible', show);
+        headerEl.classList.toggle('hidden', !show);
     });
 
-    // toggle status buttons for team sports
-    const statusButtonsContainer = document.querySelector(
-      "#container-status-buttons"
-    );
+    // 4. Toggling status buttons for team sports with fixtures
+    const statusButtonsContainer = document.querySelector("#container-status-buttons");
     const showStatusButtons = sport === "football" || sport === "cricket";
     statusButtonsContainer.style.display = showStatusButtons ? "flex" : "none";
-  }
+}
 
   // UI at initial fetch
   setStaticUIForSport(activeSport);
