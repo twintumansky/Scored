@@ -143,29 +143,6 @@ footer {
     fill: #434343;
 }
 
-/* .main-container.visible {
-    width: 30%;
-    margin: 0 auto 1rem auto;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1; 
-    align-items: center;
-    background-color: #f0efef;
-    border-radius: 0 0 0.75rem 0.75rem;
-    padding: 0.5rem 0;
-    font-weight: 400;
-}
-
-.main-container.hidden {
-    display: none;
-} */
-
-/* .main-section {
-    width: 30%;
-    margin: 1rem auto 0 auto;
-    display: none;
-} */
-
 .main-section {
     width: 30%; 
     margin: 1rem auto 0 auto; 
@@ -275,15 +252,6 @@ footer {
 .container-buttons:active {
     transform: scale(0.95);
 }
-
-/* #fixtures-container {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    color: #777;
-    align-items: center;
-    padding-bottom: 1rem;
-} */
 
 #fixtures-container {
     width: 100%; 
@@ -609,11 +577,9 @@ nav li {
     justify-content: center;
     align-items: flex-start;
     gap: 0.75rem;
-    /* Adds space between the 1st and 2nd innings */
     text-align: center;
 }
 
-/* Each innings column will stack the score and overs vertically */
 .innings-col {
     display: flex;
     flex-direction: column;
@@ -664,15 +630,6 @@ nav li {
     height: 1rem;
     margin: 0 0.25rem;
 }
-
-/* .motorsport-container.visible {
-    width: 40%;
-    margin: 1rem auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 1.5rem;
-} */
 
 .motorsport-container.main-section.active {
     width: 40%;

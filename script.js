@@ -10,7 +10,6 @@ import {
 
 //Config-driven-logic
 document.addEventListener("DOMContentLoaded", () => {
-  // const mainContainer = document.querySelector(".main-container");
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
@@ -18,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeSport = "cricket"; // Currently active sport(Default - football)
 
   //motorsport specific configurations
-  // const motorsportContainer = document.querySelector(".motorsport-container");
   const motorsportContainerButtons = document.querySelectorAll(
     ".motorsport-header-button"
   );
@@ -29,9 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let motorsportStandingsActiveSection = "drivers";
   const motorsportCardContainer = document.querySelector(
     "#motorsport-card-container"
-  );
-  const motorsportSectionInfo = document.querySelector(
-    ".motorsport-standings-container-info"
   );
 
   function isTeamSport(sport) {
@@ -223,72 +218,11 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
   }
 
-  // function displaySport(fixtures, sportToDisplay) {
-  //   const currentConfig = sportConfig[sportToDisplay];
-
-    // mainContainer.classList.add("hidden");
-    // mainContainer.classList.remove("visible");
-    // motorsportContainer.classList.add("hidden");
-    // motorsportContainer.classList.remove("visible");
-
-    // if (isTeamSport(sportToDisplay)) {
-    //   mainContainer.classList.remove("hidden");
-    //   mainContainer.classList.add("visible");
-    //   liveScoresDiv.innerHTML = "";
-    // } else if (sportToDisplay === "motorsport") {
-    //   motorsportContainer.classList.remove("hidden");
-    //   motorsportContainer.classList.add("visible");
-    //   if (motorsportActiveSection === "races") {
-    //     motorsportSectionInfo.classList.remove("visible");
-    //     motorsportSectionInfo.classList.add("hidden");
-    //     motorsportCardContainer.innerHTML = "";
-    //   } else if (motorsportActiveSection === "standings") {
-    //     motorsportSectionInfo.classList.remove("hidden");
-    //     motorsportSectionInfo.classList.add("visible");
-    //     motorsportCardContainer.innerHTML = "";
-    //   }
-    // }
-
-  //   if (!fixtures || fixtures.length === 0) {
-  //     if (isTeamSport(sportToDisplay)) {
-  //       liveScoresDiv.innerHTML = getEmptyStateHTML(
-  //         sportToDisplay,
-  //         "no_fixtures"
-  //       );
-  //     } else if (sportToDisplay === "motorsport") {
-  //       motorsportCardContainer.innerHTML = getEmptyStateHTML(
-  //         sportToDisplay,
-  //         "no_fixtures"
-  //       );
-  //     }
-  //     return;
-  //   }
-
-  //   const template = isTeamSport(sportToDisplay)
-  //     ? document.querySelector(`#${currentConfig.templateId}`)
-  //     : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
-  //     ? document.querySelector(`#${currentConfig.templateId[0]}`)
-  //     : document.querySelector(`#${currentConfig.templateId[1]}`);
-
-  //   if (!template) {
-  //     liveScoresDiv.innerHTML = `<p>Template not found for ${currentConfig.templateId}</p>`;
-  //     return;
-  //   }
-
-  //   fixtures.forEach((fixture) => {
-  //     const cardClone = template.content.cloneNode(true);
-  //     currentConfig.populateCard(cardClone.firstElementChild, fixture);
-  //     isTeamSport(sportToDisplay)
-  //       ? liveScoresDiv.appendChild(cardClone)
-  //       : motorsportCardContainer.appendChild(cardClone);
-  //   });
-  // }
-
   function displaySport(fixtures, sportToDisplay) {
     const currentConfig = sportConfig[sportToDisplay];
     const container = isTeamSport(sportToDisplay) ? liveScoresDiv : motorsportCardContainer;
 
-    container.innerHTML = ''; // Clear the relevant container
+    container.innerHTML = '';
 
     if (!fixtures || fixtures.length === 0) {
         container.innerHTML = getEmptyStateHTML(sportToDisplay, currentConfig ? 'no_fixtures' : 'not_configured');
@@ -801,7 +735,7 @@ document.addEventListener("DOMContentLoaded", () => {
     activeSport = sport; // Updating the active sport state
     const config = sportConfig[activeSport];
 
-    // If the sport is not configured, show the "coming soon" empty state and stop
+    // If the sport is not configured, show the "coming soon" empty state UI
     if (!config) {
       console.warn(`Configuration not found for sport: ${activeSport}`);
       if (isTeamSport(activeSport)) {
@@ -822,13 +756,6 @@ document.addEventListener("DOMContentLoaded", () => {
     motorsportCardContainer.innerHTML = '<div class="spinner"></div>';
 
     const { from, to } = getDateRange();
-
-    //Sport configuration error - original
-    // if (!config) {
-    //   console.error("Configuration not found for this sport");
-    //   liveScoresDiv.innerHTML = "Warming up on the sidelines… stay tuned!";
-    //   return;
-    // }
 
     sportNavButtons.forEach((btn) => {
       btn.classList.toggle("active", btn.id === `${activeSport}-card`);
@@ -908,105 +835,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // function setStaticUIForSport(sport) {
-  //   // Hiding all sport sections first
-  //   const allSections = document.querySelectorAll(".main-section");
-  //   allSections.forEach((section) => {
-  //     section.classList.remove("active");
-  //   });
-
-  //   // Showing only the active sport section
-  //   const activeSection = document.querySelector(
-  //     `.${sport}-section.main-section`
-  //   );
-  //   if (activeSection) {
-  //     activeSection.classList.add("active");
-  //   }
-
-  //   // toggle sport header images
-  //   const sportHeaders = document.querySelectorAll(".sport-header-container");
-  //   sportHeaders.forEach((headerEl) => {
-  //     const selectedSport = headerEl.id.replace("-header-container", "");
-  //     const show =
-  //       selectedSport === sport &&
-  //       (sport === "football" ||
-  //         sport === "cricket" ||
-  //         sport === "tennis" ||
-  //         sport === "basketball" ||
-  //         sport === "badminton" ||
-  //         sport === "mma");
-  //     headerEl.classList.toggle("visible", show);
-  //     headerEl.classList.toggle("hidden", !show);
-  //   });
-
-  //   // toggle status buttons for team sports
-  //   const statusButtonsContainer = document.querySelector(
-  //     "#container-status-buttons"
-  //   );
-  //   const showStatusButtons = sport === "football" || sport === "cricket";
-  //   statusButtonsContainer.style.display = showStatusButtons ? "flex" : "none";
-  // }
-
-//   function setStaticUIForSport(sport) {
-//     // Hiding all main sport sections first
-//     document.querySelectorAll('.main-section').forEach(section => {
-//         section.classList.remove('visible');
-//         section.classList.add('hidden');
-//     });
-
-//     // 2. Find and show only the active sport's section
-//     const activeSection = isTeamSport(sport)
-//         ? document.querySelector(`.${sport}-section`)
-//         : document.querySelector('.motorsport-container');
-    
-//     if (activeSection) {
-//         activeSection.classList.remove('hidden');
-//         activeSection.classList.add('visible');
-//     }
-
-//     // 3. Toggling sport-specific header images
-//     document.querySelectorAll('.sport-header-container').forEach(headerEl => {
-//         const selectedSport = headerEl.id.replace('-header-container', '');
-//         const show = (selectedSport === sport) && isTeamSport(sport);
-//         headerEl.classList.toggle('visible', show);
-//         headerEl.classList.toggle('hidden', !show);
-//     });
-
-//     // 4. Toggling status buttons for team sports with fixtures
-//     const statusButtonsContainer = document.querySelector("#container-status-buttons");
-//     const showStatusButtons = sport === "football" || sport === "cricket";
-//     statusButtonsContainer.style.display = showStatusButtons ? "flex" : "none";
-// }
-
   // UI at initial fetch
-  
-  // In your script.js
-
   function setStaticUIForSport(sport) {
-    // 1. Hide all main sport sections first
+    // Hiding all main sport sections first
     document.querySelectorAll('.main-section').forEach(section => {
         section.classList.remove('active');
-        section.classList.add('hidden'); // Explicitly add 'hidden' to all sections
+        section.classList.add('hidden');
     });
 
-    // 2. Find the one section we want to show
+    // Displaying the selected sport section
     const sectionToShow = isTeamSport(sport) 
         ? document.querySelector('.team-sport-container')
         : document.querySelector('.motorsport-container');
 
     if (sectionToShow) {
-        // 3. Show the target section by adding 'active' AND removing 'hidden'
         sectionToShow.classList.add('active');
         sectionToShow.classList.remove('hidden');
     }
 
-    // 4. Toggle sport-specific header images (for team sports)
+    // Toggling sport-specific header images
     document.querySelectorAll('.sport-header-container').forEach(headerEl => {
         const headerSport = headerEl.id.replace('-header-container', '');
         headerEl.style.display = (headerSport === sport && isTeamSport(sport)) ? 'block' : 'none';
     });
 
-    // 5. Toggle status buttons for sports that use them
+    // Toggling status buttons for sports with fixtures
     const statusButtonsContainer = document.querySelector("#container-status-buttons");
     const showStatusButtons = sport === "football" || sport === "cricket";
     statusButtonsContainer.style.display = showStatusButtons ? "grid" : "none";
@@ -1023,20 +876,12 @@ setStaticUIForSport(activeSport);
     });
   });
 
-  // motorsportContainerButtons.forEach((btn) => {
-  //   btn.addEventListener("click", () => {
-  //     motorsportActiveSection = btn.id.replace("motorsport-", "");
-  //     fetchFixtures(activeSport);
-  //   });
-  // });
-
   motorsportContainerButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
         motorsportActiveSection = btn.id.replace("motorsport-", "");
 
         const standingsNav = document.querySelector('.motorsport-standings-container-info');
 
-        // This is the correct logic for showing/hiding the sub-nav
         if (motorsportActiveSection === 'standings') {
             standingsNav.classList.remove('hidden');
             standingsNav.classList.add('visible');
