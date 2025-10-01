@@ -665,7 +665,16 @@ nav li {
     margin: 0 0.25rem;
 }
 
-.motorsport-container.visible {
+/* .motorsport-container.visible {
+    width: 40%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1.5rem;
+} */
+
+.motorsport-container.main-section.active {
     width: 40%;
     margin: 1rem auto;
     display: flex;
