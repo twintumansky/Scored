@@ -10,7 +10,7 @@ import {
 
 //Config-driven-logic
 document.addEventListener("DOMContentLoaded", () => {
-  const mainContainer = document.querySelector(".main-container");
+  // const mainContainer = document.querySelector(".main-container");
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeSport = "cricket"; // Currently active sport(Default - football)
 
   //motorsport specific configurations
-  const motorsportContainer = document.querySelector(".motorsport-container");
+  // const motorsportContainer = document.querySelector(".motorsport-container");
   const motorsportContainerButtons = document.querySelectorAll(
     ".motorsport-header-button"
   );
@@ -1009,7 +1009,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 5. Toggle status buttons for sports that use them
     const statusButtonsContainer = document.querySelector("#container-status-buttons");
     const showStatusButtons = sport === "football" || sport === "cricket";
-    statusButtonsContainer.style.display = showStatusButtons ? "flex" : "none";
+    statusButtonsContainer.style.display = showStatusButtons ? "grid" : "none";
 }
   
 setStaticUIForSport(activeSport);

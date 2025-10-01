@@ -193,6 +193,10 @@ footer {
     display: block;
 }
 
+.main-section.hidden {
+    display: none;
+}
+
 .sport-header-container.visible {
     display: block;
     width: 100%;
@@ -214,33 +218,13 @@ footer {
     border-radius: 0.75rem 0.75rem 0 0;
 }
 
-/* #container-status-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    width: 30%;
-    border-bottom: 1.5px solid #c3c1c1;
-    margin: 0 auto;
-    padding: 0.5rem 0 0.5rem 0rem;
-    background-color: #f0efef;
-} */
-
-/* #container-status-buttons {
-    width: 100%;
-    border-bottom: 1.5px solid #c3c1c1;
-    margin: 0;
-    padding: 0.5rem 0;
-    background-color: transparent; 
-    border-radius: 0.75rem 0.75rem 0 0; 
-} */
-
 #container-status-buttons {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     width: 100%;
     border-bottom: 1.5px solid #c3c1c1;
-    padding: 0.5rem 0;
+    padding: 0.25rem 0 0.5rem 0;
     background-color: transparent;
 }
 
