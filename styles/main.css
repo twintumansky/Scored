@@ -267,6 +267,11 @@ footer {
     color: #777;
 }
 
+#fixtures-container,
+#motorsport-card-container {
+    min-height: 70vh;
+}
+
 .empty-state {
     display: flex;
     flex-direction: column;

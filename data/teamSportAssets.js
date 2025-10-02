@@ -29,6 +29,7 @@ export const cricketTeamLogos = {
   'NZW': '/assets/logos/fixture_logos/newzealand.svg',
   'NZA': '/assets/logos/fixture_logos/newzealand.svg',
   'NEP': '/assets/logos/fixture_logos/nepal.svg',
+  'NEPW': '/assets/logos/fixture_logos/nepal.svg',
   'NAM': '/assets/logos/fixture_logos/namibia.svg',
   'NAMW': '/assets/logos/fixture_logos/namibia.svg',
   'PAK': '/assets/logos/fixture_logos/pakistan.svg',
@@ -133,6 +134,7 @@ export const cricketTeamLogos = {
   'NET-W': '/assets/logos/fixture_logos/netherlands.svg',
   'SIN-W': '/assets/logos/fixture_logos/singapore.svg',
   'TKW': '/assets/logos/fixture_logos/turkey.svg',
+  'ML-W': '/assets/logos/fixture_logos/malaysia.svg',
 };
 
 export const footballVenueLogos = {
