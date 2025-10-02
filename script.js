@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
+  const footer = document.querySelector('footer');
   let activeFilter = null; // Current filter for sport(Live, Upcoming, Finished)
   let activeSport = "cricket"; // Currently active sport(Default - football)
 
@@ -226,8 +227,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!fixtures || fixtures.length === 0) {
         container.innerHTML = getEmptyStateHTML(sportToDisplay, currentConfig ? 'no_fixtures' : 'not_configured');
+        footer.style.display = 'none';
         return;
     }
+    
+    footer.style.display = 'flex';
     const template = isTeamSport(sportToDisplay)
       ? document.querySelector(`#${currentConfig.templateId}`)
       : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
@@ -738,6 +742,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // If the sport is not configured, show the "coming soon" empty state UI
     if (!config) {
       console.warn(`Configuration not found for sport: ${activeSport}`);
+      footer.style.display = 'none';
       if (isTeamSport(activeSport)) {
         liveScoresDiv.innerHTML = getEmptyStateHTML(
           activeSport,
