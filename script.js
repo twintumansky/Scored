@@ -223,15 +223,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentConfig = sportConfig[sportToDisplay];
     const container = isTeamSport(sportToDisplay) ? liveScoresDiv : motorsportCardContainer;
 
+    container.classList.remove('loading');
+
     container.innerHTML = '';
 
     if (!fixtures || fixtures.length === 0) {
+        container.classList.add('is-empty');
         container.innerHTML = getEmptyStateHTML(sportToDisplay, currentConfig ? 'no_fixtures' : 'not_configured');
         footer.style.display = 'none';
         return;
     }
     
     footer.style.display = 'flex';
+    container.classList.add('has-content');
     const template = isTeamSport(sportToDisplay)
       ? document.querySelector(`#${currentConfig.templateId}`)
       : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
@@ -738,6 +742,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function fetchFixtures(sport) {
     activeSport = sport; // Updating the active sport state
     const config = sportConfig[activeSport];
+    const container = isTeamSport(sport) ? liveScoresDiv : motorsportCardContainer;
 
     // If the sport is not configured, show the "coming soon" empty state UI
     if (!config) {
@@ -756,6 +761,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       return;
     }
+
+    container.classList.add('loading');
+    container.classList.remove('has-content', 'is-empty');
 
     liveScoresDiv.innerHTML = '<div class="spinner"></div>';
     motorsportCardContainer.innerHTML = '<div class="spinner"></div>';
