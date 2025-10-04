@@ -956,78 +956,77 @@ document.addEventListener("DOMContentLoaded", () => {
         : "none";
     }
 
-    setStaticUIForSport(activeSport);
-
-    // Sport Navigation Button Listeners
-    sportNavButtons.forEach((sportCatButton) => {
-      sportCatButton.addEventListener("click", () => {
-        const selectedSport = sportCatButton.id.replace("-card", "");
-        setStaticUIForSport(selectedSport);
-        fetchFixtures(selectedSport);
-      });
-    });
-
-    motorsportContainerButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        motorsportActiveSection = btn.id.replace("motorsport-", "");
-
-        const standingsNav = document.querySelector(
-          ".motorsport-standings-container-info"
-        );
-
-        if (motorsportActiveSection === "standings") {
-          standingsNav.classList.remove("hidden");
-          standingsNav.classList.add("visible");
-        } else {
-          standingsNav.classList.remove("visible");
-          standingsNav.classList.add("hidden");
-        }
-
-        fetchFixtures(activeSport);
-      });
-    });
-
-    motorsportContainerStandingsButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        motorsportStandingsActiveSection = btn.id.replace(
-          "motorsport-standings-container-info-btn-",
-          ""
-        );
-
-        fetchFixtures(activeSport);
-      });
-    });
-
-    // Status Filter Button Listeners
-    statusButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const status = button.textContent.trim().toUpperCase();
-
-        if (activeFilter === status) {
-          activeFilter = null;
-          button.classList.remove("active");
-        } else {
-          statusButtons.forEach((btn) => btn.classList.remove("active"));
-          activeFilter = status;
-          button.classList.add("active");
-        }
-
-        // Refilter and display matches using the currently stored sortedFixtures and activeSport
-        if (window.sortedFixtures) {
-          // Make sure data has been fetched at least once
-          const filteredByStatus = filterFixturesByStatus(
-            window.sortedFixtures,
-            activeFilter,
-            activeSport
-          );
-          displaySport(filteredByStatus, activeSport); // Use the centrally stored activeSport
-        } else {
-          console.warn("No fixtures available at this moment.");
-        }
-      });
-    });
-    
+    setStaticUIForSport(activeSport);    
   }
   // --- Initial fetch of selected sport ---
   fetchFixtures(activeSport);
+
+  // Sport Navigation Button Listeners
+  sportNavButtons.forEach((sportCatButton) => {
+    sportCatButton.addEventListener("click", () => {
+      const selectedSport = sportCatButton.id.replace("-card", "");
+      setStaticUIForSport(selectedSport);
+      fetchFixtures(selectedSport);
+    });
+  });
+
+  motorsportContainerButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      motorsportActiveSection = btn.id.replace("motorsport-", "");
+
+      const standingsNav = document.querySelector(
+        ".motorsport-standings-container-info"
+      );
+
+      if (motorsportActiveSection === "standings") {
+        standingsNav.classList.remove("hidden");
+        standingsNav.classList.add("visible");
+      } else {
+        standingsNav.classList.remove("visible");
+        standingsNav.classList.add("hidden");
+      }
+
+      fetchFixtures(activeSport);
+    });
+  });
+
+  motorsportContainerStandingsButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      motorsportStandingsActiveSection = btn.id.replace(
+        "motorsport-standings-container-info-btn-",
+        ""
+      );
+
+      fetchFixtures(activeSport);
+    });
+  });
+
+  // Status Filter Button Listeners
+  statusButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const status = button.textContent.trim().toUpperCase();
+
+      if (activeFilter === status) {
+        activeFilter = null;
+        button.classList.remove("active");
+      } else {
+        statusButtons.forEach((btn) => btn.classList.remove("active"));
+        activeFilter = status;
+        button.classList.add("active");
+      }
+
+      // Refilter and display matches using the currently stored sortedFixtures and activeSport
+      if (window.sortedFixtures) {
+        // Make sure data has been fetched at least once
+        const filteredByStatus = filterFixturesByStatus(
+          window.sortedFixtures,
+          activeFilter,
+          activeSport
+        );
+        displaySport(filteredByStatus, activeSport); // Use the centrally stored activeSport
+      } else {
+        console.warn("No fixtures available at this moment.");
+      }
+    });
+  });
 });
