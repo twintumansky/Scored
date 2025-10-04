@@ -267,14 +267,10 @@ footer {
     color: #777;
 }
 
-/* #fixtures-container,
-#motorsport-card-container {
-    min-height: 70vh;
-} */
-
 #fixtures-container.loading,
 #motorsport-card-container.loading {
     min-height: 70vh;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .empty-state {
