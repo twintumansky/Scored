@@ -261,6 +261,11 @@ footer {
     color: #777;
     align-items: center;
     padding: 0 1rem 1rem 1rem; 
+    transition: opacity 0.3s ease-in-out;
+}
+
+#motorsport-card-container {
+    transition: opacity 0.3s ease-in-out;
 }
 
 #fixtures-container p {
@@ -270,7 +275,7 @@ footer {
 #fixtures-container.loading,
 #motorsport-card-container.loading {
     min-height: 70vh;
-    transition: opacity 0.3s ease-in-out;
+    /* transition: opacity 0.3s ease-in-out; */
 }
 
 .empty-state {
