@@ -302,6 +302,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // UI at initial fetch
+  function setStaticUIForSport(sport) {
+    // Hiding all main sport sections first
+    document.querySelectorAll(".main-section").forEach((section) => {
+      section.classList.remove("active");
+      section.classList.add("hidden");
+    });
+
+    // Displaying the selected sport section
+    const sectionToShow = isTeamSport(sport)
+      ? document.querySelector(".team-sport-container")
+      : document.querySelector(".motorsport-container");
+
+    if (sectionToShow) {
+      sectionToShow.classList.add("active");
+      sectionToShow.classList.remove("hidden");
+    }
+
+    // Toggling sport-specific header images
+    document
+      .querySelectorAll(".sport-header-container")
+      .forEach((headerEl) => {
+        const headerSport = headerEl.id.replace("-header-container", "");
+        headerEl.style.display =
+          headerSport === sport && isTeamSport(sport) ? "block" : "none";
+      });
+
+    // Toggling status buttons for sports with fixtures
+    const statusButtonsContainer = document.querySelector(
+      "#container-status-buttons"
+    );
+    const showStatusButtons = sport === "football" || sport === "cricket";
+    statusButtonsContainer.style.display = showStatusButtons
+      ? "grid"
+      : "none";
+  }
+
   async function contentTransition(container, contentUpdateCallback) {
     container.style.opacity = 0;
     await new Promise((resolve) => setTimeout(resolve, 300));
@@ -917,43 +954,6 @@ document.addEventListener("DOMContentLoaded", () => {
         container.innerHTML =
           '<p class="error">Unable to load fixtures. Please try again later.</p>';
       });
-    }
-
-    // UI at initial fetch
-    function setStaticUIForSport(sport) {
-      // Hiding all main sport sections first
-      document.querySelectorAll(".main-section").forEach((section) => {
-        section.classList.remove("active");
-        section.classList.add("hidden");
-      });
-
-      // Displaying the selected sport section
-      const sectionToShow = isTeamSport(sport)
-        ? document.querySelector(".team-sport-container")
-        : document.querySelector(".motorsport-container");
-
-      if (sectionToShow) {
-        sectionToShow.classList.add("active");
-        sectionToShow.classList.remove("hidden");
-      }
-
-      // Toggling sport-specific header images
-      document
-        .querySelectorAll(".sport-header-container")
-        .forEach((headerEl) => {
-          const headerSport = headerEl.id.replace("-header-container", "");
-          headerEl.style.display =
-            headerSport === sport && isTeamSport(sport) ? "block" : "none";
-        });
-
-      // Toggling status buttons for sports with fixtures
-      const statusButtonsContainer = document.querySelector(
-        "#container-status-buttons"
-      );
-      const showStatusButtons = sport === "football" || sport === "cricket";
-      statusButtonsContainer.style.display = showStatusButtons
-        ? "grid"
-        : "none";
     }
 
     setStaticUIForSport(activeSport);    
