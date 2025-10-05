@@ -9,7 +9,9 @@ import {
 } from "./data/motorsportAssets.js";
 
 //Config-driven-logic
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+  const preloader = document.getElementById('preloader');
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
@@ -959,7 +961,8 @@ document.addEventListener("DOMContentLoaded", () => {
     setStaticUIForSport(activeSport);    
   }
   // --- Initial fetch of selected sport ---
-  fetchFixtures(activeSport);
+  await fetchFixtures(activeSport);
+  preloader.classList.add('hidden');
 
   // Sport Navigation Button Listeners
   sportNavButtons.forEach((sportCatButton) => {

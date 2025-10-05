@@ -19,6 +19,40 @@ body {
     font-optical-sizing: auto;
 }
 
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e3dfdf; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden; 
+}
+
+.preloader-spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 5px solid #b1b0b0b3;
+    border-top: 5px solid #383636;
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 header {
     width: 100%;
     margin: 0;
@@ -256,6 +290,7 @@ footer {
 
 #fixtures-container {
     width: 100%; 
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     color: #777;
