@@ -290,10 +290,11 @@ footer {
 
 #fixtures-container {
     width: 100%; 
-    min-height: 60vh;
+    min-height: 40vh;
     display: flex;
     flex-direction: column;
     color: #777;
+    justify-content: center;
     align-items: center;
     padding: 0 1rem 1rem 1rem; 
     transition: opacity 0.3s ease-in-out;
