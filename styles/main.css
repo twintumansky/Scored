@@ -179,7 +179,8 @@ footer {
 }
 
 .main-section {
-    width: 30%; 
+    width: 95%; 
+    max-width: 461px;
     margin: 1rem auto 0 auto; 
     display: none;
     background-color: #f0efef;
