@@ -135,6 +135,12 @@ export const cricketTeamLogos = {
   'SIN-W': '/assets/logos/fixture_logos/singapore.svg',
   'TKW': '/assets/logos/fixture_logos/turkey.svg',
   'ML-W': '/assets/logos/fixture_logos/malaysia.svg',
+  'SAUS': '/assets/logos/fixture_logos/soa.webp',
+  'VIC': '/assets/logos/fixture_logos/vic.webp',
+  'TAS': '/assets/logos/fixture_logos/tas.webp',
+  'QL': '/assets/logos/fixture_logos/qld.webp',
+  'NSW': '/assets/logos/fixture_logos/nsw.webp',
+  'WA': '/assets/logos/fixture_logos/wa.webp',
 };
 
 export const footballVenueLogos = {

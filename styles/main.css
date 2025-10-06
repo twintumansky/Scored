@@ -682,6 +682,7 @@ nav li {
 
 .motorsport-container.main-section.active {
     width: 40%;
+    max-width: 600px;
     margin: 1rem auto;
     display: flex;
     flex-direction: column;
@@ -992,8 +993,8 @@ nav li {
 }
 
 @media screen and (max-width: 768px) {
-    .main-container.visible {
-        width: 50%;
+    .main-section.active{
+        width: 90%;
     }
 
     .fixture-card {
@@ -1020,30 +1021,8 @@ nav li {
         padding: 4px 0.6rem;
     }
 
-    .motorsport-race-card {
-        flex-direction: column;
-    }
-
-    .motorsport-race-info,
-    .motorsport-circuit-image {
-        width: 95%;
-        min-width: unset;
-        margin: 0.5rem 0;
-        height: auto;
-    }
-
-    .motorsport-race-schedule {
-        position: relative;
-        top: auto;
-        bottom: auto;
-        right: auto;
-        width: 100%;
-        margin-top: 0.5rem;
-        border-radius: 0 0 1.5rem 1.5rem;
-    }
-
-    .circuit-bg-image {
-        border-radius: 1.5rem 1.5rem 0 0;
+    .motorsport-container.main-section.active {
+        width: 90%;
     }
 
 }
