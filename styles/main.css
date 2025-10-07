@@ -115,7 +115,16 @@ footer {
     justify-content: center;
     align-items: center;
     margin: 0 1rem;
-    padding-bottom: 0.5rem;
+    /* padding-bottom: 0.5rem; */
+    padding: 0 1rem 0.5rem 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+}
+
+.nav-sports-categories::-webkit-scrollbar {
+    display: none; 
 }
 
 .nav-cards {
@@ -682,7 +691,7 @@ nav li {
 
 .motorsport-container.main-section.active {
     width: 600px;
-    max-width: 40%;    
+    max-width: 90%;    
     margin: 1rem auto;
     display: flex;
     flex-direction: column;
@@ -1044,6 +1053,20 @@ nav li {
     .league-name,
     .venue {
         font-size: 0.7rem;
+    }
+
+    #motorsport-standings-container-table-info,
+    #motorsport-standings-main-container {
+        gap: 0.4rem; 
+        padding: 0.5rem 0.25rem; 
+    }
+
+    .motorsport-standings-main-container-data {
+        font-size: 0.8rem; 
+    }
+
+    #motorsport-standings-main-container-entity-info {
+        font-weight: 500;
     }
 }
 
