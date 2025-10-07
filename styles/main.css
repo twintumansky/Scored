@@ -115,7 +115,6 @@ footer {
     justify-content: center;
     align-items: center;
     margin: 0 1rem;
-    /* padding-bottom: 0.5rem; */
     padding: 0 1rem 0.5rem 1rem;
     overflow-x: auto;
     white-space: nowrap;
@@ -147,7 +146,6 @@ footer {
     &:active {
         transform: scale(0.97);
         color: #434343;
-
     }
 
     &:hover {
@@ -321,7 +319,6 @@ footer {
 #fixtures-container.loading,
 #motorsport-card-container.loading {
     min-height: 70vh;
-    /* transition: opacity 0.3s ease-in-out; */
 }
 
 .empty-state {
@@ -714,7 +711,6 @@ nav li {
     background-size: cover;
     border-radius: 1.5rem 1.5rem 0 0;
     padding: 1rem 0rem 0rem 0rem;
-    /* height: 10.5rem; */
     aspect-ratio: 4 / 1;
 }
 
@@ -1057,8 +1053,16 @@ nav li {
 
     #motorsport-standings-container-table-info,
     #motorsport-standings-main-container {
-        gap: 0.4rem; 
         padding: 0.5rem 0.25rem; 
+        grid-template-columns: 2rem 1fr 2rem 2rem 2rem 3rem;
+    }
+    
+    #motorsport-standings-container-table-info {
+        gap: 0.4rem; 
+    }
+
+    #motorsport-standings-main-container {
+        gap: 0rem;
     }
 
     .motorsport-standings-main-container-data {
