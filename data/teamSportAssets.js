@@ -138,6 +138,7 @@ export const cricketTeamLogos = {
   'ML-W': '/assets/logos/fixture_logos/malaysia.svg',
   'NOR': '/assets/logos/fixture_logos/norway.svg',
   'NOR-W': '/assets/logos/fixture_logos/norway.svg',
+  'SAMOA': '/assets/logos/fixture_logos/samoa.svg',
   'SAUS': '/assets/logos/fixture_logos/soa.webp',
   'VIC': '/assets/logos/fixture_logos/vic.webp',
   'TAS': '/assets/logos/fixture_logos/tas.webp',

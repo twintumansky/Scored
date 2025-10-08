@@ -1003,52 +1003,20 @@ nav li {
         width: 90%;
     }
 
-    .fixture-card {
-        aspect-ratio: 3 / 1.5;
-    }
-
-    .home-team-logo,
-    .away-team-logo {
-        width: 2rem;
-        height: 2rem;
-    }
-
-    .score {
-        font-size: 1rem;
-    }
-
-    .home-team-name,
-    .away-team-name {
-        font-size: 0.75rem;
-    }
-
-    .status {
-        font-size: 0.7rem;
-        padding: 4px 0.6rem;
-    }
-
     .motorsport-container.main-section.active {
         width: 90%;
     }
-
 }
 
 @media screen and (max-width: 480px) {
-    .main-container.visible {
+    .main-section.active{
         width: 90%;
     }
 
-    .fixture-card {
-        aspect-ratio: 3 / 1.7;
-    }
-
-    .fixture-card-info {
-        gap: 0.5rem;
-    }
-
-    .league-name,
-    .venue {
-        font-size: 0.7rem;
+    .league-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     #motorsport-standings-container-table-info,
