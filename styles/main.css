@@ -86,7 +86,8 @@ footer {
     width: 100%;
     margin: 0;
     display: flex;
-    flex-shrink: 0;               
+    flex-shrink: 0;       
+    margin-top: 1.5rem;        
 }
 
 .footer-container {
@@ -102,6 +103,7 @@ footer {
 .footer-illustration img {
     display: block;
     height: auto;
+    max-width: 100%;
 }
 
 #app-logo {
@@ -112,7 +114,7 @@ footer {
 
 .nav-sports-categories {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin: 0 1rem;
     padding: 0 1rem 0.5rem 1rem;
