@@ -10,8 +10,7 @@ import {
 
 //Config-driven-logic
 document.addEventListener("DOMContentLoaded", async () => {
-
-  const preloader = document.getElementById('preloader');
+  const preloader = document.getElementById("preloader");
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
   const sportNavButtons = document.querySelectorAll(".nav-cards");
@@ -21,15 +20,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Motorsport specific configurations
   const motorsportContainerButtons = document.querySelectorAll(
-    ".motorsport-header-button"
+    ".motorsport-header-button",
   );
   const motorsportContainerStandingsButtons = document.querySelectorAll(
-    ".motorsport-standings-container-info-buttons"
+    ".motorsport-standings-container-info-buttons",
   );
   let motorsportActiveSection = "races";
   let motorsportStandingsActiveSection = "drivers";
   const motorsportCardContainer = document.querySelector(
-    "#motorsport-card-container"
+    "#motorsport-card-container",
   );
 
   function isTeamSport(sport) {
@@ -205,9 +204,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       reason === "no_fixtures" &&
       (sport === "football" || sport === "cricket" || sport === "motorsport")
     ) {
-      messages[
-        sport
-      ] = `No ${sport} matches are available at the moment. Please check back later.`;
+      messages[sport] =
+        `No ${sport} matches are available at the moment. Please check back later.`;
     }
 
     const illustrationSrc = illustrations[sport] || illustrations.default;
@@ -233,7 +231,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!fixtures || fixtures.length === 0) {
         container.innerHTML = getEmptyStateHTML(
           sportToDisplay,
-          currentConfig ? "no_fixtures" : "not_configured"
+          currentConfig ? "no_fixtures" : "not_configured",
         );
         footer.style.display = "none";
         return;
@@ -243,8 +241,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       const template = isTeamSport(sportToDisplay)
         ? document.querySelector(`#${currentConfig.templateId}`)
         : sportToDisplay === "motorsport" && motorsportActiveSection === "races"
-        ? document.querySelector(`#${currentConfig.templateId[0]}`)
-        : document.querySelector(`#${currentConfig.templateId[1]}`);
+          ? document.querySelector(`#${currentConfig.templateId[0]}`)
+          : document.querySelector(`#${currentConfig.templateId[1]}`);
 
       if (!template) {
         container.innerHTML = `<p class="error">Template not found for ${currentConfig.templateId}</p>`;
@@ -279,25 +277,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Toggling sport-specific header images
-    document
-      .querySelectorAll(".sport-header-container")
-      .forEach((headerEl) => {
-        const headerSport = headerEl.id.replace("-header-container", "");
-        headerEl.style.display =
-          headerSport === sport && isTeamSport(sport) ? "block" : "none";
-      });
+    document.querySelectorAll(".sport-header-container").forEach((headerEl) => {
+      const headerSport = headerEl.id.replace("-header-container", "");
+      headerEl.style.display =
+        headerSport === sport && isTeamSport(sport) ? "block" : "none";
+    });
 
     // Toggling status buttons for sports with fixtures
     const statusButtonsContainer = document.querySelector(
-      "#container-status-buttons"
+      "#container-status-buttons",
     );
     const showStatusButtons = sport === "football" || sport === "cricket";
-    statusButtonsContainer.style.display = showStatusButtons
-      ? "grid"
-      : "none";
+    statusButtonsContainer.style.display = showStatusButtons ? "grid" : "none";
   }
 
-  //Transition wrapper for events(adds subtle animation) 
+  //Transition wrapper for events(adds subtle animation)
   async function contentTransition(container, contentUpdateCallback) {
     container.style.opacity = 0;
     await new Promise((resolve) => setTimeout(resolve, 300));
@@ -322,6 +316,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         "FL1",
         "SA",
         "PPL",
+        "WC",
       ],
       leagueCode: (match) => match.competition?.code,
       leaguePriorities: {
@@ -369,13 +364,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         const awayTeamScore = match.score?.fullTime?.away;
         const scoreContainer = cardClone.querySelector(".score-container");
         const versusElement = cardClone.querySelector(
-          ".football-versus-element"
+          ".football-versus-element",
         );
         // const scheduledContainer = cardClone.querySelector(
         //   ".scheduled-time-container"
         // );
         const statusTextElement = cardClone.querySelector(
-          ".football-match-status"
+          ".football-match-status",
         );
 
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
@@ -493,16 +488,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         match.matchStarted === false && isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
         const cricketHomeTeamScoreContainer = cardClone.querySelector(
-          ".cricket-home-team-score-container"
+          ".cricket-home-team-score-container",
         );
         const cricketAwayTeamScoreContainer = cardClone.querySelector(
-          ".cricket-away-team-score-container"
+          ".cricket-away-team-score-container",
         );
         const cricketMatchStatus = cardClone.querySelector(
-          ".cricket-match-status"
+          ".cricket-match-status",
         );
         const scheduleContainer = cardClone.querySelector(
-          ".schedule-container"
+          ".schedule-container",
         );
 
         let homeTeamShortName, homeTeamName, awayTeamShortName, awayTeamName;
@@ -538,17 +533,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           match.matchType == "test"
             ? "Test"
             : match.matchType == "odi"
-            ? "ODI"
-            : "T20";
+              ? "ODI"
+              : "T20";
         const iconType =
           match.matchType == "test"
             ? "/assets/icons/cricket-icon-test.svg"
             : match.matchType == "odi"
-            ? "/assets/icons/cricket-icon-odi.svg"
-            : "/assets/icons/cricket-icon-t20.svg";
+              ? "/assets/icons/cricket-icon-odi.svg"
+              : "/assets/icons/cricket-icon-t20.svg";
         const venueInfo = match.venue?.split(",")[1] ?? "TBD";
         const matchTimestampSeconds = Math.floor(
-          new Date(match.dateTimeGMT + "Z").getTime() / 1000
+          new Date(match.dateTimeGMT + "Z").getTime() / 1000,
         );
 
         cardClone.querySelector(".cricket-competition-info").textContent =
@@ -560,7 +555,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ?.setAttribute(
             "src",
             cricketTeamLogos[homeTeamShortName] ??
-              "/assets/icons/default_cricket_icon.svg"
+              "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-away-team-name").textContent =
           awayTeamShortName || match.teams[1];
@@ -569,7 +564,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ?.setAttribute(
             "src",
             cricketTeamLogos[awayTeamShortName] ??
-              "/assets/icons/default_cricket_icon.svg"
+              "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-match-status").textContent =
           match.status ?? "Match status not available";
@@ -577,7 +572,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".cricket-format-icon")
           ?.setAttribute(
             "src",
-            iconType ?? "/assets/icons/cricket-icon-test.svg"
+            iconType ?? "/assets/icons/cricket-icon-test.svg",
           );
         cardClone.querySelector(".cricket-format-name").textContent =
           formatType ?? "NA";
@@ -591,7 +586,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return scores.filter(
               (s) =>
                 s.inning &&
-                s.inning.toLowerCase().includes(teamName.toLowerCase())
+                s.inning.toLowerCase().includes(teamName.toLowerCase()),
             );
           }
 
@@ -599,7 +594,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           function updateScoreDisplay(
             teamScoreContainer,
             teamScores,
-            matchType
+            matchType,
           ) {
             teamScoreContainer.style.display = "block";
 
@@ -610,24 +605,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             const inngs2Col = teamScoreContainer.querySelector(".innings-2");
 
             if (firstInnings) {
-              inngs1Col.querySelector(
-                ".score-runs"
-              ).textContent = `${firstInnings.r}/${firstInnings.w}`;
-              inngs1Col.querySelector(
-                ".score-overs"
-              ).textContent = `(${firstInnings.o})`;
+              inngs1Col.querySelector(".score-runs").textContent =
+                `${firstInnings.r}/${firstInnings.w}`;
+              inngs1Col.querySelector(".score-overs").textContent =
+                `(${firstInnings.o})`;
             } else {
               inngs1Col.querySelector(".score-runs").textContent = "Yet to bat";
               inngs1Col.querySelector(".score-overs").textContent = "-";
             }
 
             if (matchType === "test" && secondInnings) {
-              inngs2Col.querySelector(
-                ".score-runs"
-              ).textContent = `${secondInnings.r}/${secondInnings.w}`;
-              inngs2Col.querySelector(
-                ".score-overs"
-              ).textContent = `(${secondInnings.o})`;
+              inngs2Col.querySelector(".score-runs").textContent =
+                `${secondInnings.r}/${secondInnings.w}`;
+              inngs2Col.querySelector(".score-overs").textContent =
+                `(${secondInnings.o})`;
               inngs2Col.style.display = "flex";
             } else {
               inngs2Col.style.display = "none";
@@ -640,12 +631,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           updateScoreDisplay(
             cricketHomeTeamScoreContainer,
             homeScores,
-            match.matchType
+            match.matchType,
           );
           updateScoreDisplay(
             cricketAwayTeamScoreContainer,
             awayScores,
-            match.matchType
+            match.matchType,
           );
 
           cricketMatchStatus.style.display = "block";
@@ -695,7 +686,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const driverId = race.Driver?.driverId;
         if (motorsportActiveSection === "races") {
           const motorsportRoundWinner = cardClone.querySelector(
-            ".motorsport-round-winner-container"
+            ".motorsport-round-winner-container",
           );
           motorsportRoundWinner.style.display = "none";
           const raceCountry = race.Circuit?.Location?.country;
@@ -713,13 +704,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             .querySelector(".country-flag-logo")
             ?.setAttribute("src", motorsportCountryLogos[raceCountry]);
 
-          cardClone.querySelector(
-            ".motorsport-race-name"
-          ).textContent = `${raceName} GP`;
+          cardClone.querySelector(".motorsport-race-name").textContent =
+            `${raceName} GP`;
 
-          cardClone.querySelector(
-            ".motorsport-race-date"
-          ).textContent = `${raceDate} ${raceMonth}`;
+          cardClone.querySelector(".motorsport-race-date").textContent =
+            `${raceDate} ${raceMonth}`;
 
           if (race.winner) {
             motorsportRoundWinner.style.display = "flex";
@@ -731,11 +720,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           motorsportStandingsActiveSection === "drivers"
         ) {
           document.querySelector(
-            "#motorsport-standings-container-entity-info"
+            "#motorsport-standings-container-entity-info",
           ).textContent = "Drivers";
 
           cardClone.querySelector(
-            "#motorsport-standings-main-container-pos-info"
+            "#motorsport-standings-main-container-pos-info",
           ).textContent = race.position || "NA";
 
           cardClone
@@ -743,28 +732,28 @@ document.addEventListener("DOMContentLoaded", async () => {
             ?.setAttribute("src", driverImages[driverId]);
 
           cardClone.querySelector(
-            "#motorsport-standings-main-container-entity-info"
+            "#motorsport-standings-main-container-entity-info",
           ).textContent = race.Driver
             ? `${race.Driver.givenName} ${race.Driver.familyName}`
             : "Unknown Driver";
 
           cardClone.querySelector(
-            "#motorsport-standings-main-container-wins-info"
+            "#motorsport-standings-main-container-wins-info",
           ).textContent = race.wins || "0";
 
           cardClone.querySelector(
-            "#motorsport-standings-main-container-points-info"
+            "#motorsport-standings-main-container-points-info",
           ).textContent = race.points || "0";
         } else if (
           motorsportActiveSection === "standings" &&
           motorsportStandingsActiveSection === "teams"
         ) {
           document.querySelector(
-            "#motorsport-standings-container-entity-info"
+            "#motorsport-standings-container-entity-info",
           ).textContent = "Team";
 
           cardClone.querySelector(
-            "#motorsport-standings-main-container-pos-info"
+            "#motorsport-standings-main-container-pos-info",
           ).textContent = race.position || "NA";
 
           const constructorId = race.Constructor?.constructorId;
@@ -773,15 +762,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             ?.setAttribute("src", constructorLogos[constructorId]);
 
           cardClone.querySelector(
-            "#motorsport-standings-main-container-entity-info"
+            "#motorsport-standings-main-container-entity-info",
           ).textContent = race.Constructor?.name || "Unknown Team";
 
           cardClone.querySelector(
-            "#motorsport-standings-main-container-wins-info"
+            "#motorsport-standings-main-container-wins-info",
           ).textContent = race.wins || "0";
 
           cardClone.querySelector(
-            "#motorsport-standings-main-container-points-info"
+            "#motorsport-standings-main-container-points-info",
           ).textContent = race.points || "0";
         }
       },
@@ -790,7 +779,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Fetching of fixtures from sport specific APIs
   async function fetchFixtures(sport) {
-    activeSport = sport; 
+    activeSport = sport;
     const config = sportConfig[activeSport];
     const container = isTeamSport(sport)
       ? liveScoresDiv
@@ -815,12 +804,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Updating active class for sport nav buttons
     sportNavButtons.forEach((btn) => {
       btn.classList.toggle("active", btn.id === `${activeSport}-card`);
-    }); 
+    });
 
     motorsportContainerButtons.forEach((btn) => {
       btn.classList.toggle(
         "active",
-        btn.id === `${activeSport}-${motorsportActiveSection}`
+        btn.id === `${activeSport}-${motorsportActiveSection}`,
       );
     });
 
@@ -828,7 +817,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       btn.classList.toggle(
         "active",
         btn.id ===
-          `motorsport-standings-container-info-btn-${motorsportStandingsActiveSection}`
+          `motorsport-standings-container-info-btn-${motorsportStandingsActiveSection}`,
       );
     });
 
@@ -846,7 +835,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           const matches = Array.isArray(data.matches) ? data.matches : [];
           const sortedFixtureData = sortFixtures(
             filterFixtures(matches, "football"),
-            "football"
+            "football",
           );
           window.sortedFixtures = sortedFixtureData;
           return filterFixturesByStatus(sortedFixtureData, activeFilter);
@@ -863,7 +852,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           });
           const sortedFixtureData = sortFixtures(
             filterFixtures(matches, "cricket"),
-            "cricket"
+            "cricket",
           );
           window.sortedFixtures = sortedFixtureData;
           return filterFixturesByStatus(sortedFixtureData, activeFilter);
@@ -873,10 +862,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             motorsportActiveSection === "races"
               ? data?.mergedRaces
               : motorsportStandingsActiveSection === "drivers"
-              ? data?.driverstandings?.MRData?.StandingsTable
-                  ?.StandingsLists?.[0]?.DriverStandings
-              : data?.constructorstandings?.MRData?.StandingsTable
-                  ?.StandingsLists?.[0]?.ConstructorStandings;
+                ? data?.driverstandings?.MRData?.StandingsTable
+                    ?.StandingsLists?.[0]?.DriverStandings
+                : data?.constructorstandings?.MRData?.StandingsTable
+                    ?.StandingsLists?.[0]?.ConstructorStandings;
 
           return motorsportData || [];
         },
@@ -892,11 +881,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    setStaticUIForSport(activeSport);    
+    setStaticUIForSport(activeSport);
   }
   // --- Initial fetch of selected sport ---
   await fetchFixtures(activeSport);
-  preloader.classList.add('hidden');
+  preloader.classList.add("hidden");
 
   // Sport navigation button listeners
   sportNavButtons.forEach((sportCatButton) => {
@@ -913,7 +902,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       motorsportActiveSection = btn.id.replace("motorsport-", "");
 
       const standingsNav = document.querySelector(
-        ".motorsport-standings-container-info"
+        ".motorsport-standings-container-info",
       );
 
       if (motorsportActiveSection === "standings") {
@@ -933,7 +922,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     btn.addEventListener("click", () => {
       motorsportStandingsActiveSection = btn.id.replace(
         "motorsport-standings-container-info-btn-",
-        ""
+        "",
       );
 
       fetchFixtures(activeSport);
@@ -960,7 +949,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const filteredByStatus = filterFixturesByStatus(
           window.sortedFixtures,
           activeFilter,
-          activeSport
+          activeSport,
         );
         displaySport(filteredByStatus, activeSport); // Use the centrally stored activeSport
       } else {

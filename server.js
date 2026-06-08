@@ -17,12 +17,12 @@ app.get("/api/matches/football", async (req, res) => {
   try {
     const { dateFrom, dateTo } = req.query;
     const response = await fetch(
-      `https://api.football-data.org/v4/matches?dateFrom=${dateFrom}&dateTo=${dateTo}&competitions=2001,2021,2014,2015,2016,2017,2018,2019,2002,2013,2152`,
+      `https://api.football-data.org/v4/matches?dateFrom=${dateFrom}&dateTo=${dateTo}&competitions=2000,2001,2021,2014,2015,2016,2017,2018,2019,2002,2013,2152`,
       {
         headers: {
           "X-Auth-Token": process.env.FOOTBALL_API_KEY,
         },
-      }
+      },
     );
     const data = await response.json();
     res.json(data);
@@ -46,7 +46,7 @@ app.get("/api/matches/cricket", async (req, res) => {
           throw new Error(`HTTP error: ${response.status} for ${url}`);
         }
         return response.json();
-      })
+      }),
     );
 
     const settleMatchData = await Promise.allSettled(cricketMatchData);
@@ -82,7 +82,9 @@ app.get("/api/races/motorsport", async (req, res) => {
       console.log(`Serving motorsport data for ${dateYear} from cache.`);
       return res.json(cachedEntry.data);
     }
-    console.log(`Cache miss or expired for ${dateYear}. Fetching from external API...`);
+    console.log(
+      `Cache miss or expired for ${dateYear}. Fetching from external API...`,
+    );
 
     // Helper function to fetch all paginated results
     const fetchAllResults = async (baseUrl) => {
@@ -93,21 +95,21 @@ app.get("/api/races/motorsport", async (req, res) => {
 
       while (hasMoreData) {
         const url = `${baseUrl}?limit=${limit}&offset=${offset}`;
-        
+
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`HTTP error: ${response.status} for ${url}`);
         }
-        
+
         const data = await response.json();
         const races = data?.MRData?.RaceTable?.Races || [];
-        
+
         if (races.length === 0) {
           hasMoreData = false;
         } else {
           allResults.push(...races);
           offset += limit;
-          
+
           // Safety check to prevent infinite loops
           if (offset > 1000) {
             console.warn("Reached maximum offset, stopping pagination");
@@ -115,7 +117,7 @@ app.get("/api/races/motorsport", async (req, res) => {
           }
         }
       }
-      
+
       return allResults;
     };
 
@@ -126,43 +128,51 @@ app.get("/api/races/motorsport", async (req, res) => {
     };
 
     // Fetch races and standings in parallel
-    const promises = Object.values(endpoints).map(url => 
-      fetch(url).then(response => {
+    const promises = Object.values(endpoints).map((url) =>
+      fetch(url).then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error: ${response.status} for ${url}`);
         }
         return response.json();
-      })
+      }),
     );
 
     // Fetch all race results with pagination
-    const resultsPromise = fetchAllResults(`https://api.jolpi.ca/ergast/f1/${dateYear}/results`);
+    const resultsPromise = fetchAllResults(
+      `https://api.jolpi.ca/ergast/f1/${dateYear}/results`,
+    );
 
-    const [racesData, driverStandingsData, constructorStandingsData, allResults] = 
-      await Promise.all([...promises, resultsPromise]);
+    const [
+      racesData,
+      driverStandingsData,
+      constructorStandingsData,
+      allResults,
+    ] = await Promise.all([...promises, resultsPromise]);
 
     const responseData = {
       races: racesData,
       driverstandings: driverStandingsData,
       constructorstandings: constructorStandingsData,
-      results: { MRData: { RaceTable: { Races: allResults } } } // Structure to match expected format
+      results: { MRData: { RaceTable: { Races: allResults } } }, // Structure to match expected format
     };
 
     // Merging races with results to include race-winner data
     if (responseData.races && responseData.results) {
       const races = responseData.races?.MRData?.RaceTable?.Races || [];
       const raceResults = responseData.results?.MRData?.RaceTable?.Races || [];
-      
-      console.log(`Fetched ${races.length} races and ${raceResults.length} results`);
-      
+
+      console.log(
+        `Fetched ${races.length} races and ${raceResults.length} results`,
+      );
+
       // Creating a map of race results by round for quick lookup
       const resultsMap = {};
-      raceResults.forEach(race => {
+      raceResults.forEach((race) => {
         resultsMap[race.round] = race;
       });
 
       // Merge winner information into races
-      const mergedRaces = races.map(race => {
+      const mergedRaces = races.map((race) => {
         const raceResult = resultsMap[race.round];
         if (raceResult && raceResult.Results && raceResult.Results.length > 0) {
           // Add winner information to the race
@@ -171,16 +181,18 @@ app.get("/api/races/motorsport", async (req, res) => {
             winner: {
               driver: raceResult.Results[0].Driver,
               constructor: raceResult.Results[0].Constructor,
-              time: raceResult.Results[0].Time?.time || 'N/A',
-              fastestLap: raceResult.Results[0].FastestLap
-            }
+              time: raceResult.Results[0].Time?.time || "N/A",
+              fastestLap: raceResult.Results[0].FastestLap,
+            },
           };
         }
         return race; // Return race without winner info if no results yet
       });
 
       responseData.mergedRaces = mergedRaces;
-      console.log(`Merged ${mergedRaces.filter(r => r.winner).length} races with winner data`);
+      console.log(
+        `Merged ${mergedRaces.filter((r) => r.winner).length} races with winner data`,
+      );
     }
 
     console.log("Total races fetched:", responseData.mergedRaces?.length || 0);
@@ -188,14 +200,16 @@ app.get("/api/races/motorsport", async (req, res) => {
     //Caching the response before sending
     motorsportCache[dateYear] = {
       timestamp: Date.now(),
-      data: responseData
+      data: responseData,
     };
     console.log(`Cached motorsport data for ${dateYear}.`);
 
     res.json(responseData);
   } catch (error) {
     console.error("General Proxy Error in /api/races/motorsport:", error);
-    res.status(500).json({ error: "An unexpected error occurred on the server." });
+    res
+      .status(500)
+      .json({ error: "An unexpected error occurred on the server." });
   }
 });
 
