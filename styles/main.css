@@ -2,7 +2,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -25,7 +26,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #e3dfdf; 
+    background-color: #e3dfdf;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,7 +37,7 @@ body {
 
 #preloader.hidden {
     opacity: 0;
-    visibility: hidden; 
+    visibility: hidden;
 }
 
 .preloader-spinner {
@@ -49,8 +50,13 @@ body {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 header {
@@ -86,12 +92,12 @@ footer {
     width: 100%;
     margin: 0;
     display: flex;
-    flex-shrink: 0;       
-    margin-top: 1.5rem;        
+    flex-shrink: 0;
+    margin-top: 1.5rem;
 }
 
 .footer-container {
-    width: 100%;                    
+    width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -114,17 +120,17 @@ footer {
 
 .nav-sports-categories {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     margin: 0 1rem;
     padding: 0 1rem 0.5rem 1rem;
     overflow-x: auto;
-    scrollbar-width: none; 
+    scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
 .nav-sports-categories::-webkit-scrollbar {
-    display: none; 
+    display: none;
 }
 
 .nav-cards {
@@ -189,9 +195,9 @@ footer {
 }
 
 .main-section {
-    width: 95%; 
+    width: 95%;
     max-width: 461px;
-    margin: 1rem auto 0 auto; 
+    margin: 1rem auto 0 auto;
     display: none;
     background-color: #f0efef;
     border-radius: 0.75rem;
@@ -207,7 +213,7 @@ footer {
 
 .team-sport-container.visible,
 .motorsport-container.visible {
-    display: flex; 
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
@@ -258,12 +264,12 @@ footer {
 }
 
 #container-status-buttons .container-buttons:nth-child(2) {
-    justify-self: center; 
+    justify-self: center;
 }
 
 #container-status-buttons .container-buttons:nth-child(3) {
     justify-self: start;
-    margin-left: 1rem; 
+    margin-left: 1rem;
 }
 
 .container-buttons,
@@ -301,14 +307,14 @@ footer {
 }
 
 #fixtures-container {
-    width: 100%; 
+    width: 100%;
     min-height: 40vh;
     display: flex;
     flex-direction: column;
     color: #777;
     justify-content: center;
     align-items: center;
-    padding: 0 1rem 1rem 1rem; 
+    padding: 0 1rem 1rem 1rem;
     transition: opacity 0.3s ease-in-out;
 }
 
@@ -333,12 +339,14 @@ footer {
     padding: 1.5rem;
     color: #777;
 }
+
 .empty-state img {
     width: 15rem;
     height: auto;
     opacity: 0.95;
     margin: 0.5rem 0;
 }
+
 .empty-state p {
     margin: 0.25rem 0 0;
     font-size: 0.9rem;
@@ -692,7 +700,7 @@ nav li {
 
 .motorsport-container.main-section.active {
     width: 600px;
-    max-width: 90%;    
+    max-width: 90%;
     margin: 1rem auto;
     display: flex;
     flex-direction: column;
@@ -1003,7 +1011,7 @@ nav li {
 }
 
 @media screen and (max-width: 768px) {
-    .main-section.active{
+    .main-section.active {
         width: 90%;
     }
 
@@ -1013,11 +1021,11 @@ nav li {
 }
 
 @media screen and (max-width: 480px) {
-    .main-section.active{
+    .main-section.active {
         width: 90%;
     }
 
-    #container-status-buttons{
+    #container-status-buttons {
         padding-left: 0.5rem;
         padding-right: 0.5rem;
     }
@@ -1025,7 +1033,7 @@ nav li {
     .container-buttons {
         height: 1.5rem;
         padding: 0.04rem 0.85rem 0.02rem 0.85rem;
-        font-size: 0.7rem;            
+        font-size: 0.7rem;
         gap: 0.5rem;
         overflow-x: auto;
         scrollbar-width: none;
@@ -1034,13 +1042,14 @@ nav li {
     #container-status-buttons .container-buttons:nth-child(1) {
         margin-right: 0.5rem;
     }
+
     #container-status-buttons .container-buttons:nth-child(3) {
         margin-left: 0.5rem;
     }
 
     .football-match-status {
         margin-left: 1rem;
-        margin-right: 1rem; 
+        margin-right: 1rem;
     }
 
     .home-team-name,
@@ -1057,8 +1066,9 @@ nav li {
     .venue-info {
         max-width: 45%;
     }
-    
-    .league-name, .venue {
+
+    .league-name,
+    .venue {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -1066,12 +1076,12 @@ nav li {
 
     #motorsport-standings-container-table-info,
     #motorsport-standings-main-container {
-        padding: 0.5rem 0.25rem; 
+        padding: 0.5rem 0.25rem;
         grid-template-columns: 2rem 1fr 2rem 2rem 2rem 3rem;
     }
-    
+
     #motorsport-standings-container-table-info {
-        gap: 0.4rem; 
+        gap: 0.4rem;
     }
 
     #motorsport-standings-main-container {
@@ -1079,7 +1089,7 @@ nav li {
     }
 
     .motorsport-standings-main-container-data {
-        font-size: 0.8rem; 
+        font-size: 0.8rem;
     }
 
     #motorsport-standings-main-container-entity-info {
