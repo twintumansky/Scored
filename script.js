@@ -547,7 +547,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         cardClone.querySelector(".cricket-competition-info").textContent =
-          match.name ?? "NA";
+          `${homeTeamName || match.teams[0]} vs ${awayTeamName || match.teams[1]}` ??
+          "NA";
         cardClone.querySelector(".cricket-home-team-name").textContent =
           homeTeamShortName || match.teams[0];
         cardClone
