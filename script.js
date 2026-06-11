@@ -341,7 +341,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         cardClone
           .querySelector(".home-team-logo")
-          ?.setAttribute("src", match.homeTeam.crest);
+          ?.setAttribute(
+            "src",
+            footballVenueLogos[match.homeTeam] || match.homeTeam.crest,
+          );
         cardClone
           .querySelector(".away-team-logo")
           ?.setAttribute("src", match.awayTeam.crest);
