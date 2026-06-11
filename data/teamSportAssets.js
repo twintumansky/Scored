@@ -151,6 +151,12 @@ export const cricketTeamLogos = {
   WA: "/assets/logos/fixture_logos/wa.webp",
 };
 
+export const footballTeamLogos = {
+  Mexico: "/assets/logos/fixture_logos/mexico.svg",
+  "South Africa": "/assets/logos/fixture_logos/southafrica.svg",
+  "Korea Republic": "/assets/logos/fixture_logos/southkorea.svg",
+};
+
 export const footballVenueLogos = {
   Europe: "/assets/logos/fixture_logos/europe.svg",
   Germany: "/assets/logos/fixture_logos/germany.svg",
