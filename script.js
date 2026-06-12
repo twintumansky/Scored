@@ -1,5 +1,6 @@
 import {
   cricketTeamLogos,
+  footballTeamLogos,
   footballVenueLogos,
 } from "./data/teamSportAssets.js";
 import {
@@ -343,11 +344,14 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".home-team-logo")
           ?.setAttribute(
             "src",
-            footballVenueLogos[match.homeTeam] || match.homeTeam.crest,
+            footballTeamLogos[match.homeTeam] || match.homeTeam.crest,
           );
         cardClone
           .querySelector(".away-team-logo")
-          ?.setAttribute("src", match.awayTeam.crest);
+          ?.setAttribute(
+            "src",
+            footballTeamLogos[match.awayTeam] || match.awayTeam.crest,
+          );
         cardClone.querySelector(".football-competition-info").textContent =
           `${match.homeTeam.shortName} vs ${match.awayTeam.shortName}` ?? "NA";
         cardClone.querySelector(".home-team-name").textContent =

@@ -155,6 +155,23 @@ export const footballTeamLogos = {
   Mexico: "/assets/logos/fixture_logos/mexico.svg",
   "South Africa": "/assets/logos/fixture_logos/southafrica.svg",
   "Korea Republic": "/assets/logos/fixture_logos/southkorea.svg",
+  Czechia: "/assets/logos/fixture_logos/czechia.svg",
+  Canada: "/assets/logos/fixture_logos/canada.svg",
+  "Bosnia-H.": "/assets/logos/fixture_logos/bosnia.svg",
+  USA: "/assets/logos/fixture_logos/us.svg",
+  Paraguay: "/assets/logos/fixture_logos/paraguay.svg",
+  Switzerland: "/assets/logos/fixture_logos/switzerland.svg",
+  Qatar: "/assets/logos/fixture_logos/qatar.svg",
+  Morocco: "/assets/logos/fixture_logos/morocco.svg",
+  Brazil: "/assets/logos/fixture_logos/brazil.svg",
+  Haiti: "/assets/logos/fixture_logos/haiti.svg",
+  Scotland: "/assets/logos/fixture_logos/scotland.svg",
+  Turkey: "/assets/logos/fixture_logos/turkey.svg",
+  Australia: "/assets/logos/fixture_logos/australia.svg",
+  Curaçao: "/assets/logos/fixture_logos/curacao.svg",
+  Germany: "/assets/logos/fixture_logos/germany .svg",
+  Japan: "/assets/logos/fixture_logos/japan.svg",
+  Netherlands: "/assets/logos/fixture_logos/netherlands.svg",
 };
 
 export const footballVenueLogos = {
