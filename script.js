@@ -344,13 +344,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".home-team-logo")
           ?.setAttribute(
             "src",
-            footballTeamLogos[match.homeTeam] || match.homeTeam.crest,
+            footballTeamLogos[match.homeTeam.shortName] || match.homeTeam.crest,
           );
         cardClone
           .querySelector(".away-team-logo")
           ?.setAttribute(
             "src",
-            footballTeamLogos[match.awayTeam] || match.awayTeam.crest,
+            footballTeamLogos[match.awayTeam.shortName] || match.awayTeam.crest,
           );
         cardClone.querySelector(".football-competition-info").textContent =
           `${match.homeTeam.shortName} vs ${match.awayTeam.shortName}` ?? "NA";
