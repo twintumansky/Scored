@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             month: "short",
             day: "numeric",
           });
-          statusTextElement.textContent = `Scheduled on ${matchDay} at ${matchTime}`;
+          statusTextElement.textContent = `${matchDay} at ${matchTime}`;
         } else {
           statusTextElement.textContent = match.status; // Fallback
           scoreContainer.style.display = "none";
