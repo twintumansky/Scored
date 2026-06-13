@@ -321,6 +321,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ],
       leagueCode: (match) => match.competition?.code,
       leaguePriorities: {
+        WC: 150,
         CL: 100,
         PL: 90,
         PD: 80,

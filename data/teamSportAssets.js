@@ -169,12 +169,13 @@ export const footballTeamLogos = {
   Turkey: "/assets/logos/fixture_logos/turkey.svg",
   Australia: "/assets/logos/fixture_logos/australia.svg",
   Curaçao: "/assets/logos/fixture_logos/curacao.svg",
-  Germany: "/assets/logos/fixture_logos/germany .svg",
+  Germany: "/assets/logos/fixture_logos/germany.svg",
   Japan: "/assets/logos/fixture_logos/japan.svg",
   Netherlands: "/assets/logos/fixture_logos/netherlands.svg",
 };
 
 export const footballVenueLogos = {
+  World: "/assets/icons/default-venue-icon.svg",
   Europe: "/assets/logos/fixture_logos/europe.svg",
   Germany: "/assets/logos/fixture_logos/germany.svg",
   Spain: "/assets/logos/fixture_logos/spain.svg",

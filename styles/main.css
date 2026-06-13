@@ -422,9 +422,9 @@ footer {
     /* border-radius: 50%; */
     padding: 5px;
 
-    width: 4.5rem;
-    height: 2rem;
-    object-fit: contain;
+    width: 3rem;
+    height: 3rem;
+    /* object-fit: contain; */
 }
 
 .fixture-info {
