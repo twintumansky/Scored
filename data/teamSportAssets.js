@@ -1,4 +1,4 @@
-export const cricketTeamLogos = {
+export const cricketTeamLogo = {
   AFG: "/assets/logos/fixture_logos/afghanistan.svg",
   AUS: "/assets/logos/fixture_logos/australia.svg",
   AUSA: "/assets/logos/fixture_logos/australia.svg",
@@ -151,7 +151,7 @@ export const cricketTeamLogos = {
   WA: "/assets/logos/fixture_logos/wa.webp",
 };
 
-export const footballTeamLogos = {
+export const footballTeamLogo = {
   Mexico: "/assets/logos/fixture_logos/mexico.svg",
   "South Africa": "/assets/logos/fixture_logos/southafrica.svg",
   "Korea Republic": "/assets/logos/fixture_logos/southkorea.svg",
@@ -174,8 +174,12 @@ export const footballTeamLogos = {
   Netherlands: "/assets/logos/fixture_logos/netherlands.svg",
 };
 
-export const footballVenueLogos = {
-  World: "/assets/icons/default-venue-icon.svg",
+export const footballLeagueEmblem = {
+  WC: "/assets/icons/fifa.svg",
+};
+
+export const footballVenueLogo = {
+  World: "/assets/icons/venue-icon.svg",
   Europe: "/assets/logos/fixture_logos/europe.svg",
   Germany: "/assets/logos/fixture_logos/germany.svg",
   Spain: "/assets/logos/fixture_logos/spain.svg",
