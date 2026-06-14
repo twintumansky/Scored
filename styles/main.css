@@ -450,17 +450,21 @@ footer {
 .live-status-container {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.5rem;
     font-weight: 700;
     color: #dc3545;
     text-transform: uppercase;
     font-size: 0.75rem;
     letter-spacing: 0.05rem;
+    background-color: #f6e4e6;
+    border-radius: 10px;
+    padding: 1px 8px;
+    margin: 5px;
 }
 
 .pulse-dot {
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     background-color: #dc3545;
     border-radius: 50%;
     position: relative;
