@@ -373,6 +373,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".venue-flag")
           ?.setAttribute("src", footballVenueLogo[footballVenue]);
         cardClone.querySelector(".venue").textContent = footballVenue ?? "NA";
+        const liveStatusContainer = cardClone.querySelector(
+          ".live-status-container",
+        );
         const homeTeamScore = match.score?.fullTime?.home;
         const awayTeamScore = match.score?.fullTime?.away;
         const scoreContainer = cardClone.querySelector(".score-container");
@@ -389,6 +392,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
           statusTextElement.textContent = "Match in progress...";
           scoreContainer.style.display = "flex";
+          liveStatusContainer.style.display = "flex";
+
           cardClone.querySelector(".home-team-score").textContent =
             homeTeamScore ?? "0";
           cardClone.querySelector(".away-team-score").textContent =
@@ -403,11 +408,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
 
           scoreContainer.style.display = "flex";
+          liveStatusContainer.style.display = "none";
           cardClone.querySelector(".home-team-score").textContent =
             match.score?.fullTime?.home ?? "0";
           cardClone.querySelector(".away-team-score").textContent =
             match.score?.fullTime?.away ?? "0";
         } else if (match.status === "SCHEDULED" || match.status === "TIMED") {
+          liveStatusContainer.style.display = "none";
           scoreContainer.style.display = "none";
           versusElement.style.display = "block";
           const matchDate = new Date(match.utcDate);
