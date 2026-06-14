@@ -394,6 +394,14 @@ document.addEventListener("DOMContentLoaded", async () => {
           scoreContainer.style.display = "flex";
           liveStatusContainer.style.display = "flex";
 
+          if (homeTeamScore === awayTeamScore) {
+            statusTextElement.textContent = "Scores are equal";
+          } else if (homeTeamScore > awayTeamScore) {
+            statusTextElement.textContent = `${match.homeTeam.shortName} leads the match`;
+          } else {
+            statusTextElement.textContent = `${match.awayTeam.shortName} leads the match`;
+          }
+
           cardClone.querySelector(".home-team-score").textContent =
             homeTeamScore ?? "0";
           cardClone.querySelector(".away-team-score").textContent =
