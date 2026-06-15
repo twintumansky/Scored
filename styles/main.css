@@ -11,7 +11,7 @@ body {
 }
 
 body {
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -120,12 +120,13 @@ footer {
 
 .nav-sports-categories {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    margin: 0 1rem;
+    margin: 0;
     padding: 0 1rem 0.5rem 1rem;
     overflow-x: auto;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
 }
 
@@ -1077,6 +1078,7 @@ nav li {
 }
 
 @media screen and (max-width: 480px) {
+
     .main-section.active {
         width: 90%;
     }
