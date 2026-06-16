@@ -416,7 +416,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
 
           scoreContainer.style.display = "flex";
-          liveStatusContainer.style.display = "none";
+          liveStatusContainer.style.display = "flex";
+          liveStatusContainer.textContent = "FT";
           cardClone.querySelector(".home-team-score").textContent =
             match.score?.fullTime?.home ?? "0";
           cardClone.querySelector(".away-team-score").textContent =

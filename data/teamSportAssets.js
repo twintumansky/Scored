@@ -186,6 +186,16 @@ export const footballTeamLogo = {
   "New Zealand": "/assets/logos/fixture_logos/newzealand.svg",
   France: "/assets/logos/fixture_logos/france.svg",
   Senegal: "/assets/logos/fixture_logos/senegal.svg",
+  Norway: "/assets/logos/fixture_logos/norway.svg",
+  Iraq: "/assets/logos/fixture_logos/iraq.svg",
+  Argentina: "/assets/logos/fixture_logos/argentina.svg",
+  Algeria: "/assets/logos/fixture_logos/algeria.svg",
+  Austria: "/assets/logos/fixture_logos/austria.svg",
+  Jordan: "/assets/logos/fixture_logos/jordan.svg",
+  Portugal: "/assets/logos/fixture_logos/portugal.svg",
+  England: "/assets/logos/fixture_logos/england.svg",
+  Croatia: "/assets/logos/fixture_logos/croatia.svg",
+  "Congo DR": "/assets/logos/fixture_logos/congo.svg",
 };
 
 export const footballLeagueEmblem = {
