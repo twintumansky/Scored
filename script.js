@@ -418,6 +418,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           scoreContainer.style.display = "flex";
           liveStatusContainer.style.display = "flex";
           liveStatusContainer.textContent = "FT";
+          liveStatusContainer.style.color = "#be590b7d";
+          liveStatusContainer.style.backgroundColor = "#ebc3a47d";
           cardClone.querySelector(".home-team-score").textContent =
             match.score?.fullTime?.home ?? "0";
           cardClone.querySelector(".away-team-score").textContent =
