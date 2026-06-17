@@ -196,6 +196,10 @@ export const footballTeamLogo = {
   England: "/assets/logos/fixture_logos/england.svg",
   Croatia: "/assets/logos/fixture_logos/croatia.svg",
   "Congo DR": "/assets/logos/fixture_logos/congo.svg",
+  Ghana: "/assets/logos/fixture_logos/ghana.svg",
+  Panama: "/assets/logos/fixture_logos/panama.svg",
+  Uzbekistan: "/assets/logos/fixture_logos/uzbekistan.svg",
+  Colombia: "/assets/logos/fixture_logos/colombia.svg",
 };
 
 export const footballLeagueEmblem = {
