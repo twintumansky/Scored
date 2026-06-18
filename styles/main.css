@@ -675,6 +675,11 @@ nav li {
     line-height: 1.5rem;
 }
 
+.live-match-indicator {
+    color: #be590b7d;
+    background-color: #ebc3a47d;
+}
+
 .cricket-home-team,
 .cricket-away-team {
     display: flex;
