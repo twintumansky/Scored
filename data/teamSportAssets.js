@@ -123,6 +123,7 @@ export const cricketTeamLogo = {
   CW: "/assets/logos/fixture_logos/cameroon.svg",
   CRT: "/assets/logos/fixture_logos/croatia.svg",
   CYP: "/assets/logos/fixture_logos/cyprus.svg",
+  CPW: "/assets/logos/fixture_logos/cyprus.svg",
   EST: "/assets/logos/fixture_logos/estonia.svg",
   BOT: "/assets/logos/fixture_logos/botswana.svg",
   GW: "/assets/logos/fixture_logos/greece.svg",
