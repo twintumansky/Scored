@@ -586,7 +586,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".cricket-home-team-logo")
           ?.setAttribute(
             "src",
-            cricketTeamLogo[homeTeamShortName] ??
+            (cricketTeamLogo[homeTeamShortName] ||
+              cricketTeamLogo[homeTeamName]) ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-away-team-name").textContent =
@@ -595,7 +596,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".cricket-away-team-logo")
           ?.setAttribute(
             "src",
-            cricketTeamLogo[awayTeamShortName] ??
+            (cricketTeamLogo[awayTeamShortName] ||
+              cricketTeamLogo[awayTeamName]) ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-match-status").textContent =
