@@ -414,18 +414,10 @@ footer {
 
 .home-team-logo,
 .away-team-logo {
-    /* width: 3rem;
-    height: 3rem;
-    background-color: #e5e3d44f;
-    background-size: cover;
-    background-position: center; */
     margin-bottom: 0.25rem;
-    /* border-radius: 50%; */
     padding: 5px;
-
     width: 3rem;
     height: 3rem;
-    /* object-fit: contain; */
 }
 
 .fixture-info {
