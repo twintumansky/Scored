@@ -206,7 +206,8 @@ footer {
 }
 
 .team-sport-container {
-    background-color: #f0efef;
+    /* background-color: #f0efef; */
+    background-color: #d9d8c6;
     border-radius: 0.75rem;
     display: flex;
     flex-direction: column;
