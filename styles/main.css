@@ -15,7 +15,8 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: column;
-    background-color: #e3dfdf;
+    /* background-color: #e3dfdf; */
+    background-color: #fcf9f3;
     font-family: "Hanken Grotesk", sans-serif;
     font-optical-sizing: auto;
 }
