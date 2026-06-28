@@ -152,6 +152,7 @@ export const cricketTeamLogo = {
   QL: "/assets/logos/fixture_logos/qld.webp",
   NSW: "/assets/logos/fixture_logos/nsw.webp",
   WA: "/assets/logos/fixture_logos/wa.webp",
+  BHM: "/assets/logos/fixture_logos/bahamas.svg",
 };
 
 export const footballTeamLogo = {
