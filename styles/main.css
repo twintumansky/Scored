@@ -15,8 +15,7 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: column;
-    /* background-color: #e3dfdf; */
-    background-color: #fcf9f3;
+    background-color: #e3dfdf;
     font-family: "Hanken Grotesk", sans-serif;
     font-optical-sizing: auto;
 }
@@ -206,8 +205,7 @@ footer {
 }
 
 .team-sport-container {
-    /* background-color: #f0efef; */
-    background-color: #d9d8c6;
+    background-color: #f0efef;
     border-radius: 0.75rem;
     display: flex;
     flex-direction: column;

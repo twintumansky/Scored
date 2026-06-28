@@ -38,7 +38,7 @@ export const cricketTeamLogo = {
   CAN: "/assets/logos/fixture_logos/canada.svg",
   CZE: "/assets/logos/fixture_logos/czechrepublic.svg",
   DEN: "/assets/logos/fixture_logos/denmark.svg",
-  "DEN-W": "/assets/logos/fixture_logos/denmark.svg",
+  DW: "/assets/logos/fixture_logos/denmark.svg",
   FIN: "/assets/logos/fixture_logos/finland.svg",
   FRA: "/assets/logos/fixture_logos/france.svg",
   HKG: "/assets/logos/fixture_logos/hongkong.svg",
