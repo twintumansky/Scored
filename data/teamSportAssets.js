@@ -117,9 +117,9 @@ export const cricketTeamLogo = {
   PHW: "/assets/logos/fixture_logos/philippines.svg",
   PAKW: "/assets/logos/fixture_logos/pakistan.svg",
   UGAW: "/assets/logos/fixture_logos/uganda.svg",
-  BUL: "/assets/logos/fixture_logos/bulgaria.svg",
   BW: "/assets/logos/fixture_logos/bulgaria.svg",
-  BRW: "/assets/logos/fixture_logos/brazil.svg",
+  BUL: "/assets/logos/fixture_logos/bulgaria.svg",
+  BRA: "/assets/logos/fixture_logos/brazil.svg",
   CW: "/assets/logos/fixture_logos/cameroon.svg",
   CRT: "/assets/logos/fixture_logos/croatia.svg",
   CYP: "/assets/logos/fixture_logos/cyprus.svg",
@@ -153,6 +153,8 @@ export const cricketTeamLogo = {
   NSW: "/assets/logos/fixture_logos/nsw.webp",
   WA: "/assets/logos/fixture_logos/wa.webp",
   BHM: "/assets/logos/fixture_logos/bahamas.svg",
+  BLZ: "/assets/logos/fixture_logos/belize.svg",
+  BMUDA: "/assets/logos/fixture_logos/bermuda.svg",
 };
 
 export const footballTeamLogo = {
