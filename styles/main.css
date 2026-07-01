@@ -368,6 +368,7 @@ footer {
 
 .football-match-card:hover {
     background-color: #ffffff69;
+    cursor: pointer;
 }
 
 .football-fixture-info {
