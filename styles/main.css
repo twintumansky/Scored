@@ -446,13 +446,13 @@ footer {
     gap: 0.5rem;
     font-weight: 700;
     color: #39c682;
-    /* text-transform: uppercase;
+    text-transform: uppercase;
     font-size: 0.75rem;
     letter-spacing: 0.05rem;
     background-color: #dff1e8;
     border-radius: 10px;
     padding: 1px 8px;
-    margin: 5px; */
+    margin: 5px;
 }
 
 .pulse-dot {
@@ -500,7 +500,7 @@ footer {
     margin-bottom: 0.8rem;
     margin-right: 0;
     border-radius: 1rem;
-    background: #d1bbbfab;
+    background: #edecf0ab;
     padding: 0.13rem 1.1rem;
 }
 
