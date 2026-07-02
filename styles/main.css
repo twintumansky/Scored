@@ -172,11 +172,11 @@ footer {
 }
 
 .nav-cards.active {
-    background-color: #a8a8a8;
+    background-color: #383636;
 }
 
 .nav-cards.active .nav-cards-label {
-    color: #434343;
+    color: #d5d3d3;
     font-weight: 700;
 }
 
@@ -192,7 +192,7 @@ footer {
 }
 
 .nav-cards.active .nav-cards-icon svg {
-    fill: #434343;
+    fill: #d5d3d3;
 }
 
 .main-section {
