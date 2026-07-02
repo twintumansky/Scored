@@ -988,6 +988,10 @@ nav li {
     border-bottom: 0.9px solid #58575747;
 }
 
+#motorsport-standings-main-container:last-child {
+    border-bottom: none;
+}
+
 #motorsport-standings-main-container:hover {
     background-color: rgba(0, 0, 0, 0.02);
     border-radius: 0.25rem;
