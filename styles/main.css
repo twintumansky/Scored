@@ -456,19 +456,22 @@ footer {
     margin: 5px;
 }
 
-.pulse-quote {
+.blinking-quote {
+    display: inline-block;
     background-color: #39c682;
     font-size: 0.9rem;
-    animation: quotePulse 1s infinite alternate ease-in-out;
+    animation: blink 1s step-end infinite;
 }
 
-@keyframes quotePulse {
-    0% {
+@keyframes blink {
+
+    0%,
+    100% {
         opacity: 1;
     }
 
-    100% {
-        opacity: 0.2;
+    50% {
+        opacity: 0;
     }
 }
 
