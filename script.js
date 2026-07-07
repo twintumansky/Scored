@@ -390,7 +390,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
-          statusTextElement.textContent = "Match in progress...";
+          // statusTextElement.textContent = "Match in progress...";
           scoreContainer.style.display = "flex";
           liveStatusContainer.style.display = "flex";
 
