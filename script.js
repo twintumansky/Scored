@@ -354,7 +354,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".away-team-logo")
           ?.setAttribute(
             "src",
-            footballTeamLogo[match.awayTeam.shortName] || match.awayTeam.crest,
+            footballTeamLogo[match.awayTeam.shortName] ||
+              match.awayTeam.crest ||
+              "/assets/logos/fixture_logos/default.svg",
           );
         cardClone.querySelector(".football-competition-info").textContent =
           `${match.homeTeam.shortName || "TBD"} vs ${match.awayTeam.shortName || "TBD"} ` ??
