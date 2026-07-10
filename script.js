@@ -346,7 +346,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".home-team-logo")
           ?.setAttribute(
             "src",
-            footballTeamLogo[match.homeTeam.shortName] || match.homeTeam.crest,
+            footballTeamLogo[match.homeTeam.shortName] ||
+              match.homeTeam.crest ||
+              "/assets/logos/fixture_logos/default.svg",
           );
         cardClone
           .querySelector(".away-team-logo")
@@ -355,11 +357,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             footballTeamLogo[match.awayTeam.shortName] || match.awayTeam.crest,
           );
         cardClone.querySelector(".football-competition-info").textContent =
-          `${match.homeTeam.shortName} vs ${match.awayTeam.shortName}` ?? "NA";
+          `${match.homeTeam.shortName || "TBD"} vs ${match.awayTeam.shortName || "TBD"} ` ??
+          "TBD";
         cardClone.querySelector(".home-team-name").textContent =
-          match.homeTeam.tla;
+          match.homeTeam.tla ?? "TBD";
         cardClone.querySelector(".away-team-name").textContent =
-          match.awayTeam.tla;
+          match.awayTeam.tla ?? "TBD";
         cardClone
           .querySelector(".league-emblem")
           ?.setAttribute(

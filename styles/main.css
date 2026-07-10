@@ -442,9 +442,6 @@ footer {
 }
 
 .live-status-container {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
     font-weight: 700;
     color: #39c682;
     text-transform: uppercase;
@@ -452,15 +449,19 @@ footer {
     letter-spacing: 0.05rem;
     background-color: #dff1e8;
     border-radius: 10px;
-    padding: 1px 8px;
+    padding: 2px 8px;
     margin: 5px;
 }
 
 .blinking-quote {
-    display: inline-block;
+    height: 6px;
+    width: 2px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    font-weight: 100;
     background-color: #39c682;
-    font-size: 0.9rem;
     animation: blink 1s step-end infinite;
+    line-height: 1;
 }
 
 @keyframes blink {
