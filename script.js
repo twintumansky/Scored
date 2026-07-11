@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sportNavButtons = document.querySelectorAll(".nav-cards");
   const footer = document.querySelector("footer");
   let activeFilter = null; // Current filter for sport(Live, Upcoming, Finished)
-  let activeSport = "football"; // Currently active sport(Default - football)
+  let activeSport = "cricket"; // Currently active sport(Default - football)
 
   // Motorsport specific configurations
   const motorsportContainerButtons = document.querySelectorAll(
