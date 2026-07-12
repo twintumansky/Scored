@@ -666,11 +666,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           const homeScores = findScoreForTeam(match.score, homeTeamName);
           const awayScores = findScoreForTeam(match.score, awayTeamName);
-          if (this.isLive(match)) {
-            cardClone
-              .querySelector(".cricket-versus-element")
-              .classList.add("live-match-indicator");
-          }
+          // if (this.isLive(match)) {
+          //   cardClone
+          //     .querySelector(".cricket-versus-element")
+          //     .classList.add("live-match-indicator");
+          // }
 
           updateScoreDisplay(
             cricketHomeTeamScoreContainer,
