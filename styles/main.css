@@ -387,7 +387,7 @@ footer {
 
 .fixture-card-info {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     flex-grow: 3;
     position: relative;
@@ -451,6 +451,7 @@ footer {
     border-radius: 10px;
     padding: 2px 8px;
     margin: 5px;
+    gap: 1px;
 }
 
 .blinking-quote {
