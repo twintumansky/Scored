@@ -575,7 +575,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           match.matchType == "test"
             ? "/assets/icons/cricket-icon-test.svg"
             : match.matchType == "odi"
-              ? "/assets/icons/cricket-icon-odi.svg"
+              ? "/assets/icons/cricket-icon-odi1.svg"
               : "/assets/icons/cricket-icon-t20.svg";
         const venueInfo = match.venue?.split(",")[1] ?? "TBD";
         const matchTimestampSeconds = Math.floor(
