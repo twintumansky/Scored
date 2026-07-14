@@ -575,7 +575,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           match.matchType == "test"
             ? "/assets/icons/cricket-icon-test.svg"
             : match.matchType == "odi"
-              ? "/assets/icons/cricket-icon-odi1.svg"
+              ? "/assets/icons/cricket-icon-odi.svg"
               : "/assets/icons/cricket-icon-t20.svg";
         const venueInfo = match.venue?.split(",")[1] ?? "TBD";
         const matchTimestampSeconds = Math.floor(
@@ -666,11 +666,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           const homeScores = findScoreForTeam(match.score, homeTeamName);
           const awayScores = findScoreForTeam(match.score, awayTeamName);
-          // if (this.isLive(match)) {
-          //   cardClone
-          //     .querySelector(".cricket-versus-element")
-          //     .classList.add("live-match-indicator");
-          // }
 
           updateScoreDisplay(
             cricketHomeTeamScoreContainer,
@@ -683,7 +678,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             match.matchType,
           );
 
-          cricketMatchStatus.style.display = "block";
+          const matchStatusIndicator = (cricketMatchStatus.style.display =
+            "block");
           scheduleContainer.style.display = "none";
         } else {
           scheduleContainer.style.display = "flex";
