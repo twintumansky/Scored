@@ -482,33 +482,51 @@ document.addEventListener("DOMContentLoaded", async () => {
           ".schedule-container",
         );
 
-        let homeTeamShortName, homeTeamName, awayTeamShortName, awayTeamName;
+        // let home.shortName, home.name, away.shortName, away.name;
 
-        if (
-          match.teamInfo &&
-          Array.isArray(match.teamInfo) &&
-          match.teamInfo.length >= 2
-        ) {
-          homeTeamShortName = match.teamInfo[0]?.shortname;
-          homeTeamName = match.teamInfo[0]?.name;
-          awayTeamShortName = match.teamInfo[1]?.shortname;
-          awayTeamName = match.teamInfo[1]?.name;
-        } else if (
-          match.teams &&
-          Array.isArray(match.teams) &&
-          match.teams.length >= 2
-        ) {
-          // Fallback to teams array if teamInfo is not available
-          homeTeamShortName = match.teams[0];
-          homeTeamName = match.teams[0];
-          awayTeamShortName = match.teams[1];
-          awayTeamName = match.teams[1];
-        } else {
-          // Default values if neither teamInfo nor teams are available
-          homeTeamShortName = "TBD";
-          homeTeamName = "TBD";
-          awayTeamShortName = "TBD";
-          awayTeamName = "TBD";
+        // if (
+        //   //checking for matches with valid team info
+        //   match.teamInfo &&
+        //   Array.isArray(match.teamInfo) &&
+        //   match.teamInfo.length >= 2
+        // ) {
+        //   home.shortName = match.teamInfo[0]?.shortname;
+        //   home.name = match.teamInfo[0]?.name;
+        //   away.shortName = match.teamInfo[1]?.shortname;
+        //   away.name = match.teamInfo[1]?.name;
+        // } else if (
+        //   // Fallback to teams array if teamInfo is not available
+        //   match.teams &&
+        //   Array.isArray(match.teams) &&
+        //   match.teams.length >= 2
+        // ) {
+
+        //   home.shortName = match.teams[0];
+        //   home.name = match.teams[0];
+        //   away.shortName = match.teams[1];
+        //   away.name = match.teams[1];
+        // } else {
+        //   // Default values if neither teamInfo nor teams are available
+        //   home.shortName = "TBD";
+        //   home.name = "TBD";
+        //   away.shortName = "TBD";
+        //   away.name = "TBD";
+        // }
+
+        function getTeams(match) {
+          const teams = Array.isArray(match?.teamInfo) ? match.teamInfo : [];
+          const teamsFallback = Array.isArray(match?.teams) ? match.teams : [];
+
+          return {
+            home: {
+              name: teams[0].name || teamsFallback[0] || "TBD",
+              shortName: teams[0].shortname || teamsFallback[0] || "TBD",
+            },
+            away: {
+              name: teams[1].name || teamsFallback[1] || "TBD",
+              shortName: teams[1].shortname || teamsFallback[1] || "TBD",
+            },
+          };
         }
 
         const formatType =
@@ -528,27 +546,26 @@ document.addEventListener("DOMContentLoaded", async () => {
           new Date(match.dateTimeGMT + "Z").getTime() / 1000,
         );
 
+        const { home, away } = getTeams(match);
+
         cardClone.querySelector(".cricket-competition-info").textContent =
-          `${homeTeamName || match.teams[0]} vs ${awayTeamName || match.teams[1]}` ??
-          "NA";
+          `${home.name} vs ${away.name}` ?? "NA";
         cardClone.querySelector(".cricket-home-team-name").textContent =
-          homeTeamShortName || match.teams[0];
+          home.shortName;
         cardClone
           .querySelector(".cricket-home-team-logo")
           ?.setAttribute(
             "src",
-            (cricketTeamLogo[homeTeamShortName] ||
-              cricketTeamLogo[homeTeamName]) ??
+            (cricketTeamLogo[home.shortName] || cricketTeamLogo[home.name]) ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-away-team-name").textContent =
-          awayTeamShortName || match.teams[1];
+          away.shortName;
         cardClone
           .querySelector(".cricket-away-team-logo")
           ?.setAttribute(
             "src",
-            (cricketTeamLogo[awayTeamShortName] ||
-              cricketTeamLogo[awayTeamName]) ??
+            (cricketTeamLogo[away.shortName] || cricketTeamLogo[away.name]) ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-match-status").textContent =
@@ -566,12 +583,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         //for matches that are Live or Recently finished
         if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
           //getting scores for a specific team
-          function findScoreForTeam(scores, teamName) {
-            if (!scores || !teamName) return [];
+          function findScoreForTeam(scores, team) {
+            if (!scores || !team) return [];
             return scores.filter(
               (s) =>
-                s.inning &&
-                s.inning.toLowerCase().includes(teamName.toLowerCase()),
+                s.inning && s.inning.toLowerCase().includes(team.toLowerCase()),
             );
           }
 
@@ -610,8 +626,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
           }
 
-          const homeScores = findScoreForTeam(match.score, homeTeamName);
-          const awayScores = findScoreForTeam(match.score, awayTeamName);
+          const homeScores = findScoreForTeam(match.score, home.name);
+          const awayScores = findScoreForTeam(match.score, away.name);
 
           updateScoreDisplay(
             cricketHomeTeamScoreContainer,
