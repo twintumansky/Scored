@@ -1,7 +1,7 @@
 import {
   cricketTeamLogo,
   footballTeamLogo,
-  footballVenueLogo,
+  footballVenueLogos,
   footballLeagueEmblem,
 } from "./data/teamSportAssets.js";
 import {
@@ -376,7 +376,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           match.competition.name;
         cardClone
           .querySelector(".venue-flag")
-          ?.setAttribute("src", footballVenueLogo[footballVenue]);
+          ?.setAttribute("src", footballVenueLogos[footballVenue]);
         cardClone.querySelector(".venue").textContent = footballVenue ?? "NA";
         const liveStatusContainer = cardClone.querySelector(
           ".live-status-container",
@@ -457,65 +457,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       allowedLeagues: ["t20", "odi", "test"],
       leagueCode: (match) => match.matchType,
       leaguePriorities: { test: 200, odi: 150, t20: 100, default: 25 },
-      teamPriorities: {
-        IND: 25,
-        ENG: 25,
-        AUS: 25,
-        WI: 20,
-        PAK: 25,
-        RSA: 25,
-        NZ: 25,
-        SL: 20,
-        AFG: 20,
-        BAN: 20,
-        IRE: 20,
-        SCO: 15,
-        NED: 15,
-        AUT: 15,
-        BEL: 15,
-        CB: 15,
-        HK: 15,
-        IDN: 15,
-        JP: 15,
-        PH: 15,
-        NEP: 15,
-        BR: 10,
-        CM: 10,
-        CZE: 10,
-        DEN: 10,
-        FIN: 10,
-        FRA: 10,
-        LUX: 10,
-        MLT: 10,
-        MW: 10,
-        PORT: 10,
-        SLN: 10,
-        SRB: 10,
-        SWZ: 10,
-        UGA: 10,
-        DERB: 20,
-        DURH: 20,
-        ESX: 20,
-        GLAM: 20,
-        GLOU: 20,
-        HAM: 20,
-        KENT: 20,
-        LECS: 20,
-        LNCS: 20,
-        MDX: 20,
-        NOR: 20,
-        NOT: 20,
-        SOM: 20,
-        SUR: 20,
-        SUSS: 20,
-        WRCS: 20,
-        WRKS: 20,
-        YRK: 20,
-        ENGL: 10,
-        INA: 10,
-        WIA: 10,
-        "SA-A": 10,
-      },
+
       time: (match) => match.dateTimeGMT + "Z",
       isLive: (match) => match.matchStarted && match.matchEnded === false,
       isRecent: (match, timestamp) =>
@@ -529,6 +471,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const cricketAwayTeamScoreContainer = cardClone.querySelector(
           ".cricket-away-team-score-container",
         );
+        const versusElement = cardClone.querySelector(
+          ".cricket-versus-element",
+        );
+        const matchStatusLabel = cardClone.querySelector(".match-status-label");
         const cricketMatchStatus = cardClone.querySelector(
           ".cricket-match-status",
         );
@@ -678,9 +624,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             match.matchType,
           );
 
-          const matchStatusIndicator = (cricketMatchStatus.style.display =
-            "block");
+          versusElement.style.display = "none";
+          matchStatusLabel.style.display = "block";
+          // const matchStatus = match.matchEnded ? "Live" : "Finished";
+          // matchStatusLabel.textContent = matchStatus;
+          if (match.matchStarted && match.matchEnd) {
+            matchStatusLabel.textContent = "Finished";
+          }
           scheduleContainer.style.display = "none";
+          cricketMatchStatus.style.display = "block";
         } else {
           scheduleContainer.style.display = "flex";
 
