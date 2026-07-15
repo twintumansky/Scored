@@ -342,6 +342,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
         const footballVenue = match?.area?.name;
+        const matchStage = match?.stage;
+        let fixtureStage;
+        switch (matchStage) {
+          case "QUARTER_FINALS":
+            fixtureStage = "Quater Final";
+            break;
+          case "SEMI_FINALS":
+            fixtureStage = "Semi Final";
+            break;
+          case "THIRD_PLACE":
+            fixtureStage = "Third Place";
+            break;
+          case "FINAL":
+            fixtureStage = "Final";
+            break;
+          default:
+            fixtureStage = "Regular Season";
+        }
 
         cardClone
           .querySelector(".home-team-logo")
@@ -359,8 +377,9 @@ document.addEventListener("DOMContentLoaded", async () => {
               match.awayTeam.crest ||
               "/assets/logos/fixture_logos/default.svg",
           );
+
         cardClone.querySelector(".football-competition-info").textContent =
-          `${match.homeTeam.shortName || "TBD"} vs ${match.awayTeam.shortName || "TBD"} ` ??
+          `${match.homeTeam.shortName || "TBD"} vs ${match.awayTeam.shortName || "TBD"}, ${fixtureStage}` ??
           "TBD";
         cardClone.querySelector(".home-team-name").textContent =
           match.homeTeam.tla ?? "TBD";
@@ -643,8 +662,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           versusElement.style.display = "none";
           matchStatusLabel.style.display = "block";
-          // const matchStatus = match.matchEnded ? "Live" : "Finished";
-          // matchStatusLabel.textContent = matchStatus;
           if (match.matchStarted && match.matchEnded) {
             matchStatusLabel.textContent = "Finished";
           }
