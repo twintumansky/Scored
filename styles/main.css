@@ -669,6 +669,11 @@ nav li {
     padding: 0 1rem;
 }
 
+.match-status-label .finished {
+    color: #eda484;
+    background-color: #ffd09d66;
+}
+
 .cricket-home-team,
 .cricket-away-team {
     display: flex;
