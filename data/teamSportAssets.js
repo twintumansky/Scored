@@ -215,7 +215,7 @@ export const cricketTeamPriorities = {
   INA: 10,
   WIA: 10,
   "SA-A": 10,
-},
+};
 
 export const footballTeamLogo = {
   Default: "/assets/logos/fixture_logos/default.svg",

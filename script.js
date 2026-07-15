@@ -1,5 +1,6 @@
 import {
   cricketTeamLogo,
+  cricketTeamPriorities,
   footballTeamLogo,
   footballVenueLogos,
   footballLeagueEmblem,
@@ -69,10 +70,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         Array.isArray(fixture.teamInfo) &&
         fixture.teamInfo.length >= 2
       ) {
-        const homeTeam = fixture.teamInfo[1]?.shortname;
-        const awayTeam = fixture.teamInfo[0]?.shortname;
-        const homeTeamScore = config.teamPriorities[homeTeam] || 0;
-        const awayTeamScore = config.teamPriorities[awayTeam] || 0;
+        const homeTeam = fixture.teamInfo[1]?.name;
+        const awayTeam = fixture.teamInfo[0]?.name;
+        const homeTeamScore = cricketTeamPriorities[homeTeam] || 0;
+        const awayTeamScore = cricketTeamPriorities[awayTeam] || 0;
 
         score += homeTeamScore + awayTeamScore;
       }
@@ -90,15 +91,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else if (config.isUpcoming(fixture)) {
       // Prioritize matches happening sooner
       if (hoursUntilFixture <= 24) {
-        score += 300; // Next 24 hours
+        score += 200; // Next 24 hours
       } else if (hoursUntilFixture <= 48) {
-        score += 200; // 24-48 hours
+        score += 150; // 24-48 hours
       } else if (hoursUntilFixture <= 72) {
-        score += 150; // 48-72 hours
+        score += 100; // 48-72 hours
       } else if (hoursUntilFixture <= 96) {
-        score += 120; // 72-96 hours
+        score += 50; // 72-96 hours
       } else {
-        score += 100; // 96-120 hours
+        score += 25; // 96-120 hours
       }
     }
 
@@ -456,7 +457,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       apiEndpoint: "http://localhost:3000/api/matches/cricket",
       allowedLeagues: ["t20", "odi", "test"],
       leagueCode: (match) => match.matchType,
-      leaguePriorities: { test: 200, odi: 150, t20: 100, default: 25 },
+      leaguePriorities: { test: 500, odi: 250, t20: 100, default: 50 },
 
       time: (match) => match.dateTimeGMT + "Z",
       isLive: (match) => match.matchStarted && match.matchEnded === false,
@@ -556,7 +557,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".cricket-home-team-logo")
           ?.setAttribute(
             "src",
-            (cricketTeamLogo[home.shortName] || cricketTeamLogo[home.name]) ??
+            (cricketTeamLogo[home.name] || cricketTeamLogo[home.name]) ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-away-team-name").textContent =
@@ -565,7 +566,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".cricket-away-team-logo")
           ?.setAttribute(
             "src",
-            (cricketTeamLogo[away.shortName] || cricketTeamLogo[away.name]) ??
+            (cricketTeamLogo[away.name] || cricketTeamLogo[away.name]) ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-match-status").textContent =
