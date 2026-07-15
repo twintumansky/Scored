@@ -653,7 +653,7 @@ nav li {
     line-height: 1.5rem;
 }
 
-.live-match-indicator {
+.match-status-label {
     display: flex;
     justify-content: center;
     align-items: center;

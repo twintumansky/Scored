@@ -645,7 +645,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           matchStatusLabel.style.display = "block";
           // const matchStatus = match.matchEnded ? "Live" : "Finished";
           // matchStatusLabel.textContent = matchStatus;
-          if (match.matchStarted && match.matchEnd) {
+          if (match.matchStarted && match.matchEnded) {
             matchStatusLabel.textContent = "Finished";
           }
           scheduleContainer.style.display = "none";
