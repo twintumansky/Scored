@@ -664,7 +664,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           matchStatusLabel.style.display = "block";
           if (match.matchStarted && match.matchEnded) {
             matchStatusLabel.textContent = "Finished";
-            matchStatusLabel.classList.add(".finished");
+            matchStatusLabel.classList.add("finished");
           }
           scheduleContainer.style.display = "none";
           cricketMatchStatus.style.display = "block";

@@ -669,7 +669,7 @@ nav li {
     padding: 0 1rem;
 }
 
-.match-status-label .finished {
+.finished {
     color: #eda484;
     background-color: #ffd09d66;
 }
