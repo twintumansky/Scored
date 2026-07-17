@@ -80,6 +80,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const teams = Array.isArray(fixture?.teamInfo) ? fixture.teamInfo : [];
       const teamsFallback = Array.isArray(fixture?.teams) ? fixture.teams : [];
+      const homeTeam = teams[1]?.name;
+      const awayTeam = teams[0]?.name;
     }
 
     const timeFormat = config.time(fixture);
