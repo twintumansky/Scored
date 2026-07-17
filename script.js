@@ -65,18 +65,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (currentSport === "cricket") {
       // Add proper error handling for teamInfo
-      if (
-        fixture.teamInfo &&
-        Array.isArray(fixture.teamInfo) &&
-        fixture.teamInfo.length >= 2
-      ) {
-        const homeTeam = fixture.teamInfo[1]?.name;
-        const awayTeam = fixture.teamInfo[0]?.name;
-        const homeTeamScore = cricketTeamPriorities[homeTeam] || 0;
-        const awayTeamScore = cricketTeamPriorities[awayTeam] || 0;
+      // if (
+      //   fixture.teamInfo &&
+      //   Array.isArray(fixture.teamInfo) &&
+      //   fixture.teamInfo.length >= 2
+      // ) {
+      //   const homeTeam = fixture.teamInfo[1]?.name;
+      //   const awayTeam = fixture.teamInfo[0]?.name;
+      //   const homeTeamScore = cricketTeamPriorities[homeTeam] || 0;
+      //   const awayTeamScore = cricketTeamPriorities[awayTeam] || 0;
 
-        score += homeTeamScore + awayTeamScore;
-      }
+      //   score += homeTeamScore + awayTeamScore;
+      // }
+
+      const teams = Array.isArray(fixture?.teamInfo) ? fixture.teamInfo : [];
+      const teamsFallback = Array.isArray(fixture?.teams) ? fixture.teams : [];
     }
 
     const timeFormat = config.time(fixture);
