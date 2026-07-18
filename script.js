@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sportNavButtons = document.querySelectorAll(".nav-cards");
   const footer = document.querySelector("footer");
   let activeFilter = null; // Current filter for sport(Live, Upcoming, Finished)
-  let activeSport = "cricket"; // Currently active sport(Default - football)
+  let activeSport = "cricket"; // Currently active sport
 
   // Motorsport specific configurations
   const motorsportContainerButtons = document.querySelectorAll(
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function isRecentFixture(fixtureTimestamp, hoursBefore) {
     const now = Math.floor(Date.now() / 1000);
     const timeHoursAgo = hoursBefore * 60 * 60;
-    return fixtureTimestamp > now - timeHoursAgo; // // Check if the match time is within the specified time range
+    return fixtureTimestamp > now - timeHoursAgo;
   }
 
   function isUpcomingFixture(fixtureTimestamp) {
@@ -412,15 +412,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         const versusElement = cardClone.querySelector(
           ".football-versus-element",
         );
-        // const scheduledContainer = cardClone.querySelector(
-        //   ".scheduled-time-container"
-        // );
         const statusTextElement = cardClone.querySelector(
           ".football-match-status",
         );
 
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
-          // statusTextElement.textContent = "Match in progress...";
           scoreContainer.style.display = "flex";
           liveStatusContainer.style.display = "flex";
 
@@ -471,7 +467,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           });
           statusTextElement.textContent = `${matchDay} at ${matchTime}`;
         } else {
-          statusTextElement.textContent = match.status; // Fallback
+          statusTextElement.textContent = match.status;
           scoreContainer.style.display = "none";
         }
       },
