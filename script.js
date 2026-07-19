@@ -812,6 +812,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const container = isTeamSport(sport)
       ? liveScoresDiv
       : motorsportCardContainer;
+    const { from, to } = getDateRange();
 
     await contentTransition(container, () => {
       if (!config) {
@@ -823,11 +824,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
+    //For non-configured sport
     if (!config) {
-      return; // Stop if the sport wasn't configured
+      return;
     }
-
-    const { from, to } = getDateRange();
 
     // Updating active class for sport nav buttons
     sportNavButtons.forEach((btn) => {
