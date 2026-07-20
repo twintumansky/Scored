@@ -63,26 +63,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     score +=
       config.leaguePriorities[leagueCode] || config.leaguePriorities.default;
 
-    if (currentSport === "cricket") {
-      // Add proper error handling for teamInfo
-      // if (
-      //   fixture.teamInfo &&
-      //   Array.isArray(fixture.teamInfo) &&
-      //   fixture.teamInfo.length >= 2
-      // ) {
-      //   const homeTeam = fixture.teamInfo[1]?.name;
-      //   const awayTeam = fixture.teamInfo[0]?.name;
-      //   const homeTeamScore = cricketTeamPriorities[homeTeam] || 0;
-      //   const awayTeamScore = cricketTeamPriorities[awayTeam] || 0;
+    // if (currentSport === "cricket") {
+    //   //Add proper error handling for teamInfo
+    //   if (
+    //     fixture.teamInfo &&
+    //     Array.isArray(fixture.teamInfo) &&
+    //     fixture.teamInfo.length >= 2
+    //   ) {
+    //     const homeTeam = fixture.teamInfo[1]?.name;
+    //     const awayTeam = fixture.teamInfo[0]?.name;
+    //     const homeTeamScore = cricketTeamPriorities[homeTeam] || 0;
+    //     const awayTeamScore = cricketTeamPriorities[awayTeam] || 0;
 
-      //   score += homeTeamScore + awayTeamScore;
-      // }
+    //     score += homeTeamScore + awayTeamScore;
+    //   }
 
-      const teams = Array.isArray(fixture?.teamInfo) ? fixture.teamInfo : [];
-      const teamsFallback = Array.isArray(fixture?.teams) ? fixture.teams : [];
-      const homeTeam = teams[1]?.name;
-      const awayTeam = teams[0]?.name;
-    }
+    //   const teams = Array.isArray(fixture?.teamInfo) ? fixture.teamInfo : [];
+    //   const teamsFallback = Array.isArray(fixture?.teams) ? fixture.teams : [];
+    //   const homeTeam = teams[1]?.name;
+    //   const awayTeam = teams[0]?.name;
+    // }
 
     const timeFormat = config.time(fixture);
     const timestamp = Math.floor(new Date(timeFormat).getTime() / 1000);
@@ -90,24 +90,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     const hoursUntilFixture = (timestamp - now) / 3600; // Convert seconds to hours
 
     if (config.isLive(fixture)) {
-      score += 1000; // Live matches
+      score += 1000;
     } else if (config.isRecent(fixture)) {
-      score += 500; // Recent matches
+      score += 500;
     } else if (config.isUpcoming(fixture)) {
-      // Prioritize matches happening sooner
       if (hoursUntilFixture <= 24) {
-        score += 200; // Next 24 hours
+        score += 200;
       } else if (hoursUntilFixture <= 48) {
-        score += 150; // 24-48 hours
+        score += 150;
       } else if (hoursUntilFixture <= 72) {
-        score += 100; // 48-72 hours
+        score += 100;
       } else if (hoursUntilFixture <= 96) {
-        score += 50; // 72-96 hours
+        score += 50;
       } else {
-        score += 25; // 96-120 hours
+        score += 25;
       }
     }
-
     return score;
   }
 
@@ -119,9 +117,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function isUpcomingFixture(fixtureTimestamp) {
     const now = Math.floor(Date.now() / 1000);
-    const fiveDaysLater = now + 5 * 24 * 60 * 60;
+    const daysLater =
+      activeSport == "cricket"
+        ? now + 10 * 24 * 60 * 60
+        : now + 5 * 24 * 60 * 60;
 
-    return fixtureTimestamp >= now && fixtureTimestamp <= fiveDaysLater;
+    return fixtureTimestamp >= now && fixtureTimestamp <= daysLater;
   }
 
   function filterFixtures(fixtures, sport) {
@@ -503,49 +504,26 @@ document.addEventListener("DOMContentLoaded", async () => {
           ".schedule-container",
         );
 
-        // let home.shortName, home.name, away.shortName, away.name;
-
-        // if (
-        //   //checking for matches with valid team info
-        //   match.teamInfo &&
-        //   Array.isArray(match.teamInfo) &&
-        //   match.teamInfo.length >= 2
-        // ) {
-        //   home.shortName = match.teamInfo[0]?.shortname;
-        //   home.name = match.teamInfo[0]?.name;
-        //   away.shortName = match.teamInfo[1]?.shortname;
-        //   away.name = match.teamInfo[1]?.name;
-        // } else if (
-        //   // Fallback to teams array if teamInfo is not available
-        //   match.teams &&
-        //   Array.isArray(match.teams) &&
-        //   match.teams.length >= 2
-        // ) {
-
-        //   home.shortName = match.teams[0];
-        //   home.name = match.teams[0];
-        //   away.shortName = match.teams[1];
-        //   away.name = match.teams[1];
-        // } else {
-        //   // Default values if neither teamInfo nor teams are available
-        //   home.shortName = "TBD";
-        //   home.name = "TBD";
-        //   away.shortName = "TBD";
-        //   away.name = "TBD";
-        // }
-
         function getTeams(match) {
-          const teams = Array.isArray(match?.teamInfo) ? match.teamInfo : [];
-          const teamsFallback = Array.isArray(match?.teams) ? match.teams : [];
+          const teams =
+            Array.isArray(match?.teamInfo) && match.teamInfo.length == 2
+              ? match.teamInfo
+              : [];
+          console.log(teams);
+          const teamsFallback =
+            Array.isArray(match?.teams) && match.teamInfo.length == 2
+              ? match.teams
+              : [];
+          console.log(teamsFallback);
 
           return {
             home: {
-              name: teams[0].name || teamsFallback[0] || "TBD",
-              shortName: teams[0].shortname || teamsFallback[0] || "TBD",
+              name: teams[1]?.name || teamsFallback[0] || "TBD",
+              shortName: teams[1]?.shortname || teamsFallback[0] || "TBD",
             },
             away: {
-              name: teams[1].name || teamsFallback[1] || "TBD",
-              shortName: teams[1].shortname || teamsFallback[1] || "TBD",
+              name: teams[0]?.name || teamsFallback[1] || "TBD",
+              shortName: teams[0]?.shortname || teamsFallback[1] || "TBD",
             },
           };
         }
