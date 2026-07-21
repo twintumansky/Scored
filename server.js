@@ -34,14 +34,60 @@ app.get("/api/matches/football", async (req, res) => {
 
 // Proxy endpoint for cricket data
 app.get("/api/matches/cricket", async (req, res) => {
-  try {
-    const endpoints = [
-      `https://api.cricapi.com/v1/currentMatches?apikey=${process.env.CRICKET_API_KEY}&offset=0`,
-      `https://api.cricapi.com/v1/matches?apikey=${process.env.CRICKET_API_KEY}&offset=0`,
-    ];
+  // For cricapi endpoints
+  // try {
+  //   const endpoints = [
+  //     `https://api.cricapi.com/v1/currentMatches?apikey=${process.env.CRICKET_API_KEY}&offset=0`,
+  //     `https://api.cricapi.com/v1/matches?apikey=${process.env.CRICKET_API_KEY}&offset=0`,
+  //   ];
 
+  //   const cricketMatchData = endpoints.map((url) =>
+  //     fetch(url).then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error: ${response.status} for ${url}`);
+  //       }
+  //       return response.json();
+  //     }),
+  //   );
+
+  //   const settleMatchData = await Promise.allSettled(cricketMatchData);
+  //   const combinedMatches = settleMatchData.flatMap((result) => {
+  //     if (result.status === "fulfilled" && result.value.data) {
+  //       return result.value.data;
+  //     } else {
+  //       if (result.status === "rejected") {
+  //         console.error(`Failed to fetch cricket data:`, result.reason.message);
+  //       }
+  //       return [];
+  //     }
+  //   });
+  //   res.json({ matches: combinedMatches });
+  // } catch (error) {
+  //   console.error("General Proxy Error in /api/matches/cricket:", error);
+  //   res
+  //     .status(500)
+  //     .json({ error: "An unexpected error occurred on the server." });
+  // }
+
+  // For rapidapi/cricket endpoints
+  const endpoints = [
+    "https://cricket-live-line1.p.rapidapi.com/liveMatches",
+    "https://cricket-live-line1.p.rapidapi.com/upcomingMatches",
+    "https://cricket-live-line1.p.rapidapi.com/recentMatches",
+  ];
+
+  const options = {
+    method: "GET",
+    headers: {
+      "x-rapidapi-key": `${process.env.CRICKET_API_KEY_NEW}`,
+      "x-rapidapi-host": "cricket-live-line1.p.rapidapi.com",
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
     const cricketMatchData = endpoints.map((url) =>
-      fetch(url).then((response) => {
+      fetch(url, options).then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error: ${response.status} for ${url}`);
         }

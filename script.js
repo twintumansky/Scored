@@ -509,12 +509,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             Array.isArray(match?.teamInfo) && match.teamInfo.length == 2
               ? match.teamInfo
               : [];
-          console.log(teams);
           const teamsFallback =
             Array.isArray(match?.teams) && match.teamInfo.length == 2
               ? match.teams
               : [];
-          console.log(teamsFallback);
 
           return {
             home: {
