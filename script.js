@@ -673,9 +673,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     cricket: {
       templateId: "cricket-template",
       apiEndpoint: "http://localhost:3000/api/matches/cricket",
-      allowedLeagues: ["t20", "odi", "test"],
+      allowedLeagues: ["T20", "ODI", "Test"],
       leagueType: (match) => match.match_type,
-      leaguePriorities: { test: 500, odi: 250, t20: 100, default: 50 },
+      leaguePriorities: { Test: 500, ODI: 250, T20: 100, default: 50 },
 
       time: (match) => {
         const matchDate = match.date_wise;
@@ -707,56 +707,50 @@ document.addEventListener("DOMContentLoaded", async () => {
           ".schedule-container",
         );
 
-        function getTeams(match) {
-          const teams =
-            Array.isArray(match?.teamInfo) && match.teamInfo.length == 2
-              ? match.teamInfo
-              : [];
-          const teamsFallback =
-            Array.isArray(match?.teams) && match.teamInfo.length == 2
-              ? match.teams
-              : [];
+        // function getTeams(match) {
+        //   const teams =
+        //     Array.isArray(match?.teamInfo) && match.teamInfo.length == 2
+        //       ? match.teamInfo
+        //       : [];
+        //   const teamsFallback =
+        //     Array.isArray(match?.teams) && match.teamInfo.length == 2
+        //       ? match.teams
+        //       : [];
 
-          return {
-            home: {
-              name: teams[1]?.name || teamsFallback[0] || "TBD",
-              shortName: teams[1]?.shortname || teamsFallback[0] || "TBD",
-            },
-            away: {
-              name: teams[0]?.name || teamsFallback[1] || "TBD",
-              shortName: teams[0]?.shortname || teamsFallback[1] || "TBD",
-            },
-          };
-        }
+        //   return {
+        //     home: {
+        //       name: teams[1]?.name || teamsFallback[0] || "TBD",
+        //       shortName: teams[1]?.shortname || teamsFallback[0] || "TBD",
+        //     },
+        //     away: {
+        //       name: teams[0]?.name || teamsFallback[1] || "TBD",
+        //       shortName: teams[0]?.shortname || teamsFallback[1] || "TBD",
+        //     },
+        //   };
+        // }
 
-        const formatType =
-          match.matchType == "test"
-            ? "Test"
-            : match.matchType == "odi"
-              ? "ODI"
-              : "T20";
+        const homeTeam = match.team_a;
+        const homeTeamShortName = match.team_a_short;
+        const awayTeam = match.team_b;
+        const awayTeamShortName = match.team_b_short;
+        const formatType = match.match_type;
         const iconType =
-          match.matchType == "test"
+          formatType == "Test"
             ? "/assets/icons/cricket-icon-test.svg"
-            : match.matchType == "odi"
+            : formatType == "ODI"
               ? "/assets/icons/cricket-icon-odi.svg"
               : "/assets/icons/cricket-icon-t20.svg";
         const venueInfo = match.venue?.split(",")[1] ?? "TBD";
-        const matchTimestampSeconds = Math.floor(
-          new Date(match.dateTimeGMT + "Z").getTime() / 1000,
-        );
-
-        const { home, away } = getTeams(match);
 
         cardClone.querySelector(".cricket-competition-info").textContent =
-          `${home.name} vs ${away.name}` ?? "NA";
+          `${homeTeam} vs ${awayTeam}` ?? "NA";
         cardClone.querySelector(".cricket-home-team-name").textContent =
-          home.shortName;
+          homeTeamShortName;
         cardClone
           .querySelector(".cricket-home-team-logo")
           ?.setAttribute(
             "src",
-            (cricketTeamLogo[home.name] || cricketTeamLogo[home.name]) ??
+            cricketTeamLogo[homeTeam] ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-away-team-name").textContent =
@@ -765,11 +759,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".cricket-away-team-logo")
           ?.setAttribute(
             "src",
-            (cricketTeamLogo[away.name] || cricketTeamLogo[away.name]) ??
+            cricketTeamLogo[awayTeam] ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-match-status").textContent =
-          match.status ?? "Match status not available";
+          match.match_status ?? "Match status not available";
         cardClone
           .querySelector(".cricket-format-icon")
           ?.setAttribute(
@@ -781,7 +775,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         cardClone.querySelector(".cricket-venue-name").textContent = venueInfo;
 
         //for matches that are Live or Recently finished
-        if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
+        if (this.isLive(match) || this.isRecent(match)) {
           //getting scores for a specific team
           function findScoreForTeam(scores, team) {
             if (!scores || !team) return [];
