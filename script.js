@@ -677,15 +677,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       leagueType: (match) => match.match_type,
       leaguePriorities: { Test: 500, ODI: 250, T20: 100, default: 50 },
 
-      time: (match) => {
-        const matchDate = match.date_wise;
-        const cleanDate = matchDate.split(",")[0];
-        const matchTime = match.match_time;
-        const matchDateString = `${cleanDate} ${matchTime} +05:30`;
-        const formattedDate = new Date(matchDateString);
-
-        return formattedDate;
-      },
+      time: (match) => match.utc_date,
       isLive: (match) => match.match_status == "Live",
       isRecent: (match) => match.match_status == "Finished",
       isUpcoming: (match) => match.match_status == "Upcoming",
@@ -848,7 +840,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           cricketMatchStatus.style.display = "none";
 
-          const matchDate = new Date(this.time(match));
+          const matchDate = new Date(match.utc_date);
           cardClone.querySelector(".scheduled-time").textContent =
             matchDate.toLocaleTimeString("en-US", {
               hour: "2-digit",

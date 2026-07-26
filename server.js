@@ -32,6 +32,39 @@ app.get("/api/matches/football", async (req, res) => {
   }
 });
 
+function parseCricketISTToUTC(dateWise, matchDate, matchTime) {
+  try {
+    const currentYear = new Date().getFullYear();
+    let cleanDateStr = "";
+
+    if (dateWise) {
+      // Handles: "22 Jul 2026, Wednesday" -> "22 Jul 2026"
+      cleanDateStr = dateWise.replace(/,\s*\w+$/, "").trim();
+    } else if (matchDate) {
+      // Handles: "25-Jul" -> "25 Jul 2026"
+      cleanDateStr = `${matchDate.replace("-", " ")} ${currentYear}`;
+    } else {
+      return null;
+    }
+
+    // Default to midnight if time is missing or malformed
+    const timeStr = matchTime || "12:00 AM";
+
+    // Combine date + time + IST offset (+05:30)
+    const istFullString = `${cleanDateStr} ${timeStr} +05:30`;
+    const dateObj = new Date(istFullString);
+
+    if (isNaN(dateObj.getTime())) {
+      return null;
+    }
+
+    return dateObj.toISOString(); // e.g., "2026-07-22T07:30:00.000Z"
+  } catch (error) {
+    console.error("Error parsing match date:", error);
+    return null;
+  }
+}
+
 // Proxy endpoint for cricket data
 app.get("/api/matches/cricket", async (req, res) => {
   // For cricapi endpoints
@@ -107,16 +140,17 @@ app.get("/api/matches/cricket", async (req, res) => {
       }
     });
 
-    const currentYear = new Date().getFullYear();
     const normalizedMatches = combinedMatches.map((match) => {
-      if (!match.date_wise && match.match_date) {
-        const formattedDateStr = `${match.match_date.replace("-", " ")} ${currentYear}`;
-        return {
-          ...match,
-          date_wise: formattedDateStr,
-        };
-      }
-      return match;
+      const utcDate = parseCricketISTToUTC(
+        match.date_wise,
+        match.match_date,
+        match.match_time,
+      );
+
+      return {
+        ...match,
+        utc_date: utcDate, // Added standardized UTC ISO string key
+      };
     });
 
     res.json({ matches: normalizedMatches });
