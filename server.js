@@ -106,7 +106,21 @@ app.get("/api/matches/cricket", async (req, res) => {
         return [];
       }
     });
-    res.json({ matches: combinedMatches });
+
+    const currentYear = new Date().getFullYear();
+    const normalizedMatches = combinedMatches.map((match) => {
+      if (!match.date_wise && match.match_date) {
+        const formattedDateStr = `${match.match_date.replace("-", " ")} ${currentYear}`;
+        return {
+          ...match,
+          date_wise: formattedDateStr,
+        };
+      }
+      return match;
+    });
+
+    res.json({ matches: normalizedMatches });
+    console.log(`The combined matces are: ${normalizedMatches}`);
   } catch (error) {
     console.error("General Proxy Error in /api/matches/cricket:", error);
     res

@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const currentSport = sport;
     const config = sportConfig[currentSport];
     //League Priority
-    const leagueCode = config.leagueCode(fixture);
+    const leagueCode = config.leagueType(fixture);
     score +=
       config.leaguePriorities[leagueCode] || config.leaguePriorities.default;
 
@@ -706,29 +706,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const scheduleContainer = cardClone.querySelector(
           ".schedule-container",
         );
-
-        // function getTeams(match) {
-        //   const teams =
-        //     Array.isArray(match?.teamInfo) && match.teamInfo.length == 2
-        //       ? match.teamInfo
-        //       : [];
-        //   const teamsFallback =
-        //     Array.isArray(match?.teams) && match.teamInfo.length == 2
-        //       ? match.teams
-        //       : [];
-
-        //   return {
-        //     home: {
-        //       name: teams[1]?.name || teamsFallback[0] || "TBD",
-        //       shortName: teams[1]?.shortname || teamsFallback[0] || "TBD",
-        //     },
-        //     away: {
-        //       name: teams[0]?.name || teamsFallback[1] || "TBD",
-        //       shortName: teams[0]?.shortname || teamsFallback[1] || "TBD",
-        //     },
-        //   };
-        // }
-
         const homeTeam = match.team_a;
         const homeTeamShortName = match.team_a_short;
         const awayTeam = match.team_b;
@@ -754,7 +731,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-away-team-name").textContent =
-          away.shortName;
+          awayTeamShortName;
         cardClone
           .querySelector(".cricket-away-team-logo")
           ?.setAttribute(
@@ -776,67 +753,88 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         //for matches that are Live or Recently finished
         if (this.isLive(match) || this.isRecent(match)) {
-          //getting scores for a specific team
-          function findScoreForTeam(scores, team) {
-            if (!scores || !team) return [];
-            return scores.filter(
-              (s) =>
-                s.inning && s.inning.toLowerCase().includes(team.toLowerCase()),
-            );
-          }
+          const homeTeamScore = match.team_a_scores?.split("&") || [];
+          const homeTeamOver = match.team_a_over?.split("&") || [];
+          const homeTeamRuns =
+            homeTeamScore.length == 2
+              ? {
+                  firstInngsRuns: homeTeamScore[0].replace("-", "/"),
+                  secondInngsRuns: homeTeamScore[1].replace("-", "/"),
+                }
+              : {
+                  firstInngsRuns:
+                    homeTeamScore[0]?.replace("-", "/") || "Yet to bat",
+                };
+          const homeTeamOvers =
+            homeTeamOver.length == 2
+              ? {
+                  firstInngsOvers: homeTeamOver[0],
+                  secondInngsOvers: homeTeamScore[1],
+                }
+              : { firstInngsOvers: homeTeamScore[0] || "-" };
 
-          // Populating team's score container
+          const awayTeamScore = match.team_b_scores?.split("&") || [];
+          const awayTeamOver = match.team_b_over?.split("&") || [];
+          const awayTeamRuns =
+            awayTeamScore.length == 2
+              ? {
+                  firstInngsRuns: awayTeamScore[0].replace("-", "/"),
+                  secondInngsRuns: awayTeamScore[1].replace("-", "/"),
+                }
+              : {
+                  firstInngsRuns:
+                    awayTeamScore[0]?.replace("-", "/") || "Yet to bat",
+                };
+          const awayTeamOvers =
+            awayTeamOver.length == 2
+              ? {
+                  firstInngsOvers: awayTeamOver[0],
+                  secondInngsOvers: awayTeamScore[1],
+                }
+              : { firstInngsOvers: awayTeamScore[0] || "-" };
+
           function updateScoreDisplay(
             teamScoreContainer,
-            teamScores,
-            matchType,
+            teamRuns,
+            teamOvers,
+            formatType,
           ) {
             teamScoreContainer.style.display = "block";
-
-            const firstInnings = teamScores && teamScores[0];
-            const secondInnings = teamScores && teamScores[1];
-
             const inngs1Col = teamScoreContainer.querySelector(".innings-1");
             const inngs2Col = teamScoreContainer.querySelector(".innings-2");
 
-            if (firstInnings) {
-              inngs1Col.querySelector(".score-runs").textContent =
-                `${firstInnings.r}/${firstInnings.w}`;
-              inngs1Col.querySelector(".score-overs").textContent =
-                `(${firstInnings.o})`;
-            } else {
-              inngs1Col.querySelector(".score-runs").textContent = "Yet to bat";
-              inngs1Col.querySelector(".score-overs").textContent = "-";
-            }
+            inngs1Col.querySelector(".score-runs").textContent =
+              teamRuns.firstInngsRuns;
+            inngs1Col.querySelector(".score-overs").textContent =
+              teamOvers.firstInngsOvers;
 
-            if (matchType === "test" && secondInnings) {
+            if (formatType == "Test" && teamRuns.secondInngsRuns) {
               inngs2Col.querySelector(".score-runs").textContent =
-                `${secondInnings.r}/${secondInnings.w}`;
+                teamRuns.secondInngsRuns;
               inngs2Col.querySelector(".score-overs").textContent =
-                `(${secondInnings.o})`;
+                teamRuns.secondInngsOvers;
               inngs2Col.style.display = "flex";
             } else {
               inngs2Col.style.display = "none";
             }
           }
 
-          const homeScores = findScoreForTeam(match.score, home.name);
-          const awayScores = findScoreForTeam(match.score, away.name);
-
           updateScoreDisplay(
             cricketHomeTeamScoreContainer,
-            homeScores,
-            match.matchType,
+            homeTeamRuns,
+            homeTeamOvers,
+            formatType,
           );
           updateScoreDisplay(
             cricketAwayTeamScoreContainer,
-            awayScores,
-            match.matchType,
+            awayTeamRuns,
+            awayTeamOvers,
+            formatType,
           );
 
           versusElement.style.display = "none";
           matchStatusLabel.style.display = "block";
-          if (match.matchStarted && match.matchEnded) {
+          if (match.match_status == "Finished") {
             matchStatusLabel.textContent = "Finished";
             matchStatusLabel.classList.add("finished");
           }
@@ -850,7 +848,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           cricketMatchStatus.style.display = "none";
 
-          const matchDate = new Date(match.dateTimeGMT + "Z");
+          const matchDate = new Date(this.time(match));
           cardClone.querySelector(".scheduled-time").textContent =
             matchDate.toLocaleTimeString("en-US", {
               hour: "2-digit",
