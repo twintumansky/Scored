@@ -738,9 +738,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             homeTeamOver.length == 2
               ? {
                   firstInngsOvers: homeTeamOver[0],
-                  secondInngsOvers: homeTeamScore[1],
+                  secondInngsOvers: homeTeamOver[1],
                 }
-              : { firstInngsOvers: homeTeamScore[0] || "-" };
+              : { firstInngsOvers: homeTeamOver[0] || "-" };
 
           const awayTeamScore = match.team_b_scores?.split("&") || [];
           const awayTeamOver = match.team_b_over?.split("&") || [];
@@ -758,9 +758,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             awayTeamOver.length == 2
               ? {
                   firstInngsOvers: awayTeamOver[0],
-                  secondInngsOvers: awayTeamScore[1],
+                  secondInngsOvers: awayTeamOver[1],
                 }
-              : { firstInngsOvers: awayTeamScore[0] || "-" };
+              : { firstInngsOvers: awayTeamOver[0] || "-" };
 
           function updateScoreDisplay(
             teamScoreContainer,
