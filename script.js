@@ -47,42 +47,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getDateRange() {
     const today = new Date(Date.now());
-    const tenDaysLater = new Date(today);
-    tenDaysLater.setDate(today.getDate() + 10);
+    const dateFiveDaysLater = new Date(today);
+    dateFiveDaysLater.setDate(today.getDate() + 5);
     const formatDate = (date) => date.toISOString().split("T")[0];
 
-    return { from: formatDate(today), to: formatDate(tenDaysLater) };
+    return { from: formatDate(today), to: formatDate(dateFiveDaysLater) };
   }
 
   function calculateFixturePriority(fixture, sport) {
     let score = 0;
     const currentSport = sport;
     const config = sportConfig[currentSport];
-    //League Priority
     const leagueCode = config.leagueType(fixture);
     score +=
       config.leaguePriorities[leagueCode] || config.leaguePriorities.default;
-
-    // if (currentSport === "cricket") {
-    //   //Add proper error handling for teamInfo
-    //   if (
-    //     fixture.teamInfo &&
-    //     Array.isArray(fixture.teamInfo) &&
-    //     fixture.teamInfo.length >= 2
-    //   ) {
-    //     const homeTeam = fixture.teamInfo[1]?.name;
-    //     const awayTeam = fixture.teamInfo[0]?.name;
-    //     const homeTeamScore = cricketTeamPriorities[homeTeam] || 0;
-    //     const awayTeamScore = cricketTeamPriorities[awayTeam] || 0;
-
-    //     score += homeTeamScore + awayTeamScore;
-    //   }
-
-    //   const teams = Array.isArray(fixture?.teamInfo) ? fixture.teamInfo : [];
-    //   const teamsFallback = Array.isArray(fixture?.teams) ? fixture.teams : [];
-    //   const homeTeam = teams[1]?.name;
-    //   const awayTeam = teams[0]?.name;
-    // }
 
     const fixtureTime = config.time(fixture);
     const timestamp = Math.floor(new Date(fixtureTime).getTime() / 1000);
@@ -117,12 +95,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function isUpcomingFixture(fixtureTimestamp) {
     const now = Math.floor(Date.now() / 1000);
-    const daysLater =
-      activeSport == "cricket"
-        ? now + 10 * 24 * 60 * 60
-        : now + 5 * 24 * 60 * 60;
+    const dateFivedaysLater = now + 5 * 24 * 60 * 60;
 
-    return fixtureTimestamp >= now && fixtureTimestamp <= daysLater;
+    return fixtureTimestamp >= now && fixtureTimestamp <= dateFivedaysLater;
   }
 
   function filterFixtures(fixtures, sport) {
@@ -679,8 +654,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       time: (match) => match.utc_date,
       isLive: (match) => match.match_status == "Live",
-      isRecent: (match) => match.match_status == "Finished",
-      isUpcoming: (match) => match.match_status == "Upcoming",
+      isRecent: (match, timestamp) =>
+        match.match_status == "Finished" && isRecentFixture(timestamp, 24),
+      isUpcoming: (match, timestamp) =>
+        match.match_status == "Upcoming" && isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
         const cricketHomeTeamScoreContainer = cardClone.querySelector(
           ".cricket-home-team-score-container",
