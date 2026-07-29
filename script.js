@@ -651,11 +651,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       allowedLeagues: ["T20", "ODI", "Test"],
       leagueType: (match) => match.match_type,
       leaguePriorities: { Test: 500, ODI: 250, T20: 100, default: 50 },
-
       time: (match) => match.utc_date,
       isLive: (match) => match.match_status == "Live",
-      isRecent: (match, timestamp) =>
-        match.match_status == "Finished" && isRecentFixture(timestamp, 24),
+      isRecent: (match, timestamp) => {
+        const formatTimeline = match.match_type == "Test" ? 120 : 24;
+        return (
+          match.match_status == "Finished" &&
+          isRecentFixture(timestamp, formatTimeline)
+        );
+      },
       isUpcoming: (match, timestamp) =>
         match.match_status == "Upcoming" && isUpcomingFixture(timestamp),
       populateCard: function (cardClone, match) {
@@ -688,6 +692,9 @@ document.addEventListener("DOMContentLoaded", async () => {
               ? "/assets/icons/cricket-icon-odi.svg"
               : "/assets/icons/cricket-icon-t20.svg";
         const venueInfo = match.venue?.split(",")[1] ?? "TBD";
+        const matchTimestampSeconds = Math.floor(
+          new Date(match.utc_date).getTime() / 1000,
+        );
 
         cardClone.querySelector(".cricket-competition-info").textContent =
           `${homeTeam} vs ${awayTeam}, ${matchNo}` ?? "NA";
@@ -722,7 +729,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         cardClone.querySelector(".cricket-venue-name").textContent = venueInfo;
 
         //for matches that are Live or Recently finished
-        if (this.isLive(match) || this.isRecent(match)) {
+        if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
           const homeTeamScore = match.team_a_scores?.split("&") || [];
           const homeTeamOver = match.team_a_over?.split("&") || [];
           const homeTeamRuns =
@@ -776,13 +783,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             inngs1Col.querySelector(".score-runs").textContent =
               teamRuns.firstInngsRuns;
             inngs1Col.querySelector(".score-overs").textContent =
-              `${teamOvers.firstInngsOvers}`;
+              `(${teamOvers.firstInngsOvers})`;
 
             if (formatType == "Test" && teamRuns.secondInngsRuns) {
               inngs2Col.querySelector(".score-runs").textContent =
                 teamRuns.secondInngsRuns;
               inngs2Col.querySelector(".score-overs").textContent =
-                `${teamRuns.secondInngsOvers}`;
+                `(${teamOvers.secondInngsOvers})`;
               inngs2Col.style.display = "flex";
             } else {
               inngs2Col.style.display = "none";
