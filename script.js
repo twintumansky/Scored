@@ -680,6 +680,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const awayTeam = match.team_b;
         const awayTeamShortName = match.team_b_short;
         const formatType = match.match_type;
+        const matchNo = match.matchs;
         const iconType =
           formatType == "Test"
             ? "/assets/icons/cricket-icon-test.svg"
@@ -689,7 +690,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const venueInfo = match.venue?.split(",")[1] ?? "TBD";
 
         cardClone.querySelector(".cricket-competition-info").textContent =
-          `${homeTeam} vs ${awayTeam}` ?? "NA";
+          `${homeTeam} vs ${awayTeam}, ${matchNo}` ?? "NA";
         cardClone.querySelector(".cricket-home-team-name").textContent =
           homeTeamShortName;
         cardClone
@@ -775,13 +776,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             inngs1Col.querySelector(".score-runs").textContent =
               teamRuns.firstInngsRuns;
             inngs1Col.querySelector(".score-overs").textContent =
-              teamOvers.firstInngsOvers;
+              `${teamOvers.firstInngsOvers}`;
 
             if (formatType == "Test" && teamRuns.secondInngsRuns) {
               inngs2Col.querySelector(".score-runs").textContent =
                 teamRuns.secondInngsRuns;
               inngs2Col.querySelector(".score-overs").textContent =
-                teamRuns.secondInngsOvers;
+                `${teamRuns.secondInngsOvers}`;
               inngs2Col.style.display = "flex";
             } else {
               inngs2Col.style.display = "none";
