@@ -716,8 +716,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             cricketTeamLogo[awayTeam] ??
               "/assets/icons/default_cricket_icon.svg",
           );
-        cardClone.querySelector(".cricket-match-status").textContent =
-          match.match_status ?? "Match status not available";
+
+        // const match_status = match.need_run_ball || match.trail_lead;
+        // console.log(match_status);
+        // const isTeam = match_status.startsWith(homeTeam) ? homeTeam : awayTeam;
+        // console.log(isTeam);
+        // const statusStr = match_status
+        //   .slice(isTeam.length)
+        //   .trim()
+        //   .toLowerCase();
+        // const matchStatusText = `${isTeam} ${statusStr}`;
+
+        // cardClone.querySelector(".cricket-match-status").textContent =
+        //   matchStatusText || match.result || "Status Not Available";
         cardClone
           .querySelector(".cricket-format-icon")
           ?.setAttribute(
@@ -809,20 +820,35 @@ document.addEventListener("DOMContentLoaded", async () => {
             formatType,
           );
 
+          const match_status_str = match.need_run_ball || match.trail_lead;
+          console.log(match_status_str);
+          const isTeam = match_status_str?.startsWith(homeTeam)
+            ? homeTeam
+            : awayTeam;
+          console.log(isTeam);
+          const statusStr = match_status_str
+            ?.slice(isTeam.length)
+            .trim()
+            .toLowerCase();
+          const matchStatusText = `${isTeam} ${statusStr}`;
+
+          cardClone.querySelector(".cricket-match-status").textContent =
+            matchStatusText || match.result || "Status Not Available";
+
           versusElement.style.display = "none";
           matchStatusLabel.style.display = "block";
           if (match.match_status == "Finished") {
             matchStatusLabel.textContent = "Finished";
             matchStatusLabel.classList.add("finished");
+            cardClone.querySelector(".cricket-match-status").textContent =
+              match.result;
           }
           scheduleContainer.style.display = "none";
           cricketMatchStatus.style.display = "block";
         } else {
           scheduleContainer.style.display = "flex";
-
           cricketHomeTeamScoreContainer.style.display = "none";
           cricketAwayTeamScoreContainer.style.display = "none";
-
           cricketMatchStatus.style.display = "none";
 
           const matchDate = new Date(match.utc_date);
