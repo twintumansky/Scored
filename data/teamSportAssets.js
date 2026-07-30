@@ -260,7 +260,6 @@ export const footballTeamLogo = {
   Morocco: "/assets/logos/fixture_logos/morocco.svg",
   Brazil: "/assets/logos/fixture_logos/brazil.svg",
   Haiti: "/assets/logos/fixture_logos/haiti.svg",
-  Scotland: "/assets/logos/fixture_logos/scotland.svg",
   Turkey: "/assets/logos/fixture_logos/turkey.svg",
   Australia: "/assets/logos/fixture_logos/australia.svg",
   Curaçao: "/assets/logos/fixture_logos/curacao.svg",
