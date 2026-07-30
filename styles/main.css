@@ -735,6 +735,12 @@ nav li {
     color: #777;
 }
 
+.innings-breaker {
+    width: 2px;
+    height: 33px;
+    background-color: #dadada;
+}
+
 .schedule-container {
     justify-content: center;
     align-items: center;
