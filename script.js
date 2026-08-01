@@ -72,7 +72,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else if (config.isRecent(fixture)) {
       score += 500;
     } else if (config.isUpcoming(fixture)) {
-      if (hoursUntilFixture <= 24) {
+      if (hoursUntilFixture <= 6) {
+        score += 300;
+      } else if (hoursUntilFixture <= 24) {
         score += 200;
       } else if (hoursUntilFixture <= 48) {
         score += 150;
@@ -448,209 +450,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       },
     },
-    // cricket: {
-    //   templateId: "cricket-template",
-    //   apiEndpoint: "http://localhost:3000/api/matches/cricket",
-    //   allowedLeagues: ["t20", "odi", "test"],
-    //   leagueCode: (match) => match.matchType,
-    //   leaguePriorities: { test: 500, odi: 250, t20: 100, default: 50 },
-
-    //   time: (match) => match.dateTimeGMT + "Z",
-    //   isLive: (match) => match.matchStarted && match.matchEnded === false,
-    //   isRecent: (match, timestamp) =>
-    //     match.matchEnded && isRecentFixture(timestamp, 32),
-    //   isUpcoming: (match, timestamp) =>
-    //     match.matchStarted === false && isUpcomingFixture(timestamp),
-    //   populateCard: function (cardClone, match) {
-    //     const cricketHomeTeamScoreContainer = cardClone.querySelector(
-    //       ".cricket-home-team-score-container",
-    //     );
-    //     const cricketAwayTeamScoreContainer = cardClone.querySelector(
-    //       ".cricket-away-team-score-container",
-    //     );
-    //     const versusElement = cardClone.querySelector(
-    //       ".cricket-versus-element",
-    //     );
-    //     const matchStatusLabel = cardClone.querySelector(".match-status-label");
-    //     const cricketMatchStatus = cardClone.querySelector(
-    //       ".cricket-match-status",
-    //     );
-    //     const scheduleContainer = cardClone.querySelector(
-    //       ".schedule-container",
-    //     );
-
-    //     function getTeams(match) {
-    //       const teams =
-    //         Array.isArray(match?.teamInfo) && match.teamInfo.length == 2
-    //           ? match.teamInfo
-    //           : [];
-    //       const teamsFallback =
-    //         Array.isArray(match?.teams) && match.teamInfo.length == 2
-    //           ? match.teams
-    //           : [];
-
-    //       return {
-    //         home: {
-    //           name: teams[1]?.name || teamsFallback[0] || "TBD",
-    //           shortName: teams[1]?.shortname || teamsFallback[0] || "TBD",
-    //         },
-    //         away: {
-    //           name: teams[0]?.name || teamsFallback[1] || "TBD",
-    //           shortName: teams[0]?.shortname || teamsFallback[1] || "TBD",
-    //         },
-    //       };
-    //     }
-
-    //     const formatType =
-    //       match.matchType == "test"
-    //         ? "Test"
-    //         : match.matchType == "odi"
-    //           ? "ODI"
-    //           : "T20";
-    //     const iconType =
-    //       match.matchType == "test"
-    //         ? "/assets/icons/cricket-icon-test.svg"
-    //         : match.matchType == "odi"
-    //           ? "/assets/icons/cricket-icon-odi.svg"
-    //           : "/assets/icons/cricket-icon-t20.svg";
-    //     const venueInfo = match.venue?.split(",")[1] ?? "TBD";
-    //     const matchTimestampSeconds = Math.floor(
-    //       new Date(match.dateTimeGMT + "Z").getTime() / 1000,
-    //     );
-
-    //     const { home, away } = getTeams(match);
-
-    //     cardClone.querySelector(".cricket-competition-info").textContent =
-    //       `${home.name} vs ${away.name}` ?? "NA";
-    //     cardClone.querySelector(".cricket-home-team-name").textContent =
-    //       home.shortName;
-    //     cardClone
-    //       .querySelector(".cricket-home-team-logo")
-    //       ?.setAttribute(
-    //         "src",
-    //         (cricketTeamLogo[home.name] || cricketTeamLogo[home.name]) ??
-    //           "/assets/icons/default_cricket_icon.svg",
-    //       );
-    //     cardClone.querySelector(".cricket-away-team-name").textContent =
-    //       away.shortName;
-    //     cardClone
-    //       .querySelector(".cricket-away-team-logo")
-    //       ?.setAttribute(
-    //         "src",
-    //         (cricketTeamLogo[away.name] || cricketTeamLogo[away.name]) ??
-    //           "/assets/icons/default_cricket_icon.svg",
-    //       );
-    //     cardClone.querySelector(".cricket-match-status").textContent =
-    //       match.status ?? "Match status not available";
-    //     cardClone
-    //       .querySelector(".cricket-format-icon")
-    //       ?.setAttribute(
-    //         "src",
-    //         iconType ?? "/assets/icons/cricket-icon-test.svg",
-    //       );
-    //     cardClone.querySelector(".cricket-format-name").textContent =
-    //       formatType ?? "NA";
-    //     cardClone.querySelector(".cricket-venue-name").textContent = venueInfo;
-
-    //     //for matches that are Live or Recently finished
-    //     if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
-    //       //getting scores for a specific team
-    //       function findScoreForTeam(scores, team) {
-    //         if (!scores || !team) return [];
-    //         return scores.filter(
-    //           (s) =>
-    //             s.inning && s.inning.toLowerCase().includes(team.toLowerCase()),
-    //         );
-    //       }
-
-    //       // Populating team's score container
-    //       function updateScoreDisplay(
-    //         teamScoreContainer,
-    //         teamScores,
-    //         matchType,
-    //       ) {
-    //         teamScoreContainer.style.display = "block";
-
-    //         const firstInnings = teamScores && teamScores[0];
-    //         const secondInnings = teamScores && teamScores[1];
-
-    //         const inngs1Col = teamScoreContainer.querySelector(".innings-1");
-    //         const inngs2Col = teamScoreContainer.querySelector(".innings-2");
-
-    //         if (firstInnings) {
-    //           inngs1Col.querySelector(".score-runs").textContent =
-    //             `${firstInnings.r}/${firstInnings.w}`;
-    //           inngs1Col.querySelector(".score-overs").textContent =
-    //             `(${firstInnings.o})`;
-    //         } else {
-    //           inngs1Col.querySelector(".score-runs").textContent = "Yet to bat";
-    //           inngs1Col.querySelector(".score-overs").textContent = "-";
-    //         }
-
-    //         if (matchType === "test" && secondInnings) {
-    //           inngs2Col.querySelector(".score-runs").textContent =
-    //             `${secondInnings.r}/${secondInnings.w}`;
-    //           inngs2Col.querySelector(".score-overs").textContent =
-    //             `(${secondInnings.o})`;
-    //           inngs2Col.style.display = "flex";
-    //         } else {
-    //           inngs2Col.style.display = "none";
-    //         }
-    //       }
-
-    //       const homeScores = findScoreForTeam(match.score, home.name);
-    //       const awayScores = findScoreForTeam(match.score, away.name);
-
-    //       updateScoreDisplay(
-    //         cricketHomeTeamScoreContainer,
-    //         homeScores,
-    //         match.matchType,
-    //       );
-    //       updateScoreDisplay(
-    //         cricketAwayTeamScoreContainer,
-    //         awayScores,
-    //         match.matchType,
-    //       );
-
-    //       versusElement.style.display = "none";
-    //       matchStatusLabel.style.display = "block";
-    //       if (match.matchStarted && match.matchEnded) {
-    //         matchStatusLabel.textContent = "Finished";
-    //         matchStatusLabel.classList.add("finished");
-    //       }
-    //       scheduleContainer.style.display = "none";
-    //       cricketMatchStatus.style.display = "block";
-    //     } else {
-    //       scheduleContainer.style.display = "flex";
-
-    //       cricketHomeTeamScoreContainer.style.display = "none";
-    //       cricketAwayTeamScoreContainer.style.display = "none";
-
-    //       cricketMatchStatus.style.display = "none";
-
-    //       const matchDate = new Date(match.dateTimeGMT + "Z");
-    //       cardClone.querySelector(".scheduled-time").textContent =
-    //         matchDate.toLocaleTimeString("en-US", {
-    //           hour: "2-digit",
-    //           minute: "2-digit",
-    //           hour12: true,
-    //         });
-    //       cardClone.querySelector(".scheduled-day").textContent =
-    //         matchDate.toLocaleDateString("en-US", {
-    //           weekday: "short",
-    //           month: "short",
-    //           day: "numeric",
-    //         });
-    //     }
-    //   },
-    // },
-
     cricket: {
       templateId: "cricket-template",
       apiEndpoint: "http://localhost:3000/api/matches/cricket",
       allowedLeagues: ["T20", "ODI", "Test"],
       leagueType: (match) => match.match_type,
-      leaguePriorities: { Test: 500, ODI: 250, T20: 100, default: 50 },
+      leaguePriorities: { Test: 300, ODI: 200, T20: 150, default: 50 },
       time: (match) => match.utc_date,
       isLive: (match) => match.match_status == "Live",
       isRecent: (match, timestamp) => {
@@ -679,9 +484,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         const scheduleContainer = cardClone.querySelector(
           ".schedule-container",
         );
-        const homeTeam = match.team_a;
+        const homeTeam = match.team_a.trim();
         const homeTeamShortName = match.team_a_short;
-        const awayTeam = match.team_b;
+        const awayTeam = match.team_b.trim();
         const awayTeamShortName = match.team_b_short;
         const formatType = match.match_type;
         const matchNo = match.matchs;
@@ -716,19 +521,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             cricketTeamLogo[awayTeam] ??
               "/assets/icons/default_cricket_icon.svg",
           );
-
-        // const match_status = match.need_run_ball || match.trail_lead;
-        // console.log(match_status);
-        // const isTeam = match_status.startsWith(homeTeam) ? homeTeam : awayTeam;
-        // console.log(isTeam);
-        // const statusStr = match_status
-        //   .slice(isTeam.length)
-        //   .trim()
-        //   .toLowerCase();
-        // const matchStatusText = `${isTeam} ${statusStr}`;
-
-        // cardClone.querySelector(".cricket-match-status").textContent =
-        //   matchStatusText || match.result || "Status Not Available";
         cardClone
           .querySelector(".cricket-format-icon")
           ?.setAttribute(
