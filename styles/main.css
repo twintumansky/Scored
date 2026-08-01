@@ -285,7 +285,8 @@ footer {
     background-color: #dddddd;
     margin: 0 1rem;
     font-size: 0.8rem;
-    color: #5c5b5b;
+    font-weight: 500;
+    color: #787878;
     transition: all 0.2s ease;
     font-family: "Hanken Grotesk", sans-serif;
 }
@@ -659,6 +660,7 @@ nav li {
     align-items: center;
     align-self: center;
     font-size: 0.75rem;
+    font-weight: 500;
     line-height: 1.5rem;
     text-align: center;
     border-radius: 0.5rem;
@@ -667,6 +669,7 @@ nav li {
     width: auto;
     height: 1.5rem;
     padding: 0 1rem;
+    letter-spacing: 0.02rem
 }
 
 .finished {
