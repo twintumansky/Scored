@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (config.isLive(fixture)) {
       score += 1000;
     } else if (config.isRecent(fixture)) {
-      score += 500;
+      score += 700;
     } else if (config.isUpcoming(fixture)) {
       if (hoursUntilFixture <= 6) {
         score += 300;
@@ -98,7 +98,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   function isUpcomingFixture(fixtureTimestamp) {
     const now = Math.floor(Date.now() / 1000);
     const dateFivedaysLater = now + 5 * 24 * 60 * 60;
-
     return fixtureTimestamp >= now && fixtureTimestamp <= dateFivedaysLater;
   }
 
@@ -510,6 +509,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ?.setAttribute(
             "src",
             cricketTeamLogo[homeTeam] ??
+              `${match.team_a_img}` ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-away-team-name").textContent =
@@ -519,6 +519,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ?.setAttribute(
             "src",
             cricketTeamLogo[awayTeam] ??
+              `${match.team_b_img}` ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone
