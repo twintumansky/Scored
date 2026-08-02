@@ -11,15 +11,14 @@ import {
   driverImages,
 } from "./data/motorsportAssets.js";
 
-//Config-driven-logic
 document.addEventListener("DOMContentLoaded", async () => {
   const preloader = document.getElementById("preloader");
+  const sportNavButtons = document.querySelectorAll(".nav-cards");
   const liveScoresDiv = document.querySelector("#fixtures-container");
   const statusButtons = document.querySelectorAll(".container-buttons");
-  const sportNavButtons = document.querySelectorAll(".nav-cards");
   const footer = document.querySelector("footer");
-  let activeFilter = null; // Current filter for sport(Live, Upcoming, Finished)
-  let activeSport = "cricket"; // Currently active sport
+  let activeFilter = null; // (Live, Upcoming, Finished)
+  let activeSport = "cricket"; // Selected sport
 
   // Motorsport specific configurations
   const motorsportContainerButtons = document.querySelectorAll(
@@ -50,7 +49,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const dateFiveDaysLater = new Date(today);
     dateFiveDaysLater.setDate(today.getDate() + 5);
     const formatDate = (date) => date.toISOString().split("T")[0];
-
     return { from: formatDate(today), to: formatDate(dateFiveDaysLater) };
   }
 
@@ -65,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const fixtureTime = config.time(fixture);
     const timestamp = Math.floor(new Date(fixtureTime).getTime() / 1000);
     const now = Math.floor(Date.now() / 1000);
-    const hoursUntilFixture = (timestamp - now) / 3600; // Convert seconds to hours
+    const hoursUntilFixture = (timestamp - now) / 3600;
 
     if (config.isLive(fixture)) {
       score += 1000;
@@ -142,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function filterFixturesByStatus(fixtures, filterStatus, sport) {
     const currentSport = sport;
     const config = sportConfig[currentSport];
-    if (!filterStatus) return fixtures; // Return all matches if no filter
+    if (!filterStatus) return fixtures;
 
     return fixtures.filter((fixture) => {
       const timeFormat = config.time(fixture);
@@ -661,7 +659,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       },
     },
-
     motorsport: {
       templateId: [
         "motorsport-races-template",
@@ -774,7 +771,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     },
   };
 
-  // Fetching of fixtures from sport specific APIs
+  // Fetching of fixtures
   async function fetchFixtures(sport) {
     activeSport = sport;
     const config = sportConfig[activeSport];
