@@ -614,12 +614,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             formatType,
           );
 
-          const match_status_str = match.need_run_ball || match.trail_lead;
-          console.log(match_status_str);
+          const match_status_str =
+            match.need_run_ball || match.trail_lead || match.toss;
           const isTeam = match_status_str?.startsWith(homeTeam)
             ? homeTeam
             : awayTeam;
-          console.log(isTeam);
           const statusStr = match_status_str
             ?.slice(isTeam.length)
             .trim()
