@@ -607,8 +607,11 @@ nav li {
 
 .cricket-match-status {
     margin-bottom: 0.2rem;
+    padding: 0 0.5rem;
+    border-radius: 4px;
     font-size: 0.80rem;
     color: #777;
+    background-color: #F7EAFC;
 }
 
 .cricket-match-info {
