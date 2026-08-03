@@ -144,10 +144,10 @@ footer {
     border-radius: 1.25rem;
     padding: 0.1rem 1.25rem 0.02rem 1.25rem;
     margin: 0 0.80rem;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     letter-spacing: 0.02rem;
     overflow: hidden;
-    background-color: #cecece;
+    background-color: #d2d2d2;
     transition: transform 0.15s ease-out;
     will-change: transform;
     backface-visibility: hidden;
@@ -160,7 +160,7 @@ footer {
 
     &:hover {
         cursor: pointer;
-        background-color: #a8a8a8;
+        background-color: #b7b7b7;
     }
 }
 
@@ -172,7 +172,7 @@ footer {
 }
 
 .nav-cards.active {
-    background-color: #a8a8a8;
+    background-color: #b7b7b7;
 }
 
 .nav-cards.active .nav-cards-label {
