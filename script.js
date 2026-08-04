@@ -500,8 +500,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         cardClone.querySelector(".cricket-competition-info").textContent =
           `${homeTeam} vs ${awayTeam}, ${matchNo}` ?? "NA";
-        // cardClone.querySelector(".cricket-series-info").textContent =
-        //   match.;
+        cardClone.querySelector(".cricket-series-info").textContent =
+          match?.series;
         cardClone.querySelector(".cricket-home-team-name").textContent =
           homeTeamShortName;
         cardClone
@@ -532,7 +532,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           formatType ?? "NA";
         cardClone.querySelector(".cricket-venue-name").textContent = venueInfo;
 
-        //for matches that are Live or Recently finished
         if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
           const homeTeamScore = match.team_a_scores?.split("&") || [];
           const homeTeamOver = match.team_a_over?.split("&") || [];
