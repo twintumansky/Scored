@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const statusButtons = document.querySelectorAll(".container-buttons");
   const footer = document.querySelector("footer");
   let activeFilter = null; // (Live, Upcoming, Finished)
-  let activeSport = "cricket"; // Selected sport
+  let activeSport = "football"; // Selected sport
 
   // Motorsport specific configurations
   const motorsportContainerButtons = document.querySelectorAll(
@@ -500,6 +500,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         cardClone.querySelector(".cricket-competition-info").textContent =
           `${homeTeam} vs ${awayTeam}, ${matchNo}` ?? "NA";
+        // cardClone.querySelector(".cricket-series-info").textContent =
+        //   match.;
         cardClone.querySelector(".cricket-home-team-name").textContent =
           homeTeamShortName;
         cardClone
