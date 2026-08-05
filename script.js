@@ -589,7 +589,8 @@ document.addEventListener("DOMContentLoaded", async () => {
               `(${teamOvers.firstInngsOvers})`;
 
             if (formatType == "Test" && teamRuns.secondInngsRuns) {
-              const visualBreaker = cardClone.querySelector(".innings-breaker");
+              const visualBreaker =
+                cardClone.querySelectorAll(".innings-breaker");
               visualBreaker.style.display = "block";
               inngs2Col.querySelector(".score-runs").textContent =
                 teamRuns.secondInngsRuns;
