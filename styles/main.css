@@ -632,7 +632,7 @@ nav li {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 0.5rem 0;
+    margin-bottom: 0.5rem;
     min-height: 5rem;
 }
 
