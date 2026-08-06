@@ -359,6 +359,7 @@ footer {
     width: 100%;
     background: #ffffff;
     border-radius: 0.75rem;
+    padding-top: 0.5rem;
     margin: 1rem 0;
     overflow: hidden;
     display: flex;
@@ -383,7 +384,7 @@ footer {
 .football-icon {
     width: 1.1rem;
     height: 1.1rem;
-    margin: 0.5rem 0rem;
+    margin: 0.1rem 0 0.30rem 0;
 }
 
 .fixture-card-info {
@@ -392,6 +393,7 @@ footer {
     align-items: center;
     flex-grow: 3;
     position: relative;
+    margin: 0.75rem 0 0.5rem;
 }
 
 .home-team {
@@ -432,10 +434,9 @@ footer {
 }
 
 .football-match-status {
-    margin-top: 0.75rem;
+    color: #777;
     margin-bottom: 0.3rem;
     font-size: 0.80rem;
-    color: #777;
     text-align: center;
     white-space: normal;
     word-wrap: break-word;
