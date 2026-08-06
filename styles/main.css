@@ -632,7 +632,7 @@ nav li {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin: 0.25rem 0 0.5rem;
     min-height: 5rem;
 }
 
@@ -679,8 +679,10 @@ nav li {
 }
 
 .finished {
-    color: #eda484;
-    background-color: #ffd09d66;
+    /* color: #eda484;
+    background-color: #ffd09d66; */
+    color: #57238f66;
+    background-color: #d4bbef66;
 }
 
 .cricket-home-team,
