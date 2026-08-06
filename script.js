@@ -591,7 +591,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (formatType == "Test" && teamRuns.secondInngsRuns) {
               const visualBreaker =
                 cardClone.querySelectorAll(".innings-breaker");
-              visualBreaker.style.display = "block";
+              visualBreaker.forEach((breaker) => {
+                breaker.style.display = "block";
+              });
               inngs2Col.querySelector(".score-runs").textContent =
                 teamRuns.secondInngsRuns;
               inngs2Col.querySelector(".score-overs").textContent =
