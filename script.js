@@ -548,8 +548,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           const homeTeamOvers =
             homeTeamOver.length == 2
               ? {
-                  firstInngsOvers: homeTeamOver[0],
-                  secondInngsOvers: homeTeamOver[1],
+                  firstInngsOvers: homeTeamOver[0].trim(),
+                  secondInngsOvers: homeTeamOver[1].trim(),
                 }
               : { firstInngsOvers: homeTeamOver[0] || "-" };
 
@@ -568,8 +568,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           const awayTeamOvers =
             awayTeamOver.length == 2
               ? {
-                  firstInngsOvers: awayTeamOver[0],
-                  secondInngsOvers: awayTeamOver[1],
+                  firstInngsOvers: awayTeamOver[0].trim(),
+                  secondInngsOvers: awayTeamOver[1].trim(),
                 }
               : { firstInngsOvers: awayTeamOver[0] || "-" };
 
