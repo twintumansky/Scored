@@ -309,6 +309,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         PD: 80,
         BL1: 70,
         BSA: 60,
+        PPL: 60,
         CLI: 50,
         default: 30,
       },
