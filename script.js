@@ -475,7 +475,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const versusElement = cardClone.querySelector(
           ".cricket-versus-element",
         );
-        const matchStatusLabel = cardClone.querySelector(".match-status-label");
+        // const matchStatusLabel = cardClone.querySelector(".match-status-label");
+        const matchStatusLabel = cardClone.querySelector(
+          ".live-status-container",
+        );
         const cricketMatchStatus = cardClone.querySelector(
           ".cricket-match-status",
         );
@@ -632,6 +635,14 @@ document.addEventListener("DOMContentLoaded", async () => {
           cardClone.querySelector(".cricket-match-status").textContent =
             matchStatusText || match.result || "Status Not Available";
 
+          // versusElement.style.display = "none";
+          // matchStatusLabel.style.display = "block";
+          // if (match.match_status == "Finished") {
+          //   matchStatusLabel.textContent = "Finished";
+          //   matchStatusLabel.classList.add("finished");
+          //   cardClone.querySelector(".cricket-match-status").textContent =
+          //     match.result;
+          // }
           versusElement.style.display = "none";
           matchStatusLabel.style.display = "block";
           if (match.match_status == "Finished") {
@@ -640,6 +651,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             cardClone.querySelector(".cricket-match-status").textContent =
               match.result;
           }
+
           scheduleContainer.style.display = "none";
           cricketMatchStatus.style.display = "block";
         } else {
