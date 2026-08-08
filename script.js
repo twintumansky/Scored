@@ -380,7 +380,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ?.setAttribute("src", footballVenueLogos[footballVenue]);
         cardClone.querySelector(".venue").textContent = footballVenue ?? "NA";
         const matchStatusContainer = cardClone.querySelector(
-          ".match-status-container",
+          ".football-live-status-container",
         );
         const homeTeamScore = match.score?.fullTime?.home;
         const awayTeamScore = match.score?.fullTime?.away;

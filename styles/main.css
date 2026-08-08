@@ -387,13 +387,17 @@ footer {
     margin: 0.1rem 0 0.30rem 0;
 }
 
+.football-competition-info {
+    margin-bottom: 0.75rem;
+}
+
 .fixture-card-info {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     flex-grow: 3;
     position: relative;
-    margin: 0.75rem 0 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .home-team {
@@ -450,9 +454,8 @@ footer {
     letter-spacing: 0.05rem;
     color: #65B9A2;
     background-color: #DFF5EF;
-    border-radius: 8px;
-    padding: 0px 8px;
-    margin: 5px;
+    border-radius: 0.5rem;
+    padding: 1px 8px 1px 9px;
     gap: 2px;
 }
 
@@ -667,7 +670,11 @@ nav li {
     color: #65B9A2;
     background-color: #DFF5EF;
     height: 1.5rem;
-    letter-spacing: 0.02rem
+    letter-spacing: 0.02rem;
+    text-transform: uppercase;
+    padding: 0px 0.5rem;
+    margin: 5px;
+    gap: 2px;
 }
 
 .finished-status-container {
@@ -680,6 +687,10 @@ nav li {
     letter-spacing: 0.02rem;
     color: #57238f66;
     background-color: #d4bbef66;
+    text-transform: uppercase;
+    padding: 0px 0.5rem;
+    margin: 5px;
+    gap: 2px;
 }
 
 .cricket-home-team,
