@@ -379,8 +379,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".venue-flag")
           ?.setAttribute("src", footballVenueLogos[footballVenue]);
         cardClone.querySelector(".venue").textContent = footballVenue ?? "NA";
-        const liveStatusContainer = cardClone.querySelector(
-          ".live-status-container",
+        const matchStatusContainer = cardClone.querySelector(
+          ".match-status-container",
         );
         const homeTeamScore = match.score?.fullTime?.home;
         const awayTeamScore = match.score?.fullTime?.away;
@@ -394,7 +394,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
           scoreContainer.style.display = "flex";
-          liveStatusContainer.style.display = "flex";
+          matchStatusContainer.style.display = "flex";
 
           if (homeTeamScore === awayTeamScore) {
             statusTextElement.textContent = "Scores are equal";
@@ -418,16 +418,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
 
           scoreContainer.style.display = "flex";
-          liveStatusContainer.style.display = "flex";
-          liveStatusContainer.textContent = "FT";
-          liveStatusContainer.style.color = "#be590b7d";
-          liveStatusContainer.style.backgroundColor = "#ebc3a47d";
+          matchStatusContainer.style.display = "flex";
+          matchStatusContainer.textContent = "FT";
+          matchStatusContainer.style.color = "#be590b7d";
+          matchStatusContainer.style.backgroundColor = "#ebc3a47d";
           cardClone.querySelector(".home-team-score").textContent =
             match.score?.fullTime?.home ?? "0";
           cardClone.querySelector(".away-team-score").textContent =
             match.score?.fullTime?.away ?? "0";
         } else if (match.status === "SCHEDULED" || match.status === "TIMED") {
-          liveStatusContainer.style.display = "none";
+          matchStatusContainer.style.display = "none";
           scoreContainer.style.display = "none";
           versusElement.style.display = "block";
           const matchDate = new Date(match.utcDate);
@@ -639,10 +639,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           matchStatusContainer.style.display = "flex";
           blinkingQuote.style.display = "block";
           if (match.match_status == "Finished") {
-            matchStatusLabel.textContent = "Finished";
-            matchStatusContainer.classList.add("finished");
-            matchStatusLabel.classList.add("finished");
-            blinkingQuote.style.display = "none";
+            cardClone.querySelector(
+              ".finished-status-container",
+            ).style.display = "flex";
             cardClone.querySelector(".cricket-match-status").textContent =
               match.result;
           }
