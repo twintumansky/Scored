@@ -475,7 +475,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const versusElement = cardClone.querySelector(
           ".cricket-versus-element",
         );
-        // const matchStatusLabel = cardClone.querySelector(".match-status-label");
         const matchStatusContainer = cardClone.querySelector(
           ".live-status-container",
         );
@@ -641,7 +640,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           blinkingQuote.style.display = "block";
           if (match.match_status == "Finished") {
             matchStatusLabel.textContent = "Finished";
+            matchStatusContainer.classList.add("finished");
             matchStatusLabel.classList.add("finished");
+            blinkingQuote.style.display = "none";
             cardClone.querySelector(".cricket-match-status").textContent =
               match.result;
           }
