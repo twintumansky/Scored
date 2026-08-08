@@ -633,20 +633,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             .trim()
             .toLowerCase();
           const matchStatusText = `${isTeam} ${statusStr}`;
-
           cardClone.querySelector(".cricket-match-status").textContent =
             matchStatusText || match.result || "Status Not Available";
 
-          // versusElement.style.display = "none";
-          // matchStatusLabel.style.display = "block";
-          // if (match.match_status == "Finished") {
-          //   matchStatusLabel.textContent = "Finished";
-          //   matchStatusLabel.classList.add("finished");
-          //   cardClone.querySelector(".cricket-match-status").textContent =
-          //     match.result;
-          // }
           versusElement.style.display = "none";
-          matchStatusContainer.style.display = "block";
+          matchStatusContainer.style.display = "flex";
           blinkingQuote.style.display = "block";
           if (match.match_status == "Finished") {
             matchStatusLabel.textContent = "Finished";

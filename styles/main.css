@@ -445,26 +445,23 @@ footer {
 
 .live-status-container {
     font-weight: 700;
-    color: #39c682;
     text-transform: uppercase;
     font-size: 0.75rem;
     letter-spacing: 0.05rem;
-    background-color: #dff1e8;
-    border-radius: 10px;
-    padding: 2px 8px;
+    color: #65B9A2;
+    background-color: #DFF5EF;
+    border-radius: 8px;
+    padding: 0px 8px;
     margin: 5px;
-    gap: 1px;
+    gap: 2px;
 }
 
 .blinking-quote {
-    height: 6px;
-    width: 2px;
-    margin-top: 3px;
-    flex-shrink: 0;
-    font-weight: 100;
-    background-color: #39c682;
+    height: 0.25px;
+    width: 0.1rem;
+    margin-top: 6px;
+    background-color: #65B9A2;
     animation: blink 1s step-end infinite;
-    line-height: 1;
 }
 
 @keyframes blink {
@@ -662,10 +659,6 @@ nav li {
 }
 
 .match-status-label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
     font-size: 0.75rem;
     font-weight: 500;
     line-height: 1.5rem;
@@ -673,9 +666,7 @@ nav li {
     border-radius: 0.5rem;
     color: #65B9A2;
     background-color: #DFF5EF;
-    width: auto;
     height: 1.5rem;
-    padding: 0 1rem;
     letter-spacing: 0.02rem
 }
 
