@@ -639,6 +639,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           matchStatusContainer.style.display = "flex";
           blinkingQuote.style.display = "block";
           if (match.match_status == "Finished") {
+            matchStatusContainer.style.display = "none";
             cardClone.querySelector(
               ".finished-status-container",
             ).style.display = "flex";

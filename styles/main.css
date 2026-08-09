@@ -388,6 +388,9 @@ footer {
 }
 
 .football-competition-info {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6c6b6b;
     margin-bottom: 0.75rem;
 }
 
@@ -599,7 +602,7 @@ nav li {
     margin: 0.1rem 0 0.30rem 0;
 }
 
-.competition-info {
+.cricket-competition-info {
     font-size: 0.9rem;
     font-weight: 600;
     color: #6c6b6b;
