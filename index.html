@@ -310,7 +310,53 @@
         </template>
         <template id="tennis-template"></template>
         <template id="badminton-template"></template>
-        <template id="basketball-template"></template>
+        <template id="basketball-template">
+            <div class="basketball-match-card">
+                <div class="basketball-fixture-info">
+                    <img class="basketball-icon" src="/assets/icons/cricket-icon.svg" />
+                    <div class="basketball-competition-info"></div>
+                    <div class="basketball-series-info"></div>
+                    <div class="basketball-team-info">
+                        <div class="basketball-home-team">
+                            <div class="basketball-home-team-container">
+                                <img class="basketball-home-team-logo" src="" alt="Home Team" />
+                                <div class="basketball-home-team-name"></div>
+                            </div>
+                            <div class="basketball-home-team-score-container" style="display: none;"></div>
+                        </div>
+                        <span class="basketball-versus-element">vs</span>
+                        <div class="basketball-live-status-container" style="display: none;">
+                            <span class="match-status-label">Live</span>
+                            <span class="blinking-quote" style="display: none;"></span>
+                        </div>
+                        <div class="finished-status-container" style="display: none;">Finished</div>
+                        <div class="basketball-away-team">
+                            <div class="basketball-away-team-container">
+                                <img class="basketball-away-team-logo" src="" alt="Away Team" />
+                                <div class="basketball-away-team-name"></div>
+                            </div>
+                            <div class="basketball-away-team-score-container" style="display: none;"></div>
+                        </div>
+                    </div>
+                    <div class="basketball-match-status" style="display: none;"></div>
+                    <div class="schedule-container" style="display: none;">
+                        <div class="scheduled-day"></div>
+                        <span>,</span>
+                        <div class="scheduled-time"></div>
+                    </div>
+                </div>
+                <div class="basketball-match-info">
+                    <div class="basketball-league-info">
+                        <img class="basketball-league-icon" src="" />
+                        <div class="basketball-league-name"></div>
+                    </div>
+                    <div class="basketball-venue-info">
+                        <img class="basketball-location-icon" src="/assets/icons/venue-icon.svg" />
+                        <div class="basketball-venue-name"></div>
+                    </div>
+                </div>
+            </div>
+        </template>
         <template id="mma-template"></template>
     </main>
     <script type='module' src="./script.js"></script>
