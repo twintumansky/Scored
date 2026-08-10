@@ -476,7 +476,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ".cricket-versus-element",
         );
         const matchStatusContainer = cardClone.querySelector(
-          ".live-status-container",
+          ".cricket-live-status-container",
         );
         const matchStatusLabel = cardClone.querySelector(".match-status-label");
         const blinkingQuote = cardClone.querySelector(".blinking-quote");
@@ -637,7 +637,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           versusElement.style.display = "none";
           matchStatusContainer.style.display = "flex";
-          blinkingQuote.style.display = "block";
+          blinkingQuote.style.display = "flex";
           if (match.match_status == "Finished") {
             matchStatusContainer.style.display = "none";
             cardClone.querySelector(

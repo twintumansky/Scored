@@ -462,9 +462,17 @@ footer {
     gap: 2px;
 }
 
-.blinking-quote {
+/* .blinking-quote {
     height: 0.25px;
     width: 0.1rem;
+    margin-top: 6px;
+    background-color: #65B9A2;
+    animation: blink 1s step-end infinite;
+} */
+
+.blinking-quote {
+    height: 0.25rem;
+    width: 1.5px;
     margin-top: 6px;
     background-color: #65B9A2;
     animation: blink 1s step-end infinite;
@@ -664,20 +672,22 @@ nav li {
     line-height: 1.5rem;
 }
 
+.cricket-live-status-container {
+    display: flex;
+    color: #65B9A2;
+    background-color: #DFF5EF;
+    padding: 0 0.5rem;
+    border-radius: 0.5rem;
+}
+
 .match-status-label {
     font-size: 0.75rem;
     font-weight: 500;
     line-height: 1.5rem;
     text-align: center;
-    border-radius: 0.5rem;
-    color: #65B9A2;
-    background-color: #DFF5EF;
-    height: 1.5rem;
     letter-spacing: 0.02rem;
     text-transform: uppercase;
-    padding: 0px 0.5rem;
-    margin: 5px;
-    gap: 2px;
+    padding-right: 1px;
 }
 
 .finished-status-container {
