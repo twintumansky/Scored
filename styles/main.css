@@ -459,21 +459,12 @@ footer {
     background-color: #DFF5EF;
     border-radius: 0.5rem;
     padding: 1px 8px 1px 9px;
-    gap: 2px;
 }
 
-/* .blinking-quote {
-    height: 0.25px;
+.football-blinking-quote {
+    height: 5px;
     width: 0.1rem;
-    margin-top: 6px;
-    background-color: #65B9A2;
-    animation: blink 1s step-end infinite;
-} */
-
-.blinking-quote {
-    height: 0.25rem;
-    width: 1.5px;
-    margin-top: 6px;
+    margin-top: 3px;
     background-color: #65B9A2;
     animation: blink 1s step-end infinite;
 }
@@ -688,6 +679,14 @@ nav li {
     letter-spacing: 0.02rem;
     text-transform: uppercase;
     padding-right: 1px;
+}
+
+.cricket-blinking-quote {
+    height: 0.25rem;
+    width: 1.5px;
+    margin-top: 6px;
+    background-color: #65B9A2;
+    animation: blink 1s step-end infinite;
 }
 
 .finished-status-container {

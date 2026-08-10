@@ -479,7 +479,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           ".cricket-live-status-container",
         );
         const matchStatusLabel = cardClone.querySelector(".match-status-label");
-        const blinkingQuote = cardClone.querySelector(".blinking-quote");
+        const blinkingQuote = cardClone.querySelector(
+          ".cricket-blinking-quote",
+        );
         const cricketMatchStatus = cardClone.querySelector(
           ".cricket-match-status",
         );
