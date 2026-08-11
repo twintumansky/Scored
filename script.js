@@ -782,6 +782,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       },
     },
+    basketball: {
+      templateId: "basketball-template",
+    },
   };
 
   // Fetching of fixtures
