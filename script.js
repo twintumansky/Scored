@@ -784,6 +784,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     },
     basketball: {
       templateId: "basketball-template",
+      apiEndpoint: "http://localhost:3000/api/matches/basketball",
+      time: (match) => new Date(match.startTimestamp * 1000).toISOString(),
+      isLive: (match) => match.status.type === "inprogress",
+      isRecent: (match, timestamp) => match.status.type === "finished",
+      // match.status.type === "finished" && isRecentFixture(match.startTimestamp, 24),
+      isUpcoming: (match, timestamp) => match.status.type === "notstarted",
+      // match.status.type === "notstarted" && isUpcomingFixture(match.startTimestamp),
+      populateCard: function (cardClone, match) {
+        const homeTeam = match.homeTeam.name;
+        const homeTeamId = match.homeTeam.id;
+        const awayTeam = match.awayTeam.name;
+        const awayTeamId = match.awayTeam.id;
+        const homeTeamShortName = match.homeTeam.nameCode;
+        const awayTeamShortName = match.awayTeam.nameCode;
+        const tournamentName = match.tournament.uniqueTournament.name;
+        const tournamentId = match.tournament.uniqueTournament.id;
+        const venue = match.tournament.category.country.name;
+      },
     },
   };
 
