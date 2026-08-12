@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const awayTeamScore = match.score?.fullTime?.away;
         const scoreContainer = cardClone.querySelector(".score-container");
         const versusElement = cardClone.querySelector(
-          ".football-versus-element",
+          "#football-versus-element",
         );
         const statusTextElement = cardClone.querySelector(
           ".football-match-status",
@@ -473,7 +473,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ".cricket-away-team-score-container",
         );
         const versusElement = cardClone.querySelector(
-          ".cricket-versus-element",
+          "#cricket-versus-element",
         );
         const matchStatusContainer = cardClone.querySelector(
           ".cricket-live-status-container",
