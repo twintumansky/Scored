@@ -1,4 +1,4 @@
-export const cricketTeamLogo = {
+export const teamLogos = {
   Afghanistan: "/assets/logos/fixture_logos/afghanistan.svg",
   Australia: "/assets/logos/fixture_logos/australia.svg",
   "Australia A": "/assets/logos/fixture_logos/australia.svg",

@@ -1,7 +1,7 @@
 import {
-  cricketTeamLogo,
+  teamLogos,
   cricketTeamPriorities,
-  footballTeamLogo,
+  footballteamLogos,
   footballVenueLogos,
   footballLeagueEmblem,
 } from "./data/teamSportAssets.js";
@@ -346,7 +346,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".home-team-logo")
           ?.setAttribute(
             "src",
-            footballTeamLogo[match.homeTeam.shortName] ||
+            footballteamLogos[match.homeTeam.shortName] ||
               match.homeTeam.crest ||
               "/assets/logos/fixture_logos/default.svg",
           );
@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".away-team-logo")
           ?.setAttribute(
             "src",
-            footballTeamLogo[match.awayTeam.shortName] ||
+            footballteamLogos[match.awayTeam.shortName] ||
               match.awayTeam.crest ||
               "/assets/logos/fixture_logos/default.svg",
           );
@@ -515,7 +515,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".cricket-home-team-logo")
           ?.setAttribute(
             "src",
-            cricketTeamLogo[homeTeam] ??
+            teamLogos[homeTeam] ??
               `${match.team_a_img}` ??
               "/assets/icons/default_cricket_icon.svg",
           );
@@ -525,7 +525,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".cricket-away-team-logo")
           ?.setAttribute(
             "src",
-            cricketTeamLogo[awayTeam] ??
+            teamLogos[awayTeam] ??
               `${match.team_b_img}` ??
               "/assets/icons/default_cricket_icon.svg",
           );
@@ -801,6 +801,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         const tournamentName = match.tournament.uniqueTournament.name;
         const tournamentId = match.tournament.uniqueTournament.id;
         const venue = match.tournament.category.country.name;
+        const hometeamLogo = homeTeamId
+          ? `https://img.sofascore.com/api/v1/team/${homeTeamId}/image`
+          : "/assets/icons/default_basketball_icon.svg";
+        const awayteamLogo = awayTeamId
+          ? `https://img.sofascore.com/api/v1/team/${awayTeamId}/image`
+          : "/assets/icons/default_basketball_icon.svg";
+        const tournamentLogo = tournamentId
+          ? `https://api.sofascore.com/api/v1/unique-tournament/${tournamentId}/image`
+          : "/assets/icons/basketball-icon.svg";
       },
     },
   };
