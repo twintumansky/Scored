@@ -66,7 +66,7 @@ app.get("/api/matches/football", async (req, res) => {
     const data = await response.json();
     res.json(data);
   } catch (error) {
-    console.error("Proxy Error:", error);
+    console.error("Proxy error in /api/matches/foottball:", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -305,8 +305,6 @@ app.get("/api/races/motorsport", async (req, res) => {
 
 // Proxy endpoint for fetching basketball data
 app.get("/api/events/basketball", async (req, res) => {
-  const now = date.now();
-
   //Checking the basketball in-memory cache first
   if (
     basketballCache.data &&
@@ -317,30 +315,31 @@ app.get("/api/events/basketball", async (req, res) => {
   }
 
   //formulating a three day window for cumulative fetching of basketball data
-  const dates = [];
-  const today = new Date();
+  // const dates = [];
+  // const today = new Date();
 
   //today
-  dates.push(today.toISOString().split("T")[0]);
+  // dates.push(today.toISOString().split("T")[0]);
   //previous day
-  const previousDay = new Date(today);
-  previousDay.setDate(previousDay.getDate() - 1);
-  dates.push(previousDay.toISOString().split("T")[0]);
+  // const previousDay = new Date(today);
+  // previousDay.setDate(previousDay.getDate() - 1);
+  // dates.push(previousDay.toISOString().split("T")[0]);
   //next day
-  const nextDay = new Date(today);
-  nextDay.setDate(nextDay.getDate() + 1);
-  dates.push(nextDay.toISOString().split("T")[0]);
+  // const nextDay = new Date(today);
+  // nextDay.setDate(nextDay.getDate() + 1);
+  // dates.push(nextDay.toISOString().split("T")[0]);
 
   try {
-    const allBasketballEvents = [];
+    // const allBasketballEvents = [];
 
     for (const date of dates) {
-      const url = `https://sportapi7.p.rapidapi.com/api/v1/sport/basketball/scheduled-events/${date}`;
+      const url =
+        "https://allsportsapi2.p.rapidapi.com/api/basketball/matches/live";
       const response = await fetch(url, {
         method: "GET",
         headers: {
           "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-          "x-rapidapi-host": "sportapi7.p.rapidapi.com",
+          "x-rapidapi-host": "allsportsapi2.p.rapidapi.com",
           "Content-Type": "application/json",
         },
       });
@@ -350,22 +349,25 @@ app.get("/api/events/basketball", async (req, res) => {
       }
 
       const data = await response.json();
-      const data = await response.json();
-      if (Array.isArray(data.events)) {
-        allBasketballEvents.push(...data.events);
-      }
+
+      //Caching the basketball data
+      basketballCache = {
+        timestamp: Date.now(),
+        data: data.events,
+      };
+      res.json(data.events);
     }
 
     //Deduplication by event ID for games appearing multiple times
-    const existingEvents = new Set();
-    const uniqueEvents = allBasketballEvents.filter((ev) => {
-      if (existingEvents.has(ev.id)) return false;
-      existingEvents.add(ev.id);
-      return true;
-    });
+    // const existingEvents = new Set();
+    // const uniqueEvents = allBasketballEvents.filter((ev) => {
+    //   if (existingEvents.has(ev.id)) return false;
+    //   existingEvents.add(ev.id);
+    //   return true;
+    // });
   } catch (error) {
     console.error("Proxy Error in /api/events/basketball:", error);
-    res.status(500).json({ error: "Failed to fetch basketball fixtures" });
+    res.status(500).json({ error: error.message });
   }
 });
 
