@@ -784,7 +784,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     },
     basketball: {
       templateId: "basketball-template",
-      apiEndpoint: "http://localhost:3000/api/matches/basketball",
+      apiEndpoint: "http://localhost:3000/api/events/basketball",
       time: (match) => new Date(match.startTimestamp * 1000).toISOString(),
       isLive: (match) => match.status.type === "inprogress",
       isRecent: (match, timestamp) => match.status.type === "finished",
@@ -895,7 +895,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         //   return filterFixturesByStatus(sortedFixtureData, activeFilter);
         // },
         cricket: () => {
-          let matches = Array.isArray(data.matches) ? data.matches : [];
+          const matches = Array.isArray(data.matches) ? data.matches : [];
           // const uniqueMatchId = new Set();
           // matches = matches.filter((match) => {
           //   if (uniqueMatchId.has(match.id)) {
@@ -911,7 +911,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           window.sortedFixtures = sortedFixtureData;
           return filterFixturesByStatus(sortedFixtureData, activeFilter);
         },
-
         motorsport: () => {
           const motorsportData =
             motorsportActiveSection === "races"
@@ -924,6 +923,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           return motorsportData || [];
         },
+        // basketball: () => {
+
+        // }
       };
 
       const fixturesToDisplay = fixtureProcessor[activeSport]?.() || [];

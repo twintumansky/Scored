@@ -9,28 +9,14 @@ app.use(cors());
 app.use(express.static("./"));
 
 // In-memory cache for motorsport data
-const motorsportCache = {}; // Stores data: { [year]: { timestamp: Date.now(), data: {...} } }
-const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours expiration limit
-
-// Proxy endpoint for football data
-app.get("/api/matches/football", async (req, res) => {
-  try {
-    const { dateFrom, dateTo } = req.query;
-    const response = await fetch(
-      `https://api.football-data.org/v4/matches?dateFrom=${dateFrom}&dateTo=${dateTo}&competitions=2000,2001,2021,2014,2015,2016,2017,2018,2019,2002,2013,2152`,
-      {
-        headers: {
-          "X-Auth-Token": process.env.FOOTBALL_API_KEY,
-        },
-      },
-    );
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    console.error("Proxy Error:", error);
-    res.status(500).json({ error: error.message });
-  }
-});
+const motorsportCache = {};
+const CACHE_DURATION = 24 * 60 * 60 * 1000;
+// In-memory cache for basketball data
+const basketballCache = {
+  data: null,
+  timestamp: 0,
+};
+const BASKETBALL_CACHE_DURATION = 60 * 60 * 1000;
 
 function parseCricketISTToUTC(dateWise, matchDate, matchTime) {
   try {
@@ -65,7 +51,27 @@ function parseCricketISTToUTC(dateWise, matchDate, matchTime) {
   }
 }
 
-// Proxy endpoint for cricket data
+// Proxy endpoint for football data
+app.get("/api/matches/football", async (req, res) => {
+  try {
+    const { dateFrom, dateTo } = req.query;
+    const response = await fetch(
+      `https://api.football-data.org/v4/matches?dateFrom=${dateFrom}&dateTo=${dateTo}&competitions=2000,2001,2021,2014,2015,2016,2017,2018,2019,2002,2013,2152`,
+      {
+        headers: {
+          "X-Auth-Token": process.env.FOOTBALL_API_KEY,
+        },
+      },
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Proxy Error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Proxy endpoint for fetching cricket data
 app.get("/api/matches/cricket", async (req, res) => {
   // For cricapi endpoints
   // try {
@@ -163,22 +169,18 @@ app.get("/api/matches/cricket", async (req, res) => {
   }
 });
 
-// Proxy endpoint for motorsport data
+// Proxy endpoint for fetching motorsport data
 app.get("/api/races/motorsport", async (req, res) => {
   try {
     const { dateFrom } = req.query;
     const dateYear = dateFrom.split("-")[0];
-    console.log(`Motorsport request for year: ${dateYear}`);
 
-    //Checking the in-memory cache first
+    //Checking the motorsport in-memory cache first
     const cachedEntry = motorsportCache[dateYear];
     if (cachedEntry && Date.now() - cachedEntry.timestamp < CACHE_DURATION) {
       console.log(`Serving motorsport data for ${dateYear} from cache.`);
       return res.json(cachedEntry.data);
     }
-    console.log(
-      `Cache miss or expired for ${dateYear}. Fetching from external API...`,
-    );
 
     // Helper function to fetch all paginated results
     const fetchAllResults = async (baseUrl) => {
@@ -304,6 +306,72 @@ app.get("/api/races/motorsport", async (req, res) => {
     res
       .status(500)
       .json({ error: "An unexpected error occurred on the server." });
+  }
+});
+
+// Proxy endpoint for fetching basketball data
+app.get("/api/events/basketball", async (req, res) => {
+  const now = date.now();
+
+  //Checking the basketball in-memory cache first
+  if (
+    basketballCache.data &&
+    Date.now() - basketballCache.timestamp < BASKETBALL_CACHE_DURATION
+  ) {
+    console.log("Serving basketball data from cache.");
+    return res.json(basketballCache.data);
+  }
+
+  //formulating a three day window for cumulative fetching of basketball data
+  const dates = [];
+  const today = new Date();
+
+  //today
+  dates.push(today.toISOString().split("T")[0]);
+  //previous day
+  const previousDay = new Date(today);
+  previousDay.setDate(previousDay.getDate() - 1);
+  dates.push(previousDay.toISOString().split("T")[0]);
+  //next day
+  const nextDay = new Date(today);
+  nextDay.setDate(nextDay.getDate() + 1);
+  dates.push(nextDay.toISOString().split("T")[0]);
+
+  try {
+    const allBasketballEvents = [];
+
+    for (const date of dates) {
+      const url = `https://sportapi7.p.rapidapi.com/api/v1/sport/basketball/scheduled-events/${date}`;
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
+          "x-rapidapi-host": "sportapi7.p.rapidapi.com",
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status} for ${url}`);
+      }
+
+      const data = await response.json();
+      const data = await response.json();
+      if (Array.isArray(data.events)) {
+        allBasketballEvents.push(...data.events);
+      }
+    }
+
+    //Deduplication by event ID for games appearing multiple times
+    const existingEvents = new Set();
+    const uniqueEvents = allBasketballEvents.filter((ev) => {
+      if (existingEvents.has(ev.id)) return false;
+      existingEvents.add(ev.id);
+      return true;
+    });
+  } catch (error) {
+    console.error("General Proxy Error in /api/events/basketball:", error);
+    res.status(500).json({ error: "Failed to fetch basketball fixtures" });
   }
 });
 
