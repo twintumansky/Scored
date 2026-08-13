@@ -186,7 +186,7 @@ app.get("/api/races/motorsport", async (req, res) => {
     const fetchAllResults = async (baseUrl) => {
       const allResults = [];
       let offset = 0;
-      const limit = 100; // Fetching more results per page
+      const limit = 100;
       let hasMoreData = true;
 
       while (hasMoreData) {
@@ -249,7 +249,7 @@ app.get("/api/races/motorsport", async (req, res) => {
       races: racesData,
       driverstandings: driverStandingsData,
       constructorstandings: constructorStandingsData,
-      results: { MRData: { RaceTable: { Races: allResults } } }, // Structure to match expected format
+      results: { MRData: { RaceTable: { Races: allResults } } },
     };
 
     // Merging races with results to include race-winner data
@@ -267,11 +267,10 @@ app.get("/api/races/motorsport", async (req, res) => {
         resultsMap[race.round] = race;
       });
 
-      // Merge winner information into races
+      // Merging winner data into the races data
       const mergedRaces = races.map((race) => {
         const raceResult = resultsMap[race.round];
         if (raceResult && raceResult.Results && raceResult.Results.length > 0) {
-          // Add winner information to the race
           return {
             ...race,
             winner: {
@@ -282,7 +281,7 @@ app.get("/api/races/motorsport", async (req, res) => {
             },
           };
         }
-        return race; // Return race without winner info if no results yet
+        return race;
       });
 
       responseData.mergedRaces = mergedRaces;
@@ -291,21 +290,16 @@ app.get("/api/races/motorsport", async (req, res) => {
       );
     }
 
-    console.log("Total races fetched:", responseData.mergedRaces?.length || 0);
-
-    //Caching the response before sending
+    //Caching the motorsport response before sending
     motorsportCache[dateYear] = {
       timestamp: Date.now(),
       data: responseData,
     };
-    console.log(`Cached motorsport data for ${dateYear}.`);
 
     res.json(responseData);
   } catch (error) {
-    console.error("General Proxy Error in /api/races/motorsport:", error);
-    res
-      .status(500)
-      .json({ error: "An unexpected error occurred on the server." });
+    console.error("Proxy Error in /api/races/motorsport:", error);
+    res.status(500).json({ error: "Failed to fetch motorsport races" });
   }
 });
 
@@ -370,7 +364,7 @@ app.get("/api/events/basketball", async (req, res) => {
       return true;
     });
   } catch (error) {
-    console.error("General Proxy Error in /api/events/basketball:", error);
+    console.error("Proxy Error in /api/events/basketball:", error);
     res.status(500).json({ error: "Failed to fetch basketball fixtures" });
   }
 });
