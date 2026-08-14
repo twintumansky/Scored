@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const statusButtons = document.querySelectorAll(".container-buttons");
   const footer = document.querySelector("footer");
   let activeFilter = null; // (Live, Upcoming, Finished)
-  let activeSport = "cricket"; // Selected sport
+  let activeSport = "basketball"; // Selected sport
 
   // Motorsport specific configurations
   const motorsportContainerButtons = document.querySelectorAll(
@@ -32,6 +32,31 @@ document.addEventListener("DOMContentLoaded", async () => {
   const motorsportCardContainer = document.querySelector(
     "#motorsport-card-container",
   );
+
+  // Basketball specific configurations
+  function applyScoreStyling(elHome, homeVal, elAway, awayVal) {
+    // Resetting the existing styles first
+    [elHome, elAway].forEach((el) => {
+      if (el) el.classList.remove("score-winning", "score-losing", "score-tie");
+    });
+
+    // For non-existing values
+    if (homeVal == null || awayVal == null) return;
+
+    const h = Number(homeVal);
+    const a = Number(awayVal);
+
+    if (h > a) {
+      if (elHome) elHome.classList.add("score-winning");
+      if (elAway) elAway.classList.add("score-losing");
+    } else if (a > h) {
+      if (elAway) elAway.classList.add("score-winning");
+      if (elHome) elHome.classList.add("score-losing");
+    } else {
+      if (elHome) elHome.classList.add("score-tie");
+      if (elAway) elAway.classList.add("score-tie");
+    }
+  }
 
   function isTeamSport(sport) {
     return [
@@ -802,11 +827,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         //   ? `https://img.sofascore.com/api/v1/team/${homeTeamId}/image`
         //   : "/assets/icons/default_basketball_icon.svg";
         const hometeamLogo =
-          teamLogos[`${match.homeTeam.country.name}`] ||
-          `https://img.sofascore.com/api/v1/team/${homeTeamId}/image`;
+          match.homeTeam.national && match.awayTeam.national
+            ? teamLogos[`${match.homeTeam.country.name}`]
+            : `https://img.sofascore.com/api/v1/team/${homeTeamId}/image`;
         const awayteamLogo =
-          teamLogos[`${match.awayTeam.country.name}`] ||
-          `https://img.sofascore.com/api/v1/team/${awayTeamId}/image`;
+          match.homeTeam.national && match.awayTeam.national
+            ? teamLogos[`${match.awayTeam.country.name}`]
+            : `https://img.sofascore.com/api/v1/team/${awayTeamId}/image`;
         // const awayteamLogo = awayTeamId
         //   ? `https://img.sofascore.com/api/v1/team/${awayTeamId}/image`
         //   : "/assets/icons/default_basketball_icon.svg";
@@ -824,27 +851,85 @@ document.addEventListener("DOMContentLoaded", async () => {
         cardClone.querySelector(".basketball-away-team-name").textContent =
           awayTeamShortName;
 
-        cardClone.querySelector("#home-q1").textContent =
-          match.homeScore.period1 || "";
-        cardClone.querySelector("#home-q2").textContent =
-          match.homeScore.period2 || "";
-        cardClone.querySelector("#home-q3").textContent =
-          match.homeScore.period3 || "";
-        cardClone.querySelector("#home-q4").textContent =
-          match.homeScore.period4 || "";
-        cardClone.querySelector(".home-final-score").textContent =
-          match.homeScore.current || "";
+        // ── Quarter scores ──
+        const homeQ1 = cardClone.querySelector("#home-q1");
+        const awayQ1 = cardClone.querySelector("#away-q1");
+        const homeQ2 = cardClone.querySelector("#home-q2");
+        const awayQ2 = cardClone.querySelector("#away-q2");
+        const homeQ3 = cardClone.querySelector("#home-q3");
+        const awayQ3 = cardClone.querySelector("#away-q3");
+        const homeQ4 = cardClone.querySelector("#home-q4");
+        const awayQ4 = cardClone.querySelector("#away-q4");
 
-        cardClone.querySelector("#away-q1").textContent =
-          match.awayScore.period1 || "";
-        cardClone.querySelector("#away-q2").textContent =
-          match.awayScore.period2 || "";
-        cardClone.querySelector("#away-q3").textContent =
-          match.awayScore.period3 || "";
-        cardClone.querySelector("#away-q4").textContent =
-          match.awayScore.period4 || "";
-        cardClone.querySelector(".away-final-score").textContent =
-          match.awayScore.current || "";
+        homeQ1.textContent = match.homeScore.period1 ?? "  ";
+        awayQ1.textContent = match.awayScore.period1 ?? "  ";
+        homeQ2.textContent = match.homeScore.period2 ?? "  ";
+        awayQ2.textContent = match.awayScore.period2 ?? "  ";
+        homeQ3.textContent = match.homeScore.period3 ?? "  ";
+        awayQ3.textContent = match.awayScore.period3 ?? "  ";
+        homeQ4.textContent = match.homeScore.period4 ?? "  ";
+        awayQ4.textContent = match.awayScore.period4 ?? "  ";
+
+        applyScoreStyling(
+          homeQ1,
+          match.homeScore.period1,
+          awayQ1,
+          match.awayScore.period1,
+        );
+        applyScoreStyling(
+          homeQ2,
+          match.homeScore.period2,
+          awayQ2,
+          match.awayScore.period2,
+        );
+        applyScoreStyling(
+          homeQ3,
+          match.homeScore.period3,
+          awayQ3,
+          match.awayScore.period3,
+        );
+        applyScoreStyling(
+          homeQ4,
+          match.homeScore.period4,
+          awayQ4,
+          match.awayScore.period4,
+        );
+
+        // ── Final scores ──
+        const homeFinal = cardClone.querySelector(".home-final-score");
+        const awayFinal = cardClone.querySelector(".away-final-score");
+
+        homeFinal.textContent = match.homeScore.current ?? "  ";
+        awayFinal.textContent = match.awayScore.current ?? "  ";
+
+        applyScoreStyling(
+          homeFinal,
+          match.homeScore.current,
+          awayFinal,
+          match.awayScore.current,
+        );
+
+        // cardClone.querySelector("#home-q1").textContent =
+        //   match.homeScore.period1 || "  ";
+        // cardClone.querySelector("#home-q2").textContent =
+        //   match.homeScore.period2 || "  ";
+        // cardClone.querySelector("#home-q3").textContent =
+        //   match.homeScore.period3 || "  ";
+        // cardClone.querySelector("#home-q4").textContent =
+        //   match.homeScore.period4 || "  ";
+        // cardClone.querySelector(".home-final-score").textContent =
+        //   match.homeScore.current || "  ";
+
+        // cardClone.querySelector("#away-q1").textContent =
+        //   match.awayScore.period1 || "  ";
+        // cardClone.querySelector("#away-q2").textContent =
+        //   match.awayScore.period2 || "  ";
+        // cardClone.querySelector("#away-q3").textContent =
+        //   match.awayScore.period3 || "  ";
+        // cardClone.querySelector("#away-q4").textContent =
+        //   match.awayScore.period4 || "  ";
+        // cardClone.querySelector(".away-final-score").textContent =
+        //   match.awayScore.current || "  ";
 
         cardClone.querySelector(".basketball-match-status").textContent =
           match.status.description;

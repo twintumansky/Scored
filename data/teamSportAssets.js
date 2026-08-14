@@ -189,6 +189,8 @@ export const teamLogos = {
   Lithuania: "/assets/logos/fixture_logos/lithuania.svg",
   Tunisia: "/assets/logos/fixture_logos/tunisia.svg",
   "Côte d'Ivoire": "/assets/logos/fixture_logos/ivorycoast.svg",
+  Egypt: "/assets/logos/fixture_logos/egypt.svg",
+  Chad: "/assets/logos/fixture_logos/chad.svg",
 };
 
 export const cricketTeamPriorities = {

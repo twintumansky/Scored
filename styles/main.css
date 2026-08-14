@@ -1114,6 +1114,7 @@ nav li {
     flex-grow: 3;
     justify-content: space-between;
     padding: 0 3rem;
+    margin-bottom: 0.75rem;
 }
 
 .basketball-team-container {
@@ -1129,7 +1130,7 @@ nav li {
 
 .basketball-home-team-logo,
 .basketball-away-team-logo {
-    width: 4rem;
+    width: 3rem;
     height: 2rem;
     object-fit: contain;
 }
@@ -1139,11 +1140,13 @@ nav li {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 700;
+    font-size: large;
 }
 
 .basketball-score-container {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     align-items: center;
 }
 
@@ -1157,7 +1160,22 @@ nav li {
 .home-quarter-score-container,
 .away-quarter-score-container {
     display: flex;
-    gap: 0.65rem;
+    gap: 0.8rem;
+}
+
+.score-winning {
+    font-weight: 700;
+    color: #727272;
+}
+
+.score-losing {
+    color: #989898;
+    ;
+}
+
+.score-tie {
+    color: #989898;
+    ;
 }
 
 @media screen and (max-width: 768px) {
