@@ -649,7 +649,9 @@ nav li {
 }
 
 .cricket-format,
-.cricket-venue-info {
+.cricket-venue-info,
+.basketball-league-info,
+.basketball-venue-info {
     display: flex;
     align-items: center;
     max-width: 100%;

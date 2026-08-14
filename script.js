@@ -813,7 +813,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         //   : "/assets/icons/default_basketball_icon.svg";
         const tournamentLogo = tournamentId
           ? `https://api.sofascore.com/api/v1/unique-tournament/${tournamentId}/image`
-          : "/assets/icons/basketball-icon.svg";
+          : "/assets/icons/default-competition-icon.svg";
 
         cardClone.querySelector(".basketball-competition-info").textContent =
           `${homeTeam} vs ${awayTeam}`;
@@ -858,7 +858,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         cardClone.querySelector(".basketball-league-name").textContent =
           match.tournament.category.name;
         cardClone.querySelector(".basketball-venue-name").textContent =
-          match.tournament.flag || `--`;
+          match.tournament.flag || `World`;
       },
     },
   };
