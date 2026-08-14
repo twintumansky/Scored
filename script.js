@@ -797,7 +797,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const homeTeamShortName = match.homeTeam.nameCode;
         const awayTeamShortName = match.awayTeam.nameCode;
         const tournamentName = match.tournament.uniqueTournament.name;
-        const tournamentId = match.tournament.uniqueTournament.id;
         const venue = match.tournament.category.country.name;
         // const hometeamLogo = homeTeamId
         //   ? `https://img.sofascore.com/api/v1/team/${homeTeamId}/image`
@@ -811,9 +810,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         // const awayteamLogo = awayTeamId
         //   ? `https://img.sofascore.com/api/v1/team/${awayTeamId}/image`
         //   : "/assets/icons/default_basketball_icon.svg";
-        const tournamentLogo = tournamentId
-          ? `https://api.sofascore.com/api/v1/unique-tournament/${tournamentId}/image`
-          : "/assets/icons/default-competition-icon.svg";
 
         cardClone.querySelector(".basketball-competition-info").textContent =
           `${homeTeam} vs ${awayTeam}`;
@@ -854,7 +850,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           match.status.description;
         cardClone
           .querySelector(".basketball-league-icon")
-          .setAttribute("src", tournamentLogo);
+          .setAttribute("src", "/assets/icons/default-competition-icon.svg");
         cardClone.querySelector(".basketball-league-name").textContent =
           match.tournament.category.name;
         cardClone.querySelector(".basketball-venue-name").textContent =

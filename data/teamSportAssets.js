@@ -80,6 +80,7 @@ export const teamLogos = {
   Scotland: "/assets/logos/fixture_logos/scotland.svg",
   "Scotland Women": "/assets/logos/fixture_logos/scotland.svg",
   Slovenia: "/assets/logos/fixture_logos/slovenia.svg",
+  Slovakia: "/assets/logos/fixture_logos/slovakia.svg",
   Serbia: "/assets/logos/fixture_logos/serbia.svg",
   Sweden: "/assets/logos/fixture_logos/sweden.svg",
   "Sweden Women": "/assets/logos/fixture_logos/sweden.svg",
@@ -145,6 +146,7 @@ export const teamLogos = {
   Cyprus: "/assets/logos/fixture_logos/cyprus.svg",
   "Cyprus Women": "/assets/logos/fixture_logos/cyprus.svg",
   Estonia: "/assets/logos/fixture_logos/estonia.svg",
+  Iceland: "/assets/logos/fixture_logos/iceland.svg",
   Botswana: "/assets/logos/fixture_logos/botswana.svg",
   Greece: "/assets/logos/fixture_logos/greece.svg",
   "Greece Women": "/assets/logos/fixture_logos/greece.svg",
@@ -180,6 +182,13 @@ export const teamLogos = {
   Bahamas: "/assets/logos/fixture_logos/bahamas.svg",
   Belize: "/assets/logos/fixture_logos/belize.svg",
   Bermuda: "/assets/logos/fixture_logos/bermuda.svg",
+  "Bosnia & Herzegovina": "/assets/logos/fixture_logos/bosnia.svg",
+  Czechia: "/assets/logos/fixture_logos/czechia.svg",
+  Spain: "/assets/logos/fixture_logos/spain.svg",
+  Latvia: "/assets/logos/fixture_logos/latvia.svg",
+  Lithuania: "/assets/logos/fixture_logos/lithuania.svg",
+  Tunisia: "/assets/logos/fixture_logos/tunisia.svg",
+  "Côte d'Ivoire": "/assets/logos/fixture_logos/ivorycoast.svg",
 };
 
 export const cricketTeamPriorities = {
