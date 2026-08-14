@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const statusButtons = document.querySelectorAll(".container-buttons");
   const footer = document.querySelector("footer");
   let activeFilter = null; // (Live, Upcoming, Finished)
-  let activeSport = "football"; // Selected sport
+  let activeSport = "cricket"; // Selected sport
 
   // Motorsport specific configurations
   const motorsportContainerButtons = document.querySelectorAll(
@@ -472,9 +472,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const cricketAwayTeamScoreContainer = cardClone.querySelector(
           ".cricket-away-team-score-container",
         );
-        const versusElement = cardClone.querySelector(
-          "#cricket-versus-element",
-        );
+        const versusElement = cardClone.querySelector("#cricket-vs-element");
         const matchStatusContainer = cardClone.querySelector(
           ".cricket-live-status-container",
         );
@@ -967,7 +965,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         basketball: () => {
           const matches = Array.isArray(data.events) ? data.events : [];
           window.sortedFixtures = matches;
-          return filterFixturesByStatus(sortedFixtureData, activeFilter);
+          return filterFixturesByStatus(matches, activeFilter);
         },
       };
 

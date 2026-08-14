@@ -339,17 +339,16 @@ app.get("/api/events/basketball", async (req, res) => {
       return res.json(basketballCache.data);
     }
 
-    const response = await fetch(
-      "https://allsportsapi2.p.rapidapi.com/api/matches/live",
-      {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key": `${process.env.RAPIDAPI_KEY}`,
-          "x-rapidapi-host": "allsportsapi2.p.rapidapi.com",
-          "Content-Type": "application/json",
-        },
+    const url =
+      "https://allsportsapi2.p.rapidapi.com/api/basketball/matches/live";
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": `${process.env.RAPIDAPI_KEY}`,
+        "x-rapidapi-host": "allsportsapi2.p.rapidapi.com",
+        "Content-Type": "application/json",
       },
-    );
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error: ${response.status} for ${url}`);
@@ -358,10 +357,8 @@ app.get("/api/events/basketball", async (req, res) => {
     const data = await response.json();
 
     //Caching the basketball data
-    basketballCache = {
-      timestamp: Date.now(),
-      data: data,
-    };
+    basketballCache.timestamp = Date.now();
+    basketballCache.data = data;
     res.json(data);
     //Deduplication by event ID for games appearing multiple times
     // const existingEvents = new Set();
