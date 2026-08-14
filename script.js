@@ -799,12 +799,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         const tournamentName = match.tournament.uniqueTournament.name;
         const tournamentId = match.tournament.uniqueTournament.id;
         const venue = match.tournament.category.country.name;
-        const hometeamLogo = homeTeamId
-          ? `https://img.sofascore.com/api/v1/team/${homeTeamId}/image`
-          : "/assets/icons/default_basketball_icon.svg";
-        const awayteamLogo = awayTeamId
-          ? `https://img.sofascore.com/api/v1/team/${awayTeamId}/image`
-          : "/assets/icons/default_basketball_icon.svg";
+        // const hometeamLogo = homeTeamId
+        //   ? `https://img.sofascore.com/api/v1/team/${homeTeamId}/image`
+        //   : "/assets/icons/default_basketball_icon.svg";
+        const hometeamLogo =
+          teamLogos[`${match.homeTeam.country.name}`] ||
+          `https://img.sofascore.com/api/v1/team/${homeTeamId}/image`;
+        const awayteamLogo =
+          teamLogos[`${match.awayTeam.country.name}`] ||
+          `https://img.sofascore.com/api/v1/team/${awayTeamId}/image`;
+        // const awayteamLogo = awayTeamId
+        //   ? `https://img.sofascore.com/api/v1/team/${awayTeamId}/image`
+        //   : "/assets/icons/default_basketball_icon.svg";
         const tournamentLogo = tournamentId
           ? `https://api.sofascore.com/api/v1/unique-tournament/${tournamentId}/image`
           : "/assets/icons/basketball-icon.svg";
@@ -817,6 +823,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         cardClone
           .querySelector(".basketball-away-team-logo")
           .setAttribute("src", awayteamLogo);
+        cardClone.querySelector(".basketball-home-team-name").textContent =
+          homeTeamShortName;
+        cardClone.querySelector(".basketball-away-team-name").textContent =
+          awayTeamShortName;
 
         cardClone.querySelector("#home-q1").textContent =
           match.homeScore.period1 || "";
@@ -846,9 +856,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".basketball-league-icon")
           .setAttribute("src", tournamentLogo);
         cardClone.querySelector(".basketball-league-name").textContent =
-          match.tournament.name;
+          match.tournament.category.name;
         cardClone.querySelector(".basketball-venue-name").textContent =
-          match.tournament.flag;
+          match.tournament.flag || `--`;
       },
     },
   };

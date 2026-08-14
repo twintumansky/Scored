@@ -569,7 +569,9 @@ nav li {
 }
 
 .league-emblem,
-.football-venue-icon {
+.football-venue-icon,
+.basketball-league-icon,
+.basketball-location-icon {
     width: 1rem;
     height: 1rem;
     margin: 0 0.25rem;
@@ -619,7 +621,8 @@ nav li {
     margin-bottom: 0.5rem;
 }
 
-.cricket-match-status {
+.cricket-match-status,
+.basketball-match-status {
     margin-bottom: 0.2rem;
     font-size: 0.80rem;
     color: #777;
@@ -1098,13 +1101,23 @@ nav li {
     object-fit: contain;
 }
 
+.basketball-fixture-info {
+    width: 100%;
+    flex-grow: 3;
+}
+
 .basketball-match-container {
     display: flex;
+    width: 100%;
+    flex-grow: 3;
+    justify-content: space-between;
+    padding: 0 5rem 0 3rem;
 }
 
 .basketball-team-container {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
 
 .basketball-home-team-container,
@@ -1114,17 +1127,20 @@ nav li {
 
 .basketball-score-container {
     display: flex;
-    justify-content: space-between;
+    gap: 1rem;
 }
 
-.quarter-score-container {
+.quarter-score-container,
+.final-score-container {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
 }
 
 .home-quarter-score-container,
 .away-quarter-score-container {
     display: flex;
+    gap: 0.5rem;
 }
 
 @media screen and (max-width: 768px) {
