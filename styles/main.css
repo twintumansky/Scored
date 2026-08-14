@@ -355,7 +355,8 @@ footer {
     text-align: center;
 }
 
-.football-match-card {
+.football-match-card,
+.basketball-match-card {
     width: 100%;
     background: #ffffff;
     border-radius: 0.75rem;
@@ -368,12 +369,14 @@ footer {
     align-items: center;
 }
 
-.football-match-card:hover {
+.football-match-card:hover,
+.basketball-match-card:hover {
     background-color: #ffffff69;
     cursor: pointer;
 }
 
-.football-fixture-info {
+.football-fixture-info,
+.basketball-fixture-info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -381,13 +384,15 @@ footer {
     justify-content: center;
 }
 
-.football-icon {
+.football-icon,
+.basketball-icon {
     width: 1.1rem;
     height: 1.1rem;
     margin: 0.1rem 0 0.30rem 0;
 }
 
-.football-competition-info {
+.football-competition-info,
+.basketball-competition-info {
     font-size: 0.9rem;
     font-weight: 600;
     color: #6c6b6b;
@@ -521,7 +526,8 @@ footer {
     text-align: center;
 }
 
-.football-match-info {
+.football-match-info,
+.basketball-match-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1090,6 +1096,35 @@ nav li {
     width: 0.75rem;
     height: 0.75rem;
     object-fit: contain;
+}
+
+.basketball-match-container {
+    display: flex;
+}
+
+.basketball-team-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.basketball-home-team-container,
+.basketball-away-team-container {
+    display: flex;
+}
+
+.basketball-score-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.quarter-score-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-quarter-score-container,
+.away-quarter-score-container {
+    display: flex;
 }
 
 @media screen and (max-width: 768px) {

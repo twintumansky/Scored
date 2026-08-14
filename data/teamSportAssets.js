@@ -1,4 +1,5 @@
 export const teamLogos = {
+  default: "/assets/logos/fixture_logos/defaultlocation.svg",
   Afghanistan: "/assets/logos/fixture_logos/afghanistan.svg",
   Australia: "/assets/logos/fixture_logos/australia.svg",
   "Australia A": "/assets/logos/fixture_logos/australia.svg",

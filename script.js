@@ -1,7 +1,7 @@
 import {
   teamLogos,
   cricketTeamPriorities,
-  footballteamLogos,
+  footballTeamLogo,
   footballVenueLogos,
   footballLeagueEmblem,
 } from "./data/teamSportAssets.js";
@@ -44,13 +44,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     ].includes(sport);
   }
 
-  function getDateRange() {
-    const today = new Date(Date.now());
-    const dateFiveDaysLater = new Date(today);
-    dateFiveDaysLater.setDate(today.getDate() + 5);
-    const formatDate = (date) => date.toISOString().split("T")[0];
-    return { from: formatDate(today), to: formatDate(dateFiveDaysLater) };
-  }
+  // function getDateRange() {
+  //   const today = new Date(Date.now());
+  //   const dateFiveDaysLater = new Date(today);
+  //   dateFiveDaysLater.setDate(today.getDate() + 5);
+  //   const formatDate = (date) => date.toISOString().split("T")[0];
+  //   return { from: formatDate(today), to: formatDate(dateFiveDaysLater) };
+  // }
 
   function calculateFixturePriority(fixture, sport) {
     let score = 0;
@@ -270,7 +270,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const statusButtonsContainer = document.querySelector(
       "#container-status-buttons",
     );
-    const showStatusButtons = sport === "football" || sport === "cricket";
+    const showStatusButtons = ["football", "cricket", "basketball"].includes(
+      sport,
+    );
     statusButtonsContainer.style.display = showStatusButtons ? "grid" : "none";
   }
 
@@ -346,7 +348,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".home-team-logo")
           ?.setAttribute(
             "src",
-            footballteamLogos[match.homeTeam.shortName] ||
+            footballTeamLogo[match.homeTeam.shortName] ||
               match.homeTeam.crest ||
               "/assets/logos/fixture_logos/default.svg",
           );
@@ -354,7 +356,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".away-team-logo")
           ?.setAttribute(
             "src",
-            footballteamLogos[match.awayTeam.shortName] ||
+            footballTeamLogo[match.awayTeam.shortName] ||
               match.awayTeam.crest ||
               "/assets/logos/fixture_logos/default.svg",
           );
@@ -385,9 +387,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const homeTeamScore = match.score?.fullTime?.home;
         const awayTeamScore = match.score?.fullTime?.away;
         const scoreContainer = cardClone.querySelector(".score-container");
-        const versusElement = cardClone.querySelector(
-          "#football-versus-element",
-        );
+        const versusElement = cardClone.querySelector("#football-vs-element");
         const statusTextElement = cardClone.querySelector(
           ".football-match-status",
         );
@@ -810,6 +810,47 @@ document.addEventListener("DOMContentLoaded", async () => {
         const tournamentLogo = tournamentId
           ? `https://api.sofascore.com/api/v1/unique-tournament/${tournamentId}/image`
           : "/assets/icons/basketball-icon.svg";
+
+        cardClone.querySelector(".basketball-competition-info").textContent =
+          `${homeTeam} vs ${awayTeam}`;
+        cardClone
+          .querySelector(".basketball-home-team-logo")
+          .setAttribute("src", hometeamLogo);
+        cardClone
+          .querySelector(".basketball-away-team-logo")
+          .setAttribute("src", awayteamLogo);
+
+        cardClone.querySelector("#home-q1").textContent =
+          match.homeScore.period1 || "";
+        cardClone.querySelector("#home-q2").textContent =
+          match.homeScore.period2 || "";
+        cardClone.querySelector("#home-q3").textContent =
+          match.homeScore.period3 || "";
+        cardClone.querySelector("#home-q4").textContent =
+          match.homeScore.period4 || "";
+        cardClone.querySelector(".home-final-score").textContent =
+          match.homeScore.current || "";
+
+        cardClone.querySelector("#away-q1").textContent =
+          match.awayScore.period1 || "";
+        cardClone.querySelector("#away-q2").textContent =
+          match.awayScore.period2 || "";
+        cardClone.querySelector("#away-q3").textContent =
+          match.awayScore.period3 || "";
+        cardClone.querySelector("#away-q4").textContent =
+          match.awayScore.period4 || "";
+        cardClone.querySelector(".away-final-score").textContent =
+          match.awayScore.current || "";
+
+        cardClone.querySelector(".basketball-match-status").textContent =
+          match.status.description;
+        cardClone
+          .querySelector(".basketball-league-icon")
+          .setAttribute("src", tournamentLogo);
+        cardClone.querySelector(".basketball-league-name").textContent =
+          match.tournament.name;
+        cardClone.querySelector(".basketball-venue-name").textContent =
+          match.tournament.flag;
       },
     },
   };
@@ -821,7 +862,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const container = isTeamSport(sport)
       ? liveScoresDiv
       : motorsportCardContainer;
-    const { from, to } = getDateRange();
+    // const { from, to } = getDateRange();
 
     await contentTransition(container, () => {
       if (!config) {
@@ -858,7 +899,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
     });
 
-    let url = `${config.apiEndpoint}?dateFrom=${from}&dateTo=${to}`;
+    let url = `${config.apiEndpoint}`;
 
     try {
       const response = await fetch(url);
@@ -923,9 +964,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           return motorsportData || [];
         },
-        // basketball: () => {
-
-        // }
+        basketball: () => {
+          const matches = Array.isArray(data.events) ? data.events : [];
+          window.sortedFixtures = matches;
+          return filterFixturesByStatus(sortedFixtureData, activeFilter);
+        },
       };
 
       const fixturesToDisplay = fixtureProcessor[activeSport]?.() || [];

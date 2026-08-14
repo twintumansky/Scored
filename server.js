@@ -18,6 +18,13 @@ const basketballCache = {
 };
 const BASKETBALL_CACHE_DURATION = 60 * 60 * 1000;
 
+function getDateRange() {
+  const today = new Date(Date.now());
+  const dateFiveDaysLater = new Date(today);
+  dateFiveDaysLater.setDate(today.getDate() + 5);
+  const formatDate = (date) => date.toISOString().split("T")[0];
+  return { from: formatDate(today), to: formatDate(dateFiveDaysLater) };
+}
 function parseCricketISTToUTC(dateWise, matchDate, matchTime) {
   try {
     const currentYear = new Date().getFullYear();
@@ -54,9 +61,10 @@ function parseCricketISTToUTC(dateWise, matchDate, matchTime) {
 // Proxy endpoint for football data
 app.get("/api/matches/football", async (req, res) => {
   try {
-    const { dateFrom, dateTo } = req.query;
+    const { from, to } = getDateRange();
+    // const { dateFrom, dateTo } = req.query;
     const response = await fetch(
-      `https://api.football-data.org/v4/matches?dateFrom=${dateFrom}&dateTo=${dateTo}&competitions=2000,2001,2021,2014,2015,2016,2017,2018,2019,2002,2013,2152`,
+      `https://api.football-data.org/v4/matches?dateFrom=${from}&dateTo=${to}&competitions=2000,2001,2021,2014,2015,2016,2017,2018,2019,2002,2013,2152`,
       {
         headers: {
           "X-Auth-Token": process.env.FOOTBALL_API_KEY,
@@ -172,8 +180,9 @@ app.get("/api/matches/cricket", async (req, res) => {
 // Proxy endpoint for fetching motorsport data
 app.get("/api/races/motorsport", async (req, res) => {
   try {
-    const { dateFrom } = req.query;
-    const dateYear = dateFrom.split("-")[0];
+    const { from } = getDateRange();
+    // const { dateFrom } = req.query;
+    const dateYear = from.split("-")[0];
 
     //Checking the motorsport in-memory cache first
     const cachedEntry = motorsportCache[dateYear];
@@ -305,15 +314,6 @@ app.get("/api/races/motorsport", async (req, res) => {
 
 // Proxy endpoint for fetching basketball data
 app.get("/api/events/basketball", async (req, res) => {
-  //Checking the basketball in-memory cache first
-  if (
-    basketballCache.data &&
-    Date.now() - basketballCache.timestamp < BASKETBALL_CACHE_DURATION
-  ) {
-    console.log("Serving basketball data from cache.");
-    return res.json(basketballCache.data);
-  }
-
   //formulating a three day window for cumulative fetching of basketball data
   // const dates = [];
   // const today = new Date();
@@ -330,34 +330,39 @@ app.get("/api/events/basketball", async (req, res) => {
   // dates.push(nextDay.toISOString().split("T")[0]);
 
   try {
-    // const allBasketballEvents = [];
+    //Checking the basketball in-memory cache first
+    if (
+      basketballCache.data &&
+      Date.now() - basketballCache.timestamp < BASKETBALL_CACHE_DURATION
+    ) {
+      console.log("Serving basketball data from cache.");
+      return res.json(basketballCache.data);
+    }
 
-    for (const date of dates) {
-      const url =
-        "https://allsportsapi2.p.rapidapi.com/api/basketball/matches/live";
-      const response = await fetch(url, {
+    const response = await fetch(
+      "https://allsportsapi2.p.rapidapi.com/api/matches/live",
+      {
         method: "GET",
         headers: {
-          "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
+          "x-rapidapi-key": `${process.env.RAPIDAPI_KEY}`,
           "x-rapidapi-host": "allsportsapi2.p.rapidapi.com",
           "Content-Type": "application/json",
         },
-      });
+      },
+    );
 
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status} for ${url}`);
-      }
-
-      const data = await response.json();
-
-      //Caching the basketball data
-      basketballCache = {
-        timestamp: Date.now(),
-        data: data.events,
-      };
-      res.json(data.events);
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} for ${url}`);
     }
 
+    const data = await response.json();
+
+    //Caching the basketball data
+    basketballCache = {
+      timestamp: Date.now(),
+      data: data,
+    };
+    res.json(data);
     //Deduplication by event ID for games appearing multiple times
     // const existingEvents = new Set();
     // const uniqueEvents = allBasketballEvents.filter((ev) => {
