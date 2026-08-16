@@ -314,21 +314,6 @@ app.get("/api/races/motorsport", async (req, res) => {
 
 // Proxy endpoint for fetching basketball data
 app.get("/api/events/basketball", async (req, res) => {
-  //formulating a three day window for cumulative fetching of basketball data
-  // const dates = [];
-  // const today = new Date();
-
-  //today
-  // dates.push(today.toISOString().split("T")[0]);
-  //previous day
-  // const previousDay = new Date(today);
-  // previousDay.setDate(previousDay.getDate() - 1);
-  // dates.push(previousDay.toISOString().split("T")[0]);
-  //next day
-  // const nextDay = new Date(today);
-  // nextDay.setDate(nextDay.getDate() + 1);
-  // dates.push(nextDay.toISOString().split("T")[0]);
-
   try {
     //Checking the basketball in-memory cache first
     if (
