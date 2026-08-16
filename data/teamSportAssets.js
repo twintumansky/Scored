@@ -191,6 +191,10 @@ export const teamLogos = {
   "Côte d'Ivoire": "/assets/logos/fixture_logos/ivorycoast.svg",
   Egypt: "/assets/logos/fixture_logos/egypt.svg",
   Chad: "/assets/logos/fixture_logos/chad.svg",
+  Türkiye: "/assets/logos/fixture_logos/turkey.svg",
+  Israel: "/assets/logos/fixture_logos/israel.svg",
+  Bulgaria: "/assets/logos/fixture_logos/bulgaria.svg",
+  Mali: "/assets/logos/fixture_logos/mali.svg",
 };
 
 export const cricketTeamPriorities = {
