@@ -391,8 +391,7 @@ footer {
     margin: 0.1rem 0 0.30rem 0;
 }
 
-.football-competition-info,
-.basketball-competition-info {
+.football-competition-info {
     font-size: 0.9rem;
     font-weight: 600;
     color: #6c6b6b;
@@ -1126,6 +1125,19 @@ nav li {
 .basketball-home-team-container,
 .basketball-away-team-container {
     display: flex;
+}
+
+.basketball-competition-info {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6c6b6b;
+    margin-bottom: 0.15rem;
+}
+
+.basketball-tournament-info {
+    font-size: 0.80rem;
+    color: #9f9f9f;
+    margin-bottom: 0.95rem;
 }
 
 .basketball-home-team-logo,
