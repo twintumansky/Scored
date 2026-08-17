@@ -811,7 +811,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const awayTeamId = match.awayTeam.id;
         const homeTeamShortName = match.homeTeam.nameCode;
         const awayTeamShortName = match.awayTeam.nameCode;
-        const tournamentName = match.tournament.uniqueTournament.name;
+        const tournamentInfo = match.tournament.name;
         const venue = match.tournament.category.country.name;
 
         const hometeamLogo =
@@ -825,6 +825,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         cardClone.querySelector(".basketball-competition-info").textContent =
           `${homeTeam} vs ${awayTeam}`;
+        cardClone.querySelector(".basketball-tournament-info").textContent =
+          tournamentInfo;
         cardClone
           .querySelector(".basketball-home-team-logo")
           .setAttribute("src", hometeamLogo);
