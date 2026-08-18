@@ -1,15 +1,13 @@
 import {
-  teamLogos,
+  teamSportAssets,
   cricketTeamPriorities,
-  footballTeamLogo,
-  footballVenueLogos,
+  teamSportAssets,
+  teamSportAssets,
   footballLeagueEmblem,
-} from "./data/teamSportAssets.js";
-import {
   motorsportCountryLogos,
   constructorLogos,
   driverImages,
-} from "./data/motorsportAssets.js";
+} from "./data/sportAssets.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const preloader = document.getElementById("preloader");
@@ -365,7 +363,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".home-team-logo")
           ?.setAttribute(
             "src",
-            footballTeamLogo[match.homeTeam.shortName] ||
+            teamSportAssets[match.homeTeam.shortName] ||
               match.homeTeam.crest ||
               "/assets/logos/fixture_logos/default.svg",
           );
@@ -373,7 +371,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".away-team-logo")
           ?.setAttribute(
             "src",
-            footballTeamLogo[match.awayTeam.shortName] ||
+            teamSportAssets[match.awayTeam.shortName] ||
               match.awayTeam.crest ||
               "/assets/logos/fixture_logos/default.svg",
           );
@@ -396,7 +394,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           match.competition.name;
         cardClone
           .querySelector(".venue-flag")
-          ?.setAttribute("src", footballVenueLogos[footballVenue]);
+          ?.setAttribute("src", teamSportAssets[footballVenue]);
         cardClone.querySelector(".venue").textContent = footballVenue ?? "NA";
         const matchStatusContainer = cardClone.querySelector(
           ".football-live-status-container",
@@ -530,7 +528,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".cricket-home-team-logo")
           ?.setAttribute(
             "src",
-            teamLogos[homeTeam] ??
+            teamSportAssets[homeTeam] ??
               `${match.team_a_img}` ??
               "/assets/icons/default_cricket_icon.svg",
           );
@@ -540,7 +538,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".cricket-away-team-logo")
           ?.setAttribute(
             "src",
-            teamLogos[awayTeam] ??
+            teamSportAssets[awayTeam] ??
               `${match.team_b_img}` ??
               "/assets/icons/default_cricket_icon.svg",
           );
@@ -816,11 +814,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const hometeamLogo =
           match.homeTeam.national && match.awayTeam.national
-            ? teamLogos[`${match.homeTeam.country.name}`]
+            ? teamSportAssets[`${match.homeTeam.country.name}`]
             : `https://img.sofascore.com/api/v1/team/${homeTeamId}/image`;
         const awayteamLogo =
           match.homeTeam.national && match.awayTeam.national
-            ? teamLogos[`${match.awayTeam.country.name}`]
+            ? teamSportAssets[`${match.awayTeam.country.name}`]
             : `https://img.sofascore.com/api/v1/team/${awayTeamId}/image`;
 
         cardClone.querySelector(".basketball-competition-info").textContent =
