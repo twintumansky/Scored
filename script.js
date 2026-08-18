@@ -1,8 +1,6 @@
 import {
   teamSportAssets,
   cricketTeamPriorities,
-  teamSportAssets,
-  teamSportAssets,
   footballLeagueEmblem,
   motorsportCountryLogos,
   constructorLogos,
@@ -1028,7 +1026,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  // Motorsport section button listeners(Races/Standings)
+  // Motorsport specific event listeners(Races/Standings)
   motorsportContainerButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       motorsportActiveSection = btn.id.replace("motorsport-", "");
@@ -1049,7 +1047,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  // Motorsport standings section button listeners(Drivers/Teams)
   motorsportContainerStandingsButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       motorsportStandingsActiveSection = btn.id.replace(
