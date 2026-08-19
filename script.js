@@ -894,7 +894,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           match.status.description;
         cardClone
           .querySelector(".basketball-league-icon")
-          .setAttribute("src", "/assets/icons/default-competition-icon.svg");
+          .setAttribute("src", "/assets/icons/competition_icon.svg");
         cardClone.querySelector(".basketball-league-name").textContent =
           match.tournament.category.name;
         cardClone.querySelector(".basketball-venue-name").textContent =
