@@ -793,6 +793,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       },
     },
+    tennis: {
+      templateId: "tennis-template",
+    },
     basketball: {
       templateId: "basketball-template",
       apiEndpoint: "http://localhost:3000/api/events/basketball",
