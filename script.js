@@ -994,6 +994,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           return motorsportData || [];
         },
+        tennis: () => {
+          const matches = Array.isArray(data.events) ? data.events : [];
+          window.sortedFixtures = matches;
+          return filterFixturesByStatus(matches, activeFilter);
+        },
         basketball: () => {
           const matches = Array.isArray(data.events) ? data.events : [];
           window.sortedFixtures = matches;
