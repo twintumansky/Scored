@@ -312,6 +312,20 @@ app.get("/api/races/motorsport", async (req, res) => {
   }
 });
 
+// Proxy endpoint for fetching tennis data
+app.get("/api/events/basketball", async (req, res) => {
+  try {
+    //Checking the tennis in-memory cache first
+    if (
+      basketballCache.data &&
+      Date.now() - basketballCache.timestamp < BASKETBALL_CACHE_DURATION
+    ) {
+      console.log("Serving basketball data from cache.");
+      return res.json(basketballCache.data);
+    }
+  } catch (error) {}
+});
+
 // Proxy endpoint for fetching basketball data
 app.get("/api/events/basketball", async (req, res) => {
   try {
