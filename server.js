@@ -11,6 +11,11 @@ app.use(express.static("./"));
 // In-memory cache for motorsport data
 const motorsportCache = {};
 const CACHE_DURATION = 24 * 60 * 60 * 1000;
+// In-memory cache for tennis data
+const tennisCache = {
+  data: null,
+  timestamp: 0,
+};
 // In-memory cache for basketball data
 const basketballCache = {
   data: null,
@@ -25,6 +30,7 @@ function getDateRange() {
   const formatDate = (date) => date.toISOString().split("T")[0];
   return { from: formatDate(today), to: formatDate(dateFiveDaysLater) };
 }
+
 function parseCricketISTToUTC(dateWise, matchDate, matchTime) {
   try {
     const currentYear = new Date().getFullYear();
@@ -323,6 +329,16 @@ app.get("/api/events/basketball", async (req, res) => {
       console.log("Serving basketball data from cache.");
       return res.json(basketballCache.data);
     }
+
+    const url = "https://allsportsapi2.p.rapidapi.com/api/tennis/matches/live";
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": `${process.env.RAPIDAPI_KEY}`,
+        "x-rapidapi-host": "allsportsapi2.p.rapidapi.com",
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {}
 });
 
