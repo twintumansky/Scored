@@ -795,6 +795,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     },
     tennis: {
       templateId: "tennis-template",
+      apiEndpoint: "http://localhost:3000/api/events/tennis",
+      time: (match) => new Date(match.startTimestamp * 1000).toISOString(),
+      isLive: (match) => match.status.type === "inprogress",
+      isRecent: (match, timestamp) => match.status.type === "finished",
+      isUpcoming: (match, timestamp) => match.status.type === "notstarted",
+      populateCard: function (cardClone, match) {},
     },
     basketball: {
       templateId: "basketball-template",
