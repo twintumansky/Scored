@@ -1102,12 +1102,14 @@ nav li {
     object-fit: contain;
 }
 
-.basketball-fixture-info {
+.basketball-fixture-info,
+.tennis-fixture-info {
     width: 100%;
     flex-grow: 3;
 }
 
-.basketball-match-container {
+.basketball-match-container,
+.tennis-match-container {
     display: flex;
     width: 100%;
     flex-grow: 3;
@@ -1116,7 +1118,8 @@ nav li {
     margin-bottom: 0.75rem;
 }
 
-.basketball-team-container {
+.basketball-team-container,
+.tennis-team-container {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
