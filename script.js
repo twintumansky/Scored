@@ -800,7 +800,39 @@ document.addEventListener("DOMContentLoaded", async () => {
       isLive: (match) => match.status.type === "inprogress",
       isRecent: (match, timestamp) => match.status.type === "finished",
       isUpcoming: (match, timestamp) => match.status.type === "notstarted",
-      populateCard: function (cardClone, match) {},
+      populateCard: function (cardClone, match) {
+        const homeTeam = match.homeTeam.name;
+        const homeTeamId = match.homeTeam.id;
+        const awayTeam = match.awayTeam.name;
+        const awayTeamId = match.awayTeam.id;
+        // const homeTeamShortName = match.homeTeam.nameCode;
+        // const awayTeamShortName = match.awayTeam.nameCode;
+        const tournamentInfo = match.tournament.name;
+        const venue = match.tournament.category.country.name;
+
+        // const hometeamLogo =
+        //   match.homeTeam.national && match.awayTeam.national
+        //     ? teamSportAssets[`${match.homeTeam.country.name}`]
+        //     : `https://img.sofascore.com/api/v1/team/${homeTeamId}/image`;
+        // const awayteamLogo =
+        //   match.homeTeam.national && match.awayTeam.national
+        //     ? teamSportAssets[`${match.awayTeam.country.name}`]
+        //     : `https://img.sofascore.com/api/v1/team/${awayTeamId}/image`;
+        cardClone.querySelector(".basketball-competition-info").textContent =
+          `${homeTeam} vs ${awayTeam}`;
+        cardClone.querySelector(".basketball-tournament-info").textContent =
+          tournamentInfo;
+
+        cardClone.querySelector(".basketball-match-status").textContent =
+          match.status.description;
+        cardClone
+          .querySelector(".basketball-league-icon")
+          .setAttribute("src", "/assets/icons/competition_icon.svg");
+        cardClone.querySelector(".basketball-league-name").textContent =
+          match.tournament.category.name;
+        cardClone.querySelector(".basketball-venue-name").textContent =
+          match.tournament.flag || `World`;
+      },
     },
     basketball: {
       templateId: "basketball-template",
