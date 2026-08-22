@@ -339,7 +339,21 @@ app.get("/api/events/basketball", async (req, res) => {
         "Content-Type": "application/json",
       },
     });
-  } catch (error) {}
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} for ${url}`);
+    }
+
+    const data = await response.json();
+
+    //Caching the tennis data
+    tennisCache.timestamp = Date.now();
+    tennisCache.data = data;
+    res.json(data);
+  } catch (error) {
+    console.error("Proxy Error in /api/events/tennis:", error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 // Proxy endpoint for fetching basketball data
