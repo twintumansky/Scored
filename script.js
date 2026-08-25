@@ -1008,14 +1008,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         },
         cricket: () => {
           const matches = Array.isArray(data.matches) ? data.matches : [];
-          // const uniqueMatchId = new Set();
-          // matches = matches.filter((match) => {
-          //   if (uniqueMatchId.has(match.id)) {
-          //     return false;
-          //   }
-          //   uniqueMatchId.add(match.id);
-          //   return true;
-          // });
           const sortedFixtureData = sortFixtures(
             filterFixtures(matches, "cricket"),
             "cricket",
