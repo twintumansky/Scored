@@ -1015,6 +1015,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           window.sortedFixtures = sortedFixtureData;
           return filterFixturesByStatus(sortedFixtureData, activeFilter);
         },
+        tennis: () => {
+          const matches = Array.isArray(data.events) ? data.events : [];
+          window.sortedFixtures = matches;
+          return filterFixturesByStatus(matches, activeFilter);
+        },
+        basketball: () => {
+          const matches = Array.isArray(data.events) ? data.events : [];
+          window.sortedFixtures = matches;
+          return filterFixturesByStatus(matches, activeFilter);
+        },
         motorsport: () => {
           const motorsportData =
             motorsportActiveSection === "races"
@@ -1026,16 +1036,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     ?.StandingsLists?.[0]?.ConstructorStandings;
 
           return motorsportData || [];
-        },
-        tennis: () => {
-          const matches = Array.isArray(data.events) ? data.events : [];
-          window.sortedFixtures = matches;
-          return filterFixturesByStatus(matches, activeFilter);
-        },
-        basketball: () => {
-          const matches = Array.isArray(data.events) ? data.events : [];
-          window.sortedFixtures = matches;
-          return filterFixturesByStatus(matches, activeFilter);
         },
       };
 
@@ -1051,11 +1051,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     setStaticUIForSport(activeSport);
   }
-  // --- Initial fetch of selected sport ---
+  // --- Initial fetching of selected sport ---
   await fetchFixtures(activeSport);
   preloader.classList.add("hidden");
 
-  // Sport navigation button listeners
   sportNavButtons.forEach((sportCatButton) => {
     sportCatButton.addEventListener("click", () => {
       const selectedSport = sportCatButton.id.replace("-card", "");
@@ -1096,7 +1095,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  // Status filter button listeners(Live/Finished/Upcoming)
+  // (Live/Finished/Upcoming) Filtering logic
   statusButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const status = button.textContent.trim().toUpperCase();
