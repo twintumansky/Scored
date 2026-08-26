@@ -23,6 +23,22 @@ const basketballCache = {
 };
 const BASKETBALL_CACHE_DURATION = 60 * 60 * 1000;
 
+//In-memory CACHE configuration for sports
+// const cacheConfig = {
+//   motorsportCache: {
+//     data: null,
+//     timestamp: 0,
+//   },
+//   const tennisCache = {
+//     data: null,
+//     timestamp: 0,
+//   },
+//   const basketballCache = {
+//     data: null,
+//     timestamp: 0,
+//   },
+// }
+
 function getDateRange() {
   const today = new Date(Date.now());
   const dateFiveDaysLater = new Date(today);
