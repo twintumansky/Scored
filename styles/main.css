@@ -663,7 +663,7 @@ nav li {
     display: flex;
     color: #65B9A2;
     background-color: #DFF5EF;
-    padding: 0 0.5rem;
+    padding: 0 0.65rem;
     border-radius: 0.5rem;
 }
 
@@ -696,7 +696,7 @@ nav li {
     color: #57238f66;
     background-color: #d4bbef66;
     text-transform: uppercase;
-    padding: 0px 0.5rem;
+    padding: 0px 0.65rem;
     margin: 5px;
     gap: 2px;
 }
