@@ -60,10 +60,10 @@ body {
 } */
 
 .preloader-spinner {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     aspect-ratio: 1.154;
-    --_g: no-repeat radial-gradient(farthest-side, #000 90%, #0000);
+    --_g: no-repeat radial-gradient(farthest-side, #343434 90%, #2c2c2c00);
     background:
         var(--_g) 50% 0,
         var(--_g) 0 100%,
