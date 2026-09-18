@@ -551,8 +551,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         cardClone.querySelector(".cricket-venue-name").textContent = venueInfo;
 
         if (this.isLive(match) || this.isRecent(match, matchTimestampSeconds)) {
-          const homeTeamScore = match.team_a_scores?.split("&") || [];
-          const homeTeamOver = match.team_a_over?.split("&") || [];
+          const homeTeamScore = (match.team_a_scores || null)?.split("&") ?? [];
+          const homeTeamOver = (match.team_a_over || null)?.split("&") ?? [];
           const homeTeamRuns =
             homeTeamScore.length == 2
               ? {
@@ -562,6 +562,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               : {
                   firstInngsRuns:
                     homeTeamScore[0]?.replace("-", "/") || "Yet to bat",
+                  secondInngsRuns: "-",
                 };
           const homeTeamOvers =
             homeTeamOver.length == 2
@@ -571,8 +572,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
               : { firstInngsOvers: homeTeamOver[0] || "-" };
 
-          const awayTeamScore = match.team_b_scores?.split("&") || [];
-          const awayTeamOver = match.team_b_over?.split("&") || [];
+          const awayTeamScore = (match.team_b_scores || null)?.split("&") ?? [];
+          const awayTeamOver = (match.team_b_over || null)?.split("&") ?? [];
           const awayTeamRuns =
             awayTeamScore.length == 2
               ? {
@@ -582,6 +583,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               : {
                   firstInngsRuns:
                     awayTeamScore[0]?.replace("-", "/") || "Yet to bat",
+                  secondInngsRuns: "-",
                 };
           const awayTeamOvers =
             awayTeamOver.length == 2
