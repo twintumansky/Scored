@@ -562,7 +562,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               : {
                   firstInngsRuns:
                     homeTeamScore[0]?.replace("-", "/") || "Yet to bat",
-                  secondInngsRuns: "-",
+                  secondInngsRuns: "",
                 };
           const homeTeamOvers =
             homeTeamOver.length == 2
@@ -570,7 +570,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                   firstInngsOvers: homeTeamOver[0].trim(),
                   secondInngsOvers: homeTeamOver[1].trim(),
                 }
-              : { firstInngsOvers: homeTeamOver[0] || "-" };
+              : {
+                  firstInngsOvers: homeTeamOver[0] || "-",
+                  secondInngsOvers: "",
+                };
 
           const awayTeamScore = (match.team_b_scores || null)?.split("&") ?? [];
           const awayTeamOver = (match.team_b_over || null)?.split("&") ?? [];
@@ -583,7 +586,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               : {
                   firstInngsRuns:
                     awayTeamScore[0]?.replace("-", "/") || "Yet to bat",
-                  secondInngsRuns: "-",
+                  secondInngsRuns: "",
                 };
           const awayTeamOvers =
             awayTeamOver.length == 2
@@ -591,7 +594,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                   firstInngsOvers: awayTeamOver[0].trim(),
                   secondInngsOvers: awayTeamOver[1].trim(),
                 }
-              : { firstInngsOvers: awayTeamOver[0] || "-" };
+              : {
+                  firstInngsOvers: awayTeamOver[0] || "-",
+                  secondInngsOvers: "",
+                };
 
           function updateScoreDisplay(
             teamScoreContainer,
