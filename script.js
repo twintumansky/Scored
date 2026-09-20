@@ -970,7 +970,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
-    //For non-configured sport
+    //For sport not configured yet
     if (!config) {
       return;
     }
@@ -1059,7 +1059,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     setStaticUIForSport(activeSport);
   }
-  // --- Initial fetching of selected sport ---
+  // --- Initial fetch of selected sport ---
   await fetchFixtures(activeSport);
   preloader.classList.add("hidden");
 
