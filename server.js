@@ -335,7 +335,7 @@ app.get("/api/races/motorsport", async (req, res) => {
 });
 
 // Proxy endpoint for fetching tennis data
-app.get("/api/events/basketball", async (req, res) => {
+app.get("/api/events/tennis", async (req, res) => {
   try {
     //Checking the tennis in-memory cache first
     if (
