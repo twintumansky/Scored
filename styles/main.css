@@ -80,6 +80,32 @@ body {
     }
 }
 
+/* .spinner {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 4px solid #b1b0b0b3;
+    border-top: 4px solid #383636;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+} */
+
+.spinner {
+    width: 1rem;
+    height: 1rem;
+    margin: 2rem auto;
+}
+
 header {
     width: 100%;
     margin: 0;
@@ -1310,26 +1336,6 @@ nav li {
 
     #motorsport-standings-main-container-entity-info {
         font-weight: 500;
-    }
-}
-
-.spinner {
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 4px solid #b1b0b0b3;
-    border-top: 4px solid #383636;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 2rem auto;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
     }
 }
 
