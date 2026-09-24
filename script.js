@@ -966,7 +966,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         footer.style.display = "none";
       } else {
         container.style.minHeight = "70vh";
-        container.innerHTML = '<div class="spinner"></div>';
+        container.innerHTML = '<div class="preloader-spinner spinner"></div>';
       }
     });
 
