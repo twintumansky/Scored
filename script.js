@@ -614,9 +614,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             inngs1Col.querySelector(".score-overs").textContent =
               `(${teamOvers.firstInngsOvers})`;
 
-            if (formatType == "Test" && teamRuns.secondInngsRuns) {
-              const visualBreaker =
-                cardClone.querySelectorAll(".innings-breaker");
+            const visualBreaker =
+              teamScoreContainer.querySelectorAll(".innings-breaker");
+
+            if (formatType == "Test" && (teamRuns.secondInngsRuns || null)) {
               visualBreaker.forEach((breaker) => {
                 breaker.style.display = "block";
               });
@@ -626,6 +627,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 `(${teamOvers.secondInngsOvers})`;
               inngs2Col.style.display = "flex";
             } else {
+              visualBreaker.forEach((breaker) => {
+                breaker.style.display = "none";
+              });
               inngs2Col.style.display = "none";
             }
           }
