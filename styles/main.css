@@ -747,7 +747,6 @@ nav li {
     text-transform: uppercase;
     padding: 0px 0.65rem;
     margin: 5px;
-    gap: 2px;
 }
 
 .cricket-home-team,
@@ -756,7 +755,7 @@ nav li {
     flex-direction: column;
     align-items: center;
     padding: 0 0.30rem;
-    margin: 0 1.5rem;
+    margin: 0 1rem;
 }
 
 .cricket-home-team-score-container,
