@@ -335,42 +335,42 @@ app.get("/api/races/motorsport", async (req, res) => {
 });
 
 // Proxy endpoint for fetching tennis data
-app.get("/api/events/tennis", async (req, res) => {
-  try {
-    //Checking the tennis in-memory cache first
-    if (
-      basketballCache.data &&
-      Date.now() - basketballCache.timestamp < BASKETBALL_CACHE_DURATION
-    ) {
-      console.log("Serving basketball data from cache.");
-      return res.json(basketballCache.data);
-    }
+// app.get("/api/events/tennis", async (req, res) => {
+//   try {
+//     Checking the tennis in-memory cache first
+//     if (
+//       basketballCache.data &&
+//       Date.now() - basketballCache.timestamp < BASKETBALL_CACHE_DURATION
+//     ) {
+//       console.log("Serving basketball data from cache.");
+//       return res.json(basketballCache.data);
+//     }
 
-    const url = "https://allsportsapi2.p.rapidapi.com/api/tennis/matches/live";
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "x-rapidapi-key": `${process.env.RAPIDAPI_KEY}`,
-        "x-rapidapi-host": "allsportsapi2.p.rapidapi.com",
-        "Content-Type": "application/json",
-      },
-    });
+//     const url = "https://allsportsapi2.p.rapidapi.com/api/tennis/matches/live";
+//     const response = await fetch(url, {
+//       method: "GET",
+//       headers: {
+//         "x-rapidapi-key": `${process.env.RAPIDAPI_KEY}`,
+//         "x-rapidapi-host": "allsportsapi2.p.rapidapi.com",
+//         "Content-Type": "application/json",
+//       },
+//     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} for ${url}`);
-    }
+//     if (!response.ok) {
+//       throw new Error(`HTTP error: ${response.status} for ${url}`);
+//     }
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    //Caching the tennis data
-    tennisCache.timestamp = Date.now();
-    tennisCache.data = data;
-    res.json(data);
-  } catch (error) {
-    console.error("Proxy Error in /api/events/tennis:", error);
-    res.status(500).json({ error: error.message });
-  }
-});
+//     Caching the tennis data
+//     tennisCache.timestamp = Date.now();
+//     tennisCache.data = data;
+//     res.json(data);
+//   } catch (error) {
+//     console.error("Proxy Error in /api/events/tennis:", error);
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
 // Proxy endpoint for fetching basketball data
 app.get("/api/events/basketball", async (req, res) => {

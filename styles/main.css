@@ -707,6 +707,7 @@ nav li {
 
 .cricket-live-status-container {
     display: flex;
+    flex-shrink: 0;
     color: #65B9A2;
     background-color: #DFF5EF;
     padding: 0 0.65rem;
@@ -721,14 +722,16 @@ nav li {
     letter-spacing: 0.02rem;
     text-transform: uppercase;
     padding-right: 1px;
+    flex-shrink: 0;
 }
 
 .cricket-blinking-quote {
     height: 0.25rem;
-    width: 1.5px;
+    min-width: 1.5px;
     margin-top: 6px;
     background-color: #65B9A2;
     animation: blink 1s step-end infinite;
+    flex-shrink: 0;
 }
 
 .finished-status-container {

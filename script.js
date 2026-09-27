@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const statusButtons = document.querySelectorAll(".container-buttons");
   const footer = document.querySelector("footer");
   let activeFilter = null; // (Live, Upcoming, Finished)
-  let activeSport = "basketball"; // Selected sport
+  let activeSport = "cricket"; // Selected sport
 
   // Motorsport specific configurations
   const motorsportContainerButtons = document.querySelectorAll(
