@@ -658,6 +658,10 @@ nav li {
     font-size: 0.9rem;
     font-weight: 600;
     color: #6c6b6b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20rem;
 }
 
 .cricket-series-info {
