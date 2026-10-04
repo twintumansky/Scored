@@ -805,7 +805,7 @@ nav li {
     font-size: 0.75rem;
     color: #777;
     line-height: 0.9rem;
-    padding-top: 0.25rem;
+    padding-top: 0.3rem;
     min-height: 2.5rem;
 }
 
@@ -820,7 +820,7 @@ nav li {
 
 .innings-scores {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 0.4rem;
     flex-wrap: nowrap;
     white-space: nowrap;
@@ -834,9 +834,10 @@ nav li {
 
 .innings-col {
     display: flex;
-    align-items: baseline;
-    gap: 0.25rem;
-    white-space: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
 }
 
 .innings-col .score-runs {
@@ -867,7 +868,7 @@ nav li {
 
 .innings-breaker {
     width: 2px;
-    height: 33px;
+    height: 2.25rem;
     background-color: #dadada;
 }
 
