@@ -730,27 +730,27 @@ nav li {
     align-items: center;
     padding: 0 0.30rem;
     margin: 0 1rem;
-} */
+}
 
 
-/* .cricket-team-info {
+.cricket-team-info {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 0.25rem 0 0.5rem;
     min-height: 5rem;
-} */
+}
 
-/* .innings-scores {
+.innings-scores {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
     gap: 0.5rem;
     text-align: center;
-} */
+}
 
-/* .innings-col {
+.innings-col {
     display: flex;
     flex-direction: column;
     line-height: 1.2;
