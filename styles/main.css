@@ -650,14 +650,6 @@ nav li {
     height: 2.5rem;
 }
 
-/* .cricket-team-info {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0.25rem 0 0.5rem;
-    min-height: 5rem;
-} */
-
 .cricket-team-info {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -740,6 +732,30 @@ nav li {
     margin: 0 1rem;
 } */
 
+
+/* .cricket-team-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.25rem 0 0.5rem;
+    min-height: 5rem;
+} */
+
+/* .innings-scores {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    text-align: center;
+} */
+
+/* .innings-col {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+} */
+
 .cricket-home-team {
     grid-column: 1;
     display: flex;
@@ -769,14 +785,6 @@ nav li {
     min-height: 2.5rem;
 }
 
-/* .innings-scores {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0.5rem;
-    text-align: center;
-} */
 
 .innings-scores {
     display: flex;
@@ -786,11 +794,7 @@ nav li {
     white-space: nowrap;
 }
 
-/* .innings-col {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-} */
+
 
 .innings-col {
     display: flex;
