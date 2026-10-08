@@ -527,7 +527,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ?.setAttribute(
             "src",
             teamSportAssets[homeTeam] ??
-              `${match.team_a_img}` ??
+              match.team_a_img ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone.querySelector(".cricket-away-team-name").textContent =
@@ -537,7 +537,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ?.setAttribute(
             "src",
             teamSportAssets[awayTeam] ??
-              `${match.team_b_img}` ??
+              match.team_b_img ??
               "/assets/icons/default_cricket_icon.svg",
           );
         cardClone
