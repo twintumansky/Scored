@@ -377,7 +377,8 @@ footer {
 }
 
 .football-match-card:hover,
-.basketball-match-card:hover {
+.basketball-match-card:hover,
+.cricket-match-card:hover {
     background-color: #ffffff69;
     cursor: pointer;
 }
