@@ -1,6 +1,5 @@
 import {
   teamSportAssets,
-  cricketTeamPriorities,
   footballLeagueEmblem,
   motorsportCountryLogos,
   constructorLogos,
@@ -489,7 +488,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const matchStatusContainer = cardClone.querySelector(
           ".cricket-live-status-container",
         );
-        const matchStatusLabel = cardClone.querySelector(".match-status-label");
         const blinkingQuote = cardClone.querySelector(
           ".cricket-blinking-quote",
         );
