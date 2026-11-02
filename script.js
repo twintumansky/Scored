@@ -859,7 +859,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const homeTeamShortName = match.homeTeam.nameCode;
         const awayTeamShortName = match.awayTeam.nameCode;
         const tournamentInfo = match.tournament.name;
-        const venue = match.tournament.category.country.name;
+        // const venue = match.tournament.category.country.name;
 
         const hometeamLogo =
           match.homeTeam.national && match.awayTeam.national
