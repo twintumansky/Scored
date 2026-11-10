@@ -176,7 +176,6 @@ footer {
     }
 
     &:hover {
-        /* cursor: pointer; */
         background-color: #b7b7b7;
     }
 }
@@ -310,7 +309,6 @@ footer {
 
 .container-buttons:hover,
 .motorsport-standings-container-info-buttons:hover {
-    /* cursor: pointer; */
     background: #acacaa;
     color: #4e4b4b;
 }
@@ -390,7 +388,6 @@ footer {
 .basketball-match-card:hover,
 .cricket-match-card:hover {
     background-color: #ffffff69;
-    cursor: pointer;
 }
 
 .football-fixture-info,
@@ -917,7 +914,6 @@ nav li {
     width: 100%;
     background: transparent;
     border: none;
-    cursor: pointer;
     font-size: 1rem;
     font-weight: 500;
     color: #b2b0b0;
