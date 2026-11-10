@@ -27,7 +27,7 @@ body a,
 body .nav-cards,
 body .container-buttons,
 body .motorsport-header-button {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='12' viewBox='0 0 16 16'><rect x='0' y='0' width='12' height='16' fill='%23dedefc'/></svg>") 0 0, auto;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='%23838383' /></svg>") 8 8, auto;
 }
 
 #preloader {
