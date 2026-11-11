@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     statusButtonsContainer.style.display = showStatusButtons ? "grid" : "none";
   }
 
-  //Transition wrapper for events(adds subtle animation)
+  //Transition wrapper for events
   async function contentTransition(container, contentUpdateCallback) {
     container.style.opacity = 0;
     await new Promise((resolve) => setTimeout(resolve, 300));
@@ -393,7 +393,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .querySelector(".venue-flag")
           ?.setAttribute("src", teamSportAssets[footballVenue]);
         cardClone.querySelector(".venue").textContent = footballVenue ?? "NA";
-        const matchStatusContainer = cardClone.querySelector(
+        const matchLiveStatusContainer = cardClone.querySelector(
           ".football-live-status-container",
         );
         const homeTeamScore = match.score?.fullTime?.home;
@@ -406,7 +406,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
           scoreContainer.style.display = "flex";
-          matchStatusContainer.style.display = "flex";
+          matchLiveStatusContainer.style.display = "flex";
 
           if (homeTeamScore === awayTeamScore) {
             statusTextElement.textContent = "Scores are equal";
@@ -430,16 +430,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
 
           scoreContainer.style.display = "flex";
-          matchStatusContainer.style.display = "flex";
-          matchStatusContainer.textContent = "FT";
-          matchStatusContainer.style.color = "#be590b7d";
-          matchStatusContainer.style.backgroundColor = "#ebc3a47d";
+          matchLiveStatusContainer.style.display = "flex";
+          matchLiveStatusContainer.textContent = "FT";
+          matchLiveStatusContainer.style.color = "#be590b7d";
+          matchLiveStatusContainer.style.backgroundColor = "#ebc3a47d";
           cardClone.querySelector(".home-team-score").textContent =
             match.score?.fullTime?.home ?? "0";
           cardClone.querySelector(".away-team-score").textContent =
             match.score?.fullTime?.away ?? "0";
         } else if (match.status === "SCHEDULED" || match.status === "TIMED") {
-          matchStatusContainer.style.display = "none";
+          matchLiveStatusContainer.style.display = "none";
           scoreContainer.style.display = "none";
           versusElement.style.display = "block";
           const matchDate = new Date(match.utcDate);
@@ -485,7 +485,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ".cricket-away-team-score-container",
         );
         const versusElement = cardClone.querySelector("#cricket-vs-element");
-        const matchStatusContainer = cardClone.querySelector(
+        const matchLiveStatusContainer = cardClone.querySelector(
           ".cricket-live-status-container",
         );
         const blinkingQuote = cardClone.querySelector(
@@ -656,18 +656,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             .toLowerCase();
           const matchStatusText = `${isTeam} ${statusStr}`;
           cardClone.querySelector(".cricket-match-status").textContent =
-            matchStatusText || match.result || "Status Not Available";
+            matchStatusText || match.result || "Status not updated";
 
           versusElement.style.display = "none";
-          matchStatusContainer.style.display = "flex";
+          matchLiveStatusContainer.style.display = "flex";
           blinkingQuote.style.display = "flex";
           if (match.match_status == "Finished") {
-            matchStatusContainer.style.display = "none";
+            matchLiveStatusContainer.style.display = "none";
             cardClone.querySelector(
               ".finished-status-container",
             ).style.display = "flex";
-            cardClone.querySelector(".cricket-match-status").textContent =
-              match.result;
+            // cardClone.querySelector(".cricket-match-status").textContent =
+            //   match.result;
           }
           scheduleContainer.style.display = "none";
           cricketMatchStatus.style.display = "block";
