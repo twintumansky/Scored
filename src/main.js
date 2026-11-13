@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  const preloader = document.getElementById("preloader");
+  const sportNavButtons = document.querySelectorAll(".nav-cards");
+  const liveScoresDiv = document.querySelector("#fixtures-container");
+  const statusButtons = document.querySelectorAll(".container-buttons");
+  const footer = document.querySelector("footer");
+
   async function fetchFixtures(sport) {
     activeSport = sport;
     const config = sportConfig[activeSport];
