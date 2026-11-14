@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const footer = document.querySelector("footer");
 
   async function fetchFixtures(sport) {
-    activeSport = sport;
+    // activeSport = sport;
     const config = sportConfig[activeSport];
     const container = isTeamSport(sport)
       ? liveScoresDiv
@@ -28,24 +28,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Updating active class for sport nav buttons
-    sportNavButtons.forEach((btn) => {
-      btn.classList.toggle("active", btn.id === `${activeSport}-card`);
-    });
+    // sportNavButtons.forEach((btn) => {
+    //   btn.classList.toggle("active", btn.id === `${activeSport}-card`);
+    // });
 
-    motorsportContainerButtons.forEach((btn) => {
-      btn.classList.toggle(
-        "active",
-        btn.id === `${activeSport}-${motorsportActiveSection}`,
-      );
-    });
+    // motorsportContainerButtons.forEach((btn) => {
+    //   btn.classList.toggle(
+    //     "active",
+    //     btn.id === `${activeSport}-${motorsportActiveSection}`,
+    //   );
+    // });
 
-    motorsportContainerStandingsButtons.forEach((btn) => {
-      btn.classList.toggle(
-        "active",
-        btn.id ===
-          `motorsport-standings-container-info-btn-${motorsportStandingsActiveSection}`,
-      );
-    });
+    // motorsportContainerStandingsButtons.forEach((btn) => {
+    //   btn.classList.toggle(
+    //     "active",
+    //     btn.id ===
+    //       `motorsport-standings-container-info-btn-${motorsportStandingsActiveSection}`,
+    //   );
+    // });
 
     let url = `${config.apiEndpoint}`;
 
