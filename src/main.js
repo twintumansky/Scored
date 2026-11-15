@@ -56,48 +56,48 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const data = await response.json();
       console.log(`API Response for ${activeSport}:`, data);
-      const fixtureProcessor = {
-        football: () => {
-          const matches = Array.isArray(data.matches) ? data.matches : [];
-          const sortedFixtureData = sortFixtures(
-            filterFixtures(matches, "football"),
-            "football",
-          );
-          window.sortedFixtures = sortedFixtureData;
-          return filterFixturesByStatus(sortedFixtureData, activeFilter);
-        },
-        cricket: () => {
-          const matches = Array.isArray(data.matches) ? data.matches : [];
-          const sortedFixtureData = sortFixtures(
-            filterFixtures(matches, "cricket"),
-            "cricket",
-          );
-          window.sortedFixtures = sortedFixtureData;
-          return filterFixturesByStatus(sortedFixtureData, activeFilter);
-        },
-        tennis: () => {
-          const matches = Array.isArray(data.events) ? data.events : [];
-          window.sortedFixtures = matches;
-          return filterFixturesByStatus(matches, activeFilter);
-        },
-        basketball: () => {
-          const matches = Array.isArray(data.events) ? data.events : [];
-          window.sortedFixtures = matches;
-          return filterFixturesByStatus(matches, activeFilter);
-        },
-        motorsport: () => {
-          const motorsportData =
-            motorsportActiveSection === "races"
-              ? data?.mergedRaces
-              : motorsportStandingsActiveSection === "drivers"
-                ? data?.driverstandings?.MRData?.StandingsTable
-                    ?.StandingsLists?.[0]?.DriverStandings
-                : data?.constructorstandings?.MRData?.StandingsTable
-                    ?.StandingsLists?.[0]?.ConstructorStandings;
+      // const fixtureProcessor = {
+      //   football: () => {
+      //     const matches = Array.isArray(data.matches) ? data.matches : [];
+      //     const sortedFixtureData = sortFixtures(
+      //       filterFixtures(matches, "football"),
+      //       "football",
+      //     );
+      //     window.sortedFixtures = sortedFixtureData;
+      //     return filterFixturesByStatus(sortedFixtureData, activeFilter);
+      //   },
+      //   cricket: () => {
+      //     const matches = Array.isArray(data.matches) ? data.matches : [];
+      //     const sortedFixtureData = sortFixtures(
+      //       filterFixtures(matches, "cricket"),
+      //       "cricket",
+      //     );
+      //     window.sortedFixtures = sortedFixtureData;
+      //     return filterFixturesByStatus(sortedFixtureData, activeFilter);
+      //   },
+      //   tennis: () => {
+      //     const matches = Array.isArray(data.events) ? data.events : [];
+      //     window.sortedFixtures = matches;
+      //     return filterFixturesByStatus(matches, activeFilter);
+      //   },
+      //   basketball: () => {
+      //     const matches = Array.isArray(data.events) ? data.events : [];
+      //     window.sortedFixtures = matches;
+      //     return filterFixturesByStatus(matches, activeFilter);
+      //   },
+      //   motorsport: () => {
+      //     const motorsportData =
+      //       motorsportActiveSection === "races"
+      //         ? data?.mergedRaces
+      //         : motorsportStandingsActiveSection === "drivers"
+      //           ? data?.driverstandings?.MRData?.StandingsTable
+      //               ?.StandingsLists?.[0]?.DriverStandings
+      //           : data?.constructorstandings?.MRData?.StandingsTable
+      //               ?.StandingsLists?.[0]?.ConstructorStandings;
 
-          return motorsportData || [];
-        },
-      };
+      //     return motorsportData || [];
+      //   },
+      // };
 
       const fixturesToDisplay = fixtureProcessor[activeSport]?.() || [];
       displaySport(fixturesToDisplay, activeSport);
