@@ -14,8 +14,8 @@ function sortFixtures(fixtures, sport) {
       const aTime = Math.floor(new Date(config.time(a)).getTime() / 1000);
       const bTime = Math.floor(new Date(config.time(b)).getTime() / 1000);
       if (config.isRecent(a)) {
-        return bTime - aTime; // Newer first for recent
+        return bTime - aTime; // Newer first for recent fixtures
       }
-      return aTime - bTime; // Sooner first for upcoming
+      return aTime - bTime; // Sooner first for upcoming fixtures
     });
 }
