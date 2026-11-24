@@ -1,3 +1,28 @@
+// Basketball specific configurations
+function applyScoreStyling(elHome, homeVal, elAway, awayVal) {
+  // Resetting the pre-existing
+  [elHome, elAway].forEach((el) => {
+    if (el) el.classList.remove("score-winning", "score-losing", "score-tie");
+  });
+
+  // For non-existing values
+  if (homeVal == null || awayVal == null) return;
+
+  const h = Number(homeVal);
+  const a = Number(awayVal);
+
+  if (h > a) {
+    if (elHome) elHome.classList.add("score-winning");
+    if (elAway) elAway.classList.add("score-losing");
+  } else if (a > h) {
+    if (elAway) elAway.classList.add("score-winning");
+    if (elHome) elHome.classList.add("score-losing");
+  } else {
+    if (elHome) elHome.classList.add("score-tie");
+    if (elAway) elAway.classList.add("score-tie");
+  }
+}
+
 const basketballConfig = {
   templateId: "basketball-template",
   apiEndpoint: "http://localhost:3000/api/events/basketball",
