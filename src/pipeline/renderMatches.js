@@ -1,3 +1,14 @@
+function isTeamSport(sport) {
+  return [
+    "football",
+    "cricket",
+    "tennis",
+    "basketball",
+    "badminton",
+    "mma",
+  ].includes(sport);
+}
+
 function displaySport(fixtures, sportToDisplay) {
   const container = isTeamSport(sportToDisplay)
     ? liveScoresDiv
