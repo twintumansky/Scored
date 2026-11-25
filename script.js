@@ -1006,6 +1006,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const data = await response.json();
       console.log(`API Response for ${activeSport}:`, data);
+
       const fixtureProcessor = {
         football: () => {
           const matches = Array.isArray(data.matches) ? data.matches : [];

@@ -14,17 +14,6 @@ const motorsportCardContainer = document.querySelector(
 const motorsportConfig = {
   templateId: ["motorsport-races-template", "motorsport-standings-template"],
   apiEndpoint: "http://localhost:3000/api/races/motorsport",
-  // isStatus: (race) => {
-  //   const now = Date.now();
-  //   const raceTime = new Date(race.time).getTime();
-  //   const raceDuration = 3 * 60 * 60 * 1000;
-
-  //   if (now >= raceTime && now <= raceTime + raceDuration) {
-  //     return (status = "Live");
-  //   } else if (now > raceTime + raceDuration) {
-  //     return (status = "Finished");
-  //   } else return (status = "Upcoming");
-  // },
   populateCard: function (cardClone, race) {
     const driverId = race.Driver?.driverId;
     if (motorsportActiveSection === "races") {
