@@ -1061,6 +1061,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     setStaticUIForSport(activeSport);
   }
+
   // --- Initial fetch of selected sport ---
   await fetchFixtures(activeSport);
   preloader.classList.add("hidden");
