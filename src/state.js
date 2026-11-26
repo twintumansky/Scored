@@ -95,3 +95,33 @@ function setStaticUIForSport(sport) {
   );
   statusButtonsContainer.style.display = showStatusButtons ? "grid" : "none";
 }
+
+// (Live/Finished/Upcoming) Filtering logic
+statusButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const status = button.textContent.trim().toUpperCase();
+
+    if (activeFilter === status) {
+      activeFilter = null;
+      button.classList.remove("active");
+    } else {
+      statusButtons.forEach((btn) => btn.classList.remove("active"));
+      activeFilter = status;
+      button.classList.add("active");
+    }
+
+    // Refilter and display matches using the currently stored sortedFixtures and activeSport
+    if (window.sortedFixtures) {
+      // Make sure data has been fetched at least once
+      const filteredByStatus = filterFixturesByStatus(
+        window.sortedFixtures,
+        activeFilter,
+        activeSport,
+      );
+      // Use the centrally stored activeSport
+      displaySport(filteredByStatus, activeSport);
+    } else {
+      console.warn("No fixtures available at this moment.");
+    }
+  });
+});
