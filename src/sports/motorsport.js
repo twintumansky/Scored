@@ -11,6 +11,27 @@ const motorsportCardContainer = document.querySelector(
   "#motorsport-card-container",
 );
 
+// Motorsport specific event listeners(Races/Standings)
+motorsportContainerButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    motorsportActiveSection = btn.id.replace("motorsport-", "");
+
+    const standingsNav = document.querySelector(
+      ".motorsport-standings-container-info",
+    );
+
+    if (motorsportActiveSection === "standings") {
+      standingsNav.classList.remove("hidden");
+      standingsNav.classList.add("visible");
+    } else {
+      standingsNav.classList.remove("visible");
+      standingsNav.classList.add("hidden");
+    }
+
+    fetchFixtures(activeSport);
+  });
+});
+
 const motorsportConfig = {
   templateId: ["motorsport-races-template", "motorsport-standings-template"],
   apiEndpoint: "http://localhost:3000/api/races/motorsport",
