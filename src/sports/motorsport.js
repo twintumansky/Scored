@@ -32,6 +32,17 @@ motorsportContainerButtons.forEach((btn) => {
   });
 });
 
+motorsportContainerStandingsButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    motorsportStandingsActiveSection = btn.id.replace(
+      "motorsport-standings-container-info-btn-",
+      "",
+    );
+
+    fetchFixtures(activeSport);
+  });
+});
+
 const motorsportConfig = {
   templateId: ["motorsport-races-template", "motorsport-standings-template"],
   apiEndpoint: "http://localhost:3000/api/races/motorsport",
