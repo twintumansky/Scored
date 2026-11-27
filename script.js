@@ -1121,15 +1121,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         button.classList.add("active");
       }
 
-      // Refilter and display matches using the currently stored sortedFixtures and activeSport
+      // Refiltering/Ddisplay fixtures using the currently stored sortedFixtures and activeSport
       if (window.sortedFixtures) {
-        // Make sure data has been fetched at least once
+        // initial fetch for managing storage
         const filteredByStatus = filterFixturesByStatus(
           window.sortedFixtures,
           activeFilter,
           activeSport,
         );
-        // Use the centrally stored activeSport
+
         displaySport(filteredByStatus, activeSport);
       } else {
         console.warn("No fixtures available at this moment.");
