@@ -112,13 +112,13 @@ statusButtons.forEach((button) => {
 
     // Refilter and display matches using the currently stored sortedFixtures and activeSport
     if (window.sortedFixtures) {
-      // Make sure data has been fetched at least once
+      // initial fetch for assigning to storage
       const filteredByStatus = filterFixturesByStatus(
         window.sortedFixtures,
         activeFilter,
         activeSport,
       );
-      // Use the centrally stored activeSport
+
       displaySport(filteredByStatus, activeSport);
     } else {
       console.warn("No fixtures available at this moment.");
